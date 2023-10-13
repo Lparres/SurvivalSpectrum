@@ -1,0 +1,3 @@
+node -v
+npm install -g http-server
+npx http-server
