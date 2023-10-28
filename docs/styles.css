@@ -35,16 +35,18 @@ header {
 
 
   #juego{
-    margin : 50px 20% 50px;
-
+    margin : 50px;
+    
 
   }
 
-  #juego-padre{
+  #seccion-padre{
     display: flex;
     text-align: center;
     justify-content: center;
-
+    background-color: rgb(22, 22, 22);
+    margin : 50px 20% 50px;
+    border-radius: 10px;
   }
 
   body{
@@ -106,4 +108,15 @@ header {
     border-bottom-color: rgb(93, 93, 93);
     
   }
+
+  .section{
+    margin : 20px 10px 20px;
+    border-bottom: solid;
+    border-width: 5px;
+    border-bottom-color: #67ee67cf; 
+  }
   
+  .section-title{
+    color: #67ee67cf; 
+
+  }
