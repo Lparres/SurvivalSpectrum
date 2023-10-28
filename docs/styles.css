@@ -5,3 +5,105 @@
 .resources {
     display: none;
   } 
+
+
+header {
+    background: rgba(0,0,0,0.7);
+    width: 100%;
+    position: fixed;
+    z-index: 100;
+  }
+
+  #menu-superior{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 3px;
+  }
+
+  .boton-menu-sup{
+    color: #67ee67cf; 
+    font-size: 18px;
+    font-family: "josefin-sans";
+    letter-spacing: 2px;
+    
+    
+  }
+
+  .boton-menu-sup:hover{
+    color: rgb(255, 255, 255);
+  }
+
+
+  #juego{
+    margin : 50px 20% 50px;
+
+
+  }
+
+  #juego-padre{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+
+  }
+
+  body{
+    height: 100%;
+    width: 100%;
+
+    overflow-x: hidden;
+
+    color: white;
+  }
+
+  @font-face {
+    font-family: "josefin-sans";
+    src: url("/fonts/JosefinSans-Regular.ttf");
+  }
+
+
+
+
+
+  #navbarNav{
+    margin-bottom: 0px;
+    border: 0px;
+    padding: 0px;
+    height: 100%;
+  }
+
+  nav{
+    margin-bottom: 0px;
+    border: 0px;
+    padding: 0px;
+  }
+
+  .navbar{
+    padding-bottom: 0 px;
+  }
+
+  li{
+    border-top: solid;
+    border-bottom: solid;
+    border-width: 5px;
+    border-color: rgb(22, 22, 22);
+  }
+  
+  #button1:hover{
+
+    border-bottom-color: rgb(93, 93, 93);
+    
+  }
+  #button2:hover{
+    border-bottom-color: rgb(93, 93, 93);
+    
+  }
+  #button3:hover{
+    border-bottom-color: rgb(93, 93, 93);
+    
+  }
+  #button4:hover{
+    border-bottom-color: rgb(93, 93, 93);
+    
+  }
+  
