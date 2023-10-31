@@ -22,7 +22,7 @@ header {
 
   .boton-menu-sup{
     color: #67ee67cf; 
-    font-size: 18px;
+    font-size: 16px;
     font-family: "josefin-sans";
     letter-spacing: 2px;
     
@@ -50,10 +50,11 @@ header {
   }
 
   #seccion-apartado{
-    text-align: center;
-    justify-content: center;
+    /*text-align: center;*/
+    /*justify-content: center;*/
     background-color: rgb(22, 22, 22);
     margin : 50px 20% 50px;
+    padding: 30px 50px 50px;
     border-radius: 10px;
   }
 
@@ -118,14 +119,24 @@ header {
   }
 
   .section{
-    margin : 40px 20% 40px;
+    margin : 0px 20% 40px;
     border-bottom: solid;
     border-width: 5px;
     border-bottom-color: #67ee67cf; 
   }
   
   .section-title{
-    margin : 20px;
     color: #67ee67cf; 
 
+  }
+
+  
+  p{
+    text-align: justify;
+  }
+
+  .menuinferior{
+    background-color: rgb(22, 22, 22);
+    height:300px;
+    padding: 20px;
   }
