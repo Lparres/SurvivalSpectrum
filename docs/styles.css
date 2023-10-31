@@ -40,8 +40,16 @@ header {
 
   }
 
-  #seccion-padre{
+  #seccion-juego{
     display: flex;
+    text-align: center;
+    justify-content: center;
+    background-color: rgb(22, 22, 22);
+    margin : 50px 20% 50px;
+    border-radius: 10px;
+  }
+
+  #seccion-apartado{
     text-align: center;
     justify-content: center;
     background-color: rgb(22, 22, 22);
@@ -110,13 +118,14 @@ header {
   }
 
   .section{
-    margin : 20px 10px 20px;
+    margin : 40px 20% 40px;
     border-bottom: solid;
     border-width: 5px;
     border-bottom-color: #67ee67cf; 
   }
   
   .section-title{
+    margin : 20px;
     color: #67ee67cf; 
 
   }
