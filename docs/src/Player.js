@@ -42,6 +42,7 @@ export default class Player extends Phaser.GameObjects.Sprite
         this._armor = playerConfig.armor;
         this._rage = 0;
         this._eureka = 0;
+        this._moveVector = new Phaser.Math.Vector2(0,0);
         this.setScale(0.5);
         this.scene.add.existing(this);
     }
@@ -51,12 +52,15 @@ export default class Player extends Phaser.GameObjects.Sprite
     preUpdate(t,dt){
         
     }
-    //método para moverte
-    mover = function(x,y){
-        //TO DO: normalizar los vectores daba un problema con el caso (-1,0)
-        this.x += x * this._velocity;
 
-        this.y += y * this._velocity;
+    //método para moverte
+    mover = function(inputVector){     
+
+        this._moveVector = inputVector.normalize();
+        
+        this.x += this._moveVector.x * this._velocity;
+
+        this.y += this._moveVector.y * this._velocity;
     }
 
     //método para disparar

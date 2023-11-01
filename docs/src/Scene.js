@@ -32,17 +32,24 @@ export default class MainScene extends Phaser.Scene{
     }
     //game tick
     update(){
+
+        this._inputVector = new Phaser.Math.Vector2(0,0);
+
         if(this.right.isDown){
-            this.player.mover(1,0);
+            this._inputVector.x += 1;
         }
         if(this.left.isDown){
-            this.player.mover(-1,0);
+            this._inputVector.x -= 1;
         }
         if(this.up.isDown){
-            this.player.mover(0,-1);
+            this._inputVector.y -= 1;
         }
         if(this.down.isDown){
-            this.player.mover(0,1);
+            this._inputVector.y += 1;
         }
+
+
+
+        this.player.mover(this._inputVector);
     }
 }
