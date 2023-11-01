@@ -14,27 +14,49 @@ export default class Player extends Phaser.GameObjects.Sprite
     *Rage es el cargador de rabia
     *eureka es el cargador de eureka
     */
-    constructor(scene, x, y, life, damage, velocity, range, armor, rage)
-    {
-        //super(scene, x ,y, ) hay que cargar la imagen con su id
 
-        this._life = life;
+//Propuesta, Meter en un objeto los bloques de estadisticas. (LUIS.C)
+/**
+ * Consturctor del player
+ * @param {Scene} scene
+ * @param {number} x
+ * @param {number} y
+ * @param {number} life
+ * @param {number} damage
+ * @param {number} velocity
+ * @param {number} range
+ * @param {number} armor
+ * @param {number} rage*/
+//life, damage, velocity, range, armor, rage
+    constructor(scene,x, y, key, playerConfig)
+    {
+        super(scene, x ,y, key ) // hay que cargar la imagen con su id
+
+        this._life = playerConfig.life;
         //Genera un Cool Down aleatorio ente los dos (distinto para cada enemigo), los números están puestos a vole
         //Aún no se si van milisegundos o segundos
         this._atkCD = Phaser.Math.FloatBetween(0.5, 1);
-        this._velocity = velocity;
-        this._damage = damage;
-        this._range = range;
-        this._armor = armor;
+        this._velocity = playerConfig.velocity;
+        this._damage = playerConfig.damage;
+        this._range = playerConfig.range;
+        this._armor = playerConfig.armor;
         this._rage = 0;
         this._eureka = 0;
+        this.setScale(0.5);
+        this.scene.add.existing(this);
     }
 
     //métodos
 
+    preUpdate(t,dt){
+        
+    }
     //método para moverte
-    mover = function(){
-        //vacío de momento
+    mover = function(x,y){
+        //TO DO: normalizar los vectores daba un problema con el caso (-1,0)
+        this.x += x * this._velocity;
+
+        this.y += y * this._velocity;
     }
 
     //método para disparar

@@ -1,3 +1,5 @@
+import MainLevel from './Scene.js'
+
 var config = {
     type : Phaser.AUTO,
     parent: "juego",
@@ -9,18 +11,12 @@ var config = {
 
     },
     pixelArt : true,
-    scene : [{create:create, preload:preload}],
+    scene : [MainLevel],
     canvas: document.getElementById("game")
 }
     var game = new Phaser.Game(config)
 
-function create(){
-    this.add.image(0, 0, "kirby").setOrigin(0,0).setScale(0.2, 0.2)
-}
 
-function preload(){
-    this.load.image("kirby", "./img/kirby.png");
-}
 /*
 init() compartir informacion entre escenas
 preload() cargar recursos
