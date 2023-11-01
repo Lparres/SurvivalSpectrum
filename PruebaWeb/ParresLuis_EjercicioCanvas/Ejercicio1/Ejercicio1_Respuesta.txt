@@ -1,8 +1,0 @@
-En el primer caso, la instrucción 
-
-document.body.innerHTML = '<h1>Hola, mundo!</h1>'; 
-
-se ejecuta nada más comenzar la compilación, con lo que en fichero html y el fichero js aún no están referenciados, con lo que
-no se puede acceder al DOM desde document.
-
-En el segundo caso, se espera a cargar toda la página, incluidas las dependencias entre ficheros, pudiendo entonces acceder al DOM.
