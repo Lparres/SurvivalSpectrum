@@ -11,13 +11,13 @@ export default class MainScene extends Phaser.Scene{
     //load data
     preload(){
         //place holder
-        this.load.image('kirby', 'srcJuego/img/kirby.png');   
+        this.load.image('kirby', 'https://lparres2000.github.io/JuegoPVLI/srcJuego/img/kirby.png');   
     }
     //instance
     create(){
 
         // Cursor personalizado
-        this.input.setDefaultCursor('url(srcJuego/img/crosshair.png), pointer');
+        this.input.setDefaultCursor('url(https://lparres2000.github.io/JuegoPVLI/srcJuego/img/crosshair.png), pointer');
 
         //instancia del  jugador
         let playerConfig =
