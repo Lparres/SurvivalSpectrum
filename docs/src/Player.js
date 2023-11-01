@@ -50,14 +50,17 @@ export default class Player extends Phaser.GameObjects.Sprite
     //métodos
 
     preUpdate(t,dt){
-        
+
+        this.mover();
+    }
+
+    setMoveVector = function(inputVector){
+        this._moveVector = inputVector.normalize();
     }
 
     //método para moverte
-    mover = function(inputVector){     
+    mover = function(){
 
-        this._moveVector = inputVector.normalize();
-        
         this.x += this._moveVector.x * this._velocity;
 
         this.y += this._moveVector.y * this._velocity;

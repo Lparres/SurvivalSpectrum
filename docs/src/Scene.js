@@ -47,9 +47,7 @@ export default class MainScene extends Phaser.Scene{
         if(this.down.isDown){
             this._inputVector.y += 1;
         }
-
-
-
-        this.player.mover(this._inputVector);
+        
+        this.player.setMoveVector(this._inputVector);
     }
 }
