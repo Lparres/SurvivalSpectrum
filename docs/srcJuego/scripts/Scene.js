@@ -22,15 +22,25 @@ export default class MainScene extends Phaser.Scene{
     }
     //instance
     create(){
-        this.add.image(0, 0, 'fondo').setScale(2, 1.3).setOrigin(0, 0)
+        //imagen del fondo
+        this.add.image(0, 0, 'fondo').setScale(2, 1.3).setOrigin(0, 0);
 
+        
+        //grupos de colisiones
         this.bullets = this.add.group();
         this.enemys = this.add.group();
 
+        
+
+        //colisiones entre las balas y los enemigos
         this.physics.add.collider(this.bullets, this.enemys, function (proyectle, enemy){
             enemy.Hit(proyectle._damage);
             proyectle.Hit();
         });
+
+        //colision entre enemigos, por algun motivo no funciona
+        this.physics.add.collider(this.enemys, this.enemys);
+
         // Cursor personalizado
         this.input.setDefaultCursor('url(https://lparres2000.github.io/JuegoPVLI/srcJuego/img/crosshair.png), pointer');
 
@@ -58,6 +68,9 @@ export default class MainScene extends Phaser.Scene{
         }
         //creacion del enemigo
         this.meleeEnemy = new MeleeEnemy(this, 500, 500, 'enemy', enemyConfig, 10);
+        this.meleeEnemy = new MeleeEnemy(this, 400, 200, 'enemy', enemyConfig, 10);
+        this.meleeEnemy = new MeleeEnemy(this, 400, 700, 'enemy', enemyConfig, 10);
+        this.meleeEnemy = new MeleeEnemy(this, 900, 250, 'enemy', enemyConfig, 10);
 
 
 
@@ -84,7 +97,11 @@ export default class MainScene extends Phaser.Scene{
         // Modificamos el vector de movimiento del player a partir del inputVector
         this.player.setMoveVector(this._inputVector);
 
-
+        /*
+        if(this.physics.collide(this.enemys, this.enemys)) {
+            console.log("tu viejaaaaaaaaaaaaa");
+        }
+        */
         //prueba para detectar la posicion del raton
         //this.player.x = this.input.mousePointer.x;
         //this.player.y = this.input.mousePointer.y;

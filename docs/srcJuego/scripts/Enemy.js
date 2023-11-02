@@ -70,6 +70,9 @@ export default class Enemy extends Phaser.GameObjects.Sprite
         
         this.x += this._moveVector.x * this._velocity;
         this.y += this._moveVector.y * this._velocity;
+    
+        //movimiento por fisicas?
+        //this.body.setVelocity(this._moveVector.x*this.velocity,this._moveVector.y*this.velocity);
     }
 
     //método para disparar

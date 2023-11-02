@@ -50,7 +50,7 @@ export default class Player extends Phaser.GameObjects.Sprite
         this._moveVector = new Phaser.Math.Vector2(0,0);
         
         //escala y añadir a la escena
-        this.setScale(0.5);
+        this.setScale(0.3);
         this.scene.add.existing(this);
     }
 
