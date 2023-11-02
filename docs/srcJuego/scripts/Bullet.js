@@ -25,9 +25,9 @@ export default class Bullet extends Phaser.GameObjects.Sprite
         //vector de la direccion del movimiento
         this._moveVector = new Phaser.Math.Vector2(destino.x - this.x ,destino.y - this.y).normalize();
         
+        //settear escala
         this.setScale(0.05);
-
-
+        
         //añadirlo a la escena
         this.scene.add.existing(this);
 

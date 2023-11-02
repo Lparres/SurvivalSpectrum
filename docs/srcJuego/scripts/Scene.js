@@ -26,8 +26,8 @@ export default class MainScene extends Phaser.Scene{
             range: 20, 
             armor: 10, 
             life: 100,
-            minCooldown:0.5,
-            maxCooldown:1 }
+            minCooldown:500,//van en milisegundos
+            maxCooldown:1000, }
         //creacion del jugador
         this.player = new Player(this,960,540,'kirby', playerConfig);
         

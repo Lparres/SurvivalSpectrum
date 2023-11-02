@@ -42,8 +42,13 @@ export default class Player extends Phaser.GameObjects.Sprite
         this._maxCD = playerConfig._maxCooldown;
 
         //Genera un Cool Down aleatorio ente los dos, los números están puestos a vole0
-        //Aún no se si van milisegundos o segundos
-        this._atkCD = Phaser.Math.FloatBetween(this._minCD, this._maxCD);
+        //van en  milisegundos
+        this._atkCD = Phaser.Math.Between(this._minCD,this._maxCD); //por algun motivo no funciona
+        
+        //console.log(this._atkCD);
+
+
+        this._elapsedTime = 0;
 
         //dicotomias
         this._rage = 0;
@@ -63,7 +68,15 @@ export default class Player extends Phaser.GameObjects.Sprite
 
         this.Move();
              
-        new Bullet(this.scene,this.x,this.y,'kirby',true,0,5);
+        this._elapsedTime += dt;
+      
+        if(this._elapsedTime >= 500){
+            new Bullet(this.scene,this.x,this.y,'kirby',true,0,5);
+            this._atkCD = Phaser.Math.Between(this._minCD, this._maxCD);//esto no funciona
+            this._atkCD = 500;
+            this._elapsedTime = 0;
+
+        }
                
     }
 
