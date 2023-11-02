@@ -38,6 +38,10 @@ export default class Enemy extends Phaser.GameObjects.Sprite
         //añadir a la escena
         this.scene.add.existing(this);
 
+        this.scene.physics.add.existing(this);
+
+        this.scene.enemys.add(this);
+
     }
 
     preUpdate(t,dt){
@@ -65,5 +69,11 @@ export default class Enemy extends Phaser.GameObjects.Sprite
     //método para disparar
     Disparar = function(){
         //vacío de momento
+    }
+    Hit = function(damage){
+        this._vida -= damage;
+        if(this._vida <= 0){
+            this.destroy();
+        }
     }
 }

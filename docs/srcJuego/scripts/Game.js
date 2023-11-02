@@ -12,6 +12,12 @@ var config = {
     },
     pixelArt : true,
     scene : [MainLevel],
+    physics: {
+        default: 'arcade', // elegir motor
+        arcade: { // propiedades del motor
+            debug: true // true para ver info
+        }
+    },
     canvas: document.getElementById("game")
 }
     var game = new Phaser.Game(config)

@@ -15,7 +15,7 @@ export default class Bullet extends Phaser.GameObjects.Sprite
         // Padre de la bala (para no dañar al jugador con sus propias balas, ni los enemigos se dañen entre ellos) , true o false
         this._idParent = idParent;
         // Es a la vez el daño y la vida de la bala
-        this._daño = daño;
+        this._damage = daño;
         //velocidad de movimiento de las balas
         this._velocity = velocity;
 
@@ -30,7 +30,9 @@ export default class Bullet extends Phaser.GameObjects.Sprite
         
         //añadirlo a la escena
         this.scene.add.existing(this);
+        this.scene.physics.add.existing(this);
 
+        this.scene.bullets.add(this);
     }
 
     preUpdate(t,dt){
@@ -42,6 +44,8 @@ export default class Bullet extends Phaser.GameObjects.Sprite
     Hit = function()
     {
         //por ahora vacia
+        console.log("Hola Mundo Choque");
+        this.destroy();
     }
 
     Move = function(){

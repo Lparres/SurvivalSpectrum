@@ -17,6 +17,13 @@ export default class MainScene extends Phaser.Scene{
     //instance
     create(){
 
+        this.bullets = this.add.group();
+        this.enemys = this.add.group();
+
+        this.physics.add.collider(this.bullets, this.enemys, function (proyectle, enemy){
+            enemy.Hit(proyectle._damage);
+            proyectle.Hit();
+        });
         // Cursor personalizado
         this.input.setDefaultCursor('url(https://lparres2000.github.io/JuegoPVLI/srcJuego/img/crosshair.png), pointer');
 

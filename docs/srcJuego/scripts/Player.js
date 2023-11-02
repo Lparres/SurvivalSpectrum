@@ -63,7 +63,7 @@ export default class Player extends Phaser.GameObjects.Sprite
         this._elapsedTime += dt;
       
         if(this._elapsedTime >= this._atkCD){
-            new Bullet(this.scene,this.x,this.y,'kirby',true,0,5);
+            new Bullet(this.scene,this.x,this.y,'kirby',true,10,5);
             this._elapsedTime = 0;
         }
                
