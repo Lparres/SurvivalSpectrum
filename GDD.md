@@ -76,10 +76,10 @@ Se efectúa el disparo de un proyectil mediante el click izquierdo del ratón, e
 Este mismo efecto se puede conseguir activando el modo “disparo automático”, presionando una tecla determinada, de este modo también puede ser desactivado de la misma forma.
 Los sistemas de movimiento con teclado y apuntado con ratón son independientes, y no se afectan entre sí.
 
-##MAPA DE JUEGO MECÁNICAS
+## MAPA DE JUEGO MECÁNICAS
 Solo existe un mapa principal en el juego, donde se desarrolla toda la acción. Este mapa es cerrado, y cuenta con algunos obstáculos y elementos decorativos.
 
-##ENEMIGOS MECÁNICAS
+## ENEMIGOS MECÁNICAS
 Existen dos conjuntos de enemigos con los que el jugador se encuentra de forma recurrente durante toda la partida:
 * **Enemigos pertenecientes a una oleada**: Son generados junto al resto de su oleada,
 en un punto de instancia habilitado para ello. Pueden tener una IA propia, o tener
@@ -92,12 +92,12 @@ Existen distintos tipos de enemigos. Estos difieren entre sí según los siguien
 * *Distintas mecánicas de movimiento* (m.r.u, teletransporte, estático…)
 * *Distintas mecánicas de ataque* (melé, distancia, AOE…)
 
-##ELIMINACIÓN DE ENEMIGOS MECÁNICAS
+## ELIMINACIÓN DE ENEMIGOS MECÁNICAS
 El jugador debe disparar a los distintos enemigos que se acerquen dentro de su rango de alcance para eliminarlos. El proyectil disparado tiene un daño específico que será infringido al enemigo impactado. Si el proyectil tiene más daño que vida le falta al enemigo, el enemigo en cuestión será eliminado pero el proyectil seguirá su ruta, habiéndo reducido su daño de forma equivalente a la vida que le faltaba al enemigo eliminado.
 Todos los enemigos, al morir, sueltan un material que podrá ser utilizado posteriormente para modificar y personalizar la experiencia de juego con respecto a las mecánicas dicotómicas.
 Además, un enemigo aleatorio de cada oleada tiene la característica oculta de soltar un tótem de mejora al morir.
 
-###TÓTEM DE MEJORA MECÁNICAS
+### TÓTEM DE MEJORA MECÁNICAS
 El tótem de mejora se queda estático en el mapa allí donde murió el enemigo que lo soltaba. El jugador puede interactuar con él mediante la tecla E (botón de interacción).
 Una vez el jugador interactúa con el tótem, el juego se pausa, y se abre el menú de mejoras. Este está formado por dos sectores bien diferenciados:
 * **Sector superior**: Balanzas con las 4 dicotomías de las personalidades.
@@ -118,7 +118,7 @@ El jugador no tiene porqué interactuar con el tótem según aparece en pantalla
 utilizado en cualquier momento del juego, pudiendo incluso acumularse si el jugador así lo
 considera.
 
-###ESTADÍSTICAS BASE DEL PERSONAJE
+### ESTADÍSTICAS BASE DEL PERSONAJE
 
 * Vida máxima
 * Daño base
@@ -136,30 +136,30 @@ test de Myers-Briggs. Estas dicotomías están definidas como pares opuestos ent
 categorías.6
 
 ### PRIMERA DICOTOMÍA
-### Extroversión:
+#### Extroversión:
 Característica propia de personas cuyo interés está centrado en el entorno y en las personas que le rodean. Personas que prefieren dirigir su energía hacia fuera, orientados a la acción, las cosas, otros individuos.
 ### Introversión:
 Actitud típica que se caracteriza por la concentración del interés en los procesos internos del sujeto. Personas que prefieren dirigir su energía hacia dentro, orientados hacia ideas, información y pensamientos internos.
 En relación a esta dicotomía se introduce la mecánica del ataque base. Cuando el jugador crea un desbalance hacia la extroversión, el personaje pierde rango de alcance, pero gana mdaño y área de acción. Si la dicotomía se desbalancea hacia la introversión, el personaje gana rango de alcance en sus ataques, pero pierde daño en cada disparo.
-##SEGUNDA DICOTOMÍA
-### Sensación:
+### SEGUNDA DICOTOMÍA
+#### Sensación:
 Tipo de persona que prefiere tratar con hechos, detalles e información concreta. Hace uso de sus cinco sentidos para percibir y analizar la información.
-### Intuición:
+#### Intuición:
 Tipo de persona que prefiere tratar con ideas, conceptos abstractos y teorías. Recibe y analiza la información a través de procesos internos de pensamiento.
 Esta dicotomía se relaciona con la UI, y la información que aporta. Cuando el jugador crea un desbalance hacia la sensación, este recibirá más información a través de la UI, nuevos parámetros y características del estado de juego. Si el jugador desbalancea la dicotomía hacia la intuición, poco a poco se irán eliminando los elementos que conforman la UI, liberando el espacio visual del juego.
 
-## TERCERA DICOTOMÍA
-### Racional:
+### TERCERA DICOTOMÍA
+#### Racional:
 Persona que prefiere tomar decisiones desde un punto de vista independiente, utilizando la razón y la lógica para sacar conclusiones. No se precipita en su parecer, y no se deja llevar por impulsos primitivos.
-### Emocional:
+#### Emocional:
 Persona que juzga desde un punto de vista interno y sentimental. Siente con más intensidad, y se deja llevar por las emociones, lo que dificulta su toma de decisiones.
 En relación a esta dicotomía se crea una nueva mecánica: Rabia / Eureka. El jugador dispone en todo momento de dos barras de medición. La barra correspondiente a la rabia (emocional) se rellena cuando el jugador es dañado por un enemigo. La barra correspondiente al eureka (racional) se rellena cuando el jugador daña a un enemigo.
 Al completar la barra de rabia, el personaje gana un bonus multiplicativo de daño y obtiene un porcentaje de robo de vida, pero también recibe más daño de los enemigos. Este estado de rabia tiene un tiempo de duración.
 Al completar la barra de eureka, el jugador consigue una ventaja específica puntual, como una limpieza de enemigos de pantalla o un tótem de mejora extra.
-## CUARTA DICOTOMÍA
-### Juicio:
+### CUARTA DICOTOMÍA
+#### Juicio:
 Característica de las personas que prefieren experiencias planificadas y bien estructuradas. Construyen un proceso mental paso a paso, prefiriendo el orden y el control sobre los sucesos futuros.
-### Percepción:
+#### Percepción:
 Actitud típica de las personas flexibles, que se adaptan al medio y que prefieren dejarse llevar por la corriente. Son personas espontáneas, de circuito corto, que improvisan en tiempo presente.
 En relación a esta dicotomía se presenta la mecánica de las cartas de mejora. Cuando el jugador interactúa con un tótem, este tendrá acceso a una serie de cartas de mejora, que sirven para aumentar las estadísticas base del personaje, teniendo que elegir cuales desea
 obtener de entre las cartas que se le presentan.
