@@ -13,11 +13,11 @@ export default class MainScene extends Phaser.Scene{
     preload(){
         //place holder
         this.load.image('kirby', 'https://lparres2000.github.io/JuegoPVLI/srcJuego/img/kirby.png');
-        this.load.image('fondo', 'https://lparres2000.github.io/JuegoPVLI/srcJuego/img/fondo.jpg');   
+        this.load.image('fondo', 'srcJuego/img/fondo.jpg');   
     }
     //instance
     create(){
-        this.add.image(0, 0, 'fondo').setScale(1, 1).setOrigin(0, 0)
+        this.add.image(0, 0, 'fondo').setScale(2, 1.3).setOrigin(0, 0)
 
         this.bullets = this.add.group();
         this.enemys = this.add.group();
