@@ -31,25 +31,35 @@ export default class Enemy extends Phaser.GameObjects.Sprite
         //Aún no se si van milisegundos o segundos
         this._atkCD = Phaser.Math.FloatBetween( this._minCD,this._maxCD);
 
+        this._moveVector = new Phaser.Math.Vector2(0,0);
+
         //asignar escala
         this.setScale(0.3);
         //añadir a la escena
         this.scene.add.existing(this);
 
     }
+
+    preUpdate(t,dt){
+
+        this.Move();                    
+               
+    }
+
     
     // métodos
 
     //método para moverte
     //la x y la y que se pasan a la funcion mover son la x y la y del player
-    mover = function(x,y){
-        //vacío de momento
-        x = x - this.x;
-        y = y - this.y;
-        let moveVector = new Phaser.Math.Vector2(x, y);
-        moveVector = moveVector.normalize();
-        this.x += moveVector.x * this._velocity;
-        this.y += moveVector.y * this._velocity;
+    Move = function(){
+       
+        this._moveVector.x = this.scene.player.x- this.x;
+        this._moveVector.y = this.scene.player.y- this.y;
+
+        this._moveVector.normalize();   
+        
+        this.x += this._moveVector.x * this._velocity;
+        this.y += this._moveVector.y * this._velocity;
     }
 
     //método para disparar
