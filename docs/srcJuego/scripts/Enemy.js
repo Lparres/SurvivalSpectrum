@@ -11,15 +11,15 @@ export default class Enemy extends Phaser.GameObjects.Sprite
  * @param {Scene} scene escena a la que pertenecen los enemigos
  * @param {number} x coordenada x del sprite
  * @param {number} y coordenada y del sprite
- * @param {number} playerConfig Objeto que guarda la informacion del enemy{life, velocity, damage,minCooldown,maxCooldown}
+ * @param {number} enemyConfig Objeto que guarda la informacion del enemy{life, velocity, damage,minCooldown,maxCooldown}
  * */
-    constructor(scene, x, y,key,enemyConfig)
+    constructor(scene, x, y, key, enemyConfig)
     {
         //constructor del padre
-        super(scene, x ,y,key); 
+        super(scene, x ,y, key); 
 
         //atributos del enemigo
-        this._vida = enemyConfig.vida;
+        this._vida = enemyConfig.life;
         this._damage = enemyConfig.damage;
         this._velocity = enemyConfig.velocity;
 
@@ -35,8 +35,15 @@ export default class Enemy extends Phaser.GameObjects.Sprite
     // métodos
 
     //método para moverte
-    mover = function(){
+    //la x y la y que se pasan a la funcion mover son la x y la y del player
+    mover = function(x,y){
         //vacío de momento
+        x = x - this.x;
+        y = y - this.y;
+        let moveVector = new Phaser.Math.Vector2(x, y);
+        moveVector = moveVector.normalize();
+        this.x += moveVector.x * this._velocity;
+        this.y += moveVector.y * this._velocity;
     }
 
     //método para disparar

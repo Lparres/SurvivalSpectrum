@@ -1,4 +1,4 @@
-import Enemy from "./Enemy";
+import Enemy from "./Enemy.js";
 
 export default class RangeEnemy extends Enemy
 {
@@ -6,9 +6,9 @@ export default class RangeEnemy extends Enemy
     *Me tengo que poner a revidar los ejemplos a parte de los apuntes, pero creo que la llamada al constructor de super es necesaria
     * range equivale al rango de este enemigo
     */
-    constructor(scene,x,y, damage, velocity, range)
+    constructor(scene, x, y, key, enemyConfig, range)
     {
-        super(scene,x,y,vida,damage,velocity);
+        super(scene, x, y, key, enemyConfig);
         this._range = range;
     }
 }
