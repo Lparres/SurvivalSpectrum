@@ -37,12 +37,12 @@ export default class Player extends Phaser.GameObjects.Sprite
         this._armor = playerConfig.armor;
 
         //min y max cooldown
-        this._minCD = playerConfig._minCD;
-        this._maxCD = playerConfig._maxCD;
+        this._minCD = playerConfig._minCooldown;
+        this._maxCD = playerConfig._maxCooldown;
 
         //Genera un Cool Down aleatorio ente los dos, los números están puestos a vole0
         //Aún no se si van milisegundos o segundos
-        this._atkCD = Phaser.Math.FloatBetween(_minCD, this._maxCD);
+        this._atkCD = Phaser.Math.FloatBetween(this._minCD, this._maxCD);
 
         //dicotomias
         this._rage = 0;
