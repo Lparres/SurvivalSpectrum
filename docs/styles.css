@@ -181,6 +181,7 @@ header {
     background-color: #212529;
     color: white;
     transform: rotateY(180deg);
+
   }
 
   .targetas{
@@ -207,4 +208,9 @@ header {
     font-family: "josefin-sans";
     font-size: 20px;
     letter-spacing: 1px;
+  }
+
+  .texto-targeta{
+    text-align: left;
+    padding: 10px;
   }
