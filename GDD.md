@@ -1,6 +1,6 @@
 # DOCUMENTO DE DISEÑO DE JUEGO
-PROYECTO
-MYERS-BRIGGS
+**PROYECTO
+MYERS-BRIGGS**
 Diego Alonso
 Luis Cabello
 Samuel García
@@ -11,100 +11,92 @@ Copyright © 2023 - Diego Alonso, Luis Cabello, Samuel García, Luis Parres, Jul
 Todos los derechos reservados.
 ## ÍNDICE
 
-Ficha técnica
-Descripción
-Jugabilidad
-MECÁNICAS
-Cámara y entorno de juego
-Movimiento del personaje
-Apuntado y disparo
-Mapa de juego
-Enemigos
-Eliminación de enemigos
-Tótem de mejoras
-Estadísticas base del personaje
-Mecánicas dicotómicas
-Primera dicotomía
-Segunda dicotomía
-Tercera dicotomía
-Cuarta dicotomía
-HUD in-game
-HUD menú tótem
-Visual
-Referencias
-Redes y enlaces
+* Ficha técnica
+* Descripción
+* Jugabilidad
+* MECÁNICAS
+    * Cámara y entorno de juego
+    * Movimiento del personaje
+    * Apuntado y disparo
+    * Mapa de juego
+    * Enemigos
+    * Eliminación de enemigos
+    * Tótem de mejoras
+    * Estadísticas base del personaje
+    * Mecánicas dicotómicas
+        * Primera dicotomía
+        * Segunda dicotomía
+        * Tercera dicotomía
+        * Cuarta dicotomía
+* HUD in-game
+* HUD menú tótem
+* Visual
+* Referencias
+* Redes y enlaces
 
 ## FICHA TÉCNICA
-* **Género: Juego de acción de disparos y supervivencia por oleadas.**
-* **Plataforma: Navegador web con ordenador.**
-* **Público objetivo: +14 años. Público juvenil.**
-* **Estilo visual: Juego 2D, con vista Top-Down. Gráficos vectoriales.**
-DESCRIPCIÓN
+* **Género:** Juego de acción de disparos y supervivencia por oleadas.
+* **Plataforma:** Navegador web con ordenador.
+* **Público objetivo:** +14 años. Público juvenil.
+* **Estilo visual:** Juego 2D, con vista Top-Down. Gráficos vectoriales.
+
+##DESCRIPCIÓN
 
 Frenético juego de supervivencia donde el jugador tendrá que enfrentarse a las
 interminables oleadas de enemigos mientras mejora su personaje y adapta las mecánicas
 de juego acorde a su propia personalidad. A medida que el jugador vaya superando
 oleadas, tendrá la oportunidad de personalizar el entorno de juego, y generar ciertas
 dinámicas acorde a su forma de ser y de hacer las cosas.
-JUGABILIDAD
 
-El jugador controla a un personaje en tercera persona, desde una vista superior, en un
-mapa limitado a lo alto y a lo ancho. El jugador debe acabar con las oleadas de enemigos
-que se le acercan desde diferentes puntos del mapa mientras evita que estas le puedan
-dañar a él. Eliminar estos enemigos le otorgan algunas mejoras de sus características base,
-además de permitirle “adaptar” algunas mecánicas del juego según la personalidad y estilo
-de juego del propio jugador.
-El objetivo final es aguantar el mayor número de oleadas posible, mientras el jugador
-personaliza a su gusto no solo el personaje que controla, sino el propio entorno de juego y
+##JUGABILIDAD
+
+El jugador controla a un personaje en tercera persona, desde una vista superior, en un mapa limitado a lo alto y a lo ancho. El jugador debe acabar con las oleadas de enemigos que se le acercan desde diferentes puntos del mapa mientras evita que estas le puedan dañar a él. Eliminar estos enemigos le otorgan algunas mejoras de sus características base, además de permitirle “adaptar” algunas mecánicas del juego según la personalidad y estilo de juego del propio jugador.
+
+El objetivo final es aguantar el mayor número de oleadas posible, mientras el jugador personaliza a su gusto no solo el personaje que controla, sino el propio entorno de juego y
 sus mecánicas.
-Cuando acaba la partida, se descomponen las decisiones del jugador según la forma en la
-que ha personalizado su experiencia de juego, recibiendo este un análisis preciso de su
-personalidad y porqué hace las cosas como las hace.
 
-MECÁNICAS
+Cuando acaba la partida, se descomponen las decisiones del jugador según la forma en la que ha personalizado su experiencia de juego, recibiendo este un análisis preciso de su personalidad y porqué hace las cosas como las hace.
 
-CÁMARA Y ENTORNO DE JUEGO MECÁNICAS
+##MECÁNICAS
+
+###CÁMARA Y ENTORNO DE JUEGO MECÁNICAS
 
 El entorno de juego se percibe mediante una cámara Top-Down en dos dimensiones. En el
 centro de la cámara se encuentra el personaje principal. La cámara acompaña al personaje,
 imitando sus movimientos y manteniéndolo en el centro del plano.
 El jugador puede ver cualquier entidad que se encuentre dentro del frame de la cámara.
 
-MOVIMIENTO DEL PERSONAJE MECÁNICAS
+###MOVIMIENTO DEL PERSONAJE MECÁNICAS
 
 El personaje se mueve en el plano del suelo mediante las teclas A W S D, desplazandolo en
 ocho ejes de dirección.
 
-APUNTADO Y DISPARO MECÁNICAS
+###APUNTADO Y DISPARO MECÁNICAS
 
-El personaje apunta siempre en la dirección del ratón, y rota sobre sí mismo para encarar
-esa misma dirección.
-Se efectúa el disparo de un proyectil mediante el click izquierdo del ratón, el cuál saldrá
-despedido desde el personaje en dirección al ratón. Si se mantiene presionado el click
-izquierdo, se disparan proyectiles a una velocidad determinada por la cadencia de disparo.
-Este mismo efecto se puede conseguir activando el modo “disparo automático”,
-presionando una tecla determinada, de este modo también puede ser desactivado de la
-misma forma.
-Los sistemas de movimiento con teclado y apuntado con ratón son independientes, y no se
-afectan entre sí.
-MAPA DE JUEGO MECÁNICAS
+El personaje apunta siempre en la dirección del ratón, y rota sobre sí mismo para encarar esa misma dirección.
+Se efectúa el disparo de un proyectil mediante el click izquierdo del ratón, el cuál saldrá despedido desde el personaje en dirección al ratón. Si se mantiene presionado el click izquierdo, se disparan proyectiles a una velocidad determinada por la cadencia de disparo.
+Este mismo efecto se puede conseguir activando el modo “disparo automático”, presionando una tecla determinada, de este modo también puede ser desactivado de la misma forma.
+Los sistemas de movimiento con teclado y apuntado con ratón son independientes, y no se afectan entre sí.
+
+##MAPA DE JUEGO MECÁNICAS
 Solo existe un mapa principal en el juego, donde se desarrolla toda la acción. Este mapa es
 cerrado, y cuenta con algunos obstáculos y elementos decorativos.
 
-ENEMIGOS MECÁNICAS
+##ENEMIGOS MECÁNICAS
 Existen dos conjuntos de enemigos con los que el jugador se encuentra de forma recurrente
 durante toda la partida:
-● Enemigos pertenecientes a una oleada: Son generados junto al resto de su oleada,
+* Enemigos pertenecientes a una oleada: Son generados junto al resto de su oleada,
 en un punto de instancia habilitado para ello. Pueden tener una IA propia, o tener
 una “mente colmena” junto a otros integrantes de su oleada.
-● Enemigos aislados: Pueden ser generados en cualquier momento, aunque el área
+* Enemigos aislados: Pueden ser generados en cualquier momento, aunque el área
 habilitada para su instanciación es relativa a la posición del jugador. Tienen IA
 propia.
 Existen distintos tipos de enemigos. Estos difieren entre sí según los siguientes factores:
-● Distintas estadísticas base (vida, daño, velocidad…)
-● Distintas mecánicas de movimiento (m.r.u, teletransporte, estático…)
-● Distintas mecánicas de ataque (melé, distancia, AOE…)
-ELIMINACIÓN DE ENEMIGOS MECÁNICAS
+* Distintas estadísticas base (vida, daño, velocidad…)
+* Distintas mecánicas de movimiento (m.r.u, teletransporte, estático…)
+* Distintas mecánicas de ataque (melé, distancia, AOE…)
+
+##ELIMINACIÓN DE ENEMIGOS MECÁNICAS
 El jugador debe disparar a los distintos enemigos que se acerquen dentro de su rango de
 alcance para eliminarlos. El proyectil disparado tiene un daño específico que será infringido
 al enemigo impactado. Si el proyectil tiene más daño que vida le falta al enemigo, el
@@ -116,13 +108,14 @@ dicotómicas.
 Además, un enemigo aleatorio de cada oleada tiene la característica oculta de soltar un
 tótem de mejora al morir.
 
-TÓTEM DE MEJORA MECÁNICAS
+###TÓTEM DE MEJORA MECÁNICAS
 El tótem de mejora se queda estático en el mapa allí donde murió el enemigo que lo
 soltaba. El jugador puede interactuar con él mediante la tecla E (botón de interacción).
 Una vez el jugador interactúa con el tótem, el juego se pausa, y se abre el menú de
 mejoras. Este está formado por dos sectores bien diferenciados:
-● Sector superior: Balanzas con las 4 dicotomías de las personalidades.
-● Sector inferior: Cartas de mejora
+* Sector superior: Balanzas con las 4 dicotomías de las personalidades.
+* Sector inferior: Cartas de mejora
+
 Sector superior:
 Este cuenta con cuatro elementos de UI similares a una balanza con aguja centrada.
 Cualquiera de estas balanzas (originalmente equilibradas) puede ser descompensada
@@ -147,11 +140,10 @@ ESTADÍSTICAS BASE DEL PERSONAJE
 ● Velocidad
 ● Cadencia de disparo
 ● Regeneración de vida
-Proyecto Myers-Briggs - Documento de diseño de juego 6
-Copyright © 2023 - Diego Alonso, Luis Cabello, Samuel García, Luis Parres, Julian Serrano
-Todos los derechos reservados.
+
+
 MECÁNICAS DICOTÓMICAS
--
+
 La idea de juego gira alrededor de las cuatro dicotomías utilizadas como indicadores en el
 test de Myers-Briggs. Estas dicotomías están definidas como pares opuestos entre ocho
 categorías.
@@ -218,18 +210,14 @@ jugador, aunque la mejora resultante de cada carta individual será un poco peor
 Si la dicotomía es desbalanceada hacia la percepción, el jugador podrá elegir entre muchas
 menos cartas, dependiendo pues de la suerte de cada momento, aunque cada una de ellas
 individualmente otorgará una mejora más sustancial.
-Proyecto Myers-Briggs - Documento de diseño de juego 8
-Copyright © 2023 - Diego Alonso, Luis Cabello, Samuel García, Luis Parres, Julian Serrano
-Todos los derechos reservados.
+
 HUD IN-GAME
--
-Proyecto Myers-Briggs - Documento de diseño de juego 9
-Copyright © 2023 - Diego Alonso, Luis Cabello, Samuel García, Luis Parres, Julian Serrano
-Todos los derechos reservados.
+
+
 HUD MENÚ TOTEM
--
+
 VISUAL
--
+
 Para el apartado visual usamos principalmente assets con licencia CC0 o con licencia
 adquirida, obtenidos a través de páginas especializadas en internet. También usamos
 nuestros propios assets cuando buscamos un gráfico muy específico, o modificamos los
@@ -239,14 +227,9 @@ El estilo visual es con gráficos vectorizados y colores planos. Esta decisión 
 basa en la naturaleza del juego, cuyo ritmo frenético y mecánicas skill-based solo funcionan
 si se da al jugador un feedback claro e inteligible. Este feedback se vuelve gratificante
 mediante la incorporación de mecanismos como VFX o camera-shake.
-Proyecto Myers-Briggs - Documento de diseño de juego 10
-Copyright © 2023 - Diego Alonso, Luis Cabello, Samuel García, Luis Parres, Julian Serrano
-Todos los derechos reservados.
-Proyecto Myers-Briggs - Documento de diseño de juego 11
-Copyright © 2023 - Diego Alonso, Luis Cabello, Samuel García, Luis Parres, Julian Serrano
-Todos los derechos reservados.
+
 REFERENCIAS
--
+
 VAMPIRE SURVIVOR
 Juego de acción y supervivencia por oleadas utilizado para crear la base del proyecto.
 Las mecánicas de cámara, movimiento, enemigos y dinámica de juego se basan en este
@@ -262,7 +245,7 @@ Estas modificaciones generan nuevas dinámicas y estrategias en el juego. La for
 tiene el jugador de adaptar y personalizar las mecánicas de juego gracias a las cuatro
 dicotomías recuerda a este título multijugador casual.
 REDES Y ENLACES
--
+
 https://www.instagram.com/_scriptedgames/
 https://twitter.com/_scriptedgames
 https://github.com/Lparres2000/JuegoPVLI
