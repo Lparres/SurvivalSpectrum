@@ -1,4 +1,5 @@
 import Player from './Player.js'
+import MeleeEnemy from './MeleeEnemy.js'
 
 export default class MainScene extends Phaser.Scene{
     constructor(){
@@ -29,8 +30,18 @@ export default class MainScene extends Phaser.Scene{
             minCooldown:0.5,
             maxCooldown:1 }
         //creacion del jugador
-        this.player = new Player(this,960,540,'kirby', playerConfig);
-        
+        this.player = new Player(this, 960, 540, 'kirby', playerConfig);
+        //instancia de enemigo
+        let enemyConfig =
+        {
+            life: 50,
+            damage: 3,
+            velocity: 2,
+            minCooldown: 1,
+            maxCooldown: 2,
+        }
+        //creacion del enemigo
+        this.meleeEnemy = new MeleeEnemy(this, 500, 500, 'kirby', enemyConfig);
         //variables para el input
         this.up = this.input.keyboard.addKey('W');
         this.left = this.input.keyboard.addKey('A');
@@ -50,5 +61,6 @@ export default class MainScene extends Phaser.Scene{
 
         // Modificamos el vector de movimiento del player a partir del inputVector
         this.player.setMoveVector(this._inputVector);
+        this.meleeEnemy.mover(this.player.x, this.player.y)
     }
 }

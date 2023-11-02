@@ -6,9 +6,9 @@ export default class MeleeEnemy extends Enemy
     *Me tengo que poner a revidar los ejemplos a parte de los apuntes, pero creo que la llamada al constructor de super es necesaria
     * tickTime es el Cool Down entre golpes
     */
-    constructor(scene,x,y, damage, velocity, tickTime)
+    constructor(scene, x, y, key, enemyConfig, tickTime)
     {
-        super(scene,x,y,vida,damage,velocity);
+        super(scene, x, y, key, enemyConfig);
         this._tickTime = tickTime;
     }
 }
