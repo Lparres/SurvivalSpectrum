@@ -1,7 +1,7 @@
 export default class Player extends Phaser.GameObjects.Sprite
 {
     /*
-    *Las variable con barra baja son las de la clase, si barra baja son las variables de la sobrecarga
+    *Las variable con barra baja son las de la clase, sin barra baja son las variables de la sobrecarga
     *Scene es la escena a la que pertenecen los enemigos
     *x es la coordenada x del sprite
     *y es la coordenada y del sprite

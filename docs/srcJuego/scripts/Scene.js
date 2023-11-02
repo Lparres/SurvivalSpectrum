@@ -28,31 +28,23 @@ export default class MainScene extends Phaser.Scene{
             life: 100}
         this.player = new Player(this,960,540,'kirby', playerConfig);
         
+        //variables para el input
         this.up = this.input.keyboard.addKey('W');
         this.left = this.input.keyboard.addKey('A');
         this.down = this.input.keyboard.addKey('S');
         this.right = this.input.keyboard.addKey('D');
         
+        
+        // Recogida del input de movimiento en un vector
+        this._inputVector = new Phaser.Math.Vector2(0,0);
     }
     //game tick
     update(){
 
-        // Recogida del input de movimiento en un vector
-        this._inputVector = new Phaser.Math.Vector2(0,0);
+        //actualizar el valor del vector del input
+        this._inputVector.x = this.right.isDown == this.left.isDown ? 0 : this.right.isDown ? 1 : -1;
+        this._inputVector.y = this.up.isDown == this.down.isDown ? 0 : this.up.isDown ? -1 : 1;
 
-        if(this.right.isDown){
-            this._inputVector.x += 1;
-        }
-        if(this.left.isDown){
-            this._inputVector.x -= 1;
-        }
-        if(this.up.isDown){
-            this._inputVector.y -= 1;
-        }
-        if(this.down.isDown){
-            this._inputVector.y += 1;
-        }
-        
         // Modificamos el vector de movimiento del player a partir del inputVector
         this.player.setMoveVector(this._inputVector);
     }
