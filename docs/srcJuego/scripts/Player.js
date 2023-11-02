@@ -18,31 +18,40 @@ export default class Player extends Phaser.GameObjects.Sprite
 //Propuesta, Meter en un objeto los bloques de estadisticas. (LUIS.C)
 /**
  * Consturctor del player
- * @param {Scene} scene
+ * @param {Scene} scene 
  * @param {number} x
  * @param {number} y
- * @param {number} life
- * @param {number} damage
- * @param {number} velocity
- * @param {number} range
- * @param {number} armor
- * @param {number} rage*/
+ * @param {number} playerConfig Objeto que guarda la informacion del player{life, velocity, damage,range,armor,minCooldown,maxCooldown}
+ * */
 //life, damage, velocity, range, armor, rage
     constructor(scene,x, y, key, playerConfig)
     {
+        //llamada al constructor del super
         super(scene, x ,y, key ) // hay que cargar la imagen con su id
 
+        //atributos del player
         this._life = playerConfig.life;
-        //Genera un Cool Down aleatorio ente los dos (distinto para cada enemigo), los números están puestos a vole
-        //Aún no se si van milisegundos o segundos
-        this._atkCD = Phaser.Math.FloatBetween(0.5, 1);
         this._velocity = playerConfig.velocity;
         this._damage = playerConfig.damage;
         this._range = playerConfig.range;
         this._armor = playerConfig.armor;
+
+        //min y max cooldown
+        this._minCD = playerConfig._minCD;
+        this._maxCD = playerConfig._maxCD;
+
+        //Genera un Cool Down aleatorio ente los dos, los números están puestos a vole0
+        //Aún no se si van milisegundos o segundos
+        this._atkCD = Phaser.Math.FloatBetween(_minCD, this._maxCD);
+
+        //dicotomias
         this._rage = 0;
         this._eureka = 0;
+
+        //vector de movimiento
         this._moveVector = new Phaser.Math.Vector2(0,0);
+        
+        //escala y añadir a la escena
         this.setScale(0.5);
         this.scene.add.existing(this);
     }
@@ -63,7 +72,6 @@ export default class Player extends Phaser.GameObjects.Sprite
     mover = function(){
 
         this.x += this._moveVector.x * this._velocity;
-
         this.y += this._moveVector.y * this._velocity;
     }
 
