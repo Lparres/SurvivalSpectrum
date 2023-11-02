@@ -11,9 +11,12 @@ export default class MainScene extends Phaser.Scene{
     }
     //load data
     preload(){
+        let srcJuego = 'https://lparres2000.github.io/JuegoPVLI/srcJuego';
         //place holder
-        this.load.image('kirby', 'https://lparres2000.github.io/JuegoPVLI/srcJuego/img/kirby.png');
-        this.load.image('fondo', 'https://lparres2000.github.io/JuegoPVLI/srcJuego/img/fondo.jpg');   
+        this.load.image('kirby', srcJuego+'/img/kirby.png');
+        this.load.image('fondo', srcJuego+ '/img/fondo.jpg');   
+        this.load.image('player',srcJuego+ '/Sprites/Character/with_hands/SpriteSheets');   
+        this.load.image('enemy', srcJuego+ '/Sprites/Enemy1');   
     }
     //instance
     create(){
