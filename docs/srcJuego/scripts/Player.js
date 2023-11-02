@@ -1,3 +1,4 @@
+import Bullet from "./Bullet.js";
 export default class Player extends Phaser.GameObjects.Sprite
 {
     /*
@@ -60,7 +61,10 @@ export default class Player extends Phaser.GameObjects.Sprite
 
     preUpdate(t,dt){
 
-        this.mover();
+        this.Move();
+             
+        new Bullet(this.scene,this.x,this.y,'kirby',true,0,5);
+               
     }
 
     // Método para setear el vector de movimiento
@@ -69,10 +73,11 @@ export default class Player extends Phaser.GameObjects.Sprite
     }
 
     //método para moverte
-    mover = function(){
+    Move = function(){
 
         this.x += this._moveVector.x * this._velocity;
         this.y += this._moveVector.y * this._velocity;
+        
     }
 
     //método para disparar

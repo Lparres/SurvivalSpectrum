@@ -21,7 +21,7 @@ export default class MainScene extends Phaser.Scene{
 
         //instancia del  jugador
         let playerConfig =
-        {velocity: 2, 
+        {velocity: 5, 
             damage: 5, 
             range: 20, 
             armor: 10, 
@@ -37,7 +37,10 @@ export default class MainScene extends Phaser.Scene{
         this.down = this.input.keyboard.addKey('S');
         this.right = this.input.keyboard.addKey('D');
         
-        
+        //no se si hace falta para leer input del mouse
+        //this.input.mouse.capture = true;
+
+
         // Recogida del input de movimiento en un vector
         this._inputVector = new Phaser.Math.Vector2(0,0);
     }
@@ -50,5 +53,9 @@ export default class MainScene extends Phaser.Scene{
 
         // Modificamos el vector de movimiento del player a partir del inputVector
         this.player.setMoveVector(this._inputVector);
+
+        //prueba para detectar la posicion del raton
+        //this.player.x = this.input.mousePointer.x;
+        //this.player.y = this.input.mousePointer.y;
     }
 }

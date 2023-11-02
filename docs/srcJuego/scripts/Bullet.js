@@ -1,5 +1,5 @@
 
-export default class Bullet
+export default class Bullet extends Phaser.GameObjects.Sprite
 {
 
     /*
@@ -8,7 +8,7 @@ export default class Bullet
     *trataremos idParent como un booleano, true si el padre es el player, false si el padre es el enemigo
     *daño hace las veces de daño y vida dentro de la baja
     */
-    constructor(scene,x,y,key,idParent, daño)
+    constructor(scene,x,y,key,idParent, daño,velocity)
     {
         super(scene,x,y,key);
 
@@ -16,11 +16,40 @@ export default class Bullet
         this._idParent = idParent;
         // Es a la vez el daño y la vida de la bala
         this._daño = daño;
+        //velocidad de movimiento de las balas
+        this._velocity = velocity;
+
+        //objeto destino que guarda la posicion 
+        let destino = this._idParent ? this.scene.input.mousePointer : this.scene.player;
+     
+        //vector de la direccion del movimiento
+        this._moveVector = new Phaser.Math.Vector2(destino.x - this.x ,destino.y - this.y).normalize();
+        
+        this.setScale(0.05);
+
+
+        //añadirlo a la escena
+        this.scene.add.existing(this);
+
     }
+
+    preUpdate(t,dt){
+        this.Move();
+    }
+
+
     //métodos
     Hit = function()
     {
         //por ahora vacia
     }
+
+    Move = function(){
+
+        this.x += this._moveVector.x * this._velocity;
+        this.y += this._moveVector.y * this._velocity;
+
+    }
+
 }
 
