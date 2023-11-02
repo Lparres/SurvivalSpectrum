@@ -37,17 +37,9 @@ export default class Player extends Phaser.GameObjects.Sprite
         this._range = playerConfig.range;
         this._armor = playerConfig.armor;
 
-        //min y max cooldown
-        this._minCD = playerConfig._minCooldown;
-        this._maxCD = playerConfig._maxCooldown;
-
-        //Genera un Cool Down aleatorio ente los dos, los números están puestos a vole0
-        //van en  milisegundos
-        this._atkCD = Phaser.Math.Between(this._minCD,this._maxCD); //por algun motivo no funciona
-        
-        //console.log(this._atkCD);
-
-
+        //atack cooldown en milisegundos
+        this._atkCD = playerConfig.Cooldown; 
+        //para la recarga del ataque
         this._elapsedTime = 0;
 
         //dicotomias
@@ -70,12 +62,9 @@ export default class Player extends Phaser.GameObjects.Sprite
              
         this._elapsedTime += dt;
       
-        if(this._elapsedTime >= 500){
+        if(this._elapsedTime >= this._atkCD){
             new Bullet(this.scene,this.x,this.y,'kirby',true,0,5);
-            this._atkCD = Phaser.Math.Between(this._minCD, this._maxCD);//esto no funciona
-            this._atkCD = 500;
             this._elapsedTime = 0;
-
         }
                
     }
