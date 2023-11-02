@@ -41,7 +41,7 @@ export default class MainScene extends Phaser.Scene{
             maxCooldown: 2,
         }
         //creacion del enemigo
-        this.meleeEnemy = new MeleeEnemy(this, 500, 500, 'kirby', enemyConfig);
+        this.meleeEnemy = new MeleeEnemy(this, 500, 500, 'kirby', enemyConfig, 10);
         //variables para el input
         this.up = this.input.keyboard.addKey('W');
         this.left = this.input.keyboard.addKey('A');
