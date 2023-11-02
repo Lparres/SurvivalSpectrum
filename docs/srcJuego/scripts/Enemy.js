@@ -13,10 +13,10 @@ export default class Enemy extends Phaser.GameObjects.Sprite
  * @param {number} y coordenada y del sprite
  * @param {number} enemyConfig Objeto que guarda la informacion del enemy{life, velocity, damage,minCooldown,maxCooldown}
  * */
-    constructor(scene, x, y,key,enemyConfig)
+    constructor(scene, x, y, key, enemyConfig)
     {
         //constructor del padre
-        super(scene, x ,y,key); 
+        super(scene, x ,y, key); 
 
         //atributos del enemigo
         this._vida = enemyConfig.life;
