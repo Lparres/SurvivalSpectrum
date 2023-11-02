@@ -30,6 +30,12 @@ export default class Enemy extends Phaser.GameObjects.Sprite
         //Genera un Cool Down aleatorio ente los dos (distinto para cada enemigo), los números están puestos a vole
         //Aún no se si van milisegundos o segundos
         this._atkCD = Phaser.Math.FloatBetween( this._minCD,this._maxCD);
+
+        //asignar escala
+        this.setScale(0.3);
+        //añadir a la escena
+        this.scene.add.existing(this);
+
     }
     
     // métodos
