@@ -1,4 +1,4 @@
-DOCUMENTO DE DISEÑO DE JUEGO
+# DOCUMENTO DE DISEÑO DE JUEGO
 PROYECTO
 MYERS-BRIGGS
 Diego Alonso
@@ -9,48 +9,45 @@ Julian Serrano
 Versión 1.0 - 5 de octubre de 2023
 Copyright © 2023 - Diego Alonso, Luis Cabello, Samuel García, Luis Parres, Julian Serrano
 Todos los derechos reservados.
-ÍNDICE
--
-Ficha técnica............................................................................................................................ 3
-Descripción.............................................................................................................................. 3
-Jugabilidad............................................................................................................................... 3
-MECÁNICAS......................................................................................................................4
-Cámara y entorno de juego..........................................................................................4
-Movimiento del personaje............................................................................................ 4
-Apuntado y disparo...................................................................................................... 4
-Mapa de juego..............................................................................................................4
-Enemigos..................................................................................................................... 5
-Eliminación de enemigos............................................................................................. 5
-Tótem de mejoras........................................................................................................ 6
-Estadísticas base del personaje.........................................................................................6
-Mecánicas dicotómicas...................................................................................................... 7
-Primera dicotomía........................................................................................................ 7
-Segunda dicotomía...................................................................................................... 7
-Tercera dicotomía.........................................................................................................8
-Cuarta dicotomía.......................................................................................................... 8
-HUD in-game......................................................................................................................9
-HUD menú tótem..............................................................................................................10
-Visual......................................................................................................................................10
-Referencias............................................................................................................................ 12
-Redes y enlaces.....................................................................................................................12
-Proyecto Myers-Briggs - Documento de diseño de juego 2
-Copyright © 2023 - Diego Alonso, Luis Cabello, Samuel García, Luis Parres, Julian Serrano
-Todos los derechos reservados.
-FICHA TÉCNICA
--
-➢ Género: Juego de acción de disparos y supervivencia por oleadas.
-➢ Plataforma: Navegador web con ordenador.
-➢ Público objetivo: +14 años. Público juvenil.
-➢ Estilo visual: Juego 2D, con vista Top-Down. Gráficos vectoriales.
+## ÍNDICE
+
+Ficha técnica
+Descripción
+Jugabilidad
+MECÁNICAS
+Cámara y entorno de juego
+Movimiento del personaje
+Apuntado y disparo
+Mapa de juego
+Enemigos
+Eliminación de enemigos
+Tótem de mejoras
+Estadísticas base del personaje
+Mecánicas dicotómicas
+Primera dicotomía
+Segunda dicotomía
+Tercera dicotomía
+Cuarta dicotomía
+HUD in-game
+HUD menú tótem
+Visual
+Referencias
+Redes y enlaces
+
+## FICHA TÉCNICA
+* **Género: Juego de acción de disparos y supervivencia por oleadas.**
+* **Plataforma: Navegador web con ordenador.**
+* **Público objetivo: +14 años. Público juvenil.**
+* **Estilo visual: Juego 2D, con vista Top-Down. Gráficos vectoriales.**
 DESCRIPCIÓN
--
+
 Frenético juego de supervivencia donde el jugador tendrá que enfrentarse a las
 interminables oleadas de enemigos mientras mejora su personaje y adapta las mecánicas
 de juego acorde a su propia personalidad. A medida que el jugador vaya superando
 oleadas, tendrá la oportunidad de personalizar el entorno de juego, y generar ciertas
 dinámicas acorde a su forma de ser y de hacer las cosas.
 JUGABILIDAD
--
+
 El jugador controla a un personaje en tercera persona, desde una vista superior, en un
 mapa limitado a lo alto y a lo ancho. El jugador debe acabar con las oleadas de enemigos
 que se le acercan desde diferentes puntos del mapa mientras evita que estas le puedan
@@ -63,20 +60,23 @@ sus mecánicas.
 Cuando acaba la partida, se descomponen las decisiones del jugador según la forma en la
 que ha personalizado su experiencia de juego, recibiendo este un análisis preciso de su
 personalidad y porqué hace las cosas como las hace.
-Proyecto Myers-Briggs - Documento de diseño de juego 3
-Copyright © 2023 - Diego Alonso, Luis Cabello, Samuel García, Luis Parres, Julian Serrano
-Todos los derechos reservados.
+
 MECÁNICAS
--
+
 CÁMARA Y ENTORNO DE JUEGO MECÁNICAS
+
 El entorno de juego se percibe mediante una cámara Top-Down en dos dimensiones. En el
 centro de la cámara se encuentra el personaje principal. La cámara acompaña al personaje,
 imitando sus movimientos y manteniéndolo en el centro del plano.
 El jugador puede ver cualquier entidad que se encuentre dentro del frame de la cámara.
+
 MOVIMIENTO DEL PERSONAJE MECÁNICAS
+
 El personaje se mueve en el plano del suelo mediante las teclas A W S D, desplazandolo en
 ocho ejes de dirección.
+
 APUNTADO Y DISPARO MECÁNICAS
+
 El personaje apunta siempre en la dirección del ratón, y rota sobre sí mismo para encarar
 esa misma dirección.
 Se efectúa el disparo de un proyectil mediante el click izquierdo del ratón, el cuál saldrá
@@ -90,9 +90,7 @@ afectan entre sí.
 MAPA DE JUEGO MECÁNICAS
 Solo existe un mapa principal en el juego, donde se desarrolla toda la acción. Este mapa es
 cerrado, y cuenta con algunos obstáculos y elementos decorativos.
-Proyecto Myers-Briggs - Documento de diseño de juego 4
-Copyright © 2023 - Diego Alonso, Luis Cabello, Samuel García, Luis Parres, Julian Serrano
-Todos los derechos reservados.
+
 ENEMIGOS MECÁNICAS
 Existen dos conjuntos de enemigos con los que el jugador se encuentra de forma recurrente
 durante toda la partida:
@@ -117,9 +115,7 @@ para modificar y personalizar la experiencia de juego con respecto a las mecáni
 dicotómicas.
 Además, un enemigo aleatorio de cada oleada tiene la característica oculta de soltar un
 tótem de mejora al morir.
-Proyecto Myers-Briggs - Documento de diseño de juego 5
-Copyright © 2023 - Diego Alonso, Luis Cabello, Samuel García, Luis Parres, Julian Serrano
-Todos los derechos reservados.
+
 TÓTEM DE MEJORA MECÁNICAS
 El tótem de mejora se queda estático en el mapa allí donde murió el enemigo que lo
 soltaba. El jugador puede interactuar con él mediante la tecla E (botón de interacción).
@@ -141,8 +137,9 @@ y se reanude el transcurso del juego.
 El jugador no tiene porqué interactuar con el tótem según aparece en pantalla. Puede ser
 utilizado en cualquier momento del juego, pudiendo incluso acumularse si el jugador así lo
 considera.
+
 ESTADÍSTICAS BASE DEL PERSONAJE
--
+
 ● Vida máxima
 ● Daño base
 ● Armadura
