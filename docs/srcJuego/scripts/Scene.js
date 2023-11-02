@@ -27,8 +27,8 @@ export default class MainScene extends Phaser.Scene{
             range: 20, 
             armor: 10, 
             life: 100,
-            minCooldown:500,//van en milisegundos
-            maxCooldown:1000, }
+            Cooldown:500,//van en milisegundos
+        }
         //creacion del jugador
         this.player = new Player(this, 960, 540, 'kirby', playerConfig);
 
@@ -46,7 +46,7 @@ export default class MainScene extends Phaser.Scene{
         this.meleeEnemy = new MeleeEnemy(this, 500, 500, 'kirby', enemyConfig, 10);
 
 
-        
+
         //variables para el input
         this.up = this.input.keyboard.addKey('W');
         this.left = this.input.keyboard.addKey('A');
