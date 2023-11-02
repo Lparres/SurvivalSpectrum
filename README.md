@@ -1,5 +1,5 @@
 # JuegoPVLI
-Este Proyecto es un trabajo universitario de alumnos de la universidad complutense de Madrid para la asignatura de **Progaramación de Lenguajes Interpretados**.
+Este Proyecto es un trabajo universitario de alumnos de la universidad complutense de Madrid para la asignatura de **Programación de Videojuegos en Lenguajes Interpretados**.
 
 Para este proyecto se ha creado una cuenta de instagram para el estudio donde se irán subiendo progresos del juego.
 
