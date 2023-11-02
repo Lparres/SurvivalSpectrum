@@ -38,9 +38,15 @@ export default class Enemy extends Phaser.GameObjects.Sprite
         //añadir a la escena
         this.scene.add.existing(this);
 
+        //añadir a las fisicas
         this.scene.physics.add.existing(this);
-
+        //añadir al grupo de enemigos para las fisicas
         this.scene.enemys.add(this);
+
+        //ajustar el tamaño del colider
+        this.body.setSize(400,700,false);
+        //ajustar el offset del colider
+        this.body.setOffset(700,700);
 
     }
 

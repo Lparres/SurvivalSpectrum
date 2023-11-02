@@ -12,12 +12,12 @@ export default class MainScene extends Phaser.Scene{
     //load data
     preload(){
         let srcJuego = 'https://lparres2000.github.io/JuegoPVLI/srcJuego';
-        //place holder
 
-        this.load.image('kirby', srcJuego+'/img/kirby.png');
+        //carga de imagenes
+        this.load.image('kirby', srcJuego+ '/img/kirby.png');
         this.load.image('fondo', srcJuego+ '/img/fondo.jpg');   
-        this.load.image('player',srcJuego+ '/Sprites/Character/with_hands/SpriteSheets');   
-        this.load.image('enemy', srcJuego+ '/Sprites/Enemy1');    
+        this.load.image('player',srcJuego+ '/Sprites/Character/with_hands/death_0 - copia - copia.png');   
+        this.load.image('enemy', srcJuego+ '/Sprites/Enemy1/death_0.png');        
 
     }
     //instance
@@ -44,7 +44,7 @@ export default class MainScene extends Phaser.Scene{
             Cooldown:500,//van en milisegundos
         }
         //creacion del jugador
-        this.player = new Player(this, 960, 540, 'kirby', playerConfig);
+        this.player = new Player(this, 960, 540, 'player', playerConfig);
 
 
         //instancia de enemigo
@@ -57,7 +57,7 @@ export default class MainScene extends Phaser.Scene{
             maxCooldown: 2,
         }
         //creacion del enemigo
-        this.meleeEnemy = new MeleeEnemy(this, 500, 500, 'kirby', enemyConfig, 10);
+        this.meleeEnemy = new MeleeEnemy(this, 500, 500, 'enemy', enemyConfig, 10);
 
 
 
