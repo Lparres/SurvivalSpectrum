@@ -16,9 +16,11 @@ export default class MainScene extends Phaser.Scene{
         //carga de imagenes y SpriteSheets
         this.load.image('kirby', srcJuego+ '/img/kirby.png');
         this.load.image('fondo', srcJuego+ '/img/fondo.jpg');   
+
         //this.load.image('player',srcJuego+ '/Sprites/Character/with_hands/death_0 - copia - copia.png');   
         this.load.spritesheet('player', srcJuego+'/Sprites/Character/with_hands/SpriteSheets/walkSheet.png',
                       { frameWidth: 2048, frameHeight: 2048 });
+
         //this.load.image('enemy', srcJuego+ '/Sprites/Enemy1/death_0.png');   
         this.load.spritesheet('enemy', srcJuego+'/Sprites/Enemy1/SpriteSheets/walkSheet.png',
         { frameWidth: 2048, frameHeight: 2048 });
@@ -50,11 +52,11 @@ export default class MainScene extends Phaser.Scene{
 
         //instancia del  jugador
         let playerConfig =
-        {velocity: 5, 
+        {velocity: 3, 
             damage: 5, 
             range: 20, 
             armor: 10, 
-            life: 100,
+            life: 120,
             Cooldown:500,//van en milisegundos
         }
 
@@ -74,14 +76,14 @@ export default class MainScene extends Phaser.Scene{
         {
             life: 50,
             damage: 3,
-            velocity: 2,
+            velocity: 100,
             minCooldown: 1,
             maxCooldown: 2,
         }
-        //creacion del enemigo
+        //creacion del enemigo, para que funcionen bien las fisicas no deben crearse 2 objetos chocando
         this.meleeEnemy = new MeleeEnemy(this, 500, 500, 'enemy', enemyConfig, 10);
         this.meleeEnemy = new MeleeEnemy(this, 400, 200, 'enemy', enemyConfig, 10);
-        this.meleeEnemy = new MeleeEnemy(this, 400, 700, 'enemy', enemyConfig, 10);
+        this.meleeEnemy = new MeleeEnemy(this, 400, 800, 'enemy', enemyConfig, 10);
         this.meleeEnemy = new MeleeEnemy(this, 900, 250, 'enemy', enemyConfig, 10);
 
         //creación de animaciones para enemigos
@@ -119,11 +121,11 @@ export default class MainScene extends Phaser.Scene{
         // Modificamos el vector de movimiento del player a partir del inputVector
         this.player.setMoveVector(this._inputVector);
 
-        /*
+        
         if(this.physics.collide(this.enemys, this.enemys)) {
-            console.log("tu viejaaaaaaaaaaaaa");
+            console.log("colision entre enemigos");
         }
-        */
+        
         //prueba para detectar la posicion del raton
         //this.player.x = this.input.mousePointer.x;
         //this.player.y = this.input.mousePointer.y;

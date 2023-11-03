@@ -65,16 +65,16 @@ export default class Enemy extends Phaser.GameObjects.Sprite
     //la x y la y que se pasan a la funcion mover son la x y la y del player
     Move = function(){
        
+        //calcular el vector de direccion del movimient
         this._moveVector.x = this.scene.player.x- this.x;
         this._moveVector.y = this.scene.player.y- this.y;
 
         this._moveVector.normalize();   
         
-        this.x += this._moveVector.x * this._velocity;
-        this.y += this._moveVector.y * this._velocity;
-    
-        //movimiento por fisicas?
-        //this.body.setVelocity(this._moveVector.x*this.velocity,this._moveVector.y*this.velocity);
+        //movimiento por fisicas
+        this.body.setVelocity(this._moveVector.x*this._velocity,this._moveVector.y*this._velocity);
+
+        //animacion de movimiento
         this.play('enemyMove', true);
     }
 
@@ -82,10 +82,12 @@ export default class Enemy extends Phaser.GameObjects.Sprite
     Disparar = function(){
         //vacío de momento
     }
+
+
     Hit = function(damage){
         this._vida -= damage;
         if(this._vida <= 0){
-            this.destroy();
+            this.destroy();//creo que las destrucciones iban mejor en el preupdate, preguntars
         }
     }
 }
