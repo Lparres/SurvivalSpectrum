@@ -4,7 +4,7 @@ Versión 1.1 - 2 de Noviembre de 2023
 
 Copyright © 2023 - Todos los derechos reservados.
 
-Diego Alonso, Luis Cabello, Samuel García, Luis Parres, Julian Serrano
+Diego Alonso, Luis Cabello, Samuel García, Luis Parres, Julián Serrano
 ## ÍNDICE
 
 * Ficha técnica
