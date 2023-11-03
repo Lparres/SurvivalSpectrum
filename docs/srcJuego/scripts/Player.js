@@ -57,6 +57,8 @@ export default class Player extends Phaser.GameObjects.Sprite
     //métodos
 
     preUpdate(t,dt){
+        //para que reproduzca la animación hay que llamar al update del padre
+        super.preUpdate(t,dt);
 
         this.Move();
              
@@ -66,7 +68,6 @@ export default class Player extends Phaser.GameObjects.Sprite
             new Bullet(this.scene,this.x,this.y,'kirby',true,10,5);
             this._elapsedTime = 0;
         }
-               
     }
 
     // Método para setear el vector de movimiento
@@ -79,7 +80,7 @@ export default class Player extends Phaser.GameObjects.Sprite
 
         this.x += this._moveVector.x * this._velocity;
         this.y += this._moveVector.y * this._velocity;
-        
+        this.play('PlayerMove',true);     
     }
 
     //método para disparar

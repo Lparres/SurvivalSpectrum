@@ -44,13 +44,15 @@ export default class Enemy extends Phaser.GameObjects.Sprite
         this.scene.enemys.add(this);
 
         //ajustar el tamaño del colider
-        this.body.setSize(400,700,false);
+        this.body.setSize(450,750,false);
         //ajustar el offset del colider
-        this.body.setOffset(700,700);
+        this.body.setOffset(800,1050);
 
     }
 
     preUpdate(t,dt){
+        //para la animación
+        super.preUpdate(t,dt);
 
         this.Move();                    
              
@@ -73,6 +75,7 @@ export default class Enemy extends Phaser.GameObjects.Sprite
     
         //movimiento por fisicas?
         //this.body.setVelocity(this._moveVector.x*this.velocity,this._moveVector.y*this.velocity);
+        this.play('enemyMove', true);
     }
 
     //método para disparar
