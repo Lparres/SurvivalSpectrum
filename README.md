@@ -6,7 +6,9 @@ Para este proyecto se ha creado una cuenta de [Instagram](https://www.instagram.
 ## La idea de nuestro proyecto
 Nuestro proyecto es un juego de acción y supervivencia por oleadas, en vista Top-Down 2D, añadiendo el rasgo diferenciador de que la personalidad del jugador tendrá un impacto en la forma en la que se juega basándonos en el test MBTI. Cada ronda el jugador podrá desbalancear las **4 dicotomías** en las que se basa el test afectando a distintas mecánicas del juego tales como: el rango de ataque, el daño o la interfaz de usuario, entre otras cosas.
 
- El juego está pensado para jugadores casuales.
+Al finalizar la partida, el jugador tendrá acceso a su propio **mapa MBTI** fruto de las decisiones tomadas a lo largo de la partida con respecto al desbalanceo de las 4 **dicotomías**.
+
+ Juego casual para un público juvenil.
 
 Para acceder a nuestra página web donde se encuentra el juego haz clic [aquí](https://lparres2000.github.io/JuegoPVLI/)
 

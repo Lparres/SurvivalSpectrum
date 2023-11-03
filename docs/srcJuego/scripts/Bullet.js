@@ -43,7 +43,7 @@ export default class Bullet extends Phaser.GameObjects.Sprite
     //métodos
     Hit = function()
     {
-        //por ahora vacia
+
         console.log("Hola Mundo Choque");
         this.destroy();
     }

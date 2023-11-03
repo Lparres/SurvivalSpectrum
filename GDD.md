@@ -4,7 +4,10 @@ Versión 1.1 - 2 de Noviembre de 2023
 
 Copyright © 2023 - Todos los derechos reservados.
 
-Diego Alonso, Luis Cabello, Samuel García, Luis Parres, Julian Serrano
+Diego Alonso, Luis Cabello, Samuel García, Luis Parres, Julián Serrano
+<br>
+<br>
+
 ## ÍNDICE
 
 * Ficha técnica
@@ -85,13 +88,14 @@ Solo existe un mapa principal en el juego, donde se desarrolla toda la acción. 
 
 ### ENEMIGOS
 Existen dos conjuntos de enemigos con los que el jugador se encuentra de forma recurrente durante toda la partida:
-* **Enemigos pertenecientes a una oleada**: Son generados junto al resto de su oleada,
-en un punto de instancia habilitado para ello. Pueden tener una IA propia, o tener
+* **Enemigos pertenecientes a una oleada**: Son generados junto al resto de su oleada, en un punto de instancia habilitado para ello. Pueden tener una IA propia, o tener
 una “mente colmena” junto a otros integrantes de su oleada.
+
 * **Enemigos aislados**: Pueden ser generados en cualquier momento, aunque el área
-habilitada para su instanciación es relativa a la posición del jugador. Tienen IA
-propia.
+habilitada para su instanciación es relativa a la posición del jugador. Tienen IA propia.
+
 Existen distintos tipos de enemigos. Estos difieren entre sí según los siguientes factores:
+
 * *Distintas estadísticas base* (vida, daño, velocidad…)
 * *Distintas mecánicas de movimiento* (m.r.u, teletransporte, estático…)
 * *Distintas mecánicas de ataque* (melé, distancia, AOE…)
@@ -107,12 +111,10 @@ Una vez el jugador interactúa con el tótem, el juego se pausa, y se abre el me
 * **Sector 1**: Balanzas con las 4 dicotomías de las personalidades.
 * **Sector 2**: Cartas de mejora
 
-__Sector 1__:
-Este cuenta con cuatro elementos de UI similares a una balanza o un velocímetro con aguja centrada.
+__Sector 1__: Este cuenta con cuatro elementos de UI similares a una balanza o un velocímetro con aguja centrada.
 Cualquiera de estas balanzas (originalmente equilibradas) puede ser descompensada haciendo uso de los polvos que soltaban todos los enemigos al morir. Al aplicar un desequilibrio en cualquiera de las cuatro dicotomías (representadas por las balanzas), la mecánica relacionada con esa dicotomía será modificada según la dirección del desequilibrio.
 
-__Sector 2__:
-Reservado para la mecánica dicotómica de las cartas de mejora. 
+__Sector 2__: Reservado para la mecánica dicotómica de las cartas de mejora. 
 
 Solo se puede utilizar esta mecánica una vez por tótem de mejora. Cada tótem tiene un solo uso, y desaparecerá cuando el jugador cierre el menú de mejoras y se reanude el transcurso del juego.
 
@@ -150,6 +152,7 @@ Característica propia de personas cuyo interés está centrado en el entorno y 
 Actitud típica que se caracteriza por la concentración del interés en los procesos internos del sujeto. Personas que prefieren dirigir su energía hacia dentro, orientados hacia ideas, información y pensamientos internos.
 
 En relación a esta dicotomía se introduce la mecánica del ataque base. Cuando el jugador crea un desbalance hacia la extroversión, el personaje pierde rango de alcance, pero gana mdaño y área de acción. Si la dicotomía se desbalancea hacia la introversión, el personaje gana rango de alcance en sus ataques, pero pierde daño en cada disparo.
+
 ### SEGUNDA DICOTOMÍA
 #### Sensación:
 Tipo de persona que prefiere tratar con hechos, detalles e información concreta. Hace uso de sus cinco sentidos para percibir y analizar la información.
@@ -169,6 +172,7 @@ En relación a esta dicotomía se crea una nueva mecánica:
 Rabia / Eureka. <br>El jugador dispone en todo momento de dos barras de medición. La barra correspondiente a la rabia (emocional) se rellena cuando el jugador es dañado por un enemigo. La barra correspondiente al eureka (racional) se rellena cuando el jugador daña a un enemigo.
 Al completar la barra de rabia, el personaje gana un bonus multiplicativo de daño y obtiene un porcentaje de robo de vida, pero también recibe más daño de los enemigos. Este estado de rabia tiene un tiempo de duración.
 Al completar la barra de eureka, el jugador consigue una ventaja específica puntual, como una limpieza de enemigos de pantalla o un tótem de mejora extra.
+
 ### CUARTA DICOTOMÍA
 #### Juicio:
 Característica de las personas que prefieren experiencias planificadas y bien estructuradas. Construyen un proceso mental paso a paso, prefiriendo el orden y el control sobre los sucesos futuros.
@@ -185,7 +189,9 @@ Si la dicotomía es desbalanceada hacia la percepción, el jugador podrá elegir
 ## VISUAL [^1]
 
 Para el apartado visual usamos principalmente assets con licencia CC0 o con licencia adquirida, obtenidos a través de páginas especializadas en internet. También usamos nuestros propios assets cuando buscamos un gráfico muy específico, o modificamos los adquiridos (cuya licencia no tenga un atributo ND) para satisfacer nuestras necesidades concretas.
+
 El estilo visual es con gráficos vectorizados y colores planos. Esta decisión de diseño se basa en la naturaleza del juego, cuyo ritmo frenético y mecánicas skill-based solo funcionan si se da al jugador un feedback claro e inteligible. Este feedback se vuelve gratificante mediante la incorporación de mecanismos como VFX o camera-shake.
+
 [^1]: Las referencias visuales se encuentran en un documento de google no accesible al público 
 <br>
 <br>
