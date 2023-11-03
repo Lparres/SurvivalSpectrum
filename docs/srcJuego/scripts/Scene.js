@@ -128,6 +128,7 @@ export default class MainScene extends Phaser.Scene{
         //this.player.x = this.input.mousePointer.x;
         //this.player.y = this.input.mousePointer.y;
         
-        this.cameras.main.startFollow(this.player);
+        //Esta línea hace que la cámara siga al jugador
+        //this.cameras.main.startFollow(this.player);
     }
 }
