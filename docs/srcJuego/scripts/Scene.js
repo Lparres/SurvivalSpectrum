@@ -35,7 +35,7 @@ export default class MainScene extends Phaser.Scene{
         //grupos de colisiones
         this.bullets = this.add.group();
         this.enemys = this.add.group();
-
+        
         
 
         //colisiones entre las balas y los enemigos
@@ -44,15 +44,20 @@ export default class MainScene extends Phaser.Scene{
             proyectle.Hit();
         });
 
-        //colision entre enemigos, por algun motivo no funciona
+        
+        //colision entre enemigos
         this.physics.add.collider(this.enemys, this.enemys);
+
+        
+        
+        
 
         // Cursor personalizado
         this.input.setDefaultCursor('url(https://lparres2000.github.io/JuegoPVLI/srcJuego/img/crosshair.png), pointer');
 
         //instancia del  jugador
         let playerConfig =
-        {velocity: 3, 
+        {velocity: 300, 
             damage: 5, 
             range: 20, 
             armor: 10, 
@@ -70,6 +75,16 @@ export default class MainScene extends Phaser.Scene{
             frameRate: 10, // Velocidad de la animación
             repeat: -1    // Animación en bucle
           });
+
+
+
+        //colisiones entre el jugador y los enemigos
+        this.physics.add.collider(this.player, this.enemys, function (player, enemy){
+            //player.bodydamage...
+            //enemy.cooldown bodydamage...
+            //anular las fuerzas?
+            
+        });
 
         //instancia de enemigo
         let enemyConfig =

@@ -56,6 +56,16 @@ export default class Player extends Phaser.GameObjects.Sprite
         //escala y añadir a la escena
         this.setScale(0.3);
         this.scene.add.existing(this);
+
+
+         //añadir a las fisicas
+         this.scene.physics.add.existing(this);
+ 
+        //ajustar el tamaño del colider
+         this.body.setSize(450,750,false);
+         //ajustar el offset del colider
+         this.body.setOffset(800,1050);
+ 
     }
 
     //métodos
@@ -82,15 +92,17 @@ export default class Player extends Phaser.GameObjects.Sprite
     //método para moverte
     Move = function(){
 
-        this.x += this._moveVector.x * this._velocity;
-        this.y += this._moveVector.y * this._velocity; 
-        if(this._moveVector.y == 0 && this._moveVector.x == 0)
-        {
-            this.stop();
+        //this.x += this._moveVector.x * this._velocity;
+        //this.y += this._moveVector.y * this._velocity; 
+
+        this.body.setVelocity(this._moveVector.x*this._velocity,this._moveVector.y*this._velocity);
+
+
+        if(this._moveVector.y == 0 && this._moveVector.x == 0){
+            this.stop();//parar la animacion
         }
-        else
-        {
-            this.play('PlayerMove',true);  
+        else{
+            this.play('PlayerMove',true);//continuar la animacion
         }
     }
 
