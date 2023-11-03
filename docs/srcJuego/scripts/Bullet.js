@@ -48,6 +48,7 @@ export default class Bullet extends Phaser.GameObjects.Sprite
         this.destroy();
     }
 
+    //hay que cambiarlo por fisicas
     Move = function(){
 
         this.x += this._moveVector.x * this._velocity;
