@@ -52,7 +52,6 @@ export default class Bullet extends Phaser.GameObjects.Sprite
 
         this.x += this._moveVector.x * this._velocity;
         this.y += this._moveVector.y * this._velocity;
-
     }
 
 }

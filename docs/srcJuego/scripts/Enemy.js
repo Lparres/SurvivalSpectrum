@@ -53,7 +53,7 @@ export default class Enemy extends Phaser.GameObjects.Sprite
     preUpdate(t,dt){
 
         this.Move();                    
-               
+             
     }
 
     
