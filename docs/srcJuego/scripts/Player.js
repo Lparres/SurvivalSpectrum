@@ -79,8 +79,15 @@ export default class Player extends Phaser.GameObjects.Sprite
     Move = function(){
 
         this.x += this._moveVector.x * this._velocity;
-        this.y += this._moveVector.y * this._velocity;
-        this.play('PlayerMove',true);     
+        this.y += this._moveVector.y * this._velocity; 
+        if(this._moveVector.y == 0 && this._moveVector.x == 0)
+        {
+            this.stop();
+        }
+        else
+        {
+            this.play('PlayerMove',true);  
+        }
     }
 
     //método para disparar
