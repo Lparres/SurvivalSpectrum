@@ -211,6 +211,13 @@ Estas modificaciones generan nuevas dinámicas y estrategias en el juego. La for
 <br>
 <br>
 
+## UML
+
+
+![Alt text](<Diagrama de clases.svg>)
+<br>
+<br>
+
 ## REDES Y ENLACES
 
 https://www.instagram.com/_scriptedgames/
