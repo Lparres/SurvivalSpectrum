@@ -67,7 +67,7 @@ export default class MainScene extends Phaser.Scene{
         this.anims.create({
             key: 'PlayerMove',
             frames: this.anims.generateFrameNumbers('player', { start: 0, end: 7}),
-            frameRate: 4, // Velocidad de la animación
+            frameRate: 10, // Velocidad de la animación
             repeat: -1    // Animación en bucle
           });
 
@@ -90,7 +90,7 @@ export default class MainScene extends Phaser.Scene{
         this.anims.create({
             key: 'enemyMove',
             frames: this.anims.generateFrameNumbers('enemy', { start: 0, end: 7}),
-            frameRate: 4, // Velocidad de la animación
+            frameRate: 10, // Velocidad de la animación
             repeat: -1    // Animación en bucle
           });
 
