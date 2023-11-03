@@ -30,8 +30,10 @@ export default class Bullet extends Phaser.GameObjects.Sprite
         
         //añadirlo a la escena
         this.scene.add.existing(this);
-        this.scene.physics.add.existing(this);
 
+        //añadirle fisicas
+        this.scene.physics.add.existing(this);
+        //añadido al grupo de fisicas de bullets
         this.scene.bullets.add(this);
     }
 
@@ -51,8 +53,11 @@ export default class Bullet extends Phaser.GameObjects.Sprite
     //hay que cambiarlo por fisicas
     Move = function(){
 
-        this.x += this._moveVector.x * this._velocity;
-        this.y += this._moveVector.y * this._velocity;
+        //this.x += this._moveVector.x * this._velocity;
+        //this.y += this._moveVector.y * this._velocity;
+
+        this.body.setVelocity(this._moveVector.x*this._velocity,this._moveVector.y*this._velocity);
+
     }
 
 }

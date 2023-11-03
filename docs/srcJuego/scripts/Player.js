@@ -46,6 +46,10 @@ export default class Player extends Phaser.GameObjects.Sprite
         this._rage = 0;
         this._eureka = 0;
 
+
+        this._bulletSpawnOffsetX = 15;
+        this._bulletSpawnOffsetY = 100;
+
         //vector de movimiento
         this._moveVector = new Phaser.Math.Vector2(0,0);
         
@@ -65,7 +69,7 @@ export default class Player extends Phaser.GameObjects.Sprite
         this._elapsedTime += dt;
       
         if(this._elapsedTime >= this._atkCD){
-            new Bullet(this.scene,this.x,this.y,'kirby',true,10,5);
+            new Bullet(this.scene,this.x + this._bulletSpawnOffsetX,this.y+this._bulletSpawnOffsetY,'kirby',true,10,500);
             this._elapsedTime = 0;
         }
     }
