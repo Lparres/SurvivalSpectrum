@@ -3,9 +3,6 @@ export default class Player extends Phaser.GameObjects.Sprite
 {
     /*
     *Las variable con barra baja son las de la clase, sin barra baja son las variables de la sobrecarga
-    *Scene es la escena a la que pertenecen los enemigos
-    *x es la coordenada x del sprite
-    *y es la coordenada y del sprite
     *life es la vida inicial del jugador
     *AtkCD es el CoolDown entre ataques
     *Velocity es la velocidad de movimiento
@@ -19,9 +16,10 @@ export default class Player extends Phaser.GameObjects.Sprite
 //Propuesta, Meter en un objeto los bloques de estadisticas. (LUIS.C)
 /**
  * Consturctor del player
- * @param {Scene} scene 
- * @param {number} x
- * @param {number} y
+ * @param {Scene} scene escena a que pertenece
+ * @param {number} x posicion x
+ * @param {number} y posicion y
+ * @param {string} key clave de la imagen
  * @param {number} playerConfig Objeto que guarda la informacion del player{life, velocity, damage,range,armor,minCooldown,maxCooldown}
  * */
 //life, damage, velocity, range, armor, rage
@@ -46,7 +44,7 @@ export default class Player extends Phaser.GameObjects.Sprite
         this._rage = 0;
         this._eureka = 0;
 
-
+        //offset del origen de la bala
         this._bulletSpawnOffsetX = 15;
         this._bulletSpawnOffsetY = 100;
 
@@ -56,7 +54,6 @@ export default class Player extends Phaser.GameObjects.Sprite
         //escala y añadir a la escena
         this.setScale(0.3);
         this.scene.add.existing(this);
-
 
          //añadir a las fisicas
          this.scene.physics.add.existing(this);
@@ -76,12 +73,7 @@ export default class Player extends Phaser.GameObjects.Sprite
 
         this.Move();
              
-        this._elapsedTime += dt;
-      
-        if(this._elapsedTime >= this._atkCD){
-            new Bullet(this.scene,this.x + this._bulletSpawnOffsetX,this.y+this._bulletSpawnOffsetY,'kirby',true,10,500);
-            this._elapsedTime = 0;
-        }
+        this.Shoot(dt);
     }
 
     // Método para setear el vector de movimiento
@@ -90,14 +82,12 @@ export default class Player extends Phaser.GameObjects.Sprite
     }
 
     //método para moverte
-    Move = function(){
+    Move(){
 
-        //this.x += this._moveVector.x * this._velocity;
-        //this.y += this._moveVector.y * this._velocity; 
-
+        //movimiento por fisicas
         this.body.setVelocity(this._moveVector.x*this._velocity,this._moveVector.y*this._velocity);
 
-
+        //asignar la animacion correspondiente
         if(this._moveVector.y == 0 && this._moveVector.x == 0){
             this.stop();//parar la animacion
         }
@@ -107,8 +97,14 @@ export default class Player extends Phaser.GameObjects.Sprite
     }
 
     //método para disparar
-    disparar = function(){
-        //vacío de momento
+    Shoot(dt) {
+        //contador del tiempo
+        this._elapsedTime += dt;
+    
+        if(this._elapsedTime >= this._atkCD){
+            new Bullet(this.scene,this.x + this._bulletSpawnOffsetX,this.y+this._bulletSpawnOffsetY,'kirby',true,10,500);            
+            this._elapsedTime = 0;
+        }
     }
 
     // La dicotomía cambia el rango de ataque

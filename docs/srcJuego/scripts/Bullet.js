@@ -1,14 +1,21 @@
 
 export default class Bullet extends Phaser.GameObjects.Sprite
 {
+   
+    //Las variable con barra baja son las de la clase, si barra baja son las variables de la sobrecarga
 
-    /*
-    *Las variable con barra baja son las de la clase, si barra baja son las variables de la sobrecarga
-    *idParent es el id del padre, enemigo o player, no se hacen daño ni entre enemigos ni el player a sí mismo
-    *trataremos idParent como un booleano, true si el padre es el player, false si el padre es el enemigo
-    *daño hace las veces de daño y vida dentro de la baja
-    */
-    constructor(scene,x,y,key,idParent, daño,velocity)
+    /**
+     * Consturctor bullet
+     * @param {Scene} scene escena del objeto
+     * @param {number} x posicion x
+     * @param {number} y posicion y
+     * @param {string} key clave de la imagen
+     * @param {boolean} idParent true si el padre es el player, false si el 
+     * padre es el enemigo, para que las balas de un mismo grup no colisionen entre si
+     * @param {number} daño funciona como daño y vida de la bala(las balas pueden atravesar)
+     * @param {number} velocity  velocidad del movimiento
+    * */
+    constructor(scene,x,y,key, idParent, daño, velocity)
     {
         super(scene,x,y,key);
 
@@ -45,19 +52,13 @@ export default class Bullet extends Phaser.GameObjects.Sprite
     //métodos
     Hit = function()
     {
-
-        console.log("Hola Mundo Choque");
-        this.destroy();
+        //console.log("colision bala");
+        this.destroy();//esto creo que es mejor cambiarlo al preupdate
     }
 
-    //hay que cambiarlo por fisicas
+    //movimiento por fisicas
     Move = function(){
-
-        //this.x += this._moveVector.x * this._velocity;
-        //this.y += this._moveVector.y * this._velocity;
-
-        this.body.setVelocity(this._moveVector.x*this._velocity,this._moveVector.y*this._velocity);
-
+        this.body.setVelocity(this._moveVector.x * this._velocity,this._moveVector.y * this._velocity);
     }
 
 }

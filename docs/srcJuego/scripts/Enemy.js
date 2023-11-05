@@ -7,10 +7,11 @@ export default class Enemy extends Phaser.GameObjects.Sprite
     */
 
     /**
- * Consturctor del player
+ * Constructor del enemigo
  * @param {Scene} scene escena a la que pertenecen los enemigos
  * @param {number} x coordenada x del sprite
  * @param {number} y coordenada y del sprite
+ * @param {string} key clave de la imagen 
  * @param {number} enemyConfig Objeto que guarda la informacion del enemy{life, velocity, damage,minCooldown,maxCooldown}
  * */
     constructor(scene, x, y, key, enemyConfig)
@@ -27,9 +28,9 @@ export default class Enemy extends Phaser.GameObjects.Sprite
         this._minCD = enemyConfig.minCooldown;
         this._maxCD = enemyConfig.maxCooldown;
         
-        //Genera un Cool Down aleatorio ente los dos (distinto para cada enemigo), los números están puestos a vole
-        //Aún no se si van milisegundos o segundos
-        this._atkCD = Phaser.Math.FloatBetween( this._minCD,this._maxCD);
+        //Genera un Cool Down aleatorio ente los dos (distinto para cada enemigo)
+        this._atkCD = Phaser.Math.FloatBetween( this._minCD,this._maxCD);//el aleatorio no funciona
+
 
         this._moveVector = new Phaser.Math.Vector2(0,0);
 
@@ -62,13 +63,12 @@ export default class Enemy extends Phaser.GameObjects.Sprite
     // métodos
 
     //método para moverte
-    //la x y la y que se pasan a la funcion mover son la x y la y del player
     Move = function(){
        
         //calcular el vector de direccion del movimient
         this._moveVector.x = this.scene.player.x- this.x;
         this._moveVector.y = this.scene.player.y- this.y;
-
+        //normalizar el vector
         this._moveVector.normalize();   
         
         //movimiento por fisicas

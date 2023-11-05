@@ -28,29 +28,9 @@ export default class MainScene extends Phaser.Scene{
     }
     //instance
     create(){
+
         //imagen del fondo
-        this.add.image(0, 0, 'fondo').setScale(2, 1.3).setOrigin(0, 0);
-
-        
-        //grupos de colisiones
-        this.bullets = this.add.group();
-        this.enemys = this.add.group();
-        
-        
-
-        //colisiones entre las balas y los enemigos
-        this.physics.add.collider(this.bullets, this.enemys, function (proyectle, enemy){
-            enemy.Hit(proyectle._damage);
-            proyectle.Hit();
-        });
-
-        
-        //colision entre enemigos
-        this.physics.add.collider(this.enemys, this.enemys);
-
-        
-        
-        
+        this.add.image(0, 0, 'fondo').setScale(2, 1.3).setOrigin(0, 0);     
 
         // Cursor personalizado
         this.input.setDefaultCursor('url(https://lparres2000.github.io/JuegoPVLI/srcJuego/img/crosshair.png), pointer');
@@ -74,17 +54,11 @@ export default class MainScene extends Phaser.Scene{
             frames: this.anims.generateFrameNumbers('player', { start: 0, end: 7}),
             frameRate: 10, // Velocidad de la animación
             repeat: -1    // Animación en bucle
-          });
-
-
-
-        //colisiones entre el jugador y los enemigos
-        this.physics.add.collider(this.player, this.enemys, function (player, enemy){
-            //player.bodydamage...
-            //enemy.cooldown bodydamage...
-            //anular las fuerzas?
-            
         });
+
+
+
+     
 
         //instancia de enemigo
         let enemyConfig =
@@ -95,7 +69,7 @@ export default class MainScene extends Phaser.Scene{
             minCooldown: 1,
             maxCooldown: 2,
         }
-        //creacion del enemigo, para que funcionen bien las fisicas no deben crearse 2 objetos chocando
+        //creacion de  enemigos, para que funcionen bien las fisicas no deben crearse 2 objetos chocando
         this.meleeEnemy = new MeleeEnemy(this, 500, 500, 'enemy', enemyConfig, 10);
         this.meleeEnemy = new MeleeEnemy(this, 400, 200, 'enemy', enemyConfig, 10);
         this.meleeEnemy = new MeleeEnemy(this, 400, 800, 'enemy', enemyConfig, 10);
@@ -107,7 +81,31 @@ export default class MainScene extends Phaser.Scene{
             frames: this.anims.generateFrameNumbers('enemy', { start: 0, end: 7}),
             frameRate: 10, // Velocidad de la animación
             repeat: -1    // Animación en bucle
-          });
+        });
+
+
+
+        //grupos de colisiones
+        this.bullets = this.add.group();
+        this.enemys = this.add.group();       
+        
+        //colision entre enemigos
+        this.physics.add.collider(this.enemys, this.enemys);
+        
+        //colisiones entre las balas y los enemigos
+        this.physics.add.collider(this.bullets, this.enemys, function (proyectle, enemy){
+            enemy.Hit(proyectle._damage);
+            proyectle.Hit();
+        });
+
+        //colisiones entre el jugador y los enemigos
+        this.physics.add.collider(this.player, this.enemys, function (player, enemy){
+            //player.bodydamage...
+            //enemy.cooldown bodydamage...
+            //anular las fuerzas?
+                
+        });
+
 
 
 
@@ -120,12 +118,11 @@ export default class MainScene extends Phaser.Scene{
         //no se si hace falta para leer input del mouse
         //this.input.mouse.capture = true;
 
-
         // Recogida del input de movimiento en un vector
         this._inputVector = new Phaser.Math.Vector2(0,0);
 
-
     }
+
     //game tick
     update(){
 
@@ -136,10 +133,12 @@ export default class MainScene extends Phaser.Scene{
         // Modificamos el vector de movimiento del player a partir del inputVector
         this.player.setMoveVector(this._inputVector);
 
-        
+        /**
+         * Debug para las colisiones entre enemigos
         if(this.physics.collide(this.enemys, this.enemys)) {
             console.log("colision entre enemigos");
         }
+        */
         
         //prueba para detectar la posicion del raton
         //this.player.x = this.input.mousePointer.x;
