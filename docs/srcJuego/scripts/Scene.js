@@ -1,6 +1,6 @@
 import Player from './Player.js'
 import MeleeEnemy from './MeleeEnemy.js'
-
+import RangeEnemy from './RangeEnemy.js'
 export default class MainScene extends Phaser.Scene{
     constructor(){
         super({key:"level"})
@@ -57,7 +57,10 @@ export default class MainScene extends Phaser.Scene{
         });
 
 
-
+           //grupos de colisiones
+           this.playerBullets = this.add.group();
+           this.enemiesBullets = this.add.group();
+           this.enemys = this.add.group();       
      
 
         //instancia de enemigo
@@ -66,14 +69,16 @@ export default class MainScene extends Phaser.Scene{
             life: 50,
             damage: 3,
             velocity: 100,
-            minCooldown: 1,
-            maxCooldown: 2,
+            minCooldown: 500,
+            maxCooldown: 1000,
         }
+
         //creacion de  enemigos, para que funcionen bien las fisicas no deben crearse 2 objetos chocando
-        this.meleeEnemy = new MeleeEnemy(this, 500, 500, 'enemy', enemyConfig, 10);
-        this.meleeEnemy = new MeleeEnemy(this, 400, 200, 'enemy', enemyConfig, 10);
-        this.meleeEnemy = new MeleeEnemy(this, 400, 800, 'enemy', enemyConfig, 10);
-        this.meleeEnemy = new MeleeEnemy(this, 900, 250, 'enemy', enemyConfig, 10);
+        new MeleeEnemy(this, 500, 500, 'enemy', enemyConfig, 10);
+        new MeleeEnemy(this, 400, 200, 'enemy', enemyConfig, 10);
+        new MeleeEnemy(this, 400, 800, 'enemy', enemyConfig, 10);
+
+        new RangeEnemy(this, 900, 250, 'enemy', enemyConfig, 10);
 
         //creación de animaciones para enemigos
         this.anims.create({
@@ -85,15 +90,13 @@ export default class MainScene extends Phaser.Scene{
 
 
 
-        //grupos de colisiones
-        this.bullets = this.add.group();
-        this.enemys = this.add.group();       
+     
         
         //colision entre enemigos
         this.physics.add.collider(this.enemys, this.enemys);
         
         //colisiones entre las balas y los enemigos
-        this.physics.add.collider(this.bullets, this.enemys, function (proyectle, enemy){
+        this.physics.add.collider(this.playerBullets, this.enemys, function (proyectle, enemy){
             enemy.Hit(proyectle._damage);
             proyectle.Hit();
         });
@@ -106,7 +109,11 @@ export default class MainScene extends Phaser.Scene{
                 
         });
 
+        //colisiones entre el jugador y las balas de los enemigos
+        this.physics.add.collider(this.player, this.enemiesBullets, function (player, bullet){
+            bullet.Hit();
 
+        });
 
 
         //variables para el input

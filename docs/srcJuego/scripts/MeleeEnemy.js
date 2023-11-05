@@ -9,5 +9,10 @@ export default class MeleeEnemy extends Enemy
     {
         super(scene, x, y, key, enemyConfig);
         this._tickTime = tickTime;
+
+    }
+
+    preUpdate(t,dt){
+        super.preUpdate(t,dt);
     }
 }

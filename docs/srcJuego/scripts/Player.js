@@ -82,7 +82,7 @@ export default class Player extends Phaser.GameObjects.Sprite
     }
 
     //método para moverte
-    Move(){
+    Move = function(){
 
         //movimiento por fisicas
         this.body.setVelocity(this._moveVector.x*this._velocity,this._moveVector.y*this._velocity);
@@ -97,10 +97,10 @@ export default class Player extends Phaser.GameObjects.Sprite
     }
 
     //método para disparar
-    Shoot(dt) {
+    Shoot = function(dt) {
         //contador del tiempo
         this._elapsedTime += dt;
-    
+
         if(this._elapsedTime >= this._atkCD){
             new Bullet(this.scene,this.x + this._bulletSpawnOffsetX,this.y+this._bulletSpawnOffsetY,'kirby',true,10,500);            
             this._elapsedTime = 0;

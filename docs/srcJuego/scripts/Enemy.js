@@ -1,3 +1,4 @@
+
 // clase de la que heredan los demás scripts de los enemigos
 export default class Enemy extends Phaser.GameObjects.Sprite
 {
@@ -29,8 +30,9 @@ export default class Enemy extends Phaser.GameObjects.Sprite
         this._maxCD = enemyConfig.maxCooldown;
         
         //Genera un Cool Down aleatorio ente los dos (distinto para cada enemigo)
-        this._atkCD = Phaser.Math.FloatBetween( this._minCD,this._maxCD);//el aleatorio no funciona
-
+        this._atkCD = Phaser.Math.Between( this._minCD,this._maxCD);//el aleatorio no funciona
+    
+        this._elapsedTime = 0;
 
         this._moveVector = new Phaser.Math.Vector2(0,0);
 
@@ -78,11 +80,7 @@ export default class Enemy extends Phaser.GameObjects.Sprite
         this.play('enemyMove', true);
     }
 
-    //método para disparar
-    Disparar = function(){
-        //vacío de momento
-    }
-
+    
 
     Hit = function(damage){
         this._vida -= damage;

@@ -1,4 +1,5 @@
 import Enemy from "./Enemy.js";
+import Bullet from "./Bullet.js";
 
 export default class RangeEnemy extends Enemy
 {
@@ -18,5 +19,30 @@ export default class RangeEnemy extends Enemy
     {
         super(scene, x, y, key, enemyConfig);
         this._range = range;
+        this._bulletSpawnOffsetX = 15;
+        this._bulletSpawnOffsetY = 100;
+    }
+
+    preUpdate(t,dt){
+        super.preUpdate(t,dt);
+        
+
+        this.Shoot(dt);
+    }
+
+    //método para disparar
+
+        
+    Shoot = function(dt) {
+
+        //contador del tiempo
+        this._elapsedTime += dt;
+        
+
+
+        if(this._elapsedTime >= this._atkCD){
+            new Bullet(this.scene,this.x + this._bulletSpawnOffsetX,this.y+this._bulletSpawnOffsetY,'kirby',false,10,500);            
+            this._elapsedTime = 0;
+        }
     }
 }

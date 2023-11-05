@@ -41,7 +41,15 @@ export default class Bullet extends Phaser.GameObjects.Sprite
         //añadirle fisicas
         this.scene.physics.add.existing(this);
         //añadido al grupo de fisicas de bullets
-        this.scene.bullets.add(this);
+
+        if(idParent){
+
+            this.scene.playerBullets.add(this);
+        }
+        else{
+            this.scene.enemiesBullets.add(this);
+
+        }
     }
 
     preUpdate(t,dt){
