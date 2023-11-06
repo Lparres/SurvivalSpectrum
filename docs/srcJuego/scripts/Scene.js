@@ -33,7 +33,7 @@ export default class MainScene extends Phaser.Scene{
         this.add.image(0, 0, 'fondo').setScale(2, 1.3).setOrigin(0, 0);     
 
         // Cursor personalizado
-        this.input.setDefaultCursor('url(https://lparres2000.github.io/JuegoPVLI/srcJuego/img/crosshair.png), pointer');
+        this.input.setDefaultCursor('url(srcJuego/img/crosshair.png) 16 16, pointer');
 
         //instancia del  jugador
         let playerConfig =

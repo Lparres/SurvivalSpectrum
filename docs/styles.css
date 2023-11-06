@@ -73,9 +73,16 @@ header {
     src: url("https://lparres2000.github.io/JuegoPVLI/srcPaginaWeb/fonts/JosefinSans-Regular.ttf");
   }
 
+  /* @cursor myCustomCursor {
+    alias: CustomCursor;
+    src: url("https://lparres2000.github.io/JuegoPVLI/srcJuego/img/crosshair.png");
+    hotspot: 16 16;
+  } */
 
-
-
+  /* body {
+    cursor: url("https://lparres2000.github.io/JuegoPVLI/srcJuego/img/crosshair.png") 32, auto;
+    
+  } */
 
   #navbarNav{
     margin-bottom: 0px;
