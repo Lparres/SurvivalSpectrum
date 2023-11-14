@@ -102,8 +102,19 @@ export default class Player extends Phaser.GameObjects.Sprite
         this._elapsedTime += dt;
 
         if(this._elapsedTime >= this._atkCD){
-            new Bullet(this.scene,this.x + this._bulletSpawnOffsetX,this.y+this._bulletSpawnOffsetY,'kirby',true,10,500);            
+            new Bullet(this.scene,this.x + this._bulletSpawnOffsetX,this.y+this._bulletSpawnOffsetY,'kirby',true,10,1000);            
             this._elapsedTime = 0;
+        }
+    }
+
+    Hit = function(damage) {
+        this._life -= damage;
+        console.log(this._life);
+
+        if(this._life <= 0) {
+            this._life = 0;
+            //DEATH
+            console.log("Player muerto")
         }
     }
 

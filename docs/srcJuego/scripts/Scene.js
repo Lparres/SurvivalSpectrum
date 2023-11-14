@@ -67,10 +67,17 @@ export default class MainScene extends Phaser.Scene{
         let enemyConfig =
         {
             life: 50,
-            damage: 3,
+            meleeDamage: 3,
             velocity: 100,
-            minCooldown: 500,
-            maxCooldown: 1000,
+            meleeAttackCD: 500,
+        }
+
+        let enemyRangeConfig = 
+        {
+            range: 10,
+            rangeDamage: 5,
+            rangeAttackCD: 1000,
+            bulletSpeed: 500,
         }
 
         //creacion de  enemigos, para que funcionen bien las fisicas no deben crearse 2 objetos chocando
@@ -78,7 +85,7 @@ export default class MainScene extends Phaser.Scene{
         new MeleeEnemy(this, 400, 200, 'enemy', enemyConfig, 10);
         new MeleeEnemy(this, 400, 800, 'enemy', enemyConfig, 10);
 
-        new RangeEnemy(this, 900, 250, 'enemy', enemyConfig, 10);
+        new RangeEnemy(this, 900, 250, 'enemy', enemyConfig, enemyRangeConfig);
 
         //creación de animaciones para enemigos
         this.anims.create({
@@ -103,15 +110,19 @@ export default class MainScene extends Phaser.Scene{
 
         //colisiones entre el jugador y los enemigos
         this.physics.add.collider(this.player, this.enemys, function (player, enemy){
-            //player.bodydamage...
-            //enemy.cooldown bodydamage...
-            //anular las fuerzas?
+
+            // Si el enemigo está listo para atacar, el player recibe un golpe y se reinicia el cooldown del ataque del enemigo.
+            if(enemy._CDMeleeTimer <= 0){
+                player.Hit(enemy._meleeDamage);
+                enemy._CDMeleeTimer = enemy._meleeAttackCD
+            }
                 
         });
 
         //colisiones entre el jugador y las balas de los enemigos
         this.physics.add.collider(this.player, this.enemiesBullets, function (player, bullet){
             bullet.Hit();
+            player.Hit(bullet._damage);
 
         });
 

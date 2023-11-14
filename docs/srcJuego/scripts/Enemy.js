@@ -22,17 +22,10 @@ export default class Enemy extends Phaser.GameObjects.Sprite
 
         //atributos del enemigo
         this._vida = enemyConfig.life;
-        this._damage = enemyConfig.damage;
+        this._meleeDamage = enemyConfig.meleeDamage;
         this._velocity = enemyConfig.velocity;
-
-        //cooldowns de ataque
-        this._minCD = enemyConfig.minCooldown;
-        this._maxCD = enemyConfig.maxCooldown;
-        
-        //Genera un Cool Down aleatorio ente los dos (distinto para cada enemigo)
-        this._atkCD = Phaser.Math.Between( this._minCD,this._maxCD);//el aleatorio no funciona
-    
-        this._elapsedTime = 0;
+        this._meleeAttackCD = enemyConfig.meleeAttackCD;
+        this._CDMeleeTimer = 0;
 
         this._moveVector = new Phaser.Math.Vector2(0,0);
 
@@ -58,7 +51,8 @@ export default class Enemy extends Phaser.GameObjects.Sprite
         super.preUpdate(t,dt);
 
         this.Move();                    
-             
+        this.UpdateMeleeCooldown(dt);
+
     }
 
     
@@ -88,4 +82,12 @@ export default class Enemy extends Phaser.GameObjects.Sprite
             this.destroy();//creo que las destrucciones iban mejor en el preupdate, preguntars
         }
     }
+
+    UpdateMeleeCooldown = function(dt){
+        if (this._CDMeleeTimer > 0){
+            this._CDMeleeTimer -= dt;
+        }
+    }
+
+
 }

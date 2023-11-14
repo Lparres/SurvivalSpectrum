@@ -15,34 +15,45 @@ export default class RangeEnemy extends Enemy
  * @param {string} key clave de la imagen 
  * @
  * */
-    constructor(scene, x, y, key, enemyConfig, range)
+    constructor(scene, x, y, key, enemyConfig, enemyRangeConfig)
     {
         super(scene, x, y, key, enemyConfig);
-        this._range = range;
+
+        this._range = enemyRangeConfig.range;
+        this._rangeDamage = enemyRangeConfig.rangeDamage;
+        this._rangeAttackCD = enemyRangeConfig.rangeAttackCD;
+        this._bulletSpeed = enemyRangeConfig.bulletSpeed;
+
+        this._CDRangeTimer = 0;
+
         this._bulletSpawnOffsetX = 15;
         this._bulletSpawnOffsetY = 100;
+
     }
 
     preUpdate(t,dt){
         super.preUpdate(t,dt);
         
+        this.UpdateRangeCooldown(dt);
 
-        this.Shoot(dt);
+        this.Shoot();
+    }
+
+
+    UpdateRangeCooldown = function(dt){
+        if (this._CDRangeTimer > 0){
+            this._CDRangeTimer -= dt;
+        }
     }
 
     //método para disparar
 
         
-    Shoot = function(dt) {
+    Shoot = function() {
 
-        //contador del tiempo
-        this._elapsedTime += dt;
-        
-
-
-        if(this._elapsedTime >= this._atkCD){
-            new Bullet(this.scene,this.x + this._bulletSpawnOffsetX,this.y+this._bulletSpawnOffsetY,'kirby',false,10,500);            
-            this._elapsedTime = 0;
+        if(this._CDRangeTimer <= 0){
+            new Bullet(this.scene, this.x + this._bulletSpawnOffsetX, this.y + this._bulletSpawnOffsetY, 'kirby', false, this._rangeDamage, this._bulletSpeed);            
+            this._CDRangeTimer = this._rangeAttackCD;
         }
     }
 }
