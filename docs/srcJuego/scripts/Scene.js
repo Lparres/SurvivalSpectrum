@@ -40,7 +40,8 @@ export default class MainScene extends Phaser.Scene{
         {velocity: 300, 
             damage: 5, 
             range: 20, 
-            armor: 10, 
+            meleeArmor: 100,
+            rangeArmor: 100,
             life: 120,
             Cooldown:500,//van en milisegundos
         }
@@ -113,7 +114,7 @@ export default class MainScene extends Phaser.Scene{
 
             // Si el enemigo está listo para atacar, el player recibe un golpe y se reinicia el cooldown del ataque del enemigo.
             if(enemy._CDMeleeTimer <= 0){
-                player.Hit(enemy._meleeDamage);
+                player.Hit(enemy._meleeDamage, 1);
                 enemy._CDMeleeTimer = enemy._meleeAttackCD
             }
                 
@@ -122,7 +123,7 @@ export default class MainScene extends Phaser.Scene{
         //colisiones entre el jugador y las balas de los enemigos
         this.physics.add.collider(this.player, this.enemiesBullets, function (player, bullet){
             bullet.Hit();
-            player.Hit(bullet._damage);
+            player.Hit(bullet._damage, 2);
 
         });
 

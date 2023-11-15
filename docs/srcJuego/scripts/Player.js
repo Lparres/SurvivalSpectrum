@@ -33,7 +33,8 @@ export default class Player extends Phaser.GameObjects.Sprite
         this._velocity = playerConfig.velocity;
         this._damage = playerConfig.damage;
         this._range = playerConfig.range;
-        this._armor = playerConfig.armor;
+        this._meleeArmor = playerConfig.meleeArmor;
+        this._rangeArmor = playerConfig.rangeArmor;
 
         //atack cooldown en milisegundos
         this._atkCD = playerConfig.Cooldown; 
@@ -107,8 +108,12 @@ export default class Player extends Phaser.GameObjects.Sprite
         }
     }
 
-    Hit = function(damage) {
-        this._life -= damage;
+    Hit = function(damage, damageType) {
+
+        let damageReduction;
+        if(damageType == 1) damageReduction = 100 / (100 + this._meleeArmor);
+        else if (damageType == 2) damageReduction = 100 / (100 + this._rangeArmor);
+        this._life -= damage * damageReduction;
         console.log(this._life);
 
         if(this._life <= 0) {
