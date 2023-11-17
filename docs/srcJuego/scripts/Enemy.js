@@ -1,6 +1,6 @@
-
+import Mob  from './Mob.js'
 // clase de la que heredan los demás scripts de los enemigos
-export default class Enemy extends Phaser.GameObjects.Sprite
+export default class Enemy extends Mob
 {
     /*
     *Las variable con barra baja son las de la clase, si barra baja son las variables de la sobrecarga
@@ -15,16 +15,12 @@ export default class Enemy extends Phaser.GameObjects.Sprite
  * @param {string} key clave de la imagen 
  * @param {number} enemyConfig Objeto que guarda la informacion del enemy{life, velocity, damage,minCooldown,maxCooldown}
  * */
-    constructor(scene, x, y, key, enemyConfig)
+    constructor(scene, x, y, key, pool)
     {
         //constructor del padre
-        super(scene, x ,y, key);
+        super(scene, x ,y, key,0,0,0,pool);
 
-        //atributos del enemigo
-        this._vida = enemyConfig.life;
-        this._meleeDamage = enemyConfig.meleeDamage;
-        this._velocity = enemyConfig.velocity;
-        this._meleeAttackCD = enemyConfig.meleeAttackCD;
+        this._meleeAttackCD = 0;
         this._CDMeleeTimer = 0;
 
         this._moveVector = new Phaser.Math.Vector2(0,0);
@@ -33,11 +29,6 @@ export default class Enemy extends Phaser.GameObjects.Sprite
         this.setScale(0.3);
         //añadir a la escena
         this.scene.add.existing(this);
-
-        //añadir a las fisicas
-        this.scene.physics.add.existing(this);
-        //añadir al grupo de enemigos para las fisicas
-        this.scene.enemys.add(this);
 
         //ajustar el tamaño del colider
         this.body.setSize(450,750,false);
@@ -59,28 +50,25 @@ export default class Enemy extends Phaser.GameObjects.Sprite
     // métodos
 
     //método para moverte
-    Move = function(){
-       
-        //calcular el vector de direccion del movimient
-        this._moveVector.x = this.scene.player.x- this.x;
-        this._moveVector.y = this.scene.player.y- this.y;
-        //normalizar el vector
-        this._moveVector.normalize();   
-        
-        //movimiento por fisicas
-        this.body.setVelocity(this._moveVector.x*this._velocity,this._moveVector.y*this._velocity);
-
-        //animacion de movimiento
-        this.play('enemyMove', true);
-    }
+    //Move = function(){
+    //   
+    //    //calcular el vector de direccion del movimient
+    //    this._moveVector.x = this.scene.player.x- this.x;
+    //    this._moveVector.y = this.scene.player.y- this.y;
+    //    //normalizar el vector
+    //    this._moveVector.normalize();   
+    //    
+    //    //movimiento por fisicas
+    //    this.body.setVelocity(this._moveVector.x*this._velocity,this._moveVector.y*this._velocity);
+//
+    //    //animacion de movimiento
+    //    this.play('enemyMove', true);
+    //}
 
     
 
     Hit = function(damage){
-        this._vida -= damage;
-        if(this._vida <= 0){
-            this.destroy();//creo que las destrucciones iban mejor en el preupdate, preguntars
-        }
+        this.ReciveDamage(damage);
     }
 
     UpdateMeleeCooldown = function(dt){
@@ -88,6 +76,19 @@ export default class Enemy extends Phaser.GameObjects.Sprite
             this._CDMeleeTimer -= dt;
         }
     }
+    /**
+    * @param {SettingObject} seting necesita: {idParent, damage, speed}
+    */
+    setUp(seting){
+        this.health = seting.life;
+        this.damage = seting.damage;
+        this.speed = seting.velocity;
+        this._meleeAttackCD = seting.meleeAttackCD;
+        this._CDMeleeTimer = 0;
 
+        let dirDest = new Phaser.Math.Vector2(this.scene.player.x,this.scene.player.y);
+        this.SetDirection(new Phaser.Math.Vector2(dirDest.x - this.x ,dirDest.y - this.y));
+        console.log(this.dir);
+    }
 
 }

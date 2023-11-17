@@ -47,17 +47,21 @@ export default class Bullet extends Mob
     Hit(damage, idParent)
     {
         if(this.idParent != idParent){
+            this.damage = this.health;
             this.ReciveDamage(damage);//esto creo que es mejor cambiarlo al preupdate
+            console.log("Damage: "+damage);
         }
         //console.log("colision bala");
     }
-/**
- * @param {SettingObject} seting necesita: {idParent, damage, speed}
- */
+    /**
+    * @param {SettingObject} seting necesita: {idParent, damage, speed} 
+    */
     setUp(seting){
         this.idParent = seting.idParent;
+        this.health = seting.damage;
         this.damage = seting.damage;
         this.speed = seting.velocity;
+
         let dirDest;
         if(this.idParent){
             dirDest = this.scene.input.mousePointer.position

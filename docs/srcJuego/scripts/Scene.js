@@ -3,6 +3,7 @@ import MeleeEnemy from './MeleeEnemy.js'
 import RangeEnemy from './RangeEnemy.js'
 import Pool from './Pool.js'
 import Bullet from './Bullet.js'
+import Enemy from './Enemy.js'
 export default class MainScene extends Phaser.Scene{
     constructor(){
         super({key:"level"})
@@ -68,26 +69,32 @@ export default class MainScene extends Phaser.Scene{
         
         let plBullets =[];
 
-
         for(let i = 0; i < 100;i++){
             let aux = new Bullet(this,0,0,'kirby',true, 0,0,this.playerBulletsPool);
             plBullets.push(aux);
         }
-        
-        
 
         //rellenar pool de balas del player
         this.playerBulletsPool.addMultipleEntity(plBullets);
+
+        let enemysArr = [];
+
+        for(let i = 0; i < 100;i++){
+            let aux = new Enemy(this,0,0,'enemy',this.enemiesPool);
+            enemysArr.push(aux);
+        }
+
+        this.enemiesPool.addMultipleEntity(enemysArr);
 
         //grupos de colisiones
   
         //this.playerBullets = this.add.group();
         this.enemiesBullets = this.add.group();
-        this.enemys = this.add.group();       
+        //this.enemys = this.add.group();       
         
 
         //instancia de enemigo
-        let enemyConfig =
+        var enemyConfig =
         {
             life: 50,
             meleeDamage: 3,
@@ -107,6 +114,7 @@ export default class MainScene extends Phaser.Scene{
         //new MeleeEnemy(this, 500, 500, 'enemy', enemyConfig, 10);
         //new MeleeEnemy(this, 400, 200, 'enemy', enemyConfig, 10);
         //new MeleeEnemy(this, 400, 800, 'enemy', enemyConfig, 10);
+        this.enemiesPool.spawn(500, 500, 'enemyMove', enemyConfig);
 
         //
         //new RangeEnemy(this, 900, 250, 'enemy', enemyConfig, enemyRangeConfig);
@@ -124,16 +132,18 @@ export default class MainScene extends Phaser.Scene{
      
         
         //colision entre enemigos
-        this.physics.add.collider(this.enemys, this.enemys);
+        this.physics.add.collider(this.enemiesPool.group, this.enemiesPool.group);
         
         //colisiones entre las balas y los enemigos
-        this.physics.add.collider(this.playerBulletsPool.group, this.enemys, function (proyectle, enemy){
-            enemy.Hit(proyectle._damage);
-            proyectle.Hit(enemy._vida, false);
+        this.physics.add.collider(this.playerBulletsPool.group, this.enemiesPool.group, function (proyectle, enemy){
+            let dmg1 = proyectle.damage;
+            let dmg2 = enemy.health;
+            enemy.Hit(dmg1);
+            proyectle.Hit(dmg2, false);
         });
 
         //colisiones entre el jugador y los enemigos
-        this.physics.add.collider(this.player, this.enemys, function (player, enemy){
+        this.physics.add.collider(this.player, this.enemiesPool.group, function (player, enemy){
 
             // Si el enemigo está listo para atacar, el player recibe un golpe y se reinicia el cooldown del ataque del enemigo.
             if(enemy._CDMeleeTimer <= 0){

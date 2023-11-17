@@ -67,7 +67,7 @@ export default class Pool {
 			entity.setActive(true);
 			entity.setVisible(true); 
 
-            entity.setUp(settings)
+            entity.setUp(settings);
 
             //activar colisiones
 			entity.body.checkCollision.none = false;
