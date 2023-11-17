@@ -54,7 +54,8 @@ export default class Pool {
             entity = this.group.getFirstNth(1,true);
             this.group.remove(entity);
             this.group.add(entity);
-        }else{
+        }
+        else{
             //set up de la entidad
             entity.x = x;
 			entity.y = y;
