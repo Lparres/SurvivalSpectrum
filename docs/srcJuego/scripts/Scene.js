@@ -27,13 +27,27 @@ export default class MainScene extends Phaser.Scene{
         //this.load.image('enemy', srcJuego+ '/Sprites/Enemy1/death_0.png');   
         this.load.spritesheet('enemy', srcJuego+'/Sprites/Enemy1/SpriteSheets/walkSheet.png',
         { frameWidth: 2048, frameHeight: 2048 });
+
+        /**let srcJuego = 'srcJuego';
+
+        //carga de imagenes y SpriteSheets
+        this.load.image('kirby', srcJuego+ '/img/kirby.png');
+        this.load.image('fondo', srcJuego+ '/img/fondo.jpg');   
+
+        //this.load.image('player',srcJuego+ '/Sprites/Character/with_hands/death_0 - copia - copia.png');   
+        this.load.spritesheet('player', srcJuego+'/Sprites/Character/with_hands/SpriteSheets/walkSheet.png',
+                      { frameWidth: 2048, frameHeight: 2048 });
+
+        //this.load.image('enemy', srcJuego+ '/Sprites/Enemy1/death_0.png');   
+        this.load.spritesheet('enemy', srcJuego+'/Sprites/Enemy1/SpriteSheets/walkSheet.png',
+        { frameWidth: 2048, frameHeight: 2048 });
         
 
         //carga del tilemap
-        this.load.tilemapTiledJSON('tilemap', 'https://lparres2000.github.io/JuegoPVLI/Tiled/prueba.json');
+        this.load.tilemapTiledJSON('tilemap', '../Tiled/prueba..tmj');
         
         //carga del tileset
-        this.load.image('patronesTilemap', 'https://lparres2000.github.io/JuegoPVLI/Tiled/arte/Dungeon_Tileset.png');
+        this.load.image('patronesTilemap', '../Tiled/arte/Dungeon_Tileset.png'); */
     }
     //instance
     create(){
@@ -182,7 +196,8 @@ export default class MainScene extends Phaser.Scene{
 
 
 
-
+        /**
+        * 
         // Objeto tilemap
 		this.map = this.make.tilemap({ 
 			key: 'tilemap', 
@@ -214,7 +229,8 @@ export default class MainScene extends Phaser.Scene{
 		
 		this.physics.add.collider(player, this.baseColumnLayer);
 		this.physics.add.collider(coinsGroup, this.baseColumnLayer);		
-
+        */
+        
     }
 
     //game tick
