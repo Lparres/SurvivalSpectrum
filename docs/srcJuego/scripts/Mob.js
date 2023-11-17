@@ -1,4 +1,4 @@
-import Pool from "./Pool";
+import Pool from "./Pool.js";
 
 /**@description Clase Base para los objetos dinámicos de la escena
  * @extends Phaser.GameObjects.Sprite
@@ -17,11 +17,18 @@ export default class Mob extends Phaser.GameObjects.Sprite{
      */
     constructor(scene,x,y,key,hp,damage,speed, pool){
         super(scene,x,y,key);
-        this.dir = dir;
-        this.health = hp
+        this.key = key;
+        this.health = hp;
         this.damage = damage;
+        this.dir;
         this.speed = speed;
         this.pool = pool;
+
+        //añadirlo a la escena
+        this.scene.add.existing(this);
+
+        //añadirle fisicas
+        this.scene.physics.add.existing(this);
     }
 
 
@@ -30,11 +37,13 @@ export default class Mob extends Phaser.GameObjects.Sprite{
         //movimiento del objeto
         this.body.setVelocity(this.dir.x*this.speed,this.dir.y*this.speed);
         //animacion de movimiento
-        if(this._moveVector.y == 0 && this._moveVector.x == 0){
-            this.stop();//parar la animacion
-        }
-        else{
-            this.play(key,true);//continuar la animacion
+        if(this.key !== 'kirby'){
+            if(this.dir.y == 0 && this.dir.x == 0){
+                this.stop();//parar la animacion
+            }
+            else{
+                this.play(this.key,true);//continuar la animacion
+            }
         }
     }
 
@@ -55,7 +64,7 @@ export default class Mob extends Phaser.GameObjects.Sprite{
     }
     //dejo este metodo vacio porque realmente cada hijo tiene un comportamiento especifico al ser golpeado
     /**@virtual */
-    OnHit(dmg){}
+    Hit(dmg){}
     /**@virtual */
     setUp(){}
 }

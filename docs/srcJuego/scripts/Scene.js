@@ -70,7 +70,7 @@ export default class MainScene extends Phaser.Scene{
 
 
         for(let i = 0; i < 100;i++){
-            let aux = new Bullet(this,0,0,'kirby',true);
+            let aux = new Bullet(this,0,0,'kirby',true, 0,0,this.playerBulletsPool);
             plBullets.push(aux);
         }
         
@@ -81,7 +81,7 @@ export default class MainScene extends Phaser.Scene{
 
         //grupos de colisiones
   
-        this.playerBullets = this.add.group();
+        //this.playerBullets = this.add.group();
         this.enemiesBullets = this.add.group();
         this.enemys = this.add.group();       
         
@@ -127,9 +127,9 @@ export default class MainScene extends Phaser.Scene{
         this.physics.add.collider(this.enemys, this.enemys);
         
         //colisiones entre las balas y los enemigos
-        this.physics.add.collider(this.playerBullets, this.enemys, function (proyectle, enemy){
+        this.physics.add.collider(this.playerBulletsPool.group, this.enemys, function (proyectle, enemy){
             enemy.Hit(proyectle._damage);
-            proyectle.Hit();
+            proyectle.Hit(enemy._vida, false);
         });
 
         //colisiones entre el jugador y los enemigos
@@ -149,18 +149,6 @@ export default class MainScene extends Phaser.Scene{
             player.Hit(bullet._damage, 2);
 
         });
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
