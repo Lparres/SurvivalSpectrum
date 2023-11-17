@@ -8,9 +8,14 @@
     ],
     "fileStates": {
     },
+    "last.exportedFilePath": "C:/Users/Samuel/Desktop/Workspace/JuegoPVLI/Tiled",
+    "last.imagePath": "C:/Users/Samuel/Desktop/Workspace/JuegoPVLI/Tiled/Arte",
+    "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
+    "map.lastUsedFormat": "tmx",
     "openFiles": [
     ],
     "project": "prueba.tiled-project",
     "recentFiles": [
-    ]
+    ],
+    "tileset.lastUsedFormat": "tsx"
 }

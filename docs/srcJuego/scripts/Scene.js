@@ -27,7 +27,13 @@ export default class MainScene extends Phaser.Scene{
         //this.load.image('enemy', srcJuego+ '/Sprites/Enemy1/death_0.png');   
         this.load.spritesheet('enemy', srcJuego+'/Sprites/Enemy1/SpriteSheets/walkSheet.png',
         { frameWidth: 2048, frameHeight: 2048 });
+        
 
+        //carga del tilemap
+        this.load.tilemapTiledJSON('tilemap', 'https://lparres2000.github.io/JuegoPVLI/Tiled/prueba.json');
+        
+        //carga del tileset
+        this.load.image('patronesTilemap', 'https://lparres2000.github.io/JuegoPVLI/Tiled/arte/Dungeon_Tileset.png');
     }
     //instance
     create(){
@@ -173,6 +179,41 @@ export default class MainScene extends Phaser.Scene{
 
         // Recogida del input de movimiento en un vector
         this._inputVector = new Phaser.Math.Vector2(0,0);
+
+
+
+
+        // Objeto tilemap
+		this.map = this.make.tilemap({ 
+			key: 'tilemap', 
+			tileWidth: 32, 
+			tileHeight: 32 
+		});
+
+   
+		const tileset1 = this.map.addTilesetImage('Dungeon_Tileset.tsx', 'patronesTilemap');
+		
+		// creamos las diferentes capas a través del tileset. El nombre de la capa debe aparecer en el .json del tilemap cargado
+		this.groundLayer = this.map.createLayer('Suelo', tileset1);
+		
+		this.wallLayer = this.map.createLayer('Pared', tileset1);
+		this.wallLayer.setCollision(2); // Los tiles de esta capa tienen colisiones
+		
+		
+		this.mov = this.map.createFromObjects('Objetos', {name: 'player', classType: Character, key:"character"});
+		let player = this.mov[0];
+
+
+		// Ponemos la cámara principal de juego a seguir al jugador
+		this.cameras.main.startFollow(player);
+		
+		// Decimos que capas tienen colision entre ellas
+		this.physics.add.collider(player, this.wallLayer);
+		this.physics.add.collider(player, coinsGroup, this.aux);
+		this.physics.add.collider(coinsGroup, this.wallLayer);
+		
+		this.physics.add.collider(player, this.baseColumnLayer);
+		this.physics.add.collider(coinsGroup, this.baseColumnLayer);		
 
     }
 
