@@ -53,8 +53,9 @@ export default class Mob extends Phaser.GameObjects.Sprite{
     SetDirection(direccion){
         this.dir = direccion.normalize();
     }
-//dejo este metodo vacio porque realmente cada hijo tiene un comportamiento especifico al ser golpeado
-    OnHit(dmg){
-
-    }
+    //dejo este metodo vacio porque realmente cada hijo tiene un comportamiento especifico al ser golpeado
+    /**@virtual */
+    OnHit(dmg){}
+    /**@virtual */
+    setUp(){}
 }

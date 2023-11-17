@@ -86,11 +86,11 @@ export default class MainScene extends Phaser.Scene{
         }
 
         //creacion de  enemigos, para que funcionen bien las fisicas no deben crearse 2 objetos chocando
-        new MeleeEnemy(this, 500, 500, 'enemy', enemyConfig, 10);
-        new MeleeEnemy(this, 400, 200, 'enemy', enemyConfig, 10);
-        new MeleeEnemy(this, 400, 800, 'enemy', enemyConfig, 10);
-
-        new RangeEnemy(this, 900, 250, 'enemy', enemyConfig, enemyRangeConfig);
+        //new MeleeEnemy(this, 500, 500, 'enemy', enemyConfig, 10);
+        //new MeleeEnemy(this, 400, 200, 'enemy', enemyConfig, 10);
+        //new MeleeEnemy(this, 400, 800, 'enemy', enemyConfig, 10);
+//
+        //new RangeEnemy(this, 900, 250, 'enemy', enemyConfig, enemyRangeConfig);
 
         //creación de animaciones para enemigos
         this.anims.create({

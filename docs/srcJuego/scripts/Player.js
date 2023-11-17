@@ -114,6 +114,10 @@ export default class Player extends Phaser.GameObjects.Sprite
         if(damageType == 1) damageReduction = 100 / (100 + this._meleeArmor);
         else if (damageType == 2) damageReduction = 100 / (100 + this._rangeArmor);
         this._life -= damage * damageReduction;
+
+        /*cuando herede de mob llamar al metodo ReciveDamage(damage*damageReduction) este ya se encarga de matar al jugador si es necesario
+        en este caso se puede añadir un callback para detectar cuando muere el jugador y hacer las llamadas de fin de juego
+        */
         console.log(this._life);
 
         if(this._life <= 0) {

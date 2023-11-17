@@ -26,6 +26,7 @@ export default class Pool {
         let entity = this.group.getFirtsDead();
 
         if(!entity){
+            //cambiar a redimensionamiento
             entity = this.group.getFirstNth(1,true);
             this.group.remove(entity);
             this.group.add(entity);

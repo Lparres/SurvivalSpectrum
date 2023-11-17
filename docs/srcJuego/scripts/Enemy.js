@@ -18,7 +18,7 @@ export default class Enemy extends Phaser.GameObjects.Sprite
     constructor(scene, x, y, key, enemyConfig)
     {
         //constructor del padre
-        super(scene, x ,y, key); 
+        super(scene, x ,y, key);
 
         //atributos del enemigo
         this._vida = enemyConfig.life;
