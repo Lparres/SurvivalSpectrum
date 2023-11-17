@@ -1,6 +1,7 @@
 import Player from './Player.js'
 import MeleeEnemy from './MeleeEnemy.js'
 import RangeEnemy from './RangeEnemy.js'
+import Pool from './Pool.js'
 export default class MainScene extends Phaser.Scene{
     constructor(){
         super({key:"level"})
@@ -57,11 +58,14 @@ export default class MainScene extends Phaser.Scene{
             repeat: -1    // Animación en bucle
         });
 
+        this.playerBulletsPool = new Pool(this, 100);
+        this.enemiesBulletsPool = new Pool(this, 200);
+        this.enemiesPoll = new Pool(this, 200);
 
-           //grupos de colisiones
-           this.playerBullets = this.add.group();
-           this.enemiesBullets = this.add.group();
-           this.enemys = this.add.group();       
+        //grupos de colisiones
+        this.playerBullets = this.add.group();
+        this.enemiesBullets = this.add.group();
+        this.enemys = this.add.group();       
      
 
         //instancia de enemigo
