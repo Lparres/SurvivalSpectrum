@@ -1,4 +1,5 @@
 import Bullet from "./Bullet.js";
+import Pool from "./Pool.js";
 export default class Player extends Phaser.GameObjects.Sprite
 {
     /*
@@ -16,7 +17,7 @@ export default class Player extends Phaser.GameObjects.Sprite
 //Propuesta, Meter en un objeto los bloques de estadisticas. (LUIS.C)
 /**
  * Consturctor del player
- * @param {Scene} scene escena a que pertenece
+ * @param {Phaser.Scene} scene escena a que pertenece
  * @param {number} x posicion x
  * @param {number} y posicion y
  * @param {string} key clave de la imagen
@@ -102,8 +103,20 @@ export default class Player extends Phaser.GameObjects.Sprite
         //contador del tiempo
         this._elapsedTime += dt;
 
+
         if(this._elapsedTime >= this._atkCD){
-            new Bullet(this.scene,this.x + this._bulletSpawnOffsetX,this.y+this._bulletSpawnOffsetY,'kirby',true,10,1000);            
+            //new Bullet(this.scene,this.x + this._bulletSpawnOffsetX,this.y+this._bulletSpawnOffsetY,'kirby',true,10,1000);    
+
+
+            //cambiar magic numbers por las variables del player
+            let BulletSeting ={
+                idParent : true,
+                damage : 10,
+                velocity : 1000
+            }
+
+            this.scene.playerBulletsPool.spawn(this.x + this._bulletSpawnOffsetX,this.y+this._bulletSpawnOffsetY,' ',BulletSeting);
+
             this._elapsedTime = 0;
         }
     }

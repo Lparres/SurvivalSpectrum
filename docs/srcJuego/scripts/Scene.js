@@ -2,6 +2,7 @@ import Player from './Player.js'
 import MeleeEnemy from './MeleeEnemy.js'
 import RangeEnemy from './RangeEnemy.js'
 import Pool from './Pool.js'
+import Bullet from './Bullet.js'
 export default class MainScene extends Phaser.Scene{
     constructor(){
         super({key:"level"})
@@ -58,15 +59,32 @@ export default class MainScene extends Phaser.Scene{
             repeat: -1    // Animación en bucle
         });
 
-        this.playerBulletsPool = new Pool(this, 100);
+        // creacion de pools
+        this.playerBulletsPool = new Pool(this, 100);//cambiar los magics numbers por constantes
         this.enemiesBulletsPool = new Pool(this, 200);
-        this.enemiesPoll = new Pool(this, 200);
+        this.enemiesPool = new Pool(this, 200);
+
+
+        
+        let plBullets =[];
+
+
+        for(let i = 0; i < 100;i++){
+            let aux = new Bullet(this,0,0,'kirby',true);
+            plBullets.push(aux);
+        }
+        
+        
+
+        //rellenar pool de balas del player
+        this.playerBulletsPool.addMultipleEntity(plBullets);
 
         //grupos de colisiones
+  
         this.playerBullets = this.add.group();
         this.enemiesBullets = this.add.group();
         this.enemys = this.add.group();       
-     
+        
 
         //instancia de enemigo
         let enemyConfig =
@@ -89,7 +107,8 @@ export default class MainScene extends Phaser.Scene{
         //new MeleeEnemy(this, 500, 500, 'enemy', enemyConfig, 10);
         //new MeleeEnemy(this, 400, 200, 'enemy', enemyConfig, 10);
         //new MeleeEnemy(this, 400, 800, 'enemy', enemyConfig, 10);
-//
+
+        //
         //new RangeEnemy(this, 900, 250, 'enemy', enemyConfig, enemyRangeConfig);
 
         //creación de animaciones para enemigos
@@ -130,6 +149,19 @@ export default class MainScene extends Phaser.Scene{
             player.Hit(bullet._damage, 2);
 
         });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         //variables para el input

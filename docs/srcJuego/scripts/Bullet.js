@@ -10,19 +10,19 @@ export default class Bullet extends Phaser.GameObjects.Sprite
      * @param {number} x posicion x
      * @param {number} y posicion y
      * @param {string} key clave de la imagen
-     * @param {boolean} idParent true si el padre es el player, false si el 
+     * @param {bool} idParent true si el padre es el player, false si el 
      * padre es el enemigo, para que las balas de un mismo grup no colisionen entre si
-     * @param {number} daño funciona como daño y vida de la bala(las balas pueden atravesar)
-     * @param {number} velocity  velocidad del movimiento
+     * @param {number} damage funciona como daño y vida de la bala(las balas pueden atravesar)
+     * @param {number} velocity  modulo velocidad del movimiento
     * */
-    constructor(scene,x,y,key, idParent, daño, velocity)
+    constructor(scene,x,y,key, idParent, damage, velocity)
     {
         super(scene,x,y,key);
 
         // Padre de la bala (para no dañar al jugador con sus propias balas, ni los enemigos se dañen entre ellos) , true o false
         this._idParent = idParent;
         // Es a la vez el daño y la vida de la bala
-        this._damage = daño;
+        this._damage = damage;
         //velocidad de movimiento de las balas
         this._velocity = velocity;
 
@@ -44,16 +44,16 @@ export default class Bullet extends Phaser.GameObjects.Sprite
 
         if(idParent){
 
-            this.scene.playerBullets.add(this);
+            //this.scene.playerBullets.add(this);
         }
         else{
-            this.scene.enemiesBullets.add(this);
+            //this.scene.enemiesBullets.add(this);
 
         }
     }
 
     preUpdate(t,dt){
-        this.Move();
+        //this.Move();
     }
 
 
@@ -67,6 +67,13 @@ export default class Bullet extends Phaser.GameObjects.Sprite
     //movimiento por fisicas
     Move = function(){
         this.body.setVelocity(this._moveVector.x * this._velocity,this._moveVector.y * this._velocity);
+    }
+
+    setUp(seting){
+        this.idParent = seting.idParent;
+        this.damage = seting.damage;
+        this.velocity = seting.velocity;
+
     }
 
 }

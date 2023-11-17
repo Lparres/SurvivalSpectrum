@@ -2,11 +2,24 @@
  * Pool de objetos que heredan de Phaser.Sprite
  */
 export default class Pool {
+
     constructor(scene, size){
         this.group = scene.add.group();
         this.scene = scene;
         this.maxSize = size;
+
     }
+
+    
+    /**
+     * Para cuando los objetos "mueran"
+     * @param {Mob} entity entidad que muere 
+     */
+    release(entity){
+        this.group.killAndHide(entity);
+        entity.body.checkCollision.none = true;
+    }
+
 
     /**
 	 * Método para añadir nuevos objetos a la pool.
@@ -15,36 +28,54 @@ export default class Pool {
 	 * @param {Array} entities - array de objetos que añadir a la pool
 	 */
 	addMultipleEntity(entities) {
-		this._group.addMultiple(entities);
+		this.group.addMultiple(entities);
 		entities.forEach(c => {
-			this._group.killAndHide(c);
-			c.body.checkCollision.none = true;
+            this.release(c);
 		});
 	}
 
-    spawn(x,y,animKey = 'none', settings){
-        let entity = this.group.getFirtsDead();
 
+    /**
+     * 
+     * @param {number} x pos x
+     * @param {number} y pos y
+     * @param {string} animKey clave de la animacion 
+     * @param {SetingObject} settings ajustes
+     * @returns 
+     */
+    spawn(x,y,animKey, settings){
+
+        //pillar el primero muerto
+        let entity = this.group.getFirstDead();
+
+        //si no quedan objetos en la pool
         if(!entity){
             //cambiar a redimensionamiento
             entity = this.group.getFirstNth(1,true);
             this.group.remove(entity);
             this.group.add(entity);
         }else{
+            //set up de la entidad
             entity.x = x;
 			entity.y = y;
-			entity.play(animationKey)
+
+              
+
+			if(animKey != ' '){
+                entity.play(animKey)
+            }
 			entity.setActive(true);
 			entity.setVisible(true); 
-            //entity.setUp(settings)
+
+            entity.setUp(settings)
+
+            //activar colisiones
 			entity.body.checkCollision.none = false;
         }
 
+
+
         return entity;
-    }
-    release(entity){
-        this.group.killAndHide(entity);
-        entity.body.checkCollision.none = true;
     }
 
 }
