@@ -30,7 +30,8 @@ export default class Player extends Phaser.GameObjects.Sprite
         super(scene, x ,y, key ) // hay que cargar la imagen con su id
 
         //atributos del player
-        this._life = playerConfig.life;
+        this._life = playerConfig.life; //vida maxima
+        this._currentLife = playerConfig.life; //vida actual
         this._velocity = playerConfig.velocity;
         this._damage = playerConfig.damage;
         this._range = playerConfig.range;
@@ -126,15 +127,15 @@ export default class Player extends Phaser.GameObjects.Sprite
         let damageReduction;
         if(damageType == 1) damageReduction = 100 / (100 + this._meleeArmor);
         else if (damageType == 2) damageReduction = 100 / (100 + this._rangeArmor);
-        this._life -= damage * damageReduction;
+        this._currentLife -= damage * damageReduction;
 
         /*cuando herede de mob llamar al metodo ReciveDamage(damage*damageReduction) este ya se encarga de matar al jugador si es necesario
         en este caso se puede añadir un callback para detectar cuando muere el jugador y hacer las llamadas de fin de juego
         */
-        console.log(this._life);
+        console.log(this._currentLife);
 
-        if(this._life <= 0) {
-            this._life = 0;
+        if(this._currentLife <= 0) {
+            this._currentLife = 0;
             //DEATH
             console.log("Player muerto")
         }
