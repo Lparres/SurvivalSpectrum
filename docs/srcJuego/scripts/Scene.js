@@ -10,7 +10,7 @@ export default class MainScene extends Phaser.Scene{
     }
     //data transfer
     init(){
-
+        //this.scene.launch('UI');
     }
     //load data
     preload(){
