@@ -46,11 +46,11 @@ export default class Bullet extends Mob
      */
     Hit(damage, idParent)
     {
-        console.log(this.idParent);
+        //console.log(this.idParent);
         if(this.idParent != idParent){
             this.damage = this.health;
             this.ReciveDamage(damage);//esto creo que es mejor cambiarlo al preupdate
-            console.log("Damage: "+ damage);
+            //console.log("Damage: "+ damage);
         }
         //console.log("colision bala");
     }

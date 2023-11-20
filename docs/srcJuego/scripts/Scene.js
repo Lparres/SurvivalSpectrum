@@ -59,6 +59,7 @@ export default class MainScene extends Phaser.Scene{
             waveTime : 0,
             waveCount : 0
         }
+        this.maxMasillaTime = 200;
         this.timer = 0;
         this.data = this.game.cache.json.get('data');
         this.wave = this.game.cache.json.get('waves');
@@ -73,9 +74,9 @@ export default class MainScene extends Phaser.Scene{
         {velocity: 300, 
             damage: 5, 
             range: 20, 
-            meleeArmor: 3,
-            rangeArmor: 3,
-            life: 120,
+            meleeArmor: 100,
+            rangeArmor: 100,
+            life: 500,
             Cooldown:500,//van en milisegundos
         }
 
@@ -206,10 +207,10 @@ export default class MainScene extends Phaser.Scene{
         this.physics.add.collider(this.player, this.meleeEnemiesPool.group, function (player, enemy){
 
             // Si el enemigo está listo para atacar, el player recibe un golpe y se reinicia el cooldown del ataque del enemigo.
-            if(enemy._CDMeleeTimer <= 0){
-                player.Hit(enemy._meleeDamage, 1);
-                enemy._CDMeleeTimer = enemy._meleeAttackCD
-            }
+            //if(enemy._CDMeleeTimer <= 0){
+            //    player.Hit(enemy._meleeDamage, 1);
+            //    enemy._CDMeleeTimer = enemy._meleeAttackCD
+            //}
                 
         });
 
@@ -296,18 +297,26 @@ export default class MainScene extends Phaser.Scene{
         //oleadas
         if(this.waveData.waveTime > this.wave.Waves[0].timeBetween && this.waveData.waveCount <this.wave.Waves[0].size ){
             console.log(this.data.EnemyConfigs[0]);
-            this.meleeEnemiesPool.spawn(this.wave.Waves[0].x,this.wave.Waves[0].y, 'enemyMove', this.data.EnemyConfigs[0]);
+            this.rangeEnemiesPool.spawn(this.wave.Waves[0].x,this.wave.Waves[0].y, 'enemyMove', this.data.RangeConfigs[0]);
             this.waveData.waveTime = 0;
             this.waveData.waveCount++;
         }
-        if(this.timer > 100){
-            console.log("hola");
-            this.meleeEnemiesPool.spawn(Phaser.Math.Between(50, this.sys.game.canvas.width-100),
-            Phaser.Math.Between(50, this.sys.game.canvas.height-100),
-            'enemyMove', this.data.EnemyConfigs[2]);
+
+        //masillas
+        if(this.timer > this.maxMasillaTime){
+            let vector = new Phaser.Math.Vector2(0,0);
+            let spawn = Phaser.Math.RandomXY(vector, Phaser.Math.Between(400, 1000));
+            let enemyNumber = Phaser.Math.Between(0,2);
+            //this.meleeEnemiesPool.spawn(Phaser.Math.Between(50, this.sys.game.canvas.width-100),
+            //Phaser.Math.Between(50, this.sys.game.canvas.height-100),
+            //'enemyMove', this.data.EnemyConfigs[2]);
+
+            this.meleeEnemiesPool.spawn(this.player.x + spawn.x,this.player.y + spawn.y,
+            'enemyMove', this.data.EnemyConfigs[enemyNumber]);
             this.timer = 0;
+            this.maxMasillaTime = Phaser.Math.Between(100,250);
         }
         //Esta línea hace que la cámara siga al jugador
-        //this.cameras.main.startFollow(this.player);
+        this.cameras.main.startFollow(this.player);
     }
 }

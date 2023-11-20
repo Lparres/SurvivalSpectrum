@@ -56,7 +56,7 @@ export default class RangeEnemy extends Enemy
             let BulletSeting ={
                 idParent : false,
                 damage : this._rangeDamage,
-                velocity : 500
+                velocity : this._bulletSpeed
             }
 
             this.scene.enemiesBulletsPool.spawn(this.x + this._bulletSpawnOffsetX,this.y+this._bulletSpawnOffsetY,' ',BulletSeting);            

@@ -4,19 +4,19 @@
         {
             "life": 50,
             "meleeDamage": 3,
-            "velocity": 100,
+            "velocity": 50,
             "meleeAttackCD": 500
         },
         {
             "life": 100,
             "meleeDamage": 3,
-            "velocity": 50,
+            "velocity": 30,
             "meleeAttackCD": 500
         },
         {
-            "life": 10,
+            "life": 5,
             "meleeDamage": 3,
-            "velocity": 80,
+            "velocity": 150,
             "meleeAttackCD": 500
         }
     ],
@@ -25,13 +25,13 @@
             "settingMelee" : {
                 "life": 50,
                 "meleeDamage": 3,
-                "velocity": 100,
+                "velocity": 50,
                 "meleeAttackCD": 500
             },
             "range": 10,
             "rangeDamage": 20,
-            "rangeAttackCD": 1000,
-            "bulletSpeed": 500
+            "rangeAttackCD": 1500,
+            "bulletSpeed": 200
         }
     ]
 }
