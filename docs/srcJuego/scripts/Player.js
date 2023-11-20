@@ -91,7 +91,8 @@ export default class Player extends Mob
             let BulletSeting ={
                 idParent : true,
                 damage : 10,
-                velocity : 1000
+                velocity : 1000,
+                range: this._range
             }
 
             this.scene.playerBulletsPool.spawn(this.x + this._bulletSpawnOffsetX,this.y+this._bulletSpawnOffsetY,' ',BulletSeting);

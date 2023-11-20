@@ -23,6 +23,8 @@ export default class Bullet extends Mob
         // Padre de la bala (para no dañar al jugador con sus propias balas, ni los enemigos se dañen entre ellos) , true o false
         this._idParent = idParent;
 
+        this.range;
+
         //objeto destino que guarda la posicion 
         //let destino = this._idParent ? this.scene.input.mousePointer : this.scene.player;
         
@@ -37,6 +39,11 @@ export default class Bullet extends Mob
 
     preUpdate(t,dt){
         this.Move();
+        this.range -= dt*this.body.velocity.length()/1000;
+        if(this.range < 0){
+            console.log("adios Mundo cruel");
+            this.pool.release(this);
+        }
     }
 
 
@@ -62,6 +69,8 @@ export default class Bullet extends Mob
         this.health = seting.damage;
         this.damage = seting.damage;
         this.speed = seting.velocity;
+
+        this.range = seting.range;
 
         let dirDest;
         if(this.idParent){
