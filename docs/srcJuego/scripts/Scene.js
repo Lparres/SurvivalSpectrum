@@ -110,7 +110,7 @@ export default class MainScene extends Phaser.Scene{
         let enemysArr = [];
 
         for(let i = 0; i < 100;i++){
-            let aux = new Enemy(this,0,0,'enemy',this.meleeEnemiesPool);
+            let aux = new Enemy(this,0,0,'enemyMove',this.meleeEnemiesPool);
             enemysArr.push(aux);
         }
 
@@ -119,7 +119,7 @@ export default class MainScene extends Phaser.Scene{
         let rangeArr = [];
 
         for(let i = 0; i < 100;i++){
-            let aux = new RangeEnemy(this,0,0,'enemy',this.rangeEnemiesPool);
+            let aux = new RangeEnemy(this,0,0,'enemyMove',this.rangeEnemiesPool);
             rangeArr.push(aux);
         }
 
@@ -155,7 +155,7 @@ export default class MainScene extends Phaser.Scene{
         //new MeleeEnemy(this, 400, 200, 'enemy', enemyConfig, 10);
         //new MeleeEnemy(this, 400, 800, 'enemy', enemyConfig, 10);
         this.meleeEnemiesPool.spawn(500, 500, 'enemyMove', enemyConfig);
-        this.rangeEnemiesPool.spawn(500, 300, 'enemyMove', enemyRangeConfig);
+        this.rangeEnemiesPool.spawn(500, 200, 'enemyMove', enemyRangeConfig);
 
         //
         //new RangeEnemy(this, 900, 250, 'enemy', enemyConfig, enemyRangeConfig);

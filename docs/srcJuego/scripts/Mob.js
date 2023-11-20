@@ -36,15 +36,15 @@ export default class Mob extends Phaser.GameObjects.Sprite{
     Move(){
         //movimiento del objeto
         this.body.setVelocity(this.dir.x*this.speed,this.dir.y*this.speed);
-        ////animacion de movimiento
-        //if(this.key !== 'kirby'){
-        //    if(this.dir.y == 0 && this.dir.x == 0){
-        //        this.stop();//parar la animacion
-        //    }
-        //    else{
-        //        this.play(this.key,true);//continuar la animacion
-        //    }
-        //}
+        //animacion de movimiento
+        if(this.key !== 'kirby'){
+            if(this.dir.y == 0 && this.dir.x == 0){
+                this.stop();//parar la animacion
+            }
+            else{
+                this.play(this.key,true);//continuar la animacion
+            }
+        }
     }
 
     /** @description La entidad recibe una cantidad de danio. Si esta la mata se "Destruye"
