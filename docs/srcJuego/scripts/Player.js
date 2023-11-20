@@ -1,6 +1,6 @@
-import Bullet from "./Bullet.js";
 import Pool from "./Pool.js";
-export default class Player extends Phaser.GameObjects.Sprite
+import Mob from "./Mob.js";
+export default class Player extends Mob
 {
     /*
     *Las variable con barra baja son las de la clase, sin barra baja son las variables de la sobrecarga
@@ -27,11 +27,12 @@ export default class Player extends Phaser.GameObjects.Sprite
     constructor(scene,x, y, key, playerConfig)
     {
         //llamada al constructor del super
-        super(scene, x ,y, key ) // hay que cargar la imagen con su id
+        super(scene,x,y,key, playerConfig.life,playerConfig.damage,playerConfig.velocity, null) // hay que cargar la imagen con su id
+
+        this.dir = new Phaser.Math.Vector2(0,0);
 
         //atributos del player
-        this._life = playerConfig.life; //vida maxima
-        this._currentLife = playerConfig.life; //vida actual
+        this._maxLife = playerConfig.life; //vida maxima
         this._velocity = playerConfig.velocity;
         this._damage = playerConfig.damage;
         this._range = playerConfig.range;
@@ -56,15 +57,11 @@ export default class Player extends Phaser.GameObjects.Sprite
         
         //escala y añadir a la escena
         this.setScale(0.3);
-        this.scene.add.existing(this);
-
-         //añadir a las fisicas
-         this.scene.physics.add.existing(this);
  
         //ajustar el tamaño del colider
-         this.body.setSize(450,750,false);
-         //ajustar el offset del colider
-         this.body.setOffset(800,1050);
+        this.body.setSize(450,750,false);
+        //ajustar el offset del colider
+        this.body.setOffset(800,1050);
  
     }
 
@@ -79,25 +76,6 @@ export default class Player extends Phaser.GameObjects.Sprite
         this.Shoot(dt);
     }
 
-    // Método para setear el vector de movimiento
-    setMoveVector = function(inputVector){
-        this._moveVector = inputVector.normalize();
-    }
-
-    //método para moverte
-    Move = function(){
-
-        //movimiento por fisicas
-        this.body.setVelocity(this._moveVector.x*this._velocity,this._moveVector.y*this._velocity);
-
-        //asignar la animacion correspondiente
-        if(this._moveVector.y == 0 && this._moveVector.x == 0){
-            this.stop();//parar la animacion
-        }
-        else{
-            this.play('PlayerMove',true);//continuar la animacion
-        }
-    }
 
     //método para disparar
     Shoot = function(dt) {
@@ -131,18 +109,16 @@ export default class Player extends Phaser.GameObjects.Sprite
         let damageReduction;
         if(damageType == 1) damageReduction = 100 / (100 + this._meleeArmor);
         else if (damageType == 2) damageReduction = 100 / (100 + this._rangeArmor);
-        this._currentLife -= damage * damageReduction;
+        //this._currentLife -= damage * damageReduction;
 
         /*cuando herede de mob llamar al metodo ReciveDamage(damage*damageReduction) este ya se encarga de matar al jugador si es necesario
         en este caso se puede añadir un callback para detectar cuando muere el jugador y hacer las llamadas de fin de juego
         */
-        console.log(this._currentLife);
+       this.ReciveDamage(damage*damageReduction);
 
-        if(this._currentLife <= 0) {
-            this._currentLife = 0;
-            //DEATH
-            console.log("Player muerto")
-        }
+       if(this.health < 0){
+        console.log("Player Muerto");
+       }
     }
 
     // La dicotomía cambia el rango de ataque

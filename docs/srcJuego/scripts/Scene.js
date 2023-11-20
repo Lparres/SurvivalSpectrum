@@ -63,14 +63,14 @@ export default class MainScene extends Phaser.Scene{
         {velocity: 300, 
             damage: 5, 
             range: 20, 
-            meleeArmor: 100,
-            rangeArmor: 100,
+            meleeArmor: 3,
+            rangeArmor: 3,
             life: 120,
             Cooldown:500,//van en milisegundos
         }
 
         //creacion del jugador
-        this.player = new Player(this, 960, 540, 'player', playerConfig);
+        this.player = new Player(this, 960, 540, 'PlayerMove', playerConfig);
 
         //creación de las animaciones del jugador
         this.anims.create({
@@ -145,7 +145,7 @@ export default class MainScene extends Phaser.Scene{
         {
             settingMelee : enemyConfig,
             range: 10,
-            rangeDamage: 5,
+            rangeDamage: 20,
             rangeAttackCD: 1000,
             bulletSpeed: 500,
         }
@@ -205,7 +205,8 @@ export default class MainScene extends Phaser.Scene{
         //colisiones entre el jugador y las balas de los enemigos
         this.physics.add.collider(this.player, this.enemiesBulletsPool.group, function (player, bullet){
             let dmg1 = bullet.damage;
-            let dmg2 = player._currentLife;
+            let dmg2 = player.health;
+            //tengase en cuenta que si el jugador no tiene vida las balas no se desturyen (esto no va a pasar)
             bullet.Hit(dmg2, true);
             player.Hit(dmg1, 2);
         });
@@ -271,14 +272,8 @@ export default class MainScene extends Phaser.Scene{
         this._inputVector.y = this.up.isDown == this.down.isDown ? 0 : this.up.isDown ? -1 : 1;
 
         // Modificamos el vector de movimiento del player a partir del inputVector
-        this.player.setMoveVector(this._inputVector);
-
-        /**
-         * Debug para las colisiones entre enemigos
-        if(this.physics.collide(this.enemys, this.enemys)) {
-            console.log("colision entre enemigos");
-        }
-        */
+        //this.player.setMoveVector(this._inputVector);
+        this.player.SetDirection(this._inputVector);
         
         //prueba para detectar la posicion del raton
         //this.player.x = this.input.mousePointer.x;

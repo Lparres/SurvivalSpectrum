@@ -53,7 +53,9 @@ export default class Mob extends Phaser.GameObjects.Sprite{
     ReciveDamage(dmg){
         this.health -= dmg;
         if(this.health <0){
-            this.pool.release(this)
+            if(this.pool != null){
+                this.pool.release(this);
+            }
         }
     }
 

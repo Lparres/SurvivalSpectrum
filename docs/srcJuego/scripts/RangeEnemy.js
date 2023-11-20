@@ -55,7 +55,7 @@ export default class RangeEnemy extends Enemy
 
             let BulletSeting ={
                 idParent : false,
-                damage : 10,
+                damage : this._rangeDamage,
                 velocity : 500
             }
 
