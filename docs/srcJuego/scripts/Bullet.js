@@ -46,10 +46,11 @@ export default class Bullet extends Mob
      */
     Hit(damage, idParent)
     {
+        console.log(this.idParent);
         if(this.idParent != idParent){
             this.damage = this.health;
             this.ReciveDamage(damage);//esto creo que es mejor cambiarlo al preupdate
-            console.log("Damage: "+damage);
+            console.log("Damage: "+ damage);
         }
         //console.log("colision bala");
     }
@@ -69,7 +70,7 @@ export default class Bullet extends Mob
             //this.scene.playerBullets.add(this);
         }
         else{
-            dirDest = new Phaser.Math.Vector2(this.scene.Player.x,this.scene.Player.y);
+            dirDest = new Phaser.Math.Vector2(this.scene.player.x,this.scene.player.y);
             //this.scene.enemiesBullets.add(this);
 
         }

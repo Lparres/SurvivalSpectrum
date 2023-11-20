@@ -15,14 +15,14 @@ export default class RangeEnemy extends Enemy
  * @param {string} key clave de la imagen 
  * @
  * */
-    constructor(scene, x, y, key, enemyConfig, enemyRangeConfig)
+    constructor(scene, x, y, key, pool)
     {
-        super(scene, x, y, key, enemyConfig);
+        super(scene, x, y, key, pool);
 
-        this._range = enemyRangeConfig.range;
-        this._rangeDamage = enemyRangeConfig.rangeDamage;
-        this._rangeAttackCD = enemyRangeConfig.rangeAttackCD;
-        this._bulletSpeed = enemyRangeConfig.bulletSpeed;
+        this._range = 0;
+        this._rangeDamage = 0;
+        this._rangeAttackCD = 0;
+        this._bulletSpeed = 0;
 
         this._CDRangeTimer = 0;
 
@@ -52,8 +52,32 @@ export default class RangeEnemy extends Enemy
     Shoot = function() {
 
         if(this._CDRangeTimer <= 0){
-            new Bullet(this.scene, this.x + this._bulletSpawnOffsetX, this.y + this._bulletSpawnOffsetY, 'kirby', false, this._rangeDamage, this._bulletSpeed);            
+
+            let BulletSeting ={
+                idParent : false,
+                damage : 10,
+                velocity : 500
+            }
+
+            this.scene.enemiesBulletsPool.spawn(this.x + this._bulletSpawnOffsetX,this.y+this._bulletSpawnOffsetY,' ',BulletSeting);            
             this._CDRangeTimer = this._rangeAttackCD;
         }
+    }
+
+    setUp(settingRange){
+
+        this.health = settingRange.settingMelee.life;
+        this.damage = settingRange.settingMelee.damage;
+        this.speed = settingRange.settingMelee.velocity;
+        this._meleeAttackCD = settingRange.settingMelee.meleeAttackCD;
+        this._CDMeleeTimer = 0;
+
+        this._range = settingRange.range;
+        this._rangeDamage = settingRange.rangeDamage;
+        this._rangeAttackCD = settingRange.rangeAttackCD;
+        this._bulletSpeed = settingRange.bulletSpeed;
+
+        let dirDest = new Phaser.Math.Vector2(this.scene.player.x,this.scene.player.y);
+        this.SetDirection(new Phaser.Math.Vector2(dirDest.x - this.x ,dirDest.y - this.y));
     }
 }

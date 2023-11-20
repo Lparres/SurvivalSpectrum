@@ -121,7 +121,11 @@ export default class Player extends Phaser.GameObjects.Sprite
             this._elapsedTime = 0;
         }
     }
-
+    /**
+     * 
+     * @param {number} damage 
+     * @param {number} damageType 1: melee 2: range
+     */
     Hit = function(damage, damageType) {
 
         let damageReduction;

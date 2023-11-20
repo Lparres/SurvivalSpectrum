@@ -41,6 +41,9 @@ export default class Enemy extends Mob
         //para la animación
         super.preUpdate(t,dt);
 
+        let dirDest = new Phaser.Math.Vector2(this.scene.player.x,this.scene.player.y);
+        this.SetDirection(new Phaser.Math.Vector2(dirDest.x - this.x ,dirDest.y - this.y));
+        
         this.Move();                    
         this.UpdateMeleeCooldown(dt);
 

@@ -80,11 +80,13 @@ export default class MainScene extends Phaser.Scene{
             repeat: -1    // Animación en bucle
         });
 
+
+
         // creacion de pools
         this.playerBulletsPool = new Pool(this, 100);//cambiar los magics numbers por constantes
         this.enemiesBulletsPool = new Pool(this, 200);
-        this.enemiesPool = new Pool(this, 200);
-
+        this.meleeEnemiesPool = new Pool(this, 50);
+        this.rangeEnemiesPool = new Pool(this, 50);
 
         
         let plBullets =[];
@@ -97,19 +99,36 @@ export default class MainScene extends Phaser.Scene{
         //rellenar pool de balas del player
         this.playerBulletsPool.addMultipleEntity(plBullets);
 
+        let enBullets =[];
+
+        for(let i = 0; i < 100;i++){
+            let aux = new Bullet(this,0,0,'kirby',true, 0,0,this.enemiesBulletsPool);
+            enBullets.push(aux);
+        }
+        this.enemiesBulletsPool.addMultipleEntity(enBullets);
+
         let enemysArr = [];
 
         for(let i = 0; i < 100;i++){
-            let aux = new Enemy(this,0,0,'enemy',this.enemiesPool);
+            let aux = new Enemy(this,0,0,'enemy',this.meleeEnemiesPool);
             enemysArr.push(aux);
         }
 
-        this.enemiesPool.addMultipleEntity(enemysArr);
+        this.meleeEnemiesPool.addMultipleEntity(enemysArr);
+
+        let rangeArr = [];
+
+        for(let i = 0; i < 100;i++){
+            let aux = new RangeEnemy(this,0,0,'enemy',this.rangeEnemiesPool);
+            rangeArr.push(aux);
+        }
+
+        this.rangeEnemiesPool.addMultipleEntity(rangeArr);
 
         //grupos de colisiones
   
         //this.playerBullets = this.add.group();
-        this.enemiesBullets = this.add.group();
+        //this.enemiesBullets = this.add.group();
         //this.enemys = this.add.group();       
         
 
@@ -124,6 +143,7 @@ export default class MainScene extends Phaser.Scene{
 
         let enemyRangeConfig = 
         {
+            settingMelee : enemyConfig,
             range: 10,
             rangeDamage: 5,
             rangeAttackCD: 1000,
@@ -134,7 +154,8 @@ export default class MainScene extends Phaser.Scene{
         //new MeleeEnemy(this, 500, 500, 'enemy', enemyConfig, 10);
         //new MeleeEnemy(this, 400, 200, 'enemy', enemyConfig, 10);
         //new MeleeEnemy(this, 400, 800, 'enemy', enemyConfig, 10);
-        this.enemiesPool.spawn(500, 500, 'enemyMove', enemyConfig);
+        this.meleeEnemiesPool.spawn(500, 500, 'enemyMove', enemyConfig);
+        this.rangeEnemiesPool.spawn(500, 300, 'enemyMove', enemyRangeConfig);
 
         //
         //new RangeEnemy(this, 900, 250, 'enemy', enemyConfig, enemyRangeConfig);
@@ -150,20 +171,28 @@ export default class MainScene extends Phaser.Scene{
 
 
      
-        
+        //#region Collision
         //colision entre enemigos
-        this.physics.add.collider(this.enemiesPool.group, this.enemiesPool.group);
-        
+        this.physics.add.collider(this.meleeEnemiesPool.group, this.meleeEnemiesPool.group);
+        this.physics.add.collider(this.rangeEnemiesPool.group, this.rangeEnemiesPool.group);
+        this.physics.add.collider(this.meleeEnemiesPool.group, this.rangeEnemiesPool.group);
+
         //colisiones entre las balas y los enemigos
-        this.physics.add.collider(this.playerBulletsPool.group, this.enemiesPool.group, function (proyectle, enemy){
+        this.physics.add.collider(this.playerBulletsPool.group, this.meleeEnemiesPool.group, function (proyectle, enemy){
             let dmg1 = proyectle.damage;
             let dmg2 = enemy.health;
             enemy.Hit(dmg1);
             proyectle.Hit(dmg2, false);
         });
-
+        //colisiones entre las balas y los enemigos a rango
+        this.physics.add.collider(this.playerBulletsPool.group, this.rangeEnemiesPool.group, function (proyectle, enemy){
+            let dmg1 = proyectle.damage;
+            let dmg2 = enemy.health;
+            enemy.Hit(dmg1);
+            proyectle.Hit(dmg2, false);
+        });
         //colisiones entre el jugador y los enemigos
-        this.physics.add.collider(this.player, this.enemiesPool.group, function (player, enemy){
+        this.physics.add.collider(this.player, this.meleeEnemiesPool.group, function (player, enemy){
 
             // Si el enemigo está listo para atacar, el player recibe un golpe y se reinicia el cooldown del ataque del enemigo.
             if(enemy._CDMeleeTimer <= 0){
@@ -174,12 +203,13 @@ export default class MainScene extends Phaser.Scene{
         });
 
         //colisiones entre el jugador y las balas de los enemigos
-        this.physics.add.collider(this.player, this.enemiesBullets, function (player, bullet){
-            bullet.Hit();
-            player.Hit(bullet._damage, 2);
-
+        this.physics.add.collider(this.player, this.enemiesBulletsPool.group, function (player, bullet){
+            let dmg1 = bullet.damage;
+            let dmg2 = player._currentLife;
+            bullet.Hit(dmg2, true);
+            player.Hit(dmg1, 2);
         });
-
+    //#endregion
 
 
         //variables para el input
