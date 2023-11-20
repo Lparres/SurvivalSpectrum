@@ -82,65 +82,7 @@ export default class MainScene extends Phaser.Scene{
             repeat: -1    // Animación en bucle
         });
 
-
-
-        // creacion de pools
-        this.playerBulletsPool = new Pool(this, 100);//cambiar los magics numbers por constantes
-        this.enemiesBulletsPool = new Pool(this, 200);
-        this.meleeEnemiesPool = new Pool(this, 50);
-        this.rangeEnemiesPool = new Pool(this, 50);
-        this.dustPool = new Pool(this,100);
-
-        
-        let plBullets =[];
-
-        for(let i = 0; i < 100;i++){
-            let aux = new Bullet(this,0,0,'kirby',true, 0,0,this.playerBulletsPool);
-            plBullets.push(aux);
-        }
-
-        //rellenar pool de balas del player
-        this.playerBulletsPool.addMultipleEntity(plBullets);
-
-        let enBullets =[];
-
-        for(let i = 0; i < 100;i++){
-            let aux = new Bullet(this,0,0,'kirby',true, 0,0,this.enemiesBulletsPool);
-            enBullets.push(aux);
-        }
-        this.enemiesBulletsPool.addMultipleEntity(enBullets);
-
-        let enemysArr = [];
-
-        for(let i = 0; i < 100;i++){
-            let aux = new Enemy(this,0,0,'enemyMove',this.meleeEnemiesPool);
-            enemysArr.push(aux);
-        }
-
-        this.meleeEnemiesPool.addMultipleEntity(enemysArr);
-
-        let rangeArr = [];
-
-        for(let i = 0; i < 100;i++){
-            let aux = new RangeEnemy(this,0,0,'enemyMove',this.rangeEnemiesPool);
-            rangeArr.push(aux);
-        }
-
-        this.rangeEnemiesPool.addMultipleEntity(rangeArr);
-
-        let dustArr = [];
-        
-        let dustConfig ={
-            amount:50,
-        }
-        for(let i = 0; i < 100;i++){
-            let aux = new InteractuableObjects(this,0,0,'polvos',this.dustPool, function(amount){
-                //this.player.addDust(amount);
-            });
-            dustArr.push(aux);
-        }
-
-        this.dustPool.addMultipleEntity(dustArr);
+        this.inicializoPools();
 
         //grupos de colisiones
   
@@ -167,6 +109,11 @@ export default class MainScene extends Phaser.Scene{
             bulletSpeed: 500,
         }
 
+        //instancias de los polvos
+        let dustConfig ={
+            amount:50,
+        }
+
         //creacion de  enemigos, para que funcionen bien las fisicas no deben crearse 2 objetos chocando
         //new MeleeEnemy(this, 500, 500, 'enemy', enemyConfig, 10);
         //new MeleeEnemy(this, 400, 200, 'enemy', enemyConfig, 10);
@@ -174,6 +121,7 @@ export default class MainScene extends Phaser.Scene{
         this.meleeEnemiesPool.spawn(500, 500, 'enemyMove', enemyConfig);
         this.rangeEnemiesPool.spawn(500, 200, 'enemyMove', enemyRangeConfig);
         this.dustPool.spawn(500,200,'polvos',dustConfig);
+        this.dustPool.spawn(500,400,'polvos',dustConfig);
         //new RangeEnemy(this, 900, 250, 'enemy', enemyConfig, enemyRangeConfig);
 
         //creación de animaciones para enemigos
@@ -302,5 +250,63 @@ export default class MainScene extends Phaser.Scene{
         
         //Esta línea hace que la cámara siga al jugador
         //this.cameras.main.startFollow(this.player);
+    }
+
+    inicializoPools(){
+        
+        // creacion de pools
+        this.playerBulletsPool = new Pool(this, 100);//cambiar los magics numbers por constantes
+        this.enemiesBulletsPool = new Pool(this, 200);
+        this.meleeEnemiesPool = new Pool(this, 50);
+        this.rangeEnemiesPool = new Pool(this, 50);
+        this.dustPool = new Pool(this,100);
+
+        
+        let plBullets =[];
+
+        for(let i = 0; i < 100;i++){
+            let aux = new Bullet(this,0,0,'kirby',true, 0,0,this.playerBulletsPool);
+            plBullets.push(aux);
+        }
+
+        //rellenar pool de balas del player
+        this.playerBulletsPool.addMultipleEntity(plBullets);
+
+        let enBullets =[];
+
+        for(let i = 0; i < 100;i++){
+            let aux = new Bullet(this,0,0,'kirby',true, 0,0,this.enemiesBulletsPool);
+            enBullets.push(aux);
+        }
+        this.enemiesBulletsPool.addMultipleEntity(enBullets);
+
+        let enemysArr = [];
+
+        for(let i = 0; i < 100;i++){
+            let aux = new Enemy(this,0,0,'enemyMove',this.meleeEnemiesPool);
+            enemysArr.push(aux);
+        }
+
+        this.meleeEnemiesPool.addMultipleEntity(enemysArr);
+
+        let rangeArr = [];
+
+        for(let i = 0; i < 100;i++){
+            let aux = new RangeEnemy(this,0,0,'enemyMove',this.rangeEnemiesPool);
+            rangeArr.push(aux);
+        }
+
+        this.rangeEnemiesPool.addMultipleEntity(rangeArr);
+
+        let dustArr = [];
+        
+        for(let i = 0; i < 100;i++){
+            let aux = new InteractuableObjects(this,0,0,'polvos',this.dustPool, function(amount){
+                //this.player.addDust(amount);
+            });
+            dustArr.push(aux);
+        }
+
+        this.dustPool.addMultipleEntity(dustArr);
     }
 }
