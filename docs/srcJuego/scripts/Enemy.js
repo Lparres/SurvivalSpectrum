@@ -94,4 +94,11 @@ export default class Enemy extends Mob
         console.log(this.dir);
     }
 
+    /*ReciveDamage(dmg){
+        super.ReciveDamage(dmg);
+        if(this.health <0){
+            this.scene.dustPool.spawn(500,400,'polvos',dustConfig);
+        }
+    }*/ // Cuando los enemigos mueran deben spawnear los polvos (está rompido en este momento)
+
 }
