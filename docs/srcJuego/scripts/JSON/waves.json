@@ -1,0 +1,12 @@
+{
+    "Waves":[
+        {
+            "x":500,
+            "y":200,
+            "waveTime" : 500,
+            "waveType" : "melee",
+            "timeBetween" : 100,
+            "size":5
+        }
+    ]
+}

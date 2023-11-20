@@ -1,0 +1,37 @@
+
+{
+    "EnemyConfigs": [
+        {
+            "life": 50,
+            "meleeDamage": 3,
+            "velocity": 100,
+            "meleeAttackCD": 500
+        },
+        {
+            "life": 100,
+            "meleeDamage": 3,
+            "velocity": 50,
+            "meleeAttackCD": 500
+        },
+        {
+            "life": 10,
+            "meleeDamage": 3,
+            "velocity": 80,
+            "meleeAttackCD": 500
+        }
+    ],
+    "RangeConfigs":[
+        {
+            "settingMelee" : {
+                "life": 50,
+                "meleeDamage": 3,
+                "velocity": 100,
+                "meleeAttackCD": 500
+            },
+            "range": 10,
+            "rangeDamage": 20,
+            "rangeAttackCD": 1000,
+            "bulletSpeed": 500
+        }
+    ]
+}

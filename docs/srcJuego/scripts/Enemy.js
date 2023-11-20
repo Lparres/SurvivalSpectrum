@@ -91,7 +91,7 @@ export default class Enemy extends Mob
 
         let dirDest = new Phaser.Math.Vector2(this.scene.player.x,this.scene.player.y);
         this.SetDirection(new Phaser.Math.Vector2(dirDest.x - this.x ,dirDest.y - this.y));
-        console.log(this.dir);
+        //console.log(this.dir);
     }
 
 }
