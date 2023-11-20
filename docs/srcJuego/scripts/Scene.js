@@ -4,6 +4,7 @@ import RangeEnemy from './RangeEnemy.js'
 import Pool from './Pool.js'
 import Bullet from './Bullet.js'
 import Enemy from './Enemy.js'
+import InteractuableObjects from './InteractuableObject.js'
 export default class MainScene extends Phaser.Scene{
     constructor(){
         super({key:"level"})
@@ -18,7 +19,8 @@ export default class MainScene extends Phaser.Scene{
 
         //carga de imagenes y SpriteSheets
         this.load.image('kirby', srcJuego+ '/img/kirby.png');
-        this.load.image('fondo', srcJuego+ '/img/fondo.jpg');   
+        this.load.image('fondo', srcJuego+ '/img/fondo.jpg');
+        this.load.image('polvos', srcJuego+ '/img/polvos.jpg');   
 
         //this.load.image('player',srcJuego+ '/Sprites/Character/with_hands/death_0 - copia - copia.png');   
         this.load.spritesheet('player', srcJuego+'/Sprites/Character/with_hands/SpriteSheets/walkSheet.png',
@@ -87,6 +89,7 @@ export default class MainScene extends Phaser.Scene{
         this.enemiesBulletsPool = new Pool(this, 200);
         this.meleeEnemiesPool = new Pool(this, 50);
         this.rangeEnemiesPool = new Pool(this, 50);
+        this.dustPool = new Pool(this,100);
 
         
         let plBullets =[];
@@ -125,6 +128,20 @@ export default class MainScene extends Phaser.Scene{
 
         this.rangeEnemiesPool.addMultipleEntity(rangeArr);
 
+        let dustArr = [];
+        
+        let dustConfig ={
+            amount:50,
+        }
+        for(let i = 0; i < 100;i++){
+            let aux = new InteractuableObjects(this,0,0,'polvos',this.dustPool, function(amount){
+                //this.player.addDust(amount);
+            });
+            dustArr.push(aux);
+        }
+
+        this.dustPool.addMultipleEntity(dustArr);
+
         //grupos de colisiones
   
         //this.playerBullets = this.add.group();
@@ -156,8 +173,7 @@ export default class MainScene extends Phaser.Scene{
         //new MeleeEnemy(this, 400, 800, 'enemy', enemyConfig, 10);
         this.meleeEnemiesPool.spawn(500, 500, 'enemyMove', enemyConfig);
         this.rangeEnemiesPool.spawn(500, 200, 'enemyMove', enemyRangeConfig);
-
-        //
+        this.dustPool.spawn(500,200,'polvos',dustConfig);
         //new RangeEnemy(this, 900, 250, 'enemy', enemyConfig, enemyRangeConfig);
 
         //creación de animaciones para enemigos
@@ -210,6 +226,11 @@ export default class MainScene extends Phaser.Scene{
             bullet.Hit(dmg2, true);
             player.Hit(dmg1, 2);
         });
+
+        this.physics.add.overlap(this.player, this.dustPool.group,function(player,dust){
+            dust.Hit();
+            player.addDust(dust.amount);
+        })
     //#endregion
 
 

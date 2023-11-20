@@ -38,6 +38,7 @@ export default class Player extends Mob
         this._range = playerConfig.range;
         this._meleeArmor = playerConfig.meleeArmor;
         this._rangeArmor = playerConfig.rangeArmor;
+        this._dust = 0;
 
         //atack cooldown en milisegundos
         this._atkCD = playerConfig.Cooldown; 
@@ -127,4 +128,8 @@ export default class Player extends Mob
         //vacío de momento
     }
 
+    addDust = function(amount){
+        this._dust += amount;
+        console.log('polvos: ' + this._dust);
+    }
 }
