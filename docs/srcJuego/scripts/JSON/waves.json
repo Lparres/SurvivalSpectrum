@@ -1,0 +1,12 @@
+{
+    "Waves":[
+        {
+            "x":500,
+            "y":200,
+            "waveTime" : 500,
+            "waveType" : "range",
+            "timeBetween" : 500,
+            "size":5
+        }
+    ]
+}
