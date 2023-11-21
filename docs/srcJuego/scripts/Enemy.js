@@ -72,6 +72,13 @@ export default class Enemy extends Mob
 
     Hit = function(damage){
         this.ReciveDamage(damage);
+        if(this.health < 0){
+            let dustConfig ={
+                amount:50,
+            }
+
+            this.scene.dustPool.spawn(this.x,this.y, 'polvos', dustConfig);
+        }
     }
 
     UpdateMeleeCooldown = function(dt){

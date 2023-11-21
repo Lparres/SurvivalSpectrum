@@ -62,7 +62,7 @@ export default class MainScene extends Phaser.Scene{
             waveCount : 0
         }
         this.maxMasillaTime = 200;
-        this.timer = 0;
+        this.masillasTimer = 0;
         this.data = this.game.cache.json.get('data');
         this.wave = this.game.cache.json.get('waves');
         //imagen del fondo
@@ -71,19 +71,8 @@ export default class MainScene extends Phaser.Scene{
         // Cursor personalizado
         this.input.setDefaultCursor('url(srcJuego/img/crosshair.png) 16 16, pointer');
 
-        //instancia del  jugador
-        let playerConfig =
-        {velocity: 300, 
-            damage: 5, 
-            range: 20, 
-            meleeArmor: 100,
-            rangeArmor: 100,
-            life: 500,
-            Cooldown:500,//van en milisegundos
-        }
-
         //creacion del jugador
-        this.player = new Player(this, 960, 540, 'PlayerMove', playerConfig);
+        this.player = new Player(this, 960, 540, 'PlayerMove', this.data.PlayerConfig);
 
         //creación de las animaciones del jugador
         this.anims.create({
@@ -95,53 +84,6 @@ export default class MainScene extends Phaser.Scene{
 
         this.inicializoPools();
 
-        //grupos de colisiones
-  
-        //this.playerBullets = this.add.group();
-        //this.enemiesBullets = this.add.group();
-        //this.enemys = this.add.group();       
-        
-
-        //instancia de enemigo
-        var enemyConfig =
-        {
-            life: 50,
-            meleeDamage: 3,
-            velocity: 100,
-            meleeAttackCD: 500,
-        }
-
-        let enemyRangeConfig = 
-        {
-            settingMelee : enemyConfig,
-            range: 10,
-            rangeDamage: 20,
-            rangeAttackCD: 1000,
-            bulletSpeed: 500,
-        }
-
-        //instancias de los polvos
-        let dustConfig ={
-            amount:50,
-        }
-
-        //creacion de  enemigos, para que funcionen bien las fisicas no deben crearse 2 objetos chocando
-        //new MeleeEnemy(this, 500, 500, 'enemy', enemyConfig, 10);
-        //new MeleeEnemy(this, 400, 200, 'enemy', enemyConfig, 10);
-        //new MeleeEnemy(this, 400, 800, 'enemy', enemyConfig, 10);
-
-        //this.meleeEnemiesPool.spawn(500, 500, 'enemyMove', enemyConfig);
-        //this.rangeEnemiesPool.spawn(500, 200, 'enemyMove', enemyRangeConfig);
-        //this.dustPool.spawn(500,200,'polvos',dustConfig);
-        //this.dustPool.spawn(500,400,'polvos',dustConfig);
-
-        //this.meleeEnemiesPool.spawn(500, 500, 'enemyMove', this.data.EnemyConfigs[0]);
-        //this.meleeEnemiesPool.spawn(500, 500, 'enemyMove', this.data.EnemyConfigs[1]);
-        //this.rangeEnemiesPool.spawn(500, 200, 'enemyMove', enemyRangeConfig);
-
-        
-        //new RangeEnemy(this, 900, 250, 'enemy', enemyConfig, enemyRangeConfig);
-
         //creación de animaciones para enemigos
         this.anims.create({
             key: 'enemyMove',
@@ -150,9 +92,6 @@ export default class MainScene extends Phaser.Scene{
             repeat: -1    // Animación en bucle
         });
 
-
-
-     
         //#region Collision
         //colision entre enemigos
         this.physics.add.collider(this.meleeEnemiesPool.group, this.meleeEnemiesPool.group);
@@ -254,9 +193,10 @@ export default class MainScene extends Phaser.Scene{
     //game tick
     update(){
         //console.log(this.waveTime);
+        //actualizacion de temporizadores
         this.waveData.waveTime++;
-        this.timer++;
-        //console.log(this.wave.Waves[0].timeBetween);
+        this.masillasTimer++;
+
         //actualizar el valor del vector del input
         this._inputVector.x = this.right.isDown == this.left.isDown ? 0 : this.right.isDown ? 1 : -1;
         this._inputVector.y = this.up.isDown == this.down.isDown ? 0 : this.up.isDown ? -1 : 1;
@@ -278,7 +218,7 @@ export default class MainScene extends Phaser.Scene{
         }
 
         //masillas
-        if(this.timer > this.maxMasillaTime){
+        if(this.masillasTimer > this.maxMasillaTime){
             let vector = new Phaser.Math.Vector2(0,0);
             let spawn = Phaser.Math.RandomXY(vector, Phaser.Math.Between(400, 1000));
             let enemyNumber = Phaser.Math.Between(0,2);
@@ -288,7 +228,7 @@ export default class MainScene extends Phaser.Scene{
 
             this.meleeEnemiesPool.spawn(this.player.x + spawn.x,this.player.y + spawn.y,
             'enemyMove', this.data.EnemyConfigs[enemyNumber]);
-            this.timer = 0;
+            this.masillasTimer = 0;
             this.maxMasillaTime = Phaser.Math.Between(100,250);
         }
         //Esta línea hace que la cámara siga al jugador
