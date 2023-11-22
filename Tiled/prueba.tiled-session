@@ -3,19 +3,36 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "Dungeon_Tileset.tsx",
     "expandedProjectPaths": [
+        "."
     ],
     "fileStates": {
+        "Dungeon_Tileset.tsx": {
+            "scaleInDock": 0.75,
+            "scaleInEditor": 1
+        },
+        "prueba.tmx": {
+            "scale": 1,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 635.5,
+                "y": 386.5
+            }
+        }
     },
     "last.exportedFilePath": "C:/Users/Samuel/Desktop/Workspace/JuegoPVLI/Tiled",
     "last.imagePath": "C:/Users/Samuel/Desktop/Workspace/JuegoPVLI/Tiled/Arte",
     "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
     "map.lastUsedFormat": "tmx",
     "openFiles": [
+        "prueba.tmx",
+        "Dungeon_Tileset.tsx"
     ],
     "project": "prueba.tiled-project",
     "recentFiles": [
+        "prueba.tmx",
+        "Dungeon_Tileset.tsx"
     ],
     "tileset.lastUsedFormat": "tsx"
 }

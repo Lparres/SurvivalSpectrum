@@ -15,38 +15,14 @@ export default class MainScene extends Phaser.Scene{
     }
     //load data
     preload(){
-        let srcJuego = 'https://lparres2000.github.io/JuegoPVLI/srcJuego';
+
+        let srcJuego = 'srcJuego';
 
         //carga de imagenes y SpriteSheets
         this.load.image('kirby', srcJuego+ '/img/kirby.png');
-        this.load.image('fondo', srcJuego+ '/img/fondo.jpg');
+        this.load.image('fondo', srcJuego+ '/img/fondo.jpg');  
         this.load.image('polvos', srcJuego+ '/img/polvos.jpg');   
 
-        //this.load.image('player',srcJuego+ '/Sprites/Character/with_hands/death_0 - copia - copia.png');   
-        this.load.spritesheet('player', srcJuego+'/Sprites/Character/with_hands/SpriteSheets/walkSheet.png',
-                      { frameWidth: 2048, frameHeight: 2048 });
-
-        //this.load.image('enemy', srcJuego+ '/Sprites/Enemy1/death_0.png');   
-        this.load.spritesheet('enemy', srcJuego+'/Sprites/Enemy1/SpriteSheets/walkSheet.png',
-        { frameWidth: 2048, frameHeight: 2048 });
-        
-        /**caraga de json de datos de los distintos enemigos
-         * 
-         * tanto este como el siguente creo que necesitan una vuelta de tuerca para que nos sean todavia mas utiles
-         * por ejemplo guardando la clave de animacion de ese tipo de enemigo entre otras cosas 
-         * 
-         * Por otra parte creo que es util ser conscientes que todos los objetos que tenemos en el juego tienen como mucho animaciones de
-         * andar y de recibir danio (del feedback del danio creo que hace falta hablarlo)
-         */
-        this.load.json('data', 'srcJuego/scripts/JSON/data.json');
-
-        this.load.json('waves', 'srcJuego/scripts/JSON/waves.json');
-
-        /**let srcJuego = 'srcJuego';
-
-        //carga de imagenes y SpriteSheets
-        this.load.image('kirby', srcJuego+ '/img/kirby.png');
-        this.load.image('fondo', srcJuego+ '/img/fondo.jpg');   
 
         //this.load.image('player',srcJuego+ '/Sprites/Character/with_hands/death_0 - copia - copia.png');   
         this.load.spritesheet('player', srcJuego+'/Sprites/Character/with_hands/SpriteSheets/walkSheet.png',
@@ -61,7 +37,22 @@ export default class MainScene extends Phaser.Scene{
         this.load.tilemapTiledJSON('tilemap', '../Tiled/prueba..tmj');
         
         //carga del tileset
-        this.load.image('patronesTilemap', '../Tiled/arte/Dungeon_Tileset.png'); */
+        this.load.image('patronesTilemap', '../Tiled/arte/Dungeon_Tileset.png'); 
+  
+       
+        
+        /**caraga de json de datos de los distintos enemigos
+         * 
+         * tanto este como el siguente creo que necesitan una vuelta de tuerca para que nos sean todavia mas utiles
+         * por ejemplo guardando la clave de animacion de ese tipo de enemigo entre otras cosas 
+         * 
+         * Por otra parte creo que es util ser conscientes que todos los objetos que tenemos en el juego tienen como mucho animaciones de
+         * andar y de recibir danio (del feedback del danio creo que hace falta hablarlo)
+         */
+        this.load.json('data', 'srcJuego/scripts/JSON/data.json');
+
+        this.load.json('waves', 'srcJuego/scripts/JSON/waves.json');     
+
     }
 
     //instance
@@ -102,7 +93,8 @@ export default class MainScene extends Phaser.Scene{
             repeat: -1    // Animación en bucle
         });
         //por ahora este metodo esta vacio pero asi se queda mas limpio el create
-        this.setTileMap();
+        //comentado para que no pete
+        //this.setTileMap();
 
         this.setCollisions();
         
@@ -276,11 +268,12 @@ export default class MainScene extends Phaser.Scene{
             player.addDust(dust.amount);
         })
     }
+
     /**configuracion del tile map */
     setTileMap(){
         //he de suponer que esto sera util (estaba en el create)
-        /**
-        * 
+        
+        
         // Objeto tilemap
 		this.map = this.make.tilemap({ 
 			key: 'tilemap', 
@@ -312,6 +305,7 @@ export default class MainScene extends Phaser.Scene{
 		
 		this.physics.add.collider(player, this.baseColumnLayer);
 		this.physics.add.collider(coinsGroup, this.baseColumnLayer);		
-        */
+        
+        
     }
 }
