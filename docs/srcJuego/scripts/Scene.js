@@ -29,7 +29,15 @@ export default class MainScene extends Phaser.Scene{
         //this.load.image('enemy', srcJuego+ '/Sprites/Enemy1/death_0.png');   
         this.load.spritesheet('enemy', srcJuego+'/Sprites/Enemy1/SpriteSheets/walkSheet.png',
         { frameWidth: 2048, frameHeight: 2048 });
-    
+        
+        /**caraga de json de datos de los distintos enemigos
+         * 
+         * tanto este como el siguente creo que necesitan una vuelta de tuerca para que nos sean todavia mas utiles
+         * por ejemplo guardando la clave de animacion de ese tipo de enemigo entre otras cosas 
+         * 
+         * Por otra parte creo que es util ser conscientes que todos los objetos que tenemos en el juego tienen como mucho animaciones de
+         * andar y de recibir danio (del feedback del danio creo que hace falta hablarlo)
+         */
         this.load.json('data', 'srcJuego/scripts/JSON/data.json');
 
         this.load.json('waves', 'srcJuego/scripts/JSON/waves.json');
@@ -55,8 +63,10 @@ export default class MainScene extends Phaser.Scene{
         //carga del tileset
         this.load.image('patronesTilemap', '../Tiled/arte/Dungeon_Tileset.png'); */
     }
+
     //instance
-    create(){
+    create(){//igual es recomendable que se haga una seccion de creacion de animaciones ya que asi ya estan listas cuando hagan falta
+
         this.waveData = {
             waveTime : 0,
             waveCount : 0
@@ -91,51 +101,11 @@ export default class MainScene extends Phaser.Scene{
             frameRate: 10, // Velocidad de la animación
             repeat: -1    // Animación en bucle
         });
+        //por ahora este metodo esta vacio pero asi se queda mas limpio el create
+        this.setTileMap();
 
-        //#region Collision
-        //colision entre enemigos
-        this.physics.add.collider(this.meleeEnemiesPool.group, this.meleeEnemiesPool.group);
-        this.physics.add.collider(this.rangeEnemiesPool.group, this.rangeEnemiesPool.group);
-        this.physics.add.collider(this.meleeEnemiesPool.group, this.rangeEnemiesPool.group);
-
-        //colisiones entre las balas y los enemigos
-        this.physics.add.collider(this.playerBulletsPool.group, this.meleeEnemiesPool.group, function (proyectle, enemy){
-            let dmg1 = proyectle.damage;
-            let dmg2 = enemy.health;
-            enemy.Hit(dmg1);
-            proyectle.Hit(dmg2, false);
-        });
-        //colisiones entre las balas y los enemigos a rango
-        this.physics.add.collider(this.playerBulletsPool.group, this.rangeEnemiesPool.group, function (proyectle, enemy){
-            let dmg1 = proyectle.damage;
-            let dmg2 = enemy.health;
-            enemy.Hit(dmg1);
-            proyectle.Hit(dmg2, false);
-        });
-        //colisiones entre el jugador y los enemigos
-        this.physics.add.collider(this.player, this.meleeEnemiesPool.group, function (player, enemy){
-
-            // Si el enemigo está listo para atacar, el player recibe un golpe y se reinicia el cooldown del ataque del enemigo.
-            //if(enemy._CDMeleeTimer <= 0){
-            //    player.Hit(enemy._meleeDamage, 1);
-            //    enemy._CDMeleeTimer = enemy._meleeAttackCD
-            //}
-                
-        });
-
-        //colisiones entre el jugador y las balas de los enemigos
-        this.physics.add.collider(this.player, this.enemiesBulletsPool.group, function (player, bullet){
-            let dmg1 = bullet.damage;
-            let dmg2 = player.health;
-            //tengase en cuenta que si el jugador no tiene vida las balas no se desturyen (esto no va a pasar)
-            bullet.Hit(dmg2, true);
-            player.Hit(dmg1, 2);
-        });
-
-        this.physics.add.overlap(this.player, this.dustPool.group,function(player,dust){
-            dust.Hit();
-            player.addDust(dust.amount);
-        })
+        this.setCollisions();
+        
     //#endregion
 
 
@@ -151,42 +121,7 @@ export default class MainScene extends Phaser.Scene{
         // Recogida del input de movimiento en un vector
         this._inputVector = new Phaser.Math.Vector2(0,0);
 
-
-
-        /**
-        * 
-        // Objeto tilemap
-		this.map = this.make.tilemap({ 
-			key: 'tilemap', 
-			tileWidth: 32, 
-			tileHeight: 32 
-		});
-
-   
-		const tileset1 = this.map.addTilesetImage('Dungeon_Tileset.tsx', 'patronesTilemap');
-		
-		// creamos las diferentes capas a través del tileset. El nombre de la capa debe aparecer en el .json del tilemap cargado
-		this.groundLayer = this.map.createLayer('Suelo', tileset1);
-		
-		this.wallLayer = this.map.createLayer('Pared', tileset1);
-		this.wallLayer.setCollision(2); // Los tiles de esta capa tienen colisiones
-		
-		
-		this.mov = this.map.createFromObjects('Objetos', {name: 'player', classType: Character, key:"character"});
-		let player = this.mov[0];
-
-
-		// Ponemos la cámara principal de juego a seguir al jugador
-		this.cameras.main.startFollow(player);
-		
-		// Decimos que capas tienen colision entre ellas
-		this.physics.add.collider(player, this.wallLayer);
-		this.physics.add.collider(player, coinsGroup, this.aux);
-		this.physics.add.collider(coinsGroup, this.wallLayer);
-		
-		this.physics.add.collider(player, this.baseColumnLayer);
-		this.physics.add.collider(coinsGroup, this.baseColumnLayer);		
-        */
+        
         
     }
 
@@ -202,13 +137,16 @@ export default class MainScene extends Phaser.Scene{
         this._inputVector.y = this.up.isDown == this.down.isDown ? 0 : this.up.isDown ? -1 : 1;
 
         // Modificamos el vector de movimiento del player a partir del inputVector
-        //this.player.setMoveVector(this._inputVector);
         this.player.SetDirection(this._inputVector);
         
         //prueba para detectar la posicion del raton
         //this.player.x = this.input.mousePointer.x;
         //this.player.y = this.input.mousePointer.y;
         
+
+        /**esto me gustaria pasarlo a metodos tal vez pero por ahora se queda asi hasta que acordemos bien
+         * un protocolo de oleadas/ masillas (tema que no aparezcan enemigos en muros y tal)
+         */
         //oleadas
         if(this.waveData.waveTime > this.wave.Waves[0].timeBetween && this.waveData.waveCount <this.wave.Waves[0].size ){
             console.log(this.data.EnemyConfigs[0]);
@@ -234,7 +172,7 @@ export default class MainScene extends Phaser.Scene{
         //Esta línea hace que la cámara siga al jugador
         this.cameras.main.startFollow(this.player);
     }
-
+    /**inicializacion de la pools */
     inicializoPools(){
         
         // creacion de pools
@@ -291,5 +229,89 @@ export default class MainScene extends Phaser.Scene{
         }
 
         this.dustPool.addMultipleEntity(dustArr);
+    }
+    /**configuracion de las colisiones y triggers */
+    setCollisions(){
+        //colision entre enemigos
+        this.physics.add.collider(this.meleeEnemiesPool.group, this.meleeEnemiesPool.group);
+        this.physics.add.collider(this.rangeEnemiesPool.group, this.rangeEnemiesPool.group);
+        this.physics.add.collider(this.meleeEnemiesPool.group, this.rangeEnemiesPool.group);
+
+        //colisiones entre las balas y los enemigos
+        this.physics.add.collider(this.playerBulletsPool.group, this.meleeEnemiesPool.group, function (proyectle, enemy){
+            let dmg1 = proyectle.damage;
+            let dmg2 = enemy.health;
+            enemy.Hit(dmg1);
+            proyectle.Hit(dmg2, false);
+        });
+        //colisiones entre las balas y los enemigos a rango
+        this.physics.add.collider(this.playerBulletsPool.group, this.rangeEnemiesPool.group, function (proyectle, enemy){
+            let dmg1 = proyectle.damage;
+            let dmg2 = enemy.health;
+            enemy.Hit(dmg1);
+            proyectle.Hit(dmg2, false);
+        });
+        //colisiones entre el jugador y los enemigos
+        this.physics.add.collider(this.player, this.meleeEnemiesPool.group, function (player, enemy){
+
+            // Si el enemigo está listo para atacar, el player recibe un golpe y se reinicia el cooldown del ataque del enemigo.
+            //if(enemy._CDMeleeTimer <= 0){
+            //    player.Hit(enemy._meleeDamage, 1);
+            //    enemy._CDMeleeTimer = enemy._meleeAttackCD
+            //}
+                
+        });
+
+        //colisiones entre el jugador y las balas de los enemigos
+        this.physics.add.collider(this.player, this.enemiesBulletsPool.group, function (player, bullet){
+            let dmg1 = bullet.damage;
+            let dmg2 = player.health;
+            //tengase en cuenta que si el jugador no tiene vida las balas no se desturyen (esto no va a pasar)
+            bullet.Hit(dmg2, true);
+            player.Hit(dmg1, 2);
+        });
+
+        this.physics.add.overlap(this.player, this.dustPool.group,function(player,dust){
+            dust.Hit();
+            player.addDust(dust.amount);
+        })
+    }
+    /**configuracion del tile map */
+    setTileMap(){
+        //he de suponer que esto sera util (estaba en el create)
+        /**
+        * 
+        // Objeto tilemap
+		this.map = this.make.tilemap({ 
+			key: 'tilemap', 
+			tileWidth: 32, 
+			tileHeight: 32 
+		});
+
+   
+		const tileset1 = this.map.addTilesetImage('Dungeon_Tileset.tsx', 'patronesTilemap');
+		
+		// creamos las diferentes capas a través del tileset. El nombre de la capa debe aparecer en el .json del tilemap cargado
+		this.groundLayer = this.map.createLayer('Suelo', tileset1);
+		
+		this.wallLayer = this.map.createLayer('Pared', tileset1);
+		this.wallLayer.setCollision(2); // Los tiles de esta capa tienen colisiones
+		
+		
+		this.mov = this.map.createFromObjects('Objetos', {name: 'player', classType: Character, key:"character"});
+		let player = this.mov[0];
+
+
+		// Ponemos la cámara principal de juego a seguir al jugador
+		this.cameras.main.startFollow(player);
+		
+		// Decimos que capas tienen colision entre ellas
+		this.physics.add.collider(player, this.wallLayer);
+		this.physics.add.collider(player, coinsGroup, this.aux);
+		this.physics.add.collider(coinsGroup, this.wallLayer);
+		
+		this.physics.add.collider(player, this.baseColumnLayer);
+		this.physics.add.collider(coinsGroup, this.baseColumnLayer);		
+        */
     }
 }
