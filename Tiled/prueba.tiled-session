@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "Dungeon_Tileset.tsx",
+    "activeFile": "prueba.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -16,8 +16,8 @@
             "scale": 1,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 635.5,
-                "y": 386.5
+                "x": 633.5,
+                "y": 385.5
             }
         }
     },
@@ -31,8 +31,8 @@
     ],
     "project": "prueba.tiled-project",
     "recentFiles": [
-        "prueba.tmx",
-        "Dungeon_Tileset.tsx"
+        "Dungeon_Tileset.tsx",
+        "prueba.tmx"
     ],
     "tileset.lastUsedFormat": "tsx"
 }

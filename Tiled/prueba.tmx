@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="4">
  <editorsettings>
-  <export target="prueba..tmj" format="json"/>
+  <export target="prueba.tmj" format="json"/>
  </editorsettings>
  <tileset firstgid="1" source="Dungeon_Tileset.tsx"/>
  <layer id="1" name="Suelo" width="30" height="20" visible="0">

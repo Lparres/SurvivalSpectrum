@@ -28,7 +28,7 @@
          "name":"Suelo",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":30,
          "x":0,
          "y":0
@@ -95,8 +95,17 @@
  "tileheight":32,
  "tilesets":[
         {
+         "columns":16,
          "firstgid":1,
-         "source":"Dungeon_Tileset.tsx"
+         "image":"Arte\/Dungeon_Tileset.png",
+         "imageheight":640,
+         "imagewidth":512,
+         "margin":0,
+         "name":"Dungeon_Tileset",
+         "spacing":0,
+         "tilecount":320,
+         "tileheight":32,
+         "tilewidth":32
         }],
  "tilewidth":32,
  "type":"map",

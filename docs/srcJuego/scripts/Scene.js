@@ -34,7 +34,7 @@ export default class MainScene extends Phaser.Scene{
         
 
         //carga del tilemap
-        this.load.tilemapTiledJSON('tilemap', '../Tiled/prueba..tmj');
+        this.load.tilemapTiledJSON('tilemap', '../Tiled/prueba.json');
         
         //carga del tileset
         this.load.image('patronesTilemap', '../Tiled/arte/Dungeon_Tileset.png'); 
@@ -74,6 +74,8 @@ export default class MainScene extends Phaser.Scene{
 
         //creacion del jugador
         this.player = new Player(this, 960, 540, 'PlayerMove', this.data.PlayerConfig);
+        //para orden de render
+        this.player.setDepth(10);
 
         //creación de las animaciones del jugador
         this.anims.create({
@@ -94,7 +96,7 @@ export default class MainScene extends Phaser.Scene{
         });
         //por ahora este metodo esta vacio pero asi se queda mas limpio el create
         //comentado para que no pete
-        //this.setTileMap();
+        this.setTileMap();
 
         this.setCollisions();
         
@@ -179,6 +181,7 @@ export default class MainScene extends Phaser.Scene{
 
         for(let i = 0; i < 100;i++){
             let aux = new Bullet(this,0,0,'kirby',true, 0,0,this.playerBulletsPool);
+            aux.setDepth(10);
             plBullets.push(aux);
         }
 
@@ -189,6 +192,7 @@ export default class MainScene extends Phaser.Scene{
 
         for(let i = 0; i < 100;i++){
             let aux = new Bullet(this,0,0,'kirby',true, 0,0,this.enemiesBulletsPool);
+            aux.setDepth(10);
             enBullets.push(aux);
         }
         this.enemiesBulletsPool.addMultipleEntity(enBullets);
@@ -197,6 +201,7 @@ export default class MainScene extends Phaser.Scene{
 
         for(let i = 0; i < 100;i++){
             let aux = new Enemy(this,0,0,'enemyMove',this.meleeEnemiesPool);
+            aux.setDepth(10);
             enemysArr.push(aux);
         }
 
@@ -206,6 +211,7 @@ export default class MainScene extends Phaser.Scene{
 
         for(let i = 0; i < 100;i++){
             let aux = new RangeEnemy(this,0,0,'enemyMove',this.rangeEnemiesPool);
+            aux.setDepth(10);
             rangeArr.push(aux);
         }
 
@@ -215,6 +221,8 @@ export default class MainScene extends Phaser.Scene{
         
         for(let i = 0; i < 100;i++){
             let aux = new InteractuableObjects(this,0,0,'polvos',this.dustPool, function(amount){
+            aux.setDepth(10);
+
                 //this.player.addDust(amount);
             });
             dustArr.push(aux);
@@ -271,18 +279,16 @@ export default class MainScene extends Phaser.Scene{
 
     /**configuracion del tile map */
     setTileMap(){
-        //he de suponer que esto sera util (estaba en el create)
         
-        
-        // Objeto tilemap
+        // Objeto tilemap       
 		this.map = this.make.tilemap({ 
 			key: 'tilemap', 
 			tileWidth: 32, 
 			tileHeight: 32 
 		});
-
+        
    
-		const tileset1 = this.map.addTilesetImage('Dungeon_Tileset.tsx', 'patronesTilemap');
+		const tileset1 = this.map.addTilesetImage('Dungeon_Tileset', 'patronesTilemap');
 		
 		// creamos las diferentes capas a través del tileset. El nombre de la capa debe aparecer en el .json del tilemap cargado
 		this.groundLayer = this.map.createLayer('Suelo', tileset1);
@@ -291,21 +297,16 @@ export default class MainScene extends Phaser.Scene{
 		this.wallLayer.setCollision(2); // Los tiles de esta capa tienen colisiones
 		
 		
-		this.mov = this.map.createFromObjects('Objetos', {name: 'player', classType: Character, key:"character"});
-		let player = this.mov[0];
+		//this.mov = this.map.createFromObjects('Capa de objetos', {name: 'Player', classType: Player, key:"character"});
+
+		//this.player = this.mov[0];
 
 
 		// Ponemos la cámara principal de juego a seguir al jugador
-		this.cameras.main.startFollow(player);
+		//this.cameras.main.startFollow(player);
 		
 		// Decimos que capas tienen colision entre ellas
-		this.physics.add.collider(player, this.wallLayer);
-		this.physics.add.collider(player, coinsGroup, this.aux);
-		this.physics.add.collider(coinsGroup, this.wallLayer);
-		
-		this.physics.add.collider(player, this.baseColumnLayer);
-		this.physics.add.collider(coinsGroup, this.baseColumnLayer);		
-        
+		//this.physics.add.collider(player, this.wallLayer);
         
     }
 }
