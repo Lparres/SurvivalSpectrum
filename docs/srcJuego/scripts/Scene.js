@@ -4,6 +4,7 @@ import RangeEnemy from './RangeEnemy.js'
 import Pool from './Pool.js'
 import Bullet from './Bullet.js'
 import Enemy from './Enemy.js'
+import UI from './UI.js'
 export default class MainScene extends Phaser.Scene{
     constructor(){
         super({key:"level"})
@@ -194,8 +195,7 @@ export default class MainScene extends Phaser.Scene{
         // Recogida del input de movimiento en un vector
         this._inputVector = new Phaser.Math.Vector2(0,0);
 
-
-
+        this.ui = new UI(this);
         /**
         * 
         // Objeto tilemap

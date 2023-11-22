@@ -4,8 +4,6 @@ export class UI extends Phaser.Scene
   * Consturctor del player
   * @param {Phaser.Scene} scene escena donde esta el jugador
   * */
-    graphics: Phaser.GameObject.Graphics;
-    live_bar: Phaser.Geom.Rectangel;
     constructor(scene) {
         super({ key: "UI" })
         this._playerScene = scene;
@@ -22,17 +20,21 @@ export class UI extends Phaser.Scene
 
         const live_width = 350;
         const live_height = 50;
-        this.graphics = this.add.graphics({
+        var live_bar = new Phaser.Rectangle(this._playerScene.player.x, this._playerScene.player.y - live_height, live_width, live_height);
+        var figura = game.add.graphics(0,0);
+        figura.lineStyle(0, 0x000000).beginFill(0xff0000).drawShape(live_bar);
+        figura.endFill();
+        /*this.graphics = this.add.graphics({
             fillStyle: { color: 0xff0000 }
         });
-        this.live_bar = new Phaser.Geom.Rectangel(this._playerScene.player.x, this._playerScene.player.y - live_height, live_width, live_height);
+        this.live_bar = new Phaser.Geom.Rectangel(this._playerScene.player.x, this._playerScene.player.y - live_height, live_width, live_height);*/
     }
     update() {
-        this.graphics.clear();
+        /*this.graphics.clear();
         if (showLive = 1) {
             this.live_bar.width = this._playerScene.player._currentLife * live_width / this._playerScene.player._life
             this.graphics.fillRectShape(this.live_bar);
-        }
+        }*/
     }
 
     ShowUI() { //metodo para ver que se muestra y que no
