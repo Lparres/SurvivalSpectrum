@@ -294,19 +294,22 @@ export default class MainScene extends Phaser.Scene{
 		this.groundLayer = this.map.createLayer('Suelo', tileset1);
 		
 		this.wallLayer = this.map.createLayer('Pared', tileset1);
-		this.wallLayer.setCollision(2); // Los tiles de esta capa tienen colisiones
+		//this.wallLayer.setCollision(2); // Los tiles de esta capa tienen colisiones
 		
-		
+        //colisiones
+		this.wallLayer.setCollisionByExclusion([-1],true);
+
+        //creacion del player desde el tilemap
 		//this.mov = this.map.createFromObjects('Capa de objetos', {name: 'Player', classType: Player, key:"character"});
 
 		//this.player = this.mov[0];
 
 
-		// Ponemos la cámara principal de juego a seguir al jugador
-		//this.cameras.main.startFollow(player);
+		// Ponemos la cámara principal de juego a seguir al jugador, ya esta 
+		//this.cameras.main.startFollow(this.player);
 		
 		// Decimos que capas tienen colision entre ellas
-		//this.physics.add.collider(player, this.wallLayer);
+		this.physics.add.collider(this.player, this.wallLayer);
         
     }
 }
