@@ -1,12 +1,8 @@
 export class UI extends Phaser.Scene
 {
-    /**
-  * Consturctor del player
-  * @param {Phaser.Scene} scene escena donde esta el jugador
-  * */
-    constructor(scene) {
+   
+    constructor() {
         super({ key: "UI" })
-        this._playerScene = scene;
     }
     //data transfer
     init() {
@@ -16,18 +12,35 @@ export class UI extends Phaser.Scene
 
     }
     create() {
+        let seg = 0;
+        let min = 0;
+        const info = this.add.text(10, 10, 'Time: 0:0', { font: '48px Arial', fill: '#000000' });
+
         var showLive = 1;//1 se muestra, 0 no
 
         const live_width = 350;
         const live_height = 50;
-        var live_bar = new Phaser.Rectangle(this._playerScene.player.x, this._playerScene.player.y - live_height, live_width, live_height);
+        this.live_bar = new Phaser.Rectangle(100, 100, live_width, live_height);
+        //var live_bar = new Phaser.Rectangle(this._playerScene.player.x, this._playerScene.player.y - live_height, live_width, live_height);
         var figura = game.add.graphics(0,0);
-        figura.lineStyle(0, 0x000000).beginFill(0xff0000).drawShape(live_bar);
+        figura.lineStyle(0, 0x000000).beginFill(0xff0000).drawShape(this.live_bar);
         figura.endFill();
-        /*this.graphics = this.add.graphics({
-            fillStyle: { color: 0xff0000 }
-        });
-        this.live_bar = new Phaser.Geom.Rectangel(this._playerScene.player.x, this._playerScene.player.y - live_height, live_width, live_height);*/
+        this.timer = this.time.addEvent({
+            delay:1000,
+            callback: this.tiempo,
+            callbackScope: this,
+            loop: true
+        })
+        
+        tiempo ()
+        {
+            seg = seg + 1;
+            if(seg = 60){
+                min = min + 1;
+                seg = 0;
+            }
+            info.setText(`Score: ${this.min}:${this.seg}`);
+        }
     }
     update() {
         /*this.graphics.clear();
