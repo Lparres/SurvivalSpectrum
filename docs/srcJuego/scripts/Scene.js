@@ -311,5 +311,6 @@ export default class MainScene extends Phaser.Scene{
 		// Decimos que capas tienen colision entre ellas
 		this.physics.add.collider(this.player, this.wallLayer);
         
+        // demasiada línea de código comentada y poco comentario explicando las clases
     }
 }
