@@ -34,7 +34,7 @@ export default class MainScene extends Phaser.Scene{
         
 
         //carga del tilemap
-        this.load.tilemapTiledJSON('tilemap', '../Tiled/prueba.json');
+        this.load.tilemapTiledJSON('tilemap', '../Tiled/prueba2.json');
         
         //carga del tileset
         this.load.image('patronesTilemap', '../Tiled/arte/Dungeon_Tileset.png'); 
@@ -308,8 +308,9 @@ export default class MainScene extends Phaser.Scene{
 		// Ponemos la cámara principal de juego a seguir al jugador, ya esta 
 		//this.cameras.main.startFollow(this.player);
 		
-		// Decimos que capas tienen colision entre ellas
+		// Decimos que capas tienen colision entre ellas, esto hay que cambiarlo de sitio
 		this.physics.add.collider(this.player, this.wallLayer);
+		this.physics.add.collider(this.meleeEnemiesPool.group, this.wallLayer);
         
     }
 }

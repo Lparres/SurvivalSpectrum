@@ -14,17 +14,20 @@
         },
         "prueba.tmx": {
             "scale": 1,
-            "selectedLayer": 1,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 633.5,
-                "y": 385.5
+                "x": 497.5,
+                "y": 296.5
             }
         }
     },
     "last.exportedFilePath": "C:/Users/Samuel/Desktop/Workspace/JuegoPVLI/Tiled",
     "last.imagePath": "C:/Users/Samuel/Desktop/Workspace/JuegoPVLI/Tiled/Arte",
+    "map.height": 100,
     "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
     "map.lastUsedFormat": "tmx",
+    "map.renderOrder": null,
+    "map.width": 100,
     "openFiles": [
         "prueba.tmx",
         "Dungeon_Tileset.tsx"
