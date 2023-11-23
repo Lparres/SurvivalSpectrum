@@ -312,5 +312,6 @@ export default class MainScene extends Phaser.Scene{
 		this.physics.add.collider(this.player, this.wallLayer);
 		this.physics.add.collider(this.meleeEnemiesPool.group, this.wallLayer);
         
+        // demasiada línea de código comentada y poco comentario explicando las clases
     }
 }
