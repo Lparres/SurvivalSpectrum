@@ -2,7 +2,7 @@ export class UI extends Phaser.Scene
 {
    
     constructor() {
-        super({ key: "UI" })
+        super({ key: 'UI' })
     }
     //data transfer
     init() {
@@ -41,11 +41,13 @@ export class UI extends Phaser.Scene
                 min = min + 1;
                 seg = 0;
             }
+            console.log("tiempo");
             info.setText(`Score: ${this.min}:${this.seg}`);
         }
 
         ourGame.events.on('barraVida', function (x, y, currentLife, life)
         {
+            console.log("vida");
             if(showLive == 1)
             {
                 this.live_bar = new Phaser.Rectangle(x, y-live_height, currentLife * live_width / life, live_height);

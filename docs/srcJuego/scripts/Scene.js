@@ -6,7 +6,7 @@ import Bullet from './Bullet.js'
 import Enemy from './Enemy.js'
 export default class MainScene extends Phaser.Scene{
     constructor(){
-        super({key:"level"})
+        super({key:'level'})
     }
     //data transfer
     init(){
