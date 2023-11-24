@@ -12,6 +12,8 @@ export class UI extends Phaser.Scene
 
     }
     create() {
+        const ourGame = this.scene.get('level');
+
         let seg = 0;
         let min = 0;
         const info = this.add.text(10, 10, 'Time: 0:0', { font: '48px Arial', fill: '#000000' });
@@ -41,13 +43,21 @@ export class UI extends Phaser.Scene
             }
             info.setText(`Score: ${this.min}:${this.seg}`);
         }
+
+        ourGame.events.on('barraVida', function (x, y, currentLife, life)
+        {
+            if(showLive == 1)
+            {
+                this.live_bar = new Phaser.Rectangle(x, y-live_height, currentLife * live_width / life, live_height);
+                figura.clear();
+                figura.lineStyle(0, 0x000000).beginFill(0xff0000).drawShape(this.live_bar);
+                figura.endFill();
+            }
+        }, this);
+        
     }
     update() {
-        /*this.graphics.clear();
-        if (showLive = 1) {
-            this.live_bar.width = this._playerScene.player._currentLife * live_width / this._playerScene.player._life
-            this.graphics.fillRectShape(this.live_bar);
-        }*/
+        
     }
 
     ShowUI() { //metodo para ver que se muestra y que no

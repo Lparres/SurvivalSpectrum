@@ -240,6 +240,7 @@ export default class MainScene extends Phaser.Scene{
 
         // Modificamos el vector de movimiento del player a partir del inputVector
         this.player.setMoveVector(this._inputVector);
+        this.events.emit('barraVida', this.player.x, this.player.y, this.player._currentLife, this.player._life);
 
         /**
          * Debug para las colisiones entre enemigos
