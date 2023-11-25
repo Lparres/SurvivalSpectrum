@@ -8,5 +8,22 @@
             "timeBetween" : 500,
             "size":5
         }
+    ],
+    "NewWaves":[
+        {
+            "name":"Tu vieja",
+            "spawnData":[{
+                "x":500,
+                "y":200,
+                "type": "melee",
+                "index": 0,
+                "frecuency": 500,
+                "size": 2
+
+            },{
+                
+            }]
+
+        }
     ]
 }

@@ -73,7 +73,7 @@ export default class MainScene extends Phaser.Scene{
         this.input.setDefaultCursor('url(srcJuego/img/crosshair.png) 16 16, pointer');
 
         //creacion del jugador
-        this.player = new Player(this, 960, 540, 'PlayerMove', this.data.PlayerConfig);
+        this.player = new Player(this, 960, 540, 'player', this.data.PlayerConfig);
         //para orden de render
         this.player.setDepth(10);
 
