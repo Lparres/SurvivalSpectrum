@@ -42,7 +42,7 @@ export default class Mob extends Phaser.GameObjects.Sprite{
                 this.stop();//parar la animacion
             }
             else{
-                this.play(this.key,true);//continuar la animacion
+                this.play(this.key[1],true);//continuar la animacion
             }
         }
     }

@@ -73,7 +73,7 @@ export default class MainScene extends Phaser.Scene{
         this.input.setDefaultCursor('url(srcJuego/img/crosshair.png) 16 16, pointer');
 
         //creacion del jugador
-        this.player = new Player(this, 960, 540, 'player', this.data.PlayerConfig);
+        this.player = new Player(this, 960, 540, ['player', 'PlayerMove'], this.data.PlayerConfig);
         //para orden de render
         this.player.setDepth(10);
 
@@ -200,7 +200,7 @@ export default class MainScene extends Phaser.Scene{
         let enemysArr = [];
 
         for(let i = 0; i < 100;i++){
-            let aux = new Enemy(this,0,0,'enemyMove',this.meleeEnemiesPool);
+            let aux = new Enemy(this,0,0,['enemy', 'enemyMove'],this.meleeEnemiesPool);
             aux.setDepth(10);
             enemysArr.push(aux);
         }
@@ -210,7 +210,7 @@ export default class MainScene extends Phaser.Scene{
         let rangeArr = [];
 
         for(let i = 0; i < 100;i++){
-            let aux = new RangeEnemy(this,0,0,'enemyMove',this.rangeEnemiesPool);
+            let aux = new RangeEnemy(this,0,0,['enemy', 'enemyMove'],this.rangeEnemiesPool);
             aux.setDepth(10);
             rangeArr.push(aux);
         }
