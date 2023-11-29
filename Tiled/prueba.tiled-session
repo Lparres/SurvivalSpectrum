@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "prueba.tmx",
+    "activeFile": "sin nombre.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -13,11 +13,22 @@
             "scaleInEditor": 1
         },
         "prueba.tmx": {
+            "expandedObjectLayers": [
+                3
+            ],
             "scale": 1,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 497.5,
-                "y": 296.5
+                "x": 479.5,
+                "y": 319.5
+            }
+        },
+        "sin nombre.tmx": {
+            "scale": 0.25590624999999995,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 1438.026621077055,
+                "y": 1596.2877030162415
             }
         }
     },
@@ -30,12 +41,14 @@
     "map.width": 100,
     "openFiles": [
         "prueba.tmx",
-        "Dungeon_Tileset.tsx"
+        "Dungeon_Tileset.tsx",
+        "sin nombre.tmx"
     ],
     "project": "prueba.tiled-project",
     "recentFiles": [
+        "prueba.tmx",
         "Dungeon_Tileset.tsx",
-        "prueba.tmx"
+        "sin nombre.tmx"
     ],
     "tileset.lastUsedFormat": "tsx"
 }
