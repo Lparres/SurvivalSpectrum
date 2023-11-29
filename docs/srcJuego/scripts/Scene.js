@@ -17,7 +17,6 @@ export default class MainScene extends Phaser.Scene{
     preload(){
 
         let srcJuego = 'srcJuego';
-
         //carga de imagenes y SpriteSheets
         this.load.image('kirby', srcJuego+ '/img/kirby.png');
         this.load.image('fondo', srcJuego+ '/img/fondo.jpg');  
@@ -27,6 +26,9 @@ export default class MainScene extends Phaser.Scene{
         //this.load.image('player',srcJuego+ '/Sprites/Character/with_hands/death_0 - copia - copia.png');   
         this.load.spritesheet('player', srcJuego+'/Sprites/Character/with_hands/SpriteSheets/walkSheet.png',
                       { frameWidth: 2048, frameHeight: 2048 });
+        
+        this.load.spritesheet('idlePlayer', srcJuego+'/Sprites/Character/with_hands/SpriteSheets/idleSheet.png',
+        { frameWidth: 2048, frameHeight: 2048 });
 
         //this.load.image('enemy', srcJuego+ '/Sprites/Enemy1/death_0.png');   
         this.load.spritesheet('enemy', srcJuego+'/Sprites/Enemy1/SpriteSheets/walkSheet.png',
@@ -73,7 +75,7 @@ export default class MainScene extends Phaser.Scene{
         this.input.setDefaultCursor('url(srcJuego/img/crosshair.png) 16 16, pointer');
 
         //creacion del jugador
-        this.player = new Player(this, 960, 540, 'player', this.data.PlayerConfig);
+        this.player = new Player(this, 960, 540, ['idlePlayer','PlayerMove'], this.data.PlayerConfig);
         //para orden de render
         this.player.setDepth(10);
 
@@ -81,6 +83,13 @@ export default class MainScene extends Phaser.Scene{
         this.anims.create({
             key: 'PlayerMove',
             frames: this.anims.generateFrameNumbers('player', { start: 0, end: 7}),
+            frameRate: 10, // Velocidad de la animación
+            repeat: -1    // Animación en bucle
+        });
+
+        this.anims.create({
+            key: 'idlePlayer',
+            frames: this.anims.generateFrameNumbers('idlePlayer', { start: 0, end: 5}),
             frameRate: 10, // Velocidad de la animación
             repeat: -1    // Animación en bucle
         });

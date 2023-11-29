@@ -39,13 +39,15 @@ export default class Mob extends Phaser.GameObjects.Sprite{
         //animacion de movimiento
         if(this.key !== 'kirby'){
             if(this.dir.y == 0 && this.dir.x == 0){
-                this.stop();//parar la animacion
+                //this.stop();//parar la animacion
+                this.play(this.key[0],true);
             }
             else{
-                this.play(this.key,true);//continuar la animacion
+                this.play(this.key[1],true);//continuar la animacion
             }
         }
     }
+
 
     /** @description La entidad recibe una cantidad de danio. Si esta la mata se "Destruye"
      * @param {number} dmg danio a recibir
