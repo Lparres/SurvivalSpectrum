@@ -1,5 +1,5 @@
 import MainLevel from './Scene.js'
-
+import UI from './UI.js'
 var config = {
     type : Phaser.AUTO,
     parent: "juego",
@@ -11,7 +11,7 @@ var config = {
 
     },
     pixelArt : true,
-    scene : [MainLevel],
+    scene : [MainLevel, UI],
     physics: {
         default: 'arcade', // elegir motor
         arcade: { // propiedades del motor
