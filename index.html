@@ -1,0 +1,259 @@
+<!doctype html>
+<html>
+  
+<head>
+  <title>Ejercicios</title>
+  <meta charset="utf-8">
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+
+  <link rel="stylesheet" href="styles.css" type="text/css">
+  <script src="main.js"></script> 
+  <script src="phaserLib/phaser.js"></script>
+  <script src="srcJuego/scripts/Game.js" type="module"></script>
+</head>
+
+<body class="bg-dark">
+
+  <!-- 
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#">Inicio</a></li>
+        <li><a href="#">Tutoriales</a></li>
+        <li><a href="#">Cursos</a></l>
+        <li><a href="#">Bootcamps</a></li>
+        <li><a href="#">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+-->
+
+  <nav class="navbar navbar-expand-lg navbar-light container-fluid"
+    style="background-color: rgb(22, 22, 22); padding-top: 0px; padding-bottom: 0px;">
+    <a class="navbar-brand mx-3" href="#">
+      <img src="srcPaginaWeb/img/LogoCabecera.png"  height="60" alt="">
+
+    </a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-end " id="navbarNav">
+      <ul id="menu-superior" class="navbar-nav mx-5">
+        <li id="button1" class="nav-item active">
+          <a class="nav-link boton-menu-sup mx-3 " href="#controles">CONTROLES</a>
+        </li>
+        <li id="button2" class="nav-item">
+          <a class="nav-link boton-menu-sup mx-3" href="#descripcion">DESCRIPCIÓN</a>
+        </li>
+        <li id="button3" class="nav-item">
+          <a class="nav-link boton-menu-sup mx-3" href="#sobrenosotros">SOBRE NOSOTROS</a>
+        </li>
+        <li id="button" class="nav-item ">
+          <a class="nav-link boton-menu-sup mx-3" href="#redes">REDES</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+
+  <div id="seccion-juego">
+    <div id="juego"></div>
+  </div>
+
+  <div id="controles">
+    <div id="seccion-apartado">
+      <div class="section text-center py-1">
+        <h1 class="section-title">CONTROLES</h1>
+      </div>
+
+
+      <section class="text-center">
+        <div class="row">
+          <div class="col-lg-3 col-md-6 mb-5 mb-md-5 mb-lg-0 position-relative">
+            <i class="fas fa-cubes fa-3x text-primary mb-4"></i>
+            <img src="srcPaginaWeb/img/logitoprueba_Mesa de trabajo 1-13.png" width="100" height="100" class="rounded" alt="...">
+            <h5 class="text-primary fw-bold mb-3">Movimiento</h5>
+            <!-- <h6 class="fw-normal mb-0">Components</h6> -->
+            <div class="vr vr-blurry position-absolute my-0 h-100 d-none d-md-block top-0 end-0"></div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 mb-5 mb-md-5 mb-lg-0 position-relative">
+            <i class="fas fa-layer-group fa-3x text-primary mb-4"></i>
+            <img src="srcPaginaWeb/img/logitoprueba_Mesa de trabajo 1-13.png" width="100" height="100" class="rounded" alt="...">
+            <h5 class="text-primary fw-bold mb-3">Apuntado</h5>
+            <!-- <h6 class="fw-normal mb-0">Design blocks</h6> -->
+            <div class="vr vr-blurry position-absolute my-0 h-100 d-none d-md-block top-0 end-0"></div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 mb-5 mb-md-0 position-relative">
+            <i class="fas fa-image fa-3x text-primary mb-4"></i>
+            <img src="srcPaginaWeb/img/logitoprueba_Mesa de trabajo 1-13.png" width="100" height="100" class="rounded" alt="...">
+            <h5 class="text-primary fw-bold mb-3">Disparo</h5>
+            <!-- <h6 class="fw-normal mb-0">Templates</h6> -->
+            <div class="vr vr-blurry position-absolute my-0 h-100 d-none d-md-block top-0 end-0"></div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 mb-5 mb-md-0 position-relative">
+            <i class="fas fa-plug fa-3x text-primary mb-4"></i>
+            <img src="srcPaginaWeb/img/logitoprueba_Mesa de trabajo 1-13.png" width="100" height="100" class="rounded" alt="...">
+            <h5 class="text-primary fw-bold mb-3">Interacción</h5>
+            <!-- <h6 class="fw-normal mb-0">Plugins</h6> -->
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <div id="descripcion">
+    <div id="seccion-apartado">
+      <div class="section text-center py-1">
+        <h1 class="section-title">DESCRIPCIÓN</h1>
+      </div>
+      <p class="text-justify"> Frenético juego de supervivencia donde el jugador
+          tendrá que enfrentarse a las interminables oleadas de enemigos mientras mejora su personaje y adapta las mecánicas
+          de juego acorde a su propia personalidad. A medida que el jugador vaya superando oleadas, tendrá la oportunidad de
+          personalizar el entorno de juego, y generar ciertas dinámicas acorde a su forma de ser y de hacer las cosas.</p>
+    </div>
+  </div>
+
+  <div id="sobrenosotros">
+    <div id="seccion-apartado">
+      <div class="section text-center py-1">
+        <h1 class="section-title">SOBRE NOSOTROS</h1>
+      </div>
+
+
+      <div class="targetas">
+
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div>
+                <img src="srcPaginaWeb/img/logitoprueba_Mesa de trabajo 1-13.png" alt="Avatar" style="width:200px;height:250px;">
+              </div>
+              <div class="nombre" style="background-color: rgb(213, 66, 227);">
+                <h5>Luis Parres</h5>
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <div class="personalidad" style="background-color: rgb(213, 66, 227);">
+                <h5>Arquitecto</h5>
+              </div>
+              <p class="texto-targeta">Arquitecto y diseñador Personalidad: Arquitecto</p>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div>
+                <img src="srcPaginaWeb/img/logitoprueba_Mesa de trabajo 1-13.png" alt="Avatar" style="width:200px;height:250px;">
+              </div>
+              <div class="nombre" style="background-color: rgb(2, 171, 238);">
+                <h5>Diego Alonso</h5>
+              </div>
+            </div>
+            <div class="flip-card-back"> 
+              <div class="personalidad" style="background-color: rgb(2, 171, 238);">
+                <h5>Defensor</h5>
+              </div>
+              <p class="texto-targeta">Programador Personalidad: Defensors</p>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div>
+                <img src="srcPaginaWeb/img/logitoprueba_Mesa de trabajo 1-13.png" alt="Avatar" style="width:200px;height:250px;">
+              </div>
+              <div class="nombre" style="background-color: rgb(33, 231, 109)">
+                <h5>Luis Cabello</h5>
+              </div>
+            </div>
+            <div class="flip-card-back"> 
+              <div class="personalidad" style="background-color: rgb(33, 231, 109)">
+                <h5>Activista</h5>
+              </div>
+              <p class="texto-targeta">Miembro fullstack centrado en la documentación. Personalidad: activista</a>
+
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div class="targetas">
+
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div>
+                <img src="srcPaginaWeb/img/logitoprueba_Mesa de trabajo 1-13.png" alt="Avatar" style="width:200px;height:250px;">
+              </div>
+              <div class="nombre" style="background-color: rgb(232, 215, 36)">
+                <h5>Samuel García</h5>
+              </div>
+            </div>
+            <div class="flip-card-back"> 
+              <div class="personalidad" style="background-color: rgb(232, 215, 36)">
+                <h5>Virtuoso</h5>
+              </div>
+              <p class="texto-targeta">Programador y programador(no sabe dibujar) Personalidad: virtuoso</p>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div>
+                <img src="srcPaginaWeb/img/logitoprueba_Mesa de trabajo 1-13.png" alt="Avatar" style="width:200px;height:250px;">
+              </div>
+              <div class="nombre" style="background-color: rgb(33, 231, 109)">
+                <h5>Julián Serrano</h5>
+              </div>
+            </div>
+            <div class="flip-card-back"> 
+              <div class="personalidad" style="background-color: rgb(33, 231, 109)">
+                <h5>Mediador</h5>
+              </div>
+              <p class="texto-targeta">Diseñador de juego y programador Personalidad: Mediador</p>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+  </div>
+
+  <div id="redes">
+    <div class="menuinferior text-center">
+      <img src="srcPaginaWeb/img/LogoColor_TransparenteNegro.png" width="150" height="150" class="rounded" alt="...">
+    </div>
+
+
+  </div>
+
+  <!-- Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+</body>
+
+</html>
