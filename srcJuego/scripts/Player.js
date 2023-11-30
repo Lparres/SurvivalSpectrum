@@ -35,11 +35,13 @@ export default class Player extends Mob
         this._maxLife = playerConfig.life; //vida maxima
         this._velocity = playerConfig.velocity;
         this._damage = playerConfig.damage;
-        this._range = playerConfig.range;
+        this._baseRange = playerConfig.range;
         this._meleeArmor = playerConfig.meleeArmor;
         this._rangeArmor = playerConfig.rangeArmor;
         this._dust = 0;
 
+
+        this.dicRange = 0;
         //atack cooldown en milisegundos
         this._atkCD = playerConfig.Cooldown; 
         //para la recarga del ataque
@@ -83,7 +85,7 @@ export default class Player extends Mob
         //contador del tiempo
         this._elapsedTime += dt;
 
-
+        let range = this._range + this.dicRange;
         if(this._elapsedTime >= this._atkCD){
             //new Bullet(this.scene,this.x + this._bulletSpawnOffsetX,this.y+this._bulletSpawnOffsetY,'kirby',true,10,1000);    
 
@@ -93,7 +95,7 @@ export default class Player extends Mob
                 idParent : true,
                 damage : 10,
                 velocity : 1000,
-                range: this._range
+                range: range
             }
 
             this.scene.playerBulletsPool.spawn(this.x + this._bulletSpawnOffsetX,this.y+this._bulletSpawnOffsetY,' ',BulletSeting);

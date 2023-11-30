@@ -24,22 +24,22 @@ export default class MainScene extends Phaser.Scene{
 
 
         //this.load.image('player',srcJuego+ '/Sprites/Character/with_hands/death_0 - copia - copia.png');   
-        this.load.spritesheet('player', srcJuego+'/Sprites/Character/with_hands/SpriteSheets/walkSheet.png',
+        this.load.spritesheet('player', srcJuego+'/sprites/Character/with_hands/SpriteSheets/walkSheet.png',
                       { frameWidth: 2048, frameHeight: 2048 });
         
-        this.load.spritesheet('idlePlayer', srcJuego+'/Sprites/Character/with_hands/SpriteSheets/idleSheet.png',
+        this.load.spritesheet('idlePlayer', srcJuego+'/sprites/Character/with_hands/SpriteSheets/idleSheet.png',
         { frameWidth: 2048, frameHeight: 2048 });
 
         //this.load.image('enemy', srcJuego+ '/Sprites/Enemy1/death_0.png');   
-        this.load.spritesheet('enemy', srcJuego+'/Sprites/Enemy1/SpriteSheets/walkSheet.png',
+        this.load.spritesheet('enemy', srcJuego+'/sprites/Enemy1/SpriteSheets/walkSheet.png',
         { frameWidth: 2048, frameHeight: 2048 });
         
 
         //carga del tilemap
-        this.load.tilemapTiledJSON('tilemap', '../Tiled/prueba2.json');
+        this.load.tilemapTiledJSON('tilemap', srcJuego +'/tiled/prueba2.json');
         
         //carga del tileset
-        this.load.image('patronesTilemap', '../Tiled/arte/Dungeon_Tileset.png'); 
+        this.load.image('patronesTilemap', srcJuego + '/tiled/arte/Dungeon_Tileset.png'); 
   
        
         
@@ -264,10 +264,10 @@ export default class MainScene extends Phaser.Scene{
         this.physics.add.collider(this.player, this.meleeEnemiesPool.group, function (player, enemy){
 
             // Si el enemigo está listo para atacar, el player recibe un golpe y se reinicia el cooldown del ataque del enemigo.
-            //if(enemy._CDMeleeTimer <= 0){
-            //    player.Hit(enemy._meleeDamage, 1);
-            //    enemy._CDMeleeTimer = enemy._meleeAttackCD
-            //}
+            if(enemy._CDMeleeTimer <= 0){
+                player.Hit(enemy._meleeDamage, 1);
+                enemy._CDMeleeTimer = enemy._meleeAttackCD;
+            }
                 
         });
 

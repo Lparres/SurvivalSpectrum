@@ -15,19 +15,19 @@
             "life": 50,
             "meleeDamage": 3,
             "velocity": 50,
-            "meleeAttackCD": 500
+            "meleeAttackCD": 100
         },
         {
             "life": 100,
             "meleeDamage": 3,
             "velocity": 30,
-            "meleeAttackCD": 500
+            "meleeAttackCD": 100
         },
         {
             "life": 5,
             "meleeDamage": 3,
             "velocity": 150,
-            "meleeAttackCD": 500
+            "meleeAttackCD": 100
         }
     ],
     "RangeConfigs":[
@@ -36,7 +36,7 @@
                 "life": 50,
                 "meleeDamage": 3,
                 "velocity": 50,
-                "meleeAttackCD": 500
+                "meleeAttackCD": 100
             },
             "range": 500,
             "rangeDamage": 20,
