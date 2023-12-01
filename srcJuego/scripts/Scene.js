@@ -265,7 +265,8 @@ export default class MainScene extends Phaser.Scene{
 
             // Si el enemigo está listo para atacar, el player recibe un golpe y se reinicia el cooldown del ataque del enemigo.
             if(enemy._CDMeleeTimer <= 0){
-                player.Hit(enemy._meleeDamage, 1);
+                console.log(enemy);
+                player.Hit(enemy.damage, 1);
                 enemy._CDMeleeTimer = enemy._meleeAttackCD;
             }
                 

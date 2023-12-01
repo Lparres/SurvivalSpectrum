@@ -1,31 +1,31 @@
 
 {
     "PlayerConfig":{
-        "velocity": 300, 
-        "damage": 5, 
-        "range": 1000, 
+        "velocity": 300,
+        "damage": 5,
+        "range": 1000,
         "meleeArmor": 100,
         "rangeArmor": 100,
         "life": 500,
-        "Cooldown":500
+        "Cooldown": 500
     },
     
     "EnemyConfigs": [
         {
             "life": 50,
-            "meleeDamage": 3,
+            "damage": 3,
             "velocity": 50,
             "meleeAttackCD": 100
         },
         {
             "life": 100,
-            "meleeDamage": 3,
+            "damage": 3,
             "velocity": 30,
             "meleeAttackCD": 100
         },
         {
             "life": 5,
-            "meleeDamage": 3,
+            "damage": 3,
             "velocity": 150,
             "meleeAttackCD": 100
         }
@@ -34,7 +34,7 @@
         {
             "settingMelee" : {
                 "life": 50,
-                "meleeDamage": 3,
+                "damage": 3,
                 "velocity": 50,
                 "meleeAttackCD": 100
             },
