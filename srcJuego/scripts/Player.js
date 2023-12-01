@@ -1,5 +1,6 @@
 import Pool from "./Pool.js";
 import Mob from "./Mob.js";
+import Dicotomías from './Dicotomias.js'
 export default class Player extends Mob
 {
     /*
@@ -133,5 +134,26 @@ export default class Player extends Mob
     addDust = function(amount){
         this._dust += amount;
         console.log('polvos: ' + this._dust);
+    }
+
+    addRage = function(amount){
+        this._rage += amount;
+        console.log('rage: ' + this._rage);
+        if(this._rage >= 100){
+            console.log('rage mode');
+            this._eureka = this._eureka - (this._eureka * 20/100);
+            this._rage = 0;
+        }
+        
+    }
+
+    addEureka= function(amount){
+        this._eureka += amount;
+        console.log('eureka: ' + this._eureka);
+        if(this._eureka >= '100'){
+            console.log('eureka mode');
+            this._rage = this._rage - (this.rage * 20/100);
+            this._eureka = 0;
+        }
     }
 }

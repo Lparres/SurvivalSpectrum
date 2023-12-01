@@ -15,6 +15,10 @@ export default class Dicotomías
    constructor(player,perDic1,perDic2,perDic3,perDic4)
    {
         this.player = player;
+        this.perDic1=perDic1;
+        this.perDic2=perDic2;
+        this.perDic3=perDic3;
+        this.perDic4=perDic4;
    }
 
    //métodos
@@ -23,6 +27,21 @@ export default class Dicotomías
    {
     //método vacío
    }
+
+   /**
+    * 
+    * @param {number} type // quiero el primer valor o el segundo
+    */
+   TakeGeometricNumber(type)
+   {
+     if(type == 1){
+          return this.perDic1/100;
+     }
+     else{
+          return 1 - (this.perDic1/100);
+     }
+   }
+
 
    /**
     * 
