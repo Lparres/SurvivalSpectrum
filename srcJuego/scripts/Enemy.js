@@ -18,7 +18,7 @@ export default class Enemy extends Mob
     constructor(scene, x, y, key, pool)
     {
         //constructor del padre
-        super(scene, x ,y, key,0,0,0,pool);
+        super(scene, x ,y, key,1,1,1,pool);
 
         this._meleeAttackCD = 0;
         this._CDMeleeTimer = 0;

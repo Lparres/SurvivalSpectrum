@@ -1,0 +1,22 @@
+{
+    "frames": {
+        "NewHero_01.png": {
+            "frame": {
+                "x": 15,
+                "y": 0,
+                "w": 10,
+                "h": 15
+            },
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 10,
+                "h": 15
+            },
+            "sourceSize": {
+                "w": 10,
+                "h": 15
+            }
+        }
+    }
+}
