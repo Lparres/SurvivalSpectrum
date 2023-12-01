@@ -18,8 +18,7 @@ export default class MainScene extends Phaser.Scene{
 
         let srcJuego = 'srcJuego';
         //carga de imagenes y SpriteSheets
-        this.load.image('kirby', srcJuego+ '/img/kirby.png');
-        this.load.image('fondo', srcJuego+ '/img/fondo.jpg');  
+        this.load.image('kirby', srcJuego+ '/img/kirby.png');      
         this.load.image('polvos', srcJuego+ '/img/polvos.jpg');   
 
 
@@ -43,7 +42,7 @@ export default class MainScene extends Phaser.Scene{
   
        
         
-        /**caraga de json de datos de los distintos enemigos
+        /**carga de json de datos de los distintos enemigos
          * 
          * tanto este como el siguente creo que necesitan una vuelta de tuerca para que nos sean todavia mas utiles
          * por ejemplo guardando la clave de animacion de ese tipo de enemigo entre otras cosas 
@@ -305,6 +304,17 @@ export default class MainScene extends Phaser.Scene{
 		
 		this.wallLayer = this.map.createLayer('Pared', tileset1);
 		//this.wallLayer.setCollision(2); // Los tiles de esta capa tienen colisiones
+
+        this.spawnPoints = this.map.createFromObjects('Spawns');
+
+        console.log(this.spawnPoints.length);
+
+        for(let i = 0; i < this.spawnPoints.length;i++){
+            this.spawnPoints[i].setVisible(false);
+            console.log(this.spawnPoints[i].visible);
+        }
+
+        //console.log(this.spawnPoints);
 		
         //colisiones
 		this.wallLayer.setCollisionByExclusion([-1],true);
@@ -324,4 +334,5 @@ export default class MainScene extends Phaser.Scene{
         
         // demasiada línea de código comentada y poco comentario explicando las clases
     }
+
 }
