@@ -1,0 +1,54 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "sin nombre.tmx",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "fileStates": {
+        "Dungeon_Tileset.tsx": {
+            "scaleInDock": 0.75,
+            "scaleInEditor": 1
+        },
+        "prueba.tmx": {
+            "expandedObjectLayers": [
+                3
+            ],
+            "scale": 1,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 479.5,
+                "y": 319.5
+            }
+        },
+        "sin nombre.tmx": {
+            "scale": 0.25590624999999995,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 1438.026621077055,
+                "y": 1596.2877030162415
+            }
+        }
+    },
+    "last.exportedFilePath": "C:/Users/Samuel/Desktop/Workspace/JuegoPVLI/Tiled",
+    "last.imagePath": "C:/Users/Samuel/Desktop/Workspace/JuegoPVLI/Tiled/Arte",
+    "map.height": 100,
+    "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
+    "map.lastUsedFormat": "tmx",
+    "map.renderOrder": null,
+    "map.width": 100,
+    "openFiles": [
+        "prueba.tmx",
+        "Dungeon_Tileset.tsx",
+        "sin nombre.tmx"
+    ],
+    "project": "prueba.tiled-project",
+    "recentFiles": [
+        "prueba.tmx",
+        "Dungeon_Tileset.tsx",
+        "sin nombre.tmx"
+    ],
+    "tileset.lastUsedFormat": "tsx"
+}
