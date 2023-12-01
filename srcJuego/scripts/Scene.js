@@ -5,6 +5,7 @@ import Pool from './Pool.js'
 import Bullet from './Bullet.js'
 import Enemy from './Enemy.js'
 import InteractuableObjects from './InteractuableObject.js'
+import Dicotomías from './Dicotomias.js'
 export default class MainScene extends Phaser.Scene{
     constructor(){
         super({key:"level"})
@@ -31,6 +32,9 @@ export default class MainScene extends Phaser.Scene{
 
         //this.load.image('enemy', srcJuego+ '/Sprites/Enemy1/death_0.png');   
         this.load.spritesheet('enemy', srcJuego+'/sprites/Enemy1/SpriteSheets/walkSheet.png',
+        { frameWidth: 2048, frameHeight: 2048 });
+
+        this.load.spritesheet('idleEnemy', srcJuego+'/sprites/Enemy1/SpriteSheets/idleSheet.png',
         { frameWidth: 2048, frameHeight: 2048 });
         
 
@@ -73,6 +77,9 @@ export default class MainScene extends Phaser.Scene{
         // Cursor personalizado
         this.input.setDefaultCursor('url(srcJuego/img/crosshair.png) 16 16, pointer');
 
+        //creo el objeto dicotomía
+        this.dicotomía = new Dicotomías(20,20,20,20,20);
+
         //creacion del jugador
         this.player = new Player(this, 960, 540, ['idlePlayer','PlayerMove'], this.data.PlayerConfig);
         //para orden de render
@@ -99,6 +106,13 @@ export default class MainScene extends Phaser.Scene{
         this.anims.create({
             key: 'enemyMove',
             frames: this.anims.generateFrameNumbers('enemy', { start: 0, end: 7}),
+            frameRate: 10, // Velocidad de la animación
+            repeat: -1    // Animación en bucle
+        });
+
+        this.anims.create({
+            key: 'idleEnemy',
+            frames: this.anims.generateFrameNumbers('idleEnemy', { start: 0, end: 5}),
             frameRate: 10, // Velocidad de la animación
             repeat: -1    // Animación en bucle
         });
@@ -208,7 +222,7 @@ export default class MainScene extends Phaser.Scene{
         let enemysArr = [];
 
         for(let i = 0; i < 100;i++){
-            let aux = new Enemy(this,0,0,'enemyMove',this.meleeEnemiesPool);
+            let aux = new Enemy(this,0,0,['idleEnemy', 'enemyMove'],this.meleeEnemiesPool);
             aux.setDepth(10);
             enemysArr.push(aux);
         }
@@ -218,7 +232,7 @@ export default class MainScene extends Phaser.Scene{
         let rangeArr = [];
 
         for(let i = 0; i < 100;i++){
-            let aux = new RangeEnemy(this,0,0,'enemyMove',this.rangeEnemiesPool);
+            let aux = new RangeEnemy(this,0,0,['idleEnemy', 'enemyMove'],this.rangeEnemiesPool);
             aux.setDepth(10);
             rangeArr.push(aux);
         }
@@ -251,6 +265,7 @@ export default class MainScene extends Phaser.Scene{
             let dmg2 = enemy.health;
             enemy.Hit(dmg1);
             proyectle.Hit(dmg2, false);
+            enemy.scene.player.addEureka(enemy.scene.dicotomía.TakeGeometricNumber(2));
         });
         //colisiones entre las balas y los enemigos a rango
         this.physics.add.collider(this.playerBulletsPool.group, this.rangeEnemiesPool.group, function (proyectle, enemy){
@@ -258,6 +273,7 @@ export default class MainScene extends Phaser.Scene{
             let dmg2 = enemy.health;
             enemy.Hit(dmg1);
             proyectle.Hit(dmg2, false);
+            enemy.scene.player.addEureka(enemy.scene.dicotomía.TakeGeometricNumber(2))
         });
         //colisiones entre el jugador y los enemigos
         this.physics.add.collider(this.player, this.meleeEnemiesPool.group, function (player, enemy){
@@ -269,6 +285,7 @@ export default class MainScene extends Phaser.Scene{
                 enemy._CDMeleeTimer = enemy._meleeAttackCD;
             }
                 
+            player.addRage(player.scene.dicotomía.TakeGeometricNumber(1));
         });
 
         //colisiones entre el jugador y las balas de los enemigos
@@ -278,6 +295,7 @@ export default class MainScene extends Phaser.Scene{
             //tengase en cuenta que si el jugador no tiene vida las balas no se desturyen (esto no va a pasar)
             bullet.Hit(dmg2, true);
             player.Hit(dmg1, 2);
+            player.addRage(player.scene.dicotomía.TakeGeometricNumber(1));
         });
 
         this.physics.add.overlap(this.player, this.dustPool.group,function(player,dust){
