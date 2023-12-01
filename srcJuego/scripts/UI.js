@@ -12,14 +12,12 @@ export default class UI extends Phaser.Scene
 
     }
     preload () {
-            this.load.image('greenbar', 'srcJuego/img/green_button00.png');
-
-            this.load.atlas('ui', 'srcJuego/img/green_button00.png', 'srcJuego/img/UI.json');
+            this.load.atlas('ui', 'srcJuego/ui/TextureAtlas.png', 'srcJuego/ui/AtlasUI.json');
 
     }
     create() {
         
-        this.fill1 = this.add.nineslice(286, 198, 'ui', 'NewHero_01.png', 13, 39, 6, 6);
+        this.fill1 = this.add.nineslice(100, 1000, 'ui', 'NewHero_01.png', 1000, 50, 10, 10, 10,10     );
 
         this.fill1.setOrigin(0, 0.5);
 
