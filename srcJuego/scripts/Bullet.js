@@ -73,8 +73,23 @@ export default class Bullet extends Mob
         this.range = seting.range;
 
         let dirDest;
+
+        //el punto de destino es, la posicion actual mas la posicion del raton
+        //la posicion del raton debe ser la posicion del raton relativa al jugador, en concreto relativa al spawnPoint del jugador
+        //de tal forma que el spawn point sea el 0,0
+        //para ello restamos la mitad del tamaño de la pantalla y el bulletSpawnOffset del player,
+
+
         if(this.idParent){
-            dirDest = this.scene.input.mousePointer.position
+            
+            //falta legibilidad y quitar magic numbers
+            dirDest = new Phaser.Math.Vector2(  
+                this.x + (this.scene.input.mousePointer.position.x - (1920/2) -(this.scene.player._bulletSpawnOffsetX) )   , 
+                this.y + (this.scene.input.mousePointer.position.y - (1080/2) -(this.scene.player._bulletSpawnOffsetY)) );
+
+            
+                
+            //console.log(this.scene.input.mousePointer.position);
             //this.SetDirection(this.scene.input.mousePointer.position);
             //this.scene.playerBullets.add(this);
         }
@@ -84,6 +99,8 @@ export default class Bullet extends Mob
 
         }
         this.SetDirection(new Phaser.Math.Vector2(dirDest.x - this.x ,dirDest.y - this.y));
+        //console.log(this.dir);
+        
     }
 
 }

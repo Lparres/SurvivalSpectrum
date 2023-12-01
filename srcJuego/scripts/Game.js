@@ -23,6 +23,7 @@ var config = {
     var game = new Phaser.Game(config)
 
 
+
 /*
 init() compartir informacion entre escenas
 preload() cargar recursos
