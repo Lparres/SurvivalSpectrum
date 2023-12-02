@@ -63,6 +63,7 @@ export default class MainScene extends Phaser.Scene{
     //instance
     create(){//igual es recomendable que se haga una seccion de creacion de animaciones ya que asi ya estan listas cuando hagan falta
 
+        //variables de las oleadas
         this.waveData = {
             waveTime : 0,
             waveCount : 0
@@ -70,9 +71,7 @@ export default class MainScene extends Phaser.Scene{
         this.maxMasillaTime = 200;
         this.masillasTimer = 0;
         this.data = this.game.cache.json.get('data');
-        this.wave = this.game.cache.json.get('waves');
-        //imagen del fondo
-        this.add.image(0, 0, 'fondo').setScale(2, 1.3).setOrigin(0, 0);     
+        this.wave = this.game.cache.json.get('waves'); 
 
         // Cursor personalizado
         this.input.setDefaultCursor('url(srcJuego/img/crosshair.png) 16 16, pointer');
@@ -82,44 +81,20 @@ export default class MainScene extends Phaser.Scene{
 
         //creacion del jugador
         this.player = new Player(this, 960, 540, ['idlePlayer','PlayerMove'], this.data.PlayerConfig);
+        
         //para orden de render
         this.player.setDepth(10);
-
-        //creación de las animaciones del jugador
-        this.anims.create({
-            key: 'PlayerMove',
-            frames: this.anims.generateFrameNumbers('player', { start: 0, end: 7}),
-            frameRate: 10, // Velocidad de la animación
-            repeat: -1    // Animación en bucle
-        });
-
-        this.anims.create({
-            key: 'idlePlayer',
-            frames: this.anims.generateFrameNumbers('idlePlayer', { start: 0, end: 5}),
-            frameRate: 10, // Velocidad de la animación
-            repeat: -1    // Animación en bucle
-        });
-
-        this.inicializoPools();
-
-        //creación de animaciones para enemigos
-        this.anims.create({
-            key: 'enemyMove',
-            frames: this.anims.generateFrameNumbers('enemy', { start: 0, end: 7}),
-            frameRate: 10, // Velocidad de la animación
-            repeat: -1    // Animación en bucle
-        });
-
-        this.anims.create({
-            key: 'idleEnemy',
-            frames: this.anims.generateFrameNumbers('idleEnemy', { start: 0, end: 5}),
-            frameRate: 10, // Velocidad de la animación
-            repeat: -1    // Animación en bucle
-        });
-        //por ahora este metodo esta vacio pero asi se queda mas limpio el create
-        //comentado para que no pete
+        
+        //inicializar las pools
+        this.inicializoPools();  
+        
+        //creacion de las animaciones
+        this.setAnimations();
+      
+        //creacion del tilemap y variables asociadas
         this.setTileMap();
 
+        //ajuste de las colisiones
         this.setCollisions();
         
     //#endregion
@@ -130,15 +105,10 @@ export default class MainScene extends Phaser.Scene{
         this.left = this.input.keyboard.addKey('A');
         this.down = this.input.keyboard.addKey('S');
         this.right = this.input.keyboard.addKey('D');
-        
-        //no se si hace falta para leer input del mouse
-        //this.input.mouse.capture = true;
 
         // Recogida del input de movimiento en un vector
         this._inputVector = new Phaser.Math.Vector2(0,0);
-
-        
-        
+      
     }
 
     //game tick
@@ -155,11 +125,7 @@ export default class MainScene extends Phaser.Scene{
         // Modificamos el vector de movimiento del player a partir del inputVector
         this.player.SetDirection(this._inputVector);
         
-        //prueba para detectar la posicion del raton
-        //this.player.x = this.input.mousePointer.x;
-        //this.player.y = this.input.mousePointer.y;
         
-
         /**esto me gustaria pasarlo a metodos tal vez pero por ahora se queda asi hasta que acordemos bien
          * un protocolo de oleadas/ masillas (tema que no aparezcan enemigos en muros y tal)
          */
@@ -185,9 +151,12 @@ export default class MainScene extends Phaser.Scene{
             this.masillasTimer = 0;
             this.maxMasillaTime = Phaser.Math.Between(100,250);
         }
-        //Esta línea hace que la cámara siga al jugador
+
+
+        //la cámara sigue al jugador
         this.cameras.main.startFollow(this.player);
     }
+
     /**inicializacion de la pools */
     inicializoPools(){
         
@@ -259,7 +228,7 @@ export default class MainScene extends Phaser.Scene{
         this.physics.add.collider(this.rangeEnemiesPool.group, this.rangeEnemiesPool.group);
         this.physics.add.collider(this.meleeEnemiesPool.group, this.rangeEnemiesPool.group);
 
-        //colisiones entre las balas y los enemigos
+        //colisiones entre las balas del jugador y los enemigos melee
         this.physics.add.collider(this.playerBulletsPool.group, this.meleeEnemiesPool.group, function (proyectle, enemy){
             let dmg1 = proyectle.damage;
             let dmg2 = enemy.health;
@@ -267,7 +236,7 @@ export default class MainScene extends Phaser.Scene{
             proyectle.Hit(dmg2, false);
             enemy.scene.player.addEureka(enemy.scene.dicotomía.TakeGeometricNumber(2));
         });
-        //colisiones entre las balas y los enemigos a rango
+        //colisiones entre las balas del jugador y los enemigos a rango
         this.physics.add.collider(this.playerBulletsPool.group, this.rangeEnemiesPool.group, function (proyectle, enemy){
             let dmg1 = proyectle.damage;
             let dmg2 = enemy.health;
@@ -275,7 +244,9 @@ export default class MainScene extends Phaser.Scene{
             proyectle.Hit(dmg2, false);
             enemy.scene.player.addEureka(enemy.scene.dicotomía.TakeGeometricNumber(2))
         });
-        //colisiones entre el jugador y los enemigos
+
+
+        //colisiones entre el jugador y los enemigos melee
         this.physics.add.collider(this.player, this.meleeEnemiesPool.group, function (player, enemy){
 
             // Si el enemigo está listo para atacar, el player recibe un golpe y se reinicia el cooldown del ataque del enemigo.
@@ -288,6 +259,13 @@ export default class MainScene extends Phaser.Scene{
             player.addRage(player.scene.dicotomía.TakeGeometricNumber(1));
         });
 
+        //colisiones entre el jugador y los enemigos de rango
+        this.physics.add.collider(this.player, this.rangeEnemiesPool.group, function (player, enemy){
+            
+            //falta rellenar, seguramente se muy similar a los enemigos meele
+        });
+
+
         //colisiones entre el jugador y las balas de los enemigos
         this.physics.add.collider(this.player, this.enemiesBulletsPool.group, function (player, bullet){
             let dmg1 = bullet.damage;
@@ -298,10 +276,26 @@ export default class MainScene extends Phaser.Scene{
             player.addRage(player.scene.dicotomía.TakeGeometricNumber(1));
         });
 
+
+        //colisiones con el trigger de los polvos
         this.physics.add.overlap(this.player, this.dustPool.group,function(player,dust){
             dust.Hit();
             player.addDust(dust.amount);
         })
+
+        // Colisiones de las capas del tilemap
+
+        //decimos que las paredes tienen colisiones
+		this.wallLayer.setCollisionByExclusion([-1],true);
+
+        //añadimos las colisiones de los objetos con las capas
+		this.physics.add.collider(this.player, this.wallLayer);
+		this.physics.add.collider(this.meleeEnemiesPool.group, this.wallLayer);
+		this.physics.add.collider(this.rangeEnemiesPool.group, this.wallLayer);
+
+        //faltan las colisiones de las balas con las paredes
+
+
     }
 
     /**configuracion del tile map */
@@ -314,43 +308,60 @@ export default class MainScene extends Phaser.Scene{
 			tileHeight: 32 
 		});
         
-   
+        //tileset
 		const tileset1 = this.map.addTilesetImage('Dungeon_Tileset', 'patronesTilemap');
 		
 		// creamos las diferentes capas a través del tileset. El nombre de la capa debe aparecer en el .json del tilemap cargado
 		this.groundLayer = this.map.createLayer('Suelo', tileset1);
-		
 		this.wallLayer = this.map.createLayer('Pared', tileset1);
-		//this.wallLayer.setCollision(2); // Los tiles de esta capa tienen colisiones
+		
 
+        //creamos el array de spawn points
         this.spawnPoints = this.map.createFromObjects('Spawns');
 
-        console.log(this.spawnPoints.length);
-
+        //los hacemos invisibles para que no se vean
         for(let i = 0; i < this.spawnPoints.length;i++){
             this.spawnPoints[i].setVisible(false);
-            console.log(this.spawnPoints[i].visible);
-        }
+        }	       
+       
+    }
 
-        //console.log(this.spawnPoints);
-		
-        //colisiones
-		this.wallLayer.setCollisionByExclusion([-1],true);
+    setAnimations(){
+        //creación de las animaciones del jugador
+        this.anims.create({
+            key: 'PlayerMove',
+            frames: this.anims.generateFrameNumbers('player', { start: 0, end: 7}),
+            frameRate: 10, // Velocidad de la animación
+            repeat: -1    // Animación en bucle
+        });
 
-        //creacion del player desde el tilemap
-		//this.mov = this.map.createFromObjects('Capa de objetos', {name: 'Player', classType: Player, key:"character"});
+        this.anims.create({
+            key: 'idlePlayer',
+            frames: this.anims.generateFrameNumbers('idlePlayer', { start: 0, end: 5}),
+            frameRate: 10, // Velocidad de la animación
+            repeat: -1    // Animación en bucle
+        });
 
-		//this.player = this.mov[0];
+        //creación de animaciones para enemigos
+        this.anims.create({
+            key: 'enemyMove',
+            frames: this.anims.generateFrameNumbers('enemy', { start: 0, end: 7}),
+            frameRate: 10, // Velocidad de la animación
+            repeat: -1    // Animación en bucle
+        });
 
+        this.anims.create({
+            key: 'idleEnemy',
+            frames: this.anims.generateFrameNumbers('idleEnemy', { start: 0, end: 5}),
+            frameRate: 10, // Velocidad de la animación
+            repeat: -1    // Animación en bucle
+        });
+    }
 
-		// Ponemos la cámara principal de juego a seguir al jugador, ya esta 
-		//this.cameras.main.startFollow(this.player);
-		
-		// Decimos que capas tienen colision entre ellas, esto hay que cambiarlo de sitio
-		this.physics.add.collider(this.player, this.wallLayer);
-		this.physics.add.collider(this.meleeEnemiesPool.group, this.wallLayer);
-        
-        // demasiada línea de código comentada y poco comentario explicando las clases
+    //buscar los 3 primeros spawn points en un rango
+    //esto se deberia llamar cada x tiempo para refrescarlo
+    sortSpawnPoints(){
+
     }
 
 }
