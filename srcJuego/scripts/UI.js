@@ -53,7 +53,7 @@ export default class UI extends Phaser.Scene
 
             this.healthBar.width = ourGame.player.health/ourGame.player._maxLife * 500;
 
-            console.log (ourGame.player.health);
+            //console.log (ourGame.player.health);
         }
        
     }

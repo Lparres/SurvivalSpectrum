@@ -81,12 +81,12 @@ export default class MainScene extends Phaser.Scene{
 
         //creacion del jugador
         this.player = new Player(this, 960, 540, ['idlePlayer','PlayerMove'], this.data.PlayerConfig);
-        
+
         //para orden de render
         this.player.setDepth(10);
         
         //inicializar las pools
-        this.inicializoPools();  
+        this.setPools();  
         
         //creacion de las animaciones
         this.setAnimations();
@@ -112,53 +112,25 @@ export default class MainScene extends Phaser.Scene{
     }
 
     //game tick
-    update(){
-        //console.log(this.waveTime);
-        //actualizacion de temporizadores
-        this.waveData.waveTime++;
-        this.masillasTimer++;
+    update(t,dt){
 
-        //actualizar el valor del vector del input
-        this._inputVector.x = this.right.isDown == this.left.isDown ? 0 : this.right.isDown ? 1 : -1;
-        this._inputVector.y = this.up.isDown == this.down.isDown ? 0 : this.up.isDown ? -1 : 1;
+        this.playerMove();
 
-        // Modificamos el vector de movimiento del player a partir del inputVector
-        this.player.SetDirection(this._inputVector);
         
+        //actualizacion de temporizadores, le sumamos el delta time, milisegundos
+        this.masillasTimer+= dt;     
+        this.waveData.waveTime+= dt;
         
-        /**esto me gustaria pasarlo a metodos tal vez pero por ahora se queda asi hasta que acordemos bien
-         * un protocolo de oleadas/ masillas (tema que no aparezcan enemigos en muros y tal)
-         */
-        //oleadas
-        if(this.waveData.waveTime > this.wave.Waves[0].timeBetween && this.waveData.waveCount <this.wave.Waves[0].size ){
-            console.log(this.data.EnemyConfigs[0]);
-            this.rangeEnemiesPool.spawn(this.wave.Waves[0].x,this.wave.Waves[0].y, 'enemyMove', this.data.RangeConfigs[0]);
-            this.waveData.waveTime = 0;
-            this.waveData.waveCount++;
-        }
-
-        //masillas
-        if(this.masillasTimer > this.maxMasillaTime){
-            let vector = new Phaser.Math.Vector2(0,0);
-            let spawn = Phaser.Math.RandomXY(vector, Phaser.Math.Between(400, 1000));
-            let enemyNumber = Phaser.Math.Between(0,2);
-            //this.meleeEnemiesPool.spawn(Phaser.Math.Between(50, this.sys.game.canvas.width-100),
-            //Phaser.Math.Between(50, this.sys.game.canvas.height-100),
-            //'enemyMove', this.data.EnemyConfigs[2]);
-
-            this.meleeEnemiesPool.spawn(this.player.x + spawn.x,this.player.y + spawn.y,
-            'enemyMove', this.data.EnemyConfigs[enemyNumber]);
-            this.masillasTimer = 0;
-            this.maxMasillaTime = Phaser.Math.Between(100,250);
-        }
-
+        this.oleadasLogic();
+        
+        //this.masillasLogic();
 
         //la cámara sigue al jugador
         this.cameras.main.startFollow(this.player);
     }
 
     /**inicializacion de la pools */
-    inicializoPools(){
+    setPools(){
         
         // creacion de pools
         this.playerBulletsPool = new Pool(this, 100);//cambiar los magics numbers por constantes
@@ -273,6 +245,8 @@ export default class MainScene extends Phaser.Scene{
             //tengase en cuenta que si el jugador no tiene vida las balas no se desturyen (esto no va a pasar)
             bullet.Hit(dmg2, true);
             player.Hit(dmg1, 2);
+
+            //console.log(bullet.health);
             player.addRage(player.scene.dicotomía.TakeGeometricNumber(1));
         });
 
@@ -356,6 +330,53 @@ export default class MainScene extends Phaser.Scene{
             frameRate: 10, // Velocidad de la animación
             repeat: -1    // Animación en bucle
         });
+    }
+
+
+    playerMove(){
+         //actualizar el valor del vector del input
+         this._inputVector.x = this.right.isDown == this.left.isDown ? 0 : this.right.isDown ? 1 : -1;
+         this._inputVector.y = this.up.isDown == this.down.isDown ? 0 : this.up.isDown ? -1 : 1;
+ 
+         // Modificamos el vector de movimiento del player a partir del inputVector
+         this.player.SetDirection(this._inputVector);
+    }
+
+
+    //oleadas
+    oleadasLogic(){
+
+
+        //console.log(this.wave.Waves[0].timeBetween);
+        //console.log(this.waveData.waveTime);
+        //si toca spawnear
+        if(this.waveData.waveTime > this.wave.Waves[0].timeBetween && this.waveData.waveCount < this.wave.Waves[0].size ){
+            //console.log(this.data.EnemyConfigs[0]);
+            this.rangeEnemiesPool.spawn(this.wave.Waves[0].x,this.wave.Waves[0].y, 'enemyMove', this.data.RangeConfigs[0]);
+
+            this.waveData.waveTime = 0;
+            this.waveData.waveCount++;
+        }
+
+    }
+
+    //masillas
+    masillasLogic(){
+
+          if(this.masillasTimer > this.maxMasillaTime){
+            let vector = new Phaser.Math.Vector2(0,0);
+            let spawn = Phaser.Math.RandomXY(vector, Phaser.Math.Between(400, 1000));
+            let enemyNumber = Phaser.Math.Between(0,2);
+            //this.meleeEnemiesPool.spawn(Phaser.Math.Between(50, this.sys.game.canvas.width-100),
+            //Phaser.Math.Between(50, this.sys.game.canvas.height-100),
+            //'enemyMove', this.data.EnemyConfigs[2]);
+
+            this.meleeEnemiesPool.spawn(this.player.x + spawn.x,this.player.y + spawn.y,
+            'enemyMove', this.data.EnemyConfigs[enemyNumber]);
+            this.masillasTimer = 0;
+            this.maxMasillaTime = Phaser.Math.Between(100,250);
+        }
+
     }
 
     //buscar los 3 primeros spawn points en un rango
