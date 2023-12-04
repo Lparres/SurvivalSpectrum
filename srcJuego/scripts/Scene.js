@@ -5,6 +5,7 @@ import Pool from './Pool.js'
 import Bullet from './Bullet.js'
 import Enemy from './Enemy.js'
 import InteractuableObjects from './InteractuableObject.js'
+import Button from './Button.js'
 import Dicotomías from './Dicotomias.js'
 export default class MainScene extends Phaser.Scene{
     constructor(){
@@ -99,7 +100,7 @@ export default class MainScene extends Phaser.Scene{
         
     //#endregion
 
-
+        //this. boton = new Button(this,200,200,'kirby',function(){console.log("tu vieja")});
         //variables para el input
         this.up = this.input.keyboard.addKey('W');
         this.left = this.input.keyboard.addKey('A');
