@@ -1,3 +1,4 @@
+import Button from './Button.js'
 export default class UI extends Phaser.Scene    
 {
    
@@ -28,6 +29,12 @@ export default class UI extends Phaser.Scene
 
         this.healthInfo = this.add.text(590, 1045, 'xxxx', { font: '25px JosefinBold', fill: 'black' });
         this.healthInfo.setOrigin(1, 0.5)
+
+
+
+
+        
+        this.pause = new Button(this,400,200,'heart',()=>{console.log(this)})
 
         //this.healthFrame.setScale(10, 10);
 
