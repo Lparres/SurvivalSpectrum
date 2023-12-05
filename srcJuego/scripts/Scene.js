@@ -78,13 +78,15 @@ export default class MainScene extends Phaser.Scene{
         // Cursor personalizado
         this.input.setDefaultCursor('url(srcJuego/img/crosshair.png) 16 16, pointer');
 
-        //creo el objeto dicotomía
-        this.dicotomía = new Dicotomías(20,20,20,20,20);
-
+        
         //creacion del jugador
         this.player = new Player(this, 960, 540, ['idlePlayer','PlayerMove'], this.data.PlayerConfig);
+        
         //para orden de render
         this.player.setDepth(10);
+        
+        //creo el objeto dicotomía
+        this.dicotomía = new Dicotomías(this.player,20,20,20,20);
 
         //creación de las animaciones del jugador
         this.anims.create({

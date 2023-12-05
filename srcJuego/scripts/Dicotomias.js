@@ -31,23 +31,51 @@ export default class Dicotomías
    /**
     * 
     * @param {number} type // quiero el primer valor o el segundo
+    * @returns {number} devuelve la interpertacion según el porcentaje de la dicotomía dic y el extremo de type
     */
-   TakeGeometricNumber(type)
+   TakeGeometricNumber(type, dicx)
    {
+     let dic = this.getDic(dicx);
+     //rage
      if(type == 1){
-          return this.perDic1/100;
+          return dic/100;
      }
+     //eureka
      else{
-          return 1 - (this.perDic1/100);
+          return 1 - (dic/100);
+     }
+   }
+/**
+ * 
+ * @param {number} dic numero de dicotomia
+ * @returns {number} porcentaje sin calcular de la dicotomia
+ */
+   getDic(dic){
+          switch(dic){
+          case 1:
+               return this.perDic1;
+          case 2:
+               return this.perDic2;
+          case 3:
+               return this.perDic3;
+          case 4:
+               return this.perDic4;
      }
    }
 
+   AplieDicotomy(dic){
+     switch(dic){
+          case 1:
+               this.player.rageRatio = this.EmotionalValue()
+               this.
+               break;
+     }
+   }
 
-   /**
-    * 
-    * @param {number} per porcentaje de la dicotomía
-    */
-   RangeDic(per){
-        
+   EmotionalValue(){
+     return this.perDic1/100;
+   }
+   RationalValue(){
+     return (100 - this.perDic1)/100;
    }
 }

@@ -76,7 +76,7 @@ export default class Enemy extends Mob
             let dustConfig ={
                 amount:50,
             }
-
+            
             this.scene.dustPool.spawn(this.x,this.y, 'polvos', dustConfig);
         }
     }
