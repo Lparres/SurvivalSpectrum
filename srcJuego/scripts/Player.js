@@ -155,13 +155,13 @@ export default class Player extends Mob
         if((this.rageMode || this.eurekaMode) && this.dicTime <= this.dicTotalTime){
             this.dicTime += dt;
         }
-        else{
+        else{  
+            this.dicTime=0;
             if(this.rageMode){
                 this.damage /= 2;
                 this._meleeArmor *= 2;
                 this._rangeArmor *=2;
                 this.rageMode = false;
-               this.dicTime=0;
                 console.log(this.damage + " " + this._meleeArmor + " " + this._rangeArmor + " ");
                 }
         }
