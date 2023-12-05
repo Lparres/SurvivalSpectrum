@@ -3,9 +3,9 @@
         {
             "x":500,
             "y":200,
-            "waveTime" : 500,
+            "waveTime" : 20000,
             "waveType" : "range",
-            "timeBetween" : 500,
+            "timeBetween" : 2000,
             "size":5
         }
     ],

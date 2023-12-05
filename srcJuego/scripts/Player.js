@@ -135,12 +135,12 @@ export default class Player extends Mob
 
     addDust = function(amount){
         this._dust += amount;
-        console.log('polvos: ' + this._dust);
+        //console.log('polvos: ' + this._dust);
     }
 
     addRage = function(amount){
         this._rage += amount;
-        console.log('rage: ' + this._rage);
+        //console.log('rage: ' + this._rage);
         if(this._rage >= 100){
             console.log('rage mode');
             this._eureka = this._eureka - (this._eureka * 20/100);
@@ -151,7 +151,9 @@ export default class Player extends Mob
 
     addEureka= function(amount){
         this._eureka += amount;
-        console.log('eureka: ' + this._eureka);
+        
+        //console.log('eureka: ' + this._eureka);
+        
         if(this._eureka >= '100'){
             console.log('eureka mode');
             this._rage = this._rage - (this.rage * 20/100);
