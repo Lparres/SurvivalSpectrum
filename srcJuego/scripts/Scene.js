@@ -77,9 +77,11 @@ export default class MainScene extends Phaser.Scene{
         // Cursor personalizado
         this.input.setDefaultCursor('url(srcJuego/img/crosshair.png) 16 16, pointer');
 
-        
         //creacion del jugador
         this.player = new Player(this, 960, 540, ['idlePlayer','PlayerMove'], this.data.PlayerConfig);
+        
+        this.Dic = new Dicotomías(this.player,80,20,20,20);
+        this.Dic.AplieDicotomy(1);
 
 
         //para orden de render
@@ -206,7 +208,7 @@ export default class MainScene extends Phaser.Scene{
             let dmg2 = enemy.health;
             enemy.Hit(dmg1);
             proyectle.Hit(dmg2, false);
-            enemy.scene.player.addEureka(enemy.scene.dicotomía.TakeGeometricNumber(2));
+            enemy.scene.player.addEureka();
         });
         //colisiones entre las balas del jugador y los enemigos a rango
         this.physics.add.collider(this.playerBulletsPool.group, this.rangeEnemiesPool.group, function (proyectle, enemy){
@@ -214,7 +216,7 @@ export default class MainScene extends Phaser.Scene{
             let dmg2 = enemy.health;
             enemy.Hit(dmg1);
             proyectle.Hit(dmg2, false);
-            enemy.scene.player.addEureka(enemy.scene.dicotomía.TakeGeometricNumber(2))
+            enemy.scene.player.addEureka()
         });
 
 
@@ -226,9 +228,8 @@ export default class MainScene extends Phaser.Scene{
                 console.log(enemy);
                 player.Hit(enemy.damage, 1);
                 enemy._CDMeleeTimer = enemy._meleeAttackCD;
+                player.addRage();
             }
-                
-            player.addRage(player.scene.dicotomía.TakeGeometricNumber(1));
         });
 
         //colisiones entre el jugador y los enemigos de rango
@@ -247,7 +248,7 @@ export default class MainScene extends Phaser.Scene{
             player.Hit(dmg1, 2);
 
             //console.log(bullet.health);
-            player.addRage(player.scene.dicotomía.TakeGeometricNumber(1));
+            player.addRage();
         });
 
 
@@ -384,5 +385,4 @@ export default class MainScene extends Phaser.Scene{
     sortSpawnPoints(){
 
     }
-
 }

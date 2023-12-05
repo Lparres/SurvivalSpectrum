@@ -41,7 +41,10 @@ export default class Player extends Mob
         this._rangeArmor = playerConfig.rangeArmor;
         this._dust = 0;
 
-
+        // 
+        this.dicUp = 10;
+        this.rageMax = 0;
+        this.eurekaMax = 0;
         this.dicRange = 0;
         //atack cooldown en milisegundos
         this._atkCD = playerConfig.Cooldown; 
@@ -138,10 +141,10 @@ export default class Player extends Mob
         //console.log('polvos: ' + this._dust);
     }
 
-    addRage = function(amount){
-        this._rage += amount;
-        //console.log('rage: ' + this._rage);
-        if(this._rage >= 100){
+    addRage = function(){
+        this._rage += this.dicUp;
+         console.log('rage: ' + this._rage);
+        if(this._rage >= this.rageMax){
             console.log('rage mode');
             this._eureka = this._eureka - (this._eureka * 20/100);
             this._rage = 0;
@@ -149,12 +152,12 @@ export default class Player extends Mob
         
     }
 
-    addEureka= function(amount){
-        this._eureka += amount;
+    addEureka= function(){
+        this._eureka += this.dicUp;
         
-        //console.log('eureka: ' + this._eureka);
+        console.log('eureka: ' + this._eureka);
         
-        if(this._eureka >= '100'){
+        if(this._eureka >= this.eurekaMax){
             console.log('eureka mode');
             this._rage = this._rage - (this.rage * 20/100);
             this._eureka = 0;
