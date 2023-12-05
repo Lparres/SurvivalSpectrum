@@ -41,19 +41,19 @@ export default class Player extends Mob
         this._rangeArmor = playerConfig.rangeArmor;
         this._dust = 0;
 
-        // 
-        this.dicUp = 10;
-        this.rageMax = 0;
-        this.eurekaMax = 0;
-        this.dicRange = 0;
+        
         //atack cooldown en milisegundos
         this._atkCD = playerConfig.Cooldown; 
         //para la recarga del ataque
         this._elapsedTime = 0;
 
         //dicotomias
+        this.dicUp = 10;
         this._rage = 0;
         this._eureka = 0;
+        this.rageMax = 0;
+        this.eurekaMax = 0;
+        this.dicRange = 0;
 
         //offset del origen de la bala
         this._bulletSpawnOffsetX = 15;
