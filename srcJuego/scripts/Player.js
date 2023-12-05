@@ -53,6 +53,14 @@ export default class Player extends Mob
         this._eureka = 0;
         this.rageMax = 0;
         this.eurekaMax = 0;
+        this.rageMode = false;
+        this.eurekaMode = false;
+        this.rageDamageMultiply = 1;
+        this.dicTotalTime = 10000;
+        this.dicTime = 0;
+
+
+        
         this.dicRange = 0;
 
         //offset del origen de la bala
@@ -81,6 +89,8 @@ export default class Player extends Mob
         this.Move();
              
         this.Shoot(dt);
+
+        this.changeDicMode(dt);
     }
 
 
@@ -141,26 +151,51 @@ export default class Player extends Mob
         //console.log('polvos: ' + this._dust);
     }
 
-    addRage = function(){
-        this._rage += this.dicUp;
-         console.log('rage: ' + this._rage);
-        if(this._rage >= this.rageMax){
-            console.log('rage mode');
-            this._eureka = this._eureka - (this._eureka * 20/100);
-            this._rage = 0;
+    changeDicMode(dt){
+        if((this.rageMode || this.eurekaMode) && this.dicTime <= this.dicTotalTime){
+            this.dicTime += dt;
         }
-        
+        else{
+            if(this.rageMode){
+                this.damage /= 2;
+                this._meleeArmor *= 2;
+                this._rangeArmor *=2;
+                this.rageMode = false;
+               this.dicTime=0;
+                console.log(this.damage + " " + this._meleeArmor + " " + this._rangeArmor + " ");
+                }
+        }
+    }
+
+    addRage = function(){
+        if(!this.rageMode){
+            this._rage += this.dicUp;
+            console.log('rage: ' + this._rage);
+           if(this._rage >= this.rageMax){
+               //console.log('rage mode');
+               this.rageMode = true;
+               this._eureka = this._eureka - (this._eureka * 20/100);
+               this._rage = 0;
+               this.damage *= 2;
+               this._meleeArmor /= 2;
+               this._rangeArmor /=2;
+               console.log(this.damage + " " + this._meleeArmor + " " + this._rangeArmor + " ");
+           }
+        } 
     }
 
     addEureka= function(){
-        this._eureka += this.dicUp;
+        if(!this.eurekaMode){
+            this._eureka += this.dicUp;
         
         console.log('eureka: ' + this._eureka);
         
         if(this._eureka >= this.eurekaMax){
             console.log('eureka mode');
+            this.eurekaMode = true;
             this._rage = this._rage - (this.rage * 20/100);
             this._eureka = 0;
+        }
         }
     }
 }
