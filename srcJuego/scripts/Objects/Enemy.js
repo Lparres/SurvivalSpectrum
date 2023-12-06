@@ -30,10 +30,15 @@ export default class Enemy extends Mob
         //añadir a la escena
         this.scene.add.existing(this);
 
+        //cambiar magic number por cte
+
         //ajustar el tamaño del colider
         this.body.setSize(45,70,false);
         //ajustar el offset del colider
         this.body.setOffset(82,106);
+
+        //margen para flipear el sprite
+        this.flipMargin = 30;
 
     }
 
@@ -44,6 +49,10 @@ export default class Enemy extends Mob
         let dirDest = new Phaser.Math.Vector2(this.scene.player.x,this.scene.player.y);
         this.SetDirection(new Phaser.Math.Vector2(dirDest.x - this.x ,dirDest.y - this.y));
         
+        //flipear en relacion al jugador
+        this.flipX = this.scene.player.x <= this.x - this.flipMargin ? true 
+                    :this.scene.player.x >= this.x + this.flipMargin ? false : this.flipX;
+
         this.Move();                    
         this.UpdateMeleeCooldown(dt);
 

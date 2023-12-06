@@ -77,7 +77,9 @@ export default class Player extends Mob
         this.body.setSize(45,70,false);
         //ajustar el offset del colider
         this.body.setOffset(82,106);
- 
+        
+        //margen para flipear el sprite
+        this.flipMargin = 30;
     }
 
     //métodos
@@ -89,6 +91,12 @@ export default class Player extends Mob
         this.Move();
              
         this.Shoot(dt);
+
+        //flipeo del jugador segun la posicicon del raton
+        //cambiar el magic number por el ancho de la pantalla
+        this.flipX = this.scene.input.mousePointer.position.x <= (1920/2) - this.flipMargin ? true 
+                    :this.scene.input.mousePointer.position.x >= (1920/2) + this.flipMargin ? false : this.flipX;
+
 
         this.changeDicMode(dt);
     }
