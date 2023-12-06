@@ -35,7 +35,7 @@ export default class Player extends Mob
         //atributos del player
         this._maxLife = playerConfig.life; //vida maxima
         this._velocity = playerConfig.velocity;
-        this._damage = playerConfig.damage;
+        this.damage = playerConfig.damage;
         this._baseRange = playerConfig.range;
         this._meleeArmor = playerConfig.meleeArmor;
         this._rangeArmor = playerConfig.rangeArmor;
@@ -65,18 +65,18 @@ export default class Player extends Mob
 
         //offset del origen de la bala
         this._bulletSpawnOffsetX = 15;
-        this._bulletSpawnOffsetY = 100;
+        this._bulletSpawnOffsetY = 50;
 
         //vector de movimiento
         this._moveVector = new Phaser.Math.Vector2(0,0);
         
         //escala y añadir a la escena
-        this.setScale(0.3);
+        //this.setScale(0.3);
  
         //ajustar el tamaño del colider
-        this.body.setSize(450,750,false);
+        this.body.setSize(45,70,false);
         //ajustar el offset del colider
-        this.body.setOffset(800,1050);
+        this.body.setOffset(82,106);
  
     }
 
@@ -107,8 +107,8 @@ export default class Player extends Mob
             //cambiar magic numbers por las variables del player
             let BulletSeting ={
                 idParent : true,
-                damage : 10,
-                velocity : 1000,
+                damage : this.damage,
+                velocity : 200,
                 range: range
             }
 

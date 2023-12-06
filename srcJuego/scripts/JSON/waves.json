@@ -5,7 +5,7 @@
             "y":200,
             "waveTime" : 20000,
             "waveType" : "range",
-            "timeBetween" : 2000,
+            "timeBetween" : 30000,
             "size":5
         }
     ],

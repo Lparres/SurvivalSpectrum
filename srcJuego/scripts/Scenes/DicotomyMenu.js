@@ -15,12 +15,10 @@ export default class Menu extends Phaser.Scene{
         const fondo = this.add.rectangle( 0, 0, 1000, 1000, 0x6666ff);
         
         
-        const unpause = new Button(this,500,400,'kirby',()=>{
+        const unpause = new Button(this,-400,-400,'heart',()=>{
             let UI = this.scene.get('UIScene');
             let MainScene = this.scene.get('level');
             this.scene.wake('UIScene');
-            //UI.scene.setVisible(true);
-            //UI.scene.setActive(true);
             this.scene.sleep('Menu');
             MainScene.scene.setActive(true);
         })

@@ -16,7 +16,7 @@ export default class Button extends Phaser.GameObjects.Sprite{
         })
         this.on('pointerover',function(){
             console.log("encima")
-            this.setScale(0.45,0.45);
+            this.setScale(0.20,0.20);
         })
     }
 }

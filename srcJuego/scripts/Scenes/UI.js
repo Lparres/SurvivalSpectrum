@@ -34,11 +34,11 @@ export default class UI extends Phaser.Scene
 
 
         
-        this.pause = new Button(this,400,200,'heart',()=>{
-            this.pause.setActive(false);
-            this.pause.setVisible(false);
-            console.log(this.pause)
-        })
+        //this.pause = new Button(this,400,200,'heart',()=>{
+        //    this.pause.setActive(false);
+        //    this.pause.setVisible(false);
+        //    console.log(this.pause)
+        //})
 
         //this.healthFrame.setScale(10, 10);
 

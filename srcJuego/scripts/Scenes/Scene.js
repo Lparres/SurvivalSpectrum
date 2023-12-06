@@ -25,14 +25,14 @@ export default class MainScene extends Phaser.Scene {
 
         //this.load.image('player',srcJuego+ '/Sprites/Character/with_hands/death_0 - copia - copia.png');   
         this.load.spritesheet('player', srcJuego + '/sprites/Character/with_hands/SpriteSheets/walkSheet.png',
-            { frameWidth: 2048, frameHeight: 2048 });
+            { frameWidth: 204, frameHeight: 204});
 
         this.load.spritesheet('idlePlayer', srcJuego + '/sprites/Character/with_hands/SpriteSheets/idleSheet.png',
-            { frameWidth: 2048, frameHeight: 2048 });
+            { frameWidth: 204, frameHeight: 204 });
 
         //this.load.image('enemy', srcJuego+ '/Sprites/Enemy1/death_0.png');   
         this.load.spritesheet('enemy', srcJuego + '/sprites/Enemy1/SpriteSheets/walkSheet.png',
-            { frameWidth: 2048, frameHeight: 2048 });
+            { frameWidth: 204, frameHeight:204});
 
         this.load.spritesheet('idleEnemy', srcJuego + '/sprites/Enemy1/SpriteSheets/idleSheet.png',
             { frameWidth: 2048, frameHeight: 2048 });
@@ -57,6 +57,7 @@ export default class MainScene extends Phaser.Scene {
 
         this.load.json('waves', 'srcJuego/scripts/JSON/waves.json');
 
+        this.cameras.main.zoom= 2;
     }
 
     //instance
@@ -67,7 +68,7 @@ export default class MainScene extends Phaser.Scene {
             waveTime: 0,
             waveCount: 0
         }
-        this.maxMasillaTime = 200;
+        this.maxMasillaTime = 500;
         this.masillasTimer = 0;
         this.data = this.game.cache.json.get('data');
         this.wave = this.game.cache.json.get('waves');
@@ -131,7 +132,7 @@ export default class MainScene extends Phaser.Scene {
 
         this.oleadasLogic();
 
-        //this.masillasLogic();
+        this.masillasLogic();
 
         //la cámara sigue al jugador
         this.cameras.main.startFollow(this.player);
@@ -326,7 +327,7 @@ export default class MainScene extends Phaser.Scene {
         //creación de animaciones para enemigos
         this.anims.create({
             key: 'enemyMove',
-            frames: this.anims.generateFrameNumbers('enemy', { start: 0, end: 7 }),
+            frames: this.anims.generateFrameNumbers('enemy', { start: 0, end: 6 }),
             frameRate: 10, // Velocidad de la animación
             repeat: -1    // Animación en bucle
         });
@@ -372,16 +373,13 @@ export default class MainScene extends Phaser.Scene {
 
         if (this.masillasTimer > this.maxMasillaTime) {
             let vector = new Phaser.Math.Vector2(0, 0);
-            let spawn = Phaser.Math.RandomXY(vector, Phaser.Math.Between(400, 1000));
+            let spawn = Phaser.Math.RandomXY(vector, Phaser.Math.Between(200, 700));
             let enemyNumber = Phaser.Math.Between(0, 2);
-            //this.meleeEnemiesPool.spawn(Phaser.Math.Between(50, this.sys.game.canvas.width-100),
-            //Phaser.Math.Between(50, this.sys.game.canvas.height-100),
-            //'enemyMove', this.data.EnemyConfigs[2]);
 
             this.meleeEnemiesPool.spawn(this.player.x + spawn.x, this.player.y + spawn.y,
                 'enemyMove', this.data.EnemyConfigs[enemyNumber]);
             this.masillasTimer = 0;
-            this.maxMasillaTime = Phaser.Math.Between(100, 250);
+            this.maxMasillaTime = Phaser.Math.Between(500, 2000);
         }
 
     }

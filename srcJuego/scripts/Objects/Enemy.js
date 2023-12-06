@@ -26,14 +26,14 @@ export default class Enemy extends Mob
         this._moveVector = new Phaser.Math.Vector2(0,0);
 
         //asignar escala
-        this.setScale(0.3);
+        //this.setScale(0.3);
         //añadir a la escena
         this.scene.add.existing(this);
 
         //ajustar el tamaño del colider
-        this.body.setSize(450,750,false);
+        this.body.setSize(45,70,false);
         //ajustar el offset del colider
-        this.body.setOffset(800,1050);
+        this.body.setOffset(82,106);
 
     }
 
