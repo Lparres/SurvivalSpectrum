@@ -34,7 +34,6 @@ export default class Player extends Mob
 
         //atributos del player
         this._maxLife = playerConfig.life; //vida maxima
-        this._velocity = playerConfig.velocity;
         this.damage = playerConfig.damage;
         this._baseRange = playerConfig.range;
         this._meleeArmor = playerConfig.meleeArmor;
@@ -49,7 +48,7 @@ export default class Player extends Mob
 
         //dicotomias
         this.dicUp = 10;
-        this._rage = 0;
+        this.rage = 0;
         this._eureka = 0;
         this.rageMax = 0;
         this.eurekaMax = 0;
@@ -161,6 +160,7 @@ export default class Player extends Mob
                 this.damage /= 2;
                 this._meleeArmor *= 2;
                 this._rangeArmor *=2;
+                this.speed /= 3;
                 this.rageMode = false;
                 console.log(this.damage + " " + this._meleeArmor + " " + this._rangeArmor + " ");
                 }
@@ -169,16 +169,18 @@ export default class Player extends Mob
 
     addRage(){
         if(!this.rageMode){
-            this._rage += this.dicUp;
-            console.log('rage: ' + this._rage);
-           if(this._rage >= this.rageMax){
+            this.rage += this.dicUp;
+            //console.log('dickUp' + this.dicUp);
+            console.log('rage: ' + this.rage);
+           if(this.rage >= this.rageMax){
                //console.log('rage mode');
                this.rageMode = true;
                this._eureka = this._eureka - (this._eureka * 20/100);
-               this._rage = 0;
+               this.rage = 0;
                this.damage *= 2;
                this._meleeArmor /= 2;
                this._rangeArmor /=2;
+               this.speed *= 3;
                console.log(this.damage + " " + this._meleeArmor + " " + this._rangeArmor + " ");
            }
         } 
@@ -193,7 +195,7 @@ export default class Player extends Mob
         if(this._eureka >= this.eurekaMax){
             console.log('eureka mode');
             this.eurekaMode = true;
-            this._rage = this._rage - (this.rage * 20/100);
+            this.rage = this.rage - (this.rage * 20/100);
             this._eureka = 0;
         }
         }

@@ -62,7 +62,10 @@ export default class Dicotomías
                return this.perDic4;
      }
    }
-
+   /**
+    * 
+    * @param {number} dic numero de dicotomia a la que quieres aplicar cambios
+    */
    AplieDicotomy(dic){
      switch(dic){
           case 1:

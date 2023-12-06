@@ -208,7 +208,6 @@ export default class MainScene extends Phaser.Scene {
         this.physics.add.collider(this.meleeEnemiesPool.group, this.meleeEnemiesPool.group);
         this.physics.add.collider(this.rangeEnemiesPool.group, this.rangeEnemiesPool.group);
         this.physics.add.collider(this.meleeEnemiesPool.group, this.rangeEnemiesPool.group);
-
         //colisiones entre las balas del jugador y los enemigos melee
         this.physics.add.collider(this.playerBulletsPool.group, this.meleeEnemiesPool.group, function (proyectle, enemy) {
             let dmg1 = proyectle.damage;
@@ -232,7 +231,7 @@ export default class MainScene extends Phaser.Scene {
 
             // Si el enemigo está listo para atacar, el player recibe un golpe y se reinicia el cooldown del ataque del enemigo.
             if (enemy._CDMeleeTimer <= 0) {
-                console.log(enemy);
+                //console.log(enemy);
                 player.Hit(enemy.damage, 1);
                 enemy._CDMeleeTimer = enemy._meleeAttackCD;
                 player.addRage();

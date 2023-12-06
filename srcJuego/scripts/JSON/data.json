@@ -2,7 +2,7 @@
 {
     "PlayerConfig":{
         "velocity": 60,
-        "damage": 10,
+        "damage": 20,
         "range": 1000,
         "meleeArmor": 100,
         "rangeArmor": 100,
@@ -13,13 +13,13 @@
     "EnemyConfigs": [
         {
             "life": 50,
-            "damage": 3,
+            "damage": 20,
             "velocity": 20,
             "meleeAttackCD": 100
         },
         {
             "life": 100,
-            "damage": 3,
+            "damage": 10,
             "velocity": 10,
             "meleeAttackCD": 100
         },
@@ -38,7 +38,7 @@
                 "velocity": 10,
                 "meleeAttackCD": 100
             },
-            "range": 500,
+            "range": 200,
             "rangeDamage": 20,
             "rangeAttackCD": 1500,
             "bulletSpeed": 200
