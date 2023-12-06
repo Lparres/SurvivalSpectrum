@@ -1,5 +1,6 @@
 import MainLevel from './Scenes/Scene.js'
 import UI from './Scenes/UI.js'
+import Menu from './Scenes/DicotomyMenu.js'
 var config = {
     type : Phaser.AUTO,
     parent: "juego",
@@ -11,7 +12,7 @@ var config = {
 
     },
     pixelArt : true,
-    scene : [MainLevel, UI],
+    scene : [MainLevel, UI,Menu],
     physics: {
         default: 'arcade', // elegir motor
         arcade: { // propiedades del motor
