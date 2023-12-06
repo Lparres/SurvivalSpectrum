@@ -1,4 +1,4 @@
-import Pool from "./Pool.js";
+import Pool from "../Pool.js";
 
 /**@description Clase Base para los objetos dinámicos de la escena
  * @extends Phaser.GameObjects.Sprite

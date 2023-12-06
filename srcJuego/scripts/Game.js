@@ -1,5 +1,5 @@
-import MainLevel from './Scene.js'
-import UI from './UI.js'
+import MainLevel from './Scenes/Scene.js'
+import UI from './Scenes/UI.js'
 var config = {
     type : Phaser.AUTO,
     parent: "juego",

@@ -1,12 +1,11 @@
-import Player from './Player.js'
-import MeleeEnemy from './MeleeEnemy.js'
-import RangeEnemy from './RangeEnemy.js'
-import Pool from './Pool.js'
-import Bullet from './Bullet.js'
-import Enemy from './Enemy.js'
-import InteractuableObjects from './InteractuableObject.js'
-import Button from './Button.js'
-import Dicotomías from './Dicotomias.js'
+import Player from '../Objects/Player.js'
+//import MeleeEnemy from './MeleeEnemy.js'
+import RangeEnemy from '../Objects/RangeEnemy.js'
+import Pool from '../Pool.js'
+import Bullet from '../Objects/Bullet.js'
+import Enemy from '../Objects/Enemy.js'
+import InteractuableObjects from '../Objects/InteractuableObject.js'
+import Dicotomías from '../Dicotomias.js'
 export default class MainScene extends Phaser.Scene{
     constructor(){
         super({key:"level"})
@@ -135,7 +134,7 @@ export default class MainScene extends Phaser.Scene{
     setPools(){
         
         // creacion de pools
-        this.playerBulletsPool = new Pool(this, 100);//cambiar los magics numbers por constantes
+        this.playerBulletsPool = new Pool(this, 20);//cambiar los magics numbers por constantes
         this.enemiesBulletsPool = new Pool(this, 200);
         this.meleeEnemiesPool = new Pool(this, 50);
         this.rangeEnemiesPool = new Pool(this, 50);

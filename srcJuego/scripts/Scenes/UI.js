@@ -1,4 +1,4 @@
-import Button from './Button.js'
+import Button from '../UI_Objects/Button.js'
 export default class UI extends Phaser.Scene    
 {
    
@@ -34,7 +34,7 @@ export default class UI extends Phaser.Scene
 
 
         
-        this.pause = new Button(this,400,200,'heart',()=>{console.log(this)})
+        //this.pause = new Button(this,400,200,'heart',()=>{console.log(this)})
 
         //this.healthFrame.setScale(10, 10);
 

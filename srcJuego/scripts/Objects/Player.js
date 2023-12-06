@@ -1,6 +1,6 @@
-import Pool from "./Pool.js";
+import Pool from "../Pool.js";
 import Mob from "./Mob.js";
-import Dicotomías from './Dicotomias.js'
+import Dicotomías from '../Dicotomias.js'
 export default class Player extends Mob
 {
     /*
@@ -95,7 +95,7 @@ export default class Player extends Mob
 
 
     //método para disparar
-    Shoot = function(dt) {
+    Shoot(dt) {
         //contador del tiempo
         this._elapsedTime += dt;
 
@@ -124,7 +124,7 @@ export default class Player extends Mob
      * @param {number} damage 
      * @param {number} damageType 1: melee 2: range
      */
-    Hit = function(damage, damageType) {
+    Hit(damage, damageType) {
 
         let damageReduction;
         if(damageType == 1) damageReduction = 100 / (100 + this._meleeArmor);
@@ -142,11 +142,11 @@ export default class Player extends Mob
     }
 
     // La dicotomía cambia el rango de ataque
-    cambiaRange = function(damageOffset){
+    cambiaRange(damageOffset){
         //vacío de momento
     }
 
-    addDust = function(amount){
+    addDust(amount){
         this._dust += amount;
         //console.log('polvos: ' + this._dust);
     }
@@ -167,7 +167,7 @@ export default class Player extends Mob
         }
     }
 
-    addRage = function(){
+    addRage(){
         if(!this.rageMode){
             this._rage += this.dicUp;
             console.log('rage: ' + this._rage);
@@ -184,7 +184,7 @@ export default class Player extends Mob
         } 
     }
 
-    addEureka= function(){
+    addEureka(){
         if(!this.eurekaMode){
             this._eureka += this.dicUp;
         

@@ -1,5 +1,4 @@
 import Enemy from "./Enemy.js";
-import Bullet from "./Bullet.js";
 
 export default class RangeEnemy extends Enemy
 {
@@ -40,7 +39,7 @@ export default class RangeEnemy extends Enemy
     }
 
 
-    UpdateRangeCooldown = function(dt){
+    UpdateRangeCooldown(dt){
         if (this._CDRangeTimer > 0){
             this._CDRangeTimer -= dt;
         }
@@ -49,7 +48,7 @@ export default class RangeEnemy extends Enemy
     //método para disparar
 
         
-    Shoot = function() {
+    Shoot() {
 
         if(this._CDRangeTimer <= 0){
 

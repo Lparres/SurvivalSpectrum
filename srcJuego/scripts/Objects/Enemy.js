@@ -70,7 +70,7 @@ export default class Enemy extends Mob
 
     
 
-    Hit = function(damage){
+    Hit(damage){
         this.ReciveDamage(damage);
         if(this.health < 0){
             let dustConfig ={
@@ -81,7 +81,7 @@ export default class Enemy extends Mob
         }
     }
 
-    UpdateMeleeCooldown = function(dt){
+    UpdateMeleeCooldown(dt){
         if (this._CDMeleeTimer > 0){
             this._CDMeleeTimer -= dt;
         }
