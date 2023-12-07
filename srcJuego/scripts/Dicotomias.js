@@ -7,8 +7,8 @@ export default class Dicotomías
    //Realmente se puede hacer tremendo constructor vacío y tirando
    /**
     * 
-    * @param {*} perDic1 
-    * @param {*} perDic2 
+    * @param {*} perDic1 Valor del emocional
+    * @param {*} perDic2 Valor del extrovertido
     * @param {*} perDic3 
     * @param {*} perDic4 
     */
@@ -72,6 +72,10 @@ export default class Dicotomías
                this.player.rageMax = this. EmotionalValue();
                this.player.eurekaMax = this.RationalValue();
                break;
+          case 2:
+               this.player.range = this.ExtrovertValue(this.player.baseRange);
+               this.player.damage = this.IntrovertValue(this.player.baseDamage);
+               break;
      }
    }
 
@@ -80,5 +84,12 @@ export default class Dicotomías
    }
    RationalValue(){
      return (100 - this.perDic1);
+   }
+
+   ExtrovertValue(baseRange){
+     return baseRange + baseRange*(this.perDic2/100-0.5);
+   }
+   IntrovertValue(baseDamage){
+     return baseDamage + baseDamage*((100-this.perDic2)/100-0.5);
    }
 }

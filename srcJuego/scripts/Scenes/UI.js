@@ -60,9 +60,9 @@ export default class UI extends Phaser.Scene
 
 
         if(ourGame.player != undefined){
-            this.healthInfo.setText(Phaser.Math.RoundTo(ourGame.player.health, 0) + ' / ' + Phaser.Math.RoundTo(ourGame.player._maxLife, 0));
+            this.healthInfo.setText(Phaser.Math.RoundTo(ourGame.player.health, 0) + ' / ' + Phaser.Math.RoundTo(ourGame.player.maxLife, 0));
 
-            this.healthBar.width = ourGame.player.health/ourGame.player._maxLife * 500;
+            this.healthBar.width = ourGame.player.health/ourGame.player.maxLife * 500;
 
             //console.log (ourGame.player.health);
         }

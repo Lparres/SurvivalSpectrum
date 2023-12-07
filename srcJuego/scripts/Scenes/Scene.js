@@ -79,9 +79,9 @@ export default class MainScene extends Phaser.Scene {
         //creacion del jugador
         this.player = new Player(this, 960, 540, ['idlePlayer', 'PlayerMove'], this.data.PlayerConfig);
 
-        this.Dic = new Dicotomías(this.player, 80, 20, 20, 20);
-        this.Dic.AplieDicotomy(1);
-
+        this.dicotomyManager = new Dicotomías(this.player, 50, 50, 50, 50);
+        this.dicotomyManager.AplieDicotomy(1);
+        this.dicotomyManager.AplieDicotomy(2);
 
         //para orden de render
         this.player.setDepth(10);
@@ -192,10 +192,9 @@ export default class MainScene extends Phaser.Scene {
         let dustArr = [];
 
         for (let i = 0; i < 100; i++) {
-            let aux = new InteractuableObjects(this, 0, 0, 'polvos', this.dustPool, function (amount) {
+            let aux = new InteractuableObjects(this, 0, 0, 'polvos', this.dustPool, (amount) => {
                 aux.setDepth(10);
-
-                //this.player.addDust(amount);
+                this.player.addDust(amount);
             });
             dustArr.push(aux);
         }

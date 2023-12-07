@@ -33,19 +33,19 @@ export default class Player extends Mob
         this.dir = new Phaser.Math.Vector2(0,0);
 
         //atributos del player
-        this._maxLife = playerConfig.life; //vida maxima
-        this.damage = playerConfig.damage;
-        this._baseRange = playerConfig.range;
+        this.maxLife = playerConfig.life; //vida maxima
+        this.baseDamage = playerConfig.damage;
         this._meleeArmor = playerConfig.meleeArmor;
         this._rangeArmor = playerConfig.rangeArmor;
-        this._dust = 0;
-
+        this.dust = 0;
+        this.baseRange = playerConfig.range;
+        
         
         //atack cooldown en milisegundos
         this._atkCD = playerConfig.Cooldown; 
         //para la recarga del ataque
         this._elapsedTime = 0;
-
+        
         //dicotomias
         this.dicUp = 10;
         this.rage = 0;
@@ -57,11 +57,12 @@ export default class Player extends Mob
         this.rageDamageMultiply = 1;
         this.dicTotalTime = 10000;
         this.dicTime = 0;
-
-
         
-        this.dicRange = 0;
-
+        
+        
+        this.range = this.baseRange;
+        this.damage = this.baseDamage;
+        
         //offset del origen de la bala
         this._bulletSpawnOffsetX = 15;
         this._bulletSpawnOffsetY = 50;
@@ -105,8 +106,6 @@ export default class Player extends Mob
     Shoot(dt) {
         //contador del tiempo
         this._elapsedTime += dt;
-
-        let range = this._range + this.dicRange;
         if(this._elapsedTime >= this._atkCD){
             //new Bullet(this.scene,this.x + this._bulletSpawnOffsetX,this.y+this._bulletSpawnOffsetY,'kirby',true,10,1000);    
 
@@ -116,7 +115,7 @@ export default class Player extends Mob
                 idParent : true,
                 damage : this.damage,
                 velocity : 200,
-                range: range
+                range: this.range
             }
 
         
@@ -154,8 +153,8 @@ export default class Player extends Mob
     }
 
     addDust(amount){
-        this._dust += amount;
-        //console.log('polvos: ' + this._dust);
+        this.dust += amount;
+        //console.log('polvos: ' + this.dust);
     }
 
     changeDicMode(dt){

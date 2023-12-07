@@ -2,10 +2,10 @@
 {
     "PlayerConfig":{
         "velocity": 60,
-        "damage": 20,
-        "range": 1000,
-        "meleeArmor": 100,
-        "rangeArmor": 100,
+        "damage": 10,
+        "range": 300,
+        "meleeArmor": 10,
+        "rangeArmor": 10,
         "life": 500,
         "Cooldown": 500
     },
