@@ -30,16 +30,6 @@ export default class UI extends Phaser.Scene
         this.healthInfo = this.add.text(590, 1045, 'xxxx', { font: '25px JosefinBold', fill: 'black' });
         this.healthInfo.setOrigin(1, 0.5)
 
-
-
-
-        
-        //this.pause = new Button(this,400,200,'heart',()=>{
-        //    this.pause.setActive(false);
-        //    this.pause.setVisible(false);
-        //    console.log(this.pause)
-        //})
-
         //this.healthFrame.setScale(10, 10);
 
         // this.tweens.add({
@@ -50,11 +40,13 @@ export default class UI extends Phaser.Scene
         //     yoyo: true,
         //     repeat: -1,
         // });
+        this.text = this.add.text(800, 40,' ',{ font: '100px JosefinBold', fill: 'red' });
 
-        
-        
+        this.timedEvent = this.time.addEvent({ delay: 1000, callback: this.onEvent, callbackScope: this, loop:true  });
+        this.secondsCount = 0;
+        this.minuteCount = 0;
     }
-    update() {
+    update(t,dt) {
         const ourGame = this.scene.get('level');
         
 
@@ -66,7 +58,7 @@ export default class UI extends Phaser.Scene
 
             //console.log (ourGame.player.health);
         }
-       
+       this.timerUpdate(dt);
     }
 
     loadFont(name, url) {
@@ -83,5 +75,21 @@ export default class UI extends Phaser.Scene
 	        return error;
     	});
 	}
+    timerUpdate(dt){
+        //set timer UI
+		this.secondsCount += dt/1000;
+		if(this.secondsCount > 60){
+            this.minuteCount++;
+			this.secondsCount = 0;
+		}	
+        this.text.setText (this.minuteCount.toLocaleString('en-US', {
+            minimumIntegerDigits: 2,
+            useGrouping: false
+          })+ ':' +this.secondsCount.toLocaleString('en-US', {
+            minimumIntegerDigits: 2,
+            useGrouping: false,
+            maximumFractionDigits:0 
+          })) ;
+    }
 
 }

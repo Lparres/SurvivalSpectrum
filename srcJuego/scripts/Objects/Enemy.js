@@ -86,7 +86,7 @@ export default class Enemy extends Mob
                 amount:50,
             }
             
-            this.scene.dustPool.spawn(this.x,this.y, 'polvos', dustConfig);
+            this.scene.dustPool.spawn(this.x,this.y, ' ', dustConfig);
         }
     }
 

@@ -41,7 +41,7 @@ export default class Bullet extends Mob
         this.Move();
         this.range -= dt*this.body.velocity.length()/1000;
         if(this.range < 0){
-            console.log("adios Mundo cruel");
+            //console.log("adios Mundo cruel");
             this.pool.release(this);
         }
     }
