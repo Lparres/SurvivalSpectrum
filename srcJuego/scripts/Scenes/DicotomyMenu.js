@@ -81,7 +81,7 @@ export default class Menu extends Phaser.Scene {
         'Range Arm.: '+ this.player._rangeArmor+'\n'+'\n'+
         'Range: '+this.player.range+'\n'+'\n'+
         'Speed: '+this.player.speed;
-        this.polvosMagicos.setText('polvos ' + this.player.dust);
+        this.polvosMagicos.setText('polvos: ' + this.player.dust);
         this.statsObj.setText(this.statsText);
     }
 }

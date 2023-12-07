@@ -62,7 +62,7 @@ export default class Bullet extends Mob
         //console.log("colision bala");
     }
     /**
-    * @param {SettingObject} seting necesita: {idParent, damage, speed} 
+    * @param {SettingObject} seting necesita: {idParent, damage, speed, range} 
     */
     setUp(seting){
         this.idParent = seting.idParent;

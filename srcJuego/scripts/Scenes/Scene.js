@@ -371,13 +371,13 @@ export default class MainScene extends Phaser.Scene {
 
         if (this.masillasTimer > this.maxMasillaTime) {
             let vector = new Phaser.Math.Vector2(0, 0);
-            let spawn = Phaser.Math.RandomXY(vector, Phaser.Math.Between(200, 700));
+            let spawn = Phaser.Math.RandomXY(vector, Phaser.Math.Between(300, 500));
             let enemyNumber = Phaser.Math.Between(0, 2);
 
             this.meleeEnemiesPool.spawn(this.player.x + spawn.x, this.player.y + spawn.y,
                 'enemyMove', this.data.EnemyConfigs[enemyNumber]);
             this.masillasTimer = 0;
-            this.maxMasillaTime = Phaser.Math.Between(500, 2000);
+            this.maxMasillaTime = Phaser.Math.Between(3000, 6000);
         }
 
     }

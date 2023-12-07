@@ -121,7 +121,7 @@ export default class Player extends Mob
         
 
             this.scene.playerBulletsPool.spawn(this.x + this._bulletSpawnOffsetX,this.y+this._bulletSpawnOffsetY,' ',BulletSeting);
-
+            //console.log(this.damage);
             this._elapsedTime = 0;
         }
     }

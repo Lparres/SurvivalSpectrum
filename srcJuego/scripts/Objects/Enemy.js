@@ -59,25 +59,6 @@ export default class Enemy extends Mob
     }
 
     
-    // métodos
-
-    //método para moverte
-    //Move = function(){
-    //   
-    //    //calcular el vector de direccion del movimient
-    //    this._moveVector.x = this.scene.player.x- this.x;
-    //    this._moveVector.y = this.scene.player.y- this.y;
-    //    //normalizar el vector
-    //    this._moveVector.normalize();   
-    //    
-    //    //movimiento por fisicas
-    //    this.body.setVelocity(this._moveVector.x*this._velocity,this._moveVector.y*this._velocity);
-//
-    //    //animacion de movimiento
-    //    this.play('enemyMove', true);
-    //}
-
-    
 
     Hit(damage){
         this.ReciveDamage(damage);
@@ -109,12 +90,5 @@ export default class Enemy extends Mob
         this.SetDirection(new Phaser.Math.Vector2(dirDest.x - this.x ,dirDest.y - this.y));
         //console.log(this.dir);
     }
-
-    /*ReciveDamage(dmg){
-        super.ReciveDamage(dmg);
-        if(this.health <0){
-            this.scene.dustPool.spawn(500,400,'polvos',dustConfig);
-        }
-    }*/ // Cuando los enemigos mueran deben spawnear los polvos (está rompido en este momento)
 
 }
