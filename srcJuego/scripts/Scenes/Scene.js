@@ -82,6 +82,9 @@ export default class MainScene extends Phaser.Scene {
         this.minSpawnRange =  400;
         this.maxSpawnRange =  750;
 
+        this.sortSpawnPointsFrecuency = 5000;
+        this.sortSpawnPointsTimer = 9999;
+
         // Cursor personalizado
         this.input.setDefaultCursor('url(srcJuego/img/crosshair.png) 16 16, pointer');
 
@@ -309,7 +312,6 @@ export default class MainScene extends Phaser.Scene {
         //creamos el array de spawn points
         this.spawnPoints = this.map.createFromObjects('Spawns');
 
-        console.log(this.spawnPoints);
 
         //los hacemos invisibles para que no se vean
         for (let i = 0; i < this.spawnPoints.length; i++) {
@@ -363,26 +365,31 @@ export default class MainScene extends Phaser.Scene {
 
     //oleadas
     oleadasLogic(dt) {
-        this.sortSpawnPoints();
-        console.log(this.spawnPositions);
-        //console.log(this.wave.Waves[0].timeBetween);
-        //console.log(this.waveData.waveTime);
-        //si toca spawnear
 
-        //console.log(this.waveJson.NewWaves[0].spawnsData);
+        //actualizar la posicion de los spawnPoints, cuando toque
 
+        this.sortSpawnPointsTimer += dt;
+
+        if(this.sortSpawnPointsTimer >= this.sortSpawnPointsFrecuency){
+            this.sortSpawnPoints();
+            this.sortSpawnPointsTimer = 0;
+        }
+        
+
+        //para cada uno de los spawns de la oleada actual
         for(let i = 0; i < this.waveJson.NewWaves[this.currentWave].spawnsData.length ;i++){
             
+            //actualizar el contador de tiempo
             this.waveJson.NewWaves[this.currentWave].spawnsData[i].timer += dt;
 
+            //si toca spawnear y quedan enemigos en este spawn point
             if(this.waveJson.NewWaves[this.currentWave].spawnsData[i].timer >=
                 this.waveJson.NewWaves[this.currentWave].spawnsData[i].frecuency && 
                 this.waveJson.NewWaves[this.currentWave].spawnsData[i].size >0 ) 
             {
-                this.waveJson.NewWaves[this.currentWave].spawnsData[i].timer = 0;
-
+                
                 //spawneo del enemigo en su spawnPoint 
-
+                
                 //spawnear segun el tipo
                 if(this.waveJson.NewWaves[this.currentWave].spawnsData[i].type == "melee"){
                     this.meleeEnemiesPool.spawn(this.spawnPositions[i].x,this.spawnPositions[i].y,'enemyMove',this.data.EnemyConfigs[0]);
@@ -390,23 +397,15 @@ export default class MainScene extends Phaser.Scene {
                 else if(this.waveJson.NewWaves[this.currentWave].spawnsData[i].type == "range"){
                     this.rangeEnemiesPool.spawn(this.spawnPositions[i].x,this.spawnPositions[i].y,'enemyMove',this.data.RangeConfigs[0]);
                 }
-                    
-
+                
+                
+                //resetear el timer
+                this.waveJson.NewWaves[this.currentWave].spawnsData[i].timer = 0;
+                //disminuir el tamaño
                 this.waveJson.NewWaves[this.currentWave].spawnsData[i].size--;
             }
 
         }
-
-        /*
-        if (this.waveData.waveTime > this.wave.Waves[0].timeBetween && this.waveData.waveCount < this.wave.Waves[0].size) {
-            //console.log(this.data.EnemyConfigs[0]);
-            this.rangeEnemiesPool.spawn(this.wave.Waves[0].x, this.wave.Waves[0].y, 'enemyMove', this.data.RangeConfigs[0]);
-            
-            this.waveData.waveTime = 0;
-            this.waveData.waveCount++;
-        }
-        */
-        
     }
 
     //masillas, cambiar a logica de las oleadas
@@ -425,18 +424,21 @@ export default class MainScene extends Phaser.Scene {
 
     }
 
-    //buscar los 3 primeros spawn points en un rango
-    //esto se deberia llamar cada x tiempo para refrescarlo
+
     sortSpawnPoints() {
         
+        //array de posiciones final, lo reseteamos
         this.spawnPositions = [];
 
+        //i, contador de posiciones validas encontradas
         let i = 0;
+
         let playerPos = new Phaser.Math.Vector2(this.player.x,this.player.y);
 
         //mientras no haya encontrado los puntos suficientes
         while(i < this.waveJson.NewWaves[this.currentWave].spawnsData.length){
-
+            
+            //j, contador para recorrer los spawnPoint del array en el que estan todos
             let j = 0;
             let encontrado = false;
             //buscar un punto de los spawnPoints
@@ -446,11 +448,13 @@ export default class MainScene extends Phaser.Scene {
                 let point = new Phaser.Math.Vector2(this.spawnPoints[j].x,this.spawnPoints[j].y);
                 let distance = playerPos.distance(point);
 
+                //si está en el rango
                 if(distance >= this.minSpawnRange && distance <= this.maxSpawnRange){
 
                     let enLaOtraLista = false;
                     let k = 0;
 
+                    //verificar que no esté ya en la lista definitiva
                     while(!enLaOtraLista && k < this.spawnPositions.length){
                         
                         if(point.x == this.spawnPositions[k].x &&
@@ -460,6 +464,7 @@ export default class MainScene extends Phaser.Scene {
                         k++;
                     }
 
+                    //si no estaba en la otra lista, añadirlo
                     if(!enLaOtraLista){
                         this.spawnPositions.push(point);
                         encontrado = true;

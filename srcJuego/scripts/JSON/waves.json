@@ -13,44 +13,34 @@
 
     "NewWaves":[
         {
-            "waveTime": 0,
+            "waveStartTime": 0,
             "spawnsData":[
-                {
-                    "type": "melee",
-                    "size": 5,
-                    "frecuency": 1000,
-                    "timer": 0
-            },
-                {
-                    "type": "range",
-                    "size": 5,
-                    "frecuency": 1000,
-                    "timer": 0
-            },
-                {
-                    "type": "melee",
-                    "size": 5,
-                    "frecuency": 1000,
-                    "timer": 0
-            },
-                {
-                    "type": "melee",
-                    "size": 5,
-                    "frecuency": 1000,
-                    "timer": 0
-            },
-                {
-                    "type": "range",
-                    "size": 5,
-                    "frecuency": 1000,
-                    "timer": 0
-            },
-                {
-                    "type": "melee",
-                    "size": 5,
-                    "frecuency": 1000,
-                    "timer": 0
-            }
+                {"type": "melee", "size": 2, "frecuency": 3000, "timer": 0 },
+                {"type": "melee", "size": 2, "frecuency": 3000, "timer": 0 },
+                {"type": "melee", "size": 2, "frecuency": 3000, "timer": 0 },
+                {"type": "melee", "size": 2, "frecuency": 3000, "timer": 0 },
+                {"type": "melee", "size": 2, "frecuency": 3000, "timer": 0 },
+                {"type": "melee", "size": 2, "frecuency": 3000, "timer": 0 },
+                {"type": "melee", "size": 2, "frecuency": 3000, "timer": 0 },
+                {"type": "melee", "size": 2, "frecuency": 3000, "timer": 0 },
+                {"type": "range", "size": 2, "frecuency": 3000, "timer": 0 },
+                {"type": "range", "size": 2, "frecuency": 3000, "timer": 0 }
+        ]
+
+        },
+        {
+            "waveStartTime": 65,
+            "spawnsData":[
+                {"type": "melee", "size": 3, "frecuency": 3000, "timer": 0 },
+                {"type": "melee", "size": 3, "frecuency": 3000, "timer": 0 },
+                {"type": "melee", "size": 3, "frecuency": 3000, "timer": 0 },
+                {"type": "melee", "size": 3, "frecuency": 3000, "timer": 0 },
+                {"type": "melee", "size": 3, "frecuency": 3000, "timer": 0 },
+                {"type": "melee", "size": 3, "frecuency": 3000, "timer": 0 },
+                {"type": "melee", "size": 3, "frecuency": 3000, "timer": 0 },
+                {"type": "melee", "size": 3, "frecuency": 3000, "timer": 0 },
+                {"type": "range", "size": 3, "frecuency": 3000, "timer": 0 },
+                {"type": "range", "size": 3, "frecuency": 3000, "timer": 0 }
         ]
 
         }
