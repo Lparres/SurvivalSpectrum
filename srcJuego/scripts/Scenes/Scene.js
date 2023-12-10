@@ -118,6 +118,9 @@ export default class MainScene extends Phaser.Scene {
         // Recogida del input de movimiento en un vector
         this._inputVector = new Phaser.Math.Vector2(0, 0);
 
+        //booleano que detiene el movimiento de los enemigos
+        this.stopEnemy = false;
+
     }
 
     //game tick
@@ -386,5 +389,14 @@ export default class MainScene extends Phaser.Scene {
     //esto se deberia llamar cada x tiempo para refrescarlo
     sortSpawnPoints() {
 
+    }
+
+    /**
+     * método que detiene el tiempo al llegar el eureka
+     * @param {boolean} value 
+     */
+    isTimeToStop(value){
+        this.stopEnemy = value ;
+        
     }
 }

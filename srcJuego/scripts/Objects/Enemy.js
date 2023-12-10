@@ -43,6 +43,7 @@ export default class Enemy extends Mob
     }
 
     preUpdate(t,dt){
+        if(!this.scene.stopEnemy){
         //para la animación
         super.preUpdate(t,dt);
 
@@ -52,9 +53,12 @@ export default class Enemy extends Mob
         //flipear en relacion al jugador
         this.flipX = this.scene.player.x <= this.x - this.flipMargin ? true 
                     :this.scene.player.x >= this.x + this.flipMargin ? false : this.flipX;
-
-        this.Move();                    
+        this.Move();        
         this.UpdateMeleeCooldown(dt);
+        }
+        else{
+            this.body.setVelocity(0,0);
+        }
 
     }
 

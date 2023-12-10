@@ -55,7 +55,10 @@ export default class Player extends Mob
         this.rageMode = false;
         this.eurekaMode = false;
         this.rageDamageMultiply = 1;
-        this.dicTotalTime = 10000;
+        this.lifeSteal = 10;
+        this.rageTime = 10000; // variable que indica el tiempo que dura la rabia
+        this.eurekaTime = 10000; // variable que indica el tiempo que dura el eureka
+        this.dicTotalTime = 10000; // variable dentro del timer a modificar
         this.dicTime = 0;
         
         
@@ -169,13 +172,17 @@ export default class Player extends Mob
                 this._rangeArmor *=2;
                 this.speed /= 3;
                 this.rageMode = false;
-                console.log(this.damage + " " + this._meleeArmor + " " + this._rangeArmor + " ");
+                //Sconsole.log(this.damage + " " + this._meleeArmor + " " + this._rangeArmor + " ");
+                }
+                else if(this.eurekaMode){
+                    this.eurekaMode=false;
+                    this.scene.isTimeToStop(false);
                 }
         }
     }
 
     addRage(){
-        if(!this.rageMode){
+        if(!this.rageMode && !this.eurekaMode && !this.rageMode){
             this.rage += this.dicUp;
             //console.log('dickUp' + this.dicUp);
             console.log('rage: ' + this.rage);
@@ -188,23 +195,32 @@ export default class Player extends Mob
                this._meleeArmor /= 2;
                this._rangeArmor /=2;
                this.speed *= 3;
-               console.log(this.damage + " " + this._meleeArmor + " " + this._rangeArmor + " ");
+               this.dicTotalTime = this.rageTime;
+               //console.log(this.damage + " " + this._meleeArmor + " " + this._rangeArmor + " ");
            }
         } 
     }
 
     addEureka(){
-        if(!this.eurekaMode){
+        if(!this.eurekaMode && !this.rageMode){
             this._eureka += this.dicUp;
         
-        console.log('eureka: ' + this._eureka);
+       // console.log('eureka: ' + this._eureka);
         
         if(this._eureka >= this.eurekaMax){
-            console.log('eureka mode');
+           // console.log('eureka mode');
             this.eurekaMode = true;
             this.rage = this.rage - (this.rage * 20/100);
             this._eureka = 0;
+            this.dicTotalTime = this.eurekaTime;
+            this.scene.isTimeToStop(true);
         }
+        }
+        else if(!this.eurekaMode && this.rageMode){
+            this.health += this.lifeSteal;
+            if(this.health> this.maxLife){
+                this.health = this.maxLife;
+            }
         }
     }
 }
