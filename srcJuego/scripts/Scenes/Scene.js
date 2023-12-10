@@ -31,7 +31,7 @@ export default class MainScene extends Phaser.Scene {
             { frameWidth: 204, frameHeight: 204 });
 
         //this.load.image('enemy', srcJuego+ '/Sprites/Enemy1/death_0.png');   
-        this.load.spritesheet('enemy', srcJuego + '/sprites/Enemy1/SpriteSheets/walkSheet.png',
+        this.load.spritesheet('enemy', srcJuego + '/sprites/Enemy3/SpriteSheets/fly-Sheet.png',
             { frameWidth: 204, frameHeight:204});
 
         this.load.spritesheet('idleEnemy', srcJuego + '/sprites/Enemy1/SpriteSheets/idleSheet.png',
@@ -129,6 +129,9 @@ export default class MainScene extends Phaser.Scene {
         });
         // Recogida del input de movimiento en un vector
         this._inputVector = new Phaser.Math.Vector2(0, 0);
+
+        //booleano que detiene el movimiento de los enemigos
+        this.stopEnemy = false;
 
     }
 
@@ -480,5 +483,14 @@ export default class MainScene extends Phaser.Scene {
         
         
 
+    }
+
+    /**
+     * método que detiene el tiempo al llegar el eureka
+     * @param {boolean} value 
+     */
+    isTimeToStop(value){
+        this.stopEnemy = value ;
+        
     }
 }
