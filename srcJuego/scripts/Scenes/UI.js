@@ -4,6 +4,7 @@ export default class UI extends Phaser.Scene
    
     constructor() {
         super({ key: 'UIScene', active: true });
+
     }
     //data transfer
     init() {
@@ -16,7 +17,12 @@ export default class UI extends Phaser.Scene
     }
     create() {
 
-        this.player = this.scene.get('level').player;
+
+
+        this.mainScene = this.scene.get('level');
+        this.player = this.mainScene.player;
+
+
         this.loadFont("JosefinBold", "srcJuego/fonts/JosefinSans-Bold.ttf");
         this.loadFont("JosefinMedium", "srcJuego/fonts/JosefinSans-Medium.ttf");
 
@@ -71,8 +77,11 @@ export default class UI extends Phaser.Scene
         //datos de la oleada (por rellenar y gestionar actualizacion)
         this.waveData = this.add.text(100, 40,'Wave: '+ (this.scene.get("level").currentWave+1),{ font: '70px JosefinMedium', fill: 'blue' });
          
-        //
-        this.nextWave = this.add.text(100, 150,'Next Wave: 00:15',{ font: '70px JosefinMedium', fill: 'blue' });
+        //el momento en el que saldrá la siguiente oleada
+        this.nextWave = this.add.text(100, 150,'Next Wave: ',{ font: '70px JosefinMedium', fill: 'blue' });
+
+        this.enemies = this.add.text(100, 260,'Enemies: ',{ font: '50px JosefinMedium', fill: 'blue' });
+        
 
         //texto de estadisticas
         this.statsText = 
@@ -90,12 +99,12 @@ export default class UI extends Phaser.Scene
         { font: '50px JosefinMedium', fill: 'green', align: 'right'}).setOrigin(1,0.5);
 
 
-        
+
         this.updateWaveData();
     }
     update(t,dt) {
-        const ourGame = this.scene.get('level');
         
+        const ourGame = this.scene.get('level');
 
 
         if(ourGame.player != undefined){
@@ -163,19 +172,28 @@ export default class UI extends Phaser.Scene
     updateWaveData() {
 
         //actualizar el numero de oleada
-        this.waveData.setText('Wave: '+ (this.scene.get("level").currentWave+1));
+        this.waveData.setText('Wave: '+ (this.mainScene.currentWave+1));
         
         //actualizar el timer de la proxima oleada
-        this.nextWave.setText('Next Wave: ' + Math.floor(this.scene.get("level").waveJson.NewWaves[this.scene.get("level").currentWave +1].waveStartTime / 60).toLocaleString('en-US', {
+        this.nextWave.setText('Next Wave: ' + Math.floor(this.mainScene.waveJson.NewWaves[this.mainScene.currentWave +1].waveStartTime / 60).toLocaleString('en-US', {
             minimumIntegerDigits: 2,
             useGrouping: false,
             maximumFractionDigits:0
-        })+ ':' +(this.scene.get("level").waveJson.NewWaves[this.scene.get("level").currentWave +1].waveStartTime % 60).toLocaleString('en-US', {
+        })+ ':' +(this.mainScene.waveJson.NewWaves[this.mainScene.currentWave +1].waveStartTime % 60).toLocaleString('en-US', {
             minimumIntegerDigits: 2,
             useGrouping: false,
             maximumFractionDigits:0 
         })) ;
         
+
+        //calculo de los enemigos de esta oleada
+        let nEnemies = 0;
+        for(let i = 0; i< this.mainScene.waveJson.NewWaves[this.mainScene.currentWave].spawnsData.length;i++){
+            nEnemies += this.mainScene.waveJson.NewWaves[this.mainScene.currentWave].spawnsData[i].size;
+        }
+
+        this.enemies.setText('Total wave enemies: '+ nEnemies);
+
     }
     
 }
