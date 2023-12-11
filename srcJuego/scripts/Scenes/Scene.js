@@ -64,6 +64,22 @@ export default class MainScene extends Phaser.Scene {
     create() {//igual es recomendable que se haga una seccion de creacion de animaciones ya que asi ya estan listas cuando hagan falta
 
         this.data = this.game.cache.json.get('data');
+
+        /**Explicacion del formato de las oleadas
+         * Cada oleada está compuesta por, un waveStartTime(en segundos) y un array de spawnsData.
+         * El waveStartTime, indica el segundo en el que empezará la oleada, cuando el reloj global llegue
+         * a ese tiempo, se lanzará esa oleada. 
+         * El array de spawnsData contiene la informacion de cada spawn,
+         * la posicion de cada spawn se recalcula cada X tiempo(actualmente cada 5 segundos) y detetermina el
+         * punto exacto del mapa en el que salen los enemigos
+         * La informacion que contiene cada spawn es(de momento):
+         * -type: range o melee, para saber el tipo de enemigo
+         * -size: el numero de enemigos que hay en ese spawn point
+         * -frecuency: cada cuantos segundos sale un enemigo en dicho spawn point
+         * -timer: contador de tiempo, para ir sabiendo cuando toca spawnear y cuando no
+         *
+         * 
+         */
         this.waveJson = this.game.cache.json.get('waves');
 
         this.currentWave = 0;
@@ -453,11 +469,11 @@ export default class MainScene extends Phaser.Scene {
 
         let playerPos = new Phaser.Math.Vector2(this.player.x,this.player.y);
 
+        let j = 0;
         //mientras no haya encontrado los puntos suficientes
         while(i < this.waveJson.NewWaves[this.currentWave].spawnsData.length){
             
             //j, contador para recorrer los spawnPoint del array en el que estan todos
-            let j = 0;
             let encontrado = false;
             //buscar un punto de los spawnPoints
             while(!encontrado && j < this.spawnPoints.length){
@@ -492,6 +508,8 @@ export default class MainScene extends Phaser.Scene {
 
                 j++;
             }
+
+
             i++;
 
         }
