@@ -13,6 +13,8 @@ export default class UI extends Phaser.Scene
             this.load.atlas('ui', 'srcJuego/ui/AtlasTexturas.png', 'srcJuego/ui/AtlasUI.json');
             this.load.image('heart', 'srcJuego/ui/Corazon.png');
             this.load.image('furiaEureka', 'srcJuego/ui/FuriaEureka2.png');
+            this.load.image('estadisticas', 'srcJuego/ui/estadisticas.png');
+            this.load.image('statsInGame', 'srcJuego/ui/statsInGame.png');
     }
     create() {
 
@@ -38,7 +40,6 @@ export default class UI extends Phaser.Scene
         this.furiaBG = this.add.nineslice(330, 1000, 'ui', 'GreyBG', 265, 50, 10, 10, 10, 10);
         this.furiaBar = this.add.nineslice(330, 1000, 'ui', 'OrangeBar', 265, 40, 10, 20, 20, 20);
         this.furiaFrame = this.add.nineslice(330, 1000, 'ui', 'GreyFrame', 265, 50, 10, 10, 10, 10);
-
         this.furiaBG.setOrigin(0, 0.5);
         this.furiaBar.setOrigin(0, 0.5);
         this.furiaFrame.setOrigin(0, 0.5);
@@ -46,12 +47,26 @@ export default class UI extends Phaser.Scene
         this.eurekaBG = this.add.nineslice(330, 1000, 'ui', 'GreyBG', 265, 50, 10, 10, 10, 10);
         this.eurekaBar = this.add.nineslice(330, 1000, 'ui', 'BlueBar', 265, 40, 10, 20, 20, 20);
         this.eurekaFrame = this.add.nineslice(330, 1000, 'ui', 'GreyFrame', 265, 50, 10, 10, 10, 10);
-
         this.eurekaBG.setOrigin(1, 0.5);
         this.eurekaBar.setOrigin(1, 0.5);
         this.eurekaFrame.setOrigin(1, 0.5);
 
         this.add.image(330, 1000, 'furiaEureka').setOrigin(0.5, 0.5).setScale(1, 1);
+
+
+        // Creación estadísticas
+        this.add.image(1880, 50, 'estadisticas').setOrigin(1, 0).setScale(1, 1);
+
+        this.lifeInfo = this.add.text(1860, 128, 'xxxx', { font: '30px JosefinMedium', fill: 'black' }).setOrigin(1, 0.5);
+        this.lifeRegenInfo = this.add.text(1860, 190, 'xxxx', { font: '30px JosefinMedium', fill: 'black' }).setOrigin(1, 0.5);
+        this.damageInfo = this.add.text(1860, 252, 'xxxx', { font: '30px JosefinMedium', fill: 'black' }).setOrigin(1, 0.5);
+        this.fireRateInfo = this.add.text(1860, 313, 'xxxx', { font: '30px JosefinMedium', fill: 'black' }).setOrigin(1, 0.5);
+        this.meleeArmorInfo = this.add.text(1860, 372, 'xxxx', { font: '30px JosefinMedium', fill: 'black' }).setOrigin(1, 0.5);
+        this.rangeArmorInfo = this.add.text(1860, 435, 'xxxx', { font: '30px JosefinMedium', fill: 'black' }).setOrigin(1, 0.5);
+        this.rangeInfo = this.add.text(1860, 498, 'xxxx', { font: '30px JosefinMedium', fill: 'black' }).setOrigin(1, 0.5);
+        this.speedInfo = this.add.text(1860, 557, 'xxxx', { font: '30px JosefinMedium', fill: 'black' }).setOrigin(1, 0.5);
+
+
 
         //this.healthFrame.setScale(10, 10);
 
@@ -71,20 +86,20 @@ export default class UI extends Phaser.Scene
         //datos de la oleada (por rellenar y gestionar actualizacion)
         this.waveData = this.add.text(100, 40,'Wave: '+ 1,{ font: '70px JosefinMedium', fill: 'blue' });
         
-        //texto de estadisticas
-        this.statsText = 
-        'Life: '+this.player.maxLife+'\n'+'\n'+
-        'Life Reg.: '+'\n'+'\n'+
-        'Damage: '+this.player.damage+'\n'+'\n'+
-        'Melee Arm.: '+ this.player._meleeArmor+'\n'+'\n'+
-        'Range Arm.: '+ this.player._rangeArmor+'\n'+'\n'+
-        'Range: '+this.player.range+'\n'+'\n'+
-        'Speed: '+this.player.speed;
-        this.stats = this.add.text(this.sys.game.canvas.width - 20, this.sys.game.canvas.height / 2, this.statsText, 
-            { font: '50px JosefinMedium', fill: 'white', align: 'right'}).setOrigin(1,0.5);
+        // //texto de estadisticas
+        // this.statsText = 
+        // 'Life: '+this.player.maxLife+'\n'+'\n'+
+        // 'Life Reg.: '+'\n'+'\n'+
+        // 'Damage: '+this.player.damage+'\n'+'\n'+
+        // 'Melee Arm.: '+ this.player._meleeArmor+'\n'+'\n'+
+        // 'Range Arm.: '+ this.player._rangeArmor+'\n'+'\n'+
+        // 'Range: '+this.player.range+'\n'+'\n'+
+        // 'Speed: '+this.player.speed;
+        // this.stats = this.add.text(this.sys.game.canvas.width - 20, this.sys.game.canvas.height / 2, this.statsText, 
+        //     { font: '50px JosefinMedium', fill: 'white', align: 'right'}).setOrigin(1,0.5);
 
-        this.dust = this.add.text(this.sys.game.canvas.width - 20, this.sys.game.canvas.height - 70,'Dust: ', 
-        { font: '50px JosefinMedium', fill: 'green', align: 'right'}).setOrigin(1,0.5);
+        // this.dust = this.add.text(this.sys.game.canvas.width - 20, this.sys.game.canvas.height - 70,'Dust: ', 
+        // { font: '50px JosefinMedium', fill: 'green', align: 'right'}).setOrigin(1,0.5);
     }
     update(t,dt) {
         const ourGame = this.scene.get('level');
@@ -101,7 +116,7 @@ export default class UI extends Phaser.Scene
         }
        this.timerUpdate(dt);
        this.updateStats();
-       this.dust.setText('Dust: ' + this.player.dust);
+       //this.dust.setText('Dust: ' + this.player.dust);
     }
 
     loadFont(name, url) {
@@ -139,15 +154,23 @@ export default class UI extends Phaser.Scene
           })) ;
     }
     updateStats(){
-        this.statsText = 
-        'Life: '+this.player.maxLife+'\n'+'\n'+
-        'Life Reg.: '+'\n'+'\n'+
-        'Damage: '+this.player.damage+'\n'+'\n'+
-        'Melee Arm.: '+ this.player._meleeArmor+'\n'+'\n'+
-        'Range Arm.: '+ this.player._rangeArmor+'\n'+'\n'+
-        'Range: '+this.player.range+'\n'+'\n'+
-        'Speed: '+this.player.speed;
-        this.stats.setText(this.statsText);
+        this.lifeInfo.setText(this.player.maxLife);
+        this.lifeRegenInfo.setText("xxxx");
+        this.damageInfo.setText(this.player.damage);
+        this.fireRateInfo.setText("xxxx");
+        this.meleeArmorInfo.setText(this.player._meleeArmor);
+        this.rangeArmorInfo.setText(this.player._rangeArmor);
+        this.rangeInfo.setText(this.player.range);
+        this.speedInfo.setText(this.player.speed);
+    //     this.statsText = 
+    //     'Life: '+this.player.maxLife+'\n'+'\n'+
+    //     'Life Reg.: '+'\n'+'\n'+
+    //     'Damage: '+this.player.damage+'\n'+'\n'+
+    //     'Melee Arm.: '+ this.player._meleeArmor+'\n'+'\n'+
+    //     'Range Arm.: '+ this.player._rangeArmor+'\n'+'\n'+
+    //     'Range: '+this.player.range+'\n'+'\n'+
+    //     'Speed: '+this.player.speed;
+    //     this.stats.setText(this.statsText);
     }
 
 }
