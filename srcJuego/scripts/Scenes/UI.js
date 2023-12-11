@@ -12,23 +12,46 @@ export default class UI extends Phaser.Scene
     preload () {
             this.load.atlas('ui', 'srcJuego/ui/AtlasTexturas.png', 'srcJuego/ui/AtlasUI.json');
             this.load.image('heart', 'srcJuego/ui/Corazon.png');
+            this.load.image('furiaEureka', 'srcJuego/ui/FuriaEureka2.png');
     }
     create() {
+
         this.player = this.scene.get('level').player;
         this.loadFont("JosefinBold", "srcJuego/fonts/JosefinSans-Bold.ttf");
+        this.loadFont("JosefinMedium", "srcJuego/fonts/JosefinSans-Medium.ttf");
 
-        // Creación de una barra de UI
-        this.healthBG = this.add.nineslice(100, 1000, 'ui', 'GreyBG', 500, 50, 10, 10, 10, 10);
-        this.healthBar = this.add.nineslice(100, 1000, 'ui', 'GreenBar', 500, 40, 10, 20, 20, 20);
-        this.healthFrame = this.add.nineslice(100, 1000, 'ui', 'GreyFrame', 500, 50, 10, 10, 10, 10);
+        // Creación de la barra de vida
+        this.healthBG = this.add.nineslice(100, 900, 'ui', 'GreyBG', 500, 50, 10, 10, 10, 10);
+        this.healthBar = this.add.nineslice(100, 900, 'ui', 'GreenBar', 500, 40, 10, 20, 20, 20);
+        this.healthFrame = this.add.nineslice(100, 900, 'ui', 'GreyFrame', 500, 50, 10, 10, 10, 10);
         this.healthBG.setOrigin(0, 0.5);
         this.healthBar.setOrigin(0, 0.5);
         this.healthFrame.setOrigin(0, 0.5);
 
-        this.add.image(90, 1000, 'heart').setOrigin(0.5, 0.5).setScale(0.15, 0.15);
+        this.add.image(90, 900, 'heart').setOrigin(0.5, 0.5).setScale(0.15, 0.15);
 
-        this.healthInfo = this.add.text(590, 1045, 'xxxx', { font: '25px JosefinBold', fill: 'black' });
+        this.healthInfo = this.add.text(590, 945, 'xxxx', { font: '25px JosefinBold', fill: 'black' });
         this.healthInfo.setOrigin(1, 0.5)
+
+
+        // Creación de la barra de furiaEureka
+        this.furiaBG = this.add.nineslice(330, 1000, 'ui', 'GreyBG', 265, 50, 10, 10, 10, 10);
+        this.furiaBar = this.add.nineslice(330, 1000, 'ui', 'OrangeBar', 265, 40, 10, 20, 20, 20);
+        this.furiaFrame = this.add.nineslice(330, 1000, 'ui', 'GreyFrame', 265, 50, 10, 10, 10, 10);
+
+        this.furiaBG.setOrigin(0, 0.5);
+        this.furiaBar.setOrigin(0, 0.5);
+        this.furiaFrame.setOrigin(0, 0.5);
+
+        this.eurekaBG = this.add.nineslice(330, 1000, 'ui', 'GreyBG', 265, 50, 10, 10, 10, 10);
+        this.eurekaBar = this.add.nineslice(330, 1000, 'ui', 'BlueBar', 265, 40, 10, 20, 20, 20);
+        this.eurekaFrame = this.add.nineslice(330, 1000, 'ui', 'GreyFrame', 265, 50, 10, 10, 10, 10);
+
+        this.eurekaBG.setOrigin(1, 0.5);
+        this.eurekaBar.setOrigin(1, 0.5);
+        this.eurekaFrame.setOrigin(1, 0.5);
+
+        this.add.image(330, 1000, 'furiaEureka').setOrigin(0.5, 0.5).setScale(1, 1);
 
         //this.healthFrame.setScale(10, 10);
 
@@ -46,7 +69,7 @@ export default class UI extends Phaser.Scene
         this.secondsCount = 0;
         this.minuteCount = 0;
         //datos de la oleada (por rellenar y gestionar actualizacion)
-        this.waveData = this.add.text(100, 40,'Wave: '+ 1,{ font: '70px JosefinBold', fill: 'blue' });
+        this.waveData = this.add.text(100, 40,'Wave: '+ 1,{ font: '70px JosefinMedium', fill: 'blue' });
         
         //texto de estadisticas
         this.statsText = 
@@ -58,10 +81,10 @@ export default class UI extends Phaser.Scene
         'Range: '+this.player.range+'\n'+'\n'+
         'Speed: '+this.player.speed;
         this.stats = this.add.text(this.sys.game.canvas.width - 20, this.sys.game.canvas.height / 2, this.statsText, 
-            { font: '50px JosefinBold', fill: 'white', align: 'right'}).setOrigin(1,0.5);
+            { font: '50px JosefinMedium', fill: 'white', align: 'right'}).setOrigin(1,0.5);
 
         this.dust = this.add.text(this.sys.game.canvas.width - 20, this.sys.game.canvas.height - 70,'Dust: ', 
-        { font: '50px JosefinBold', fill: 'green', align: 'right'}).setOrigin(1,0.5);
+        { font: '50px JosefinMedium', fill: 'green', align: 'right'}).setOrigin(1,0.5);
     }
     update(t,dt) {
         const ourGame = this.scene.get('level');
@@ -73,7 +96,8 @@ export default class UI extends Phaser.Scene
 
             this.healthBar.width = ourGame.player.health/ourGame.player.maxLife * 500;
 
-            //console.log (ourGame.player.health);
+            this.furiaBar.width = ourGame.player.rage/ourGame.player.rageMax * 265 + 50
+            this.eurekaBar.width = ourGame.player._eureka/ourGame.player.eurekaMax * 265 + 50
         }
        this.timerUpdate(dt);
        this.updateStats();
