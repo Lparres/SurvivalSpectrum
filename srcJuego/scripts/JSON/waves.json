@@ -24,9 +24,8 @@
                 {"type": "melee", "size": 2, "frecuency": 3000, "timer": 0 },
                 {"type": "melee", "size": 2, "frecuency": 3000, "timer": 0 },
                 {"type": "range", "size": 2, "frecuency": 3000, "timer": 0 },
-                {"type": "range", "size": 2, "frecuency": 3000, "timer": 0 }
-        ]
-
+                {"type": "range", "size": 2, "frecuency": 3000, "timer": 0 } 
+            ]
         },
         {
             "waveStartTime": 65,
@@ -41,8 +40,56 @@
                 {"type": "melee", "size": 3, "frecuency": 3000, "timer": 0 },
                 {"type": "range", "size": 3, "frecuency": 3000, "timer": 0 },
                 {"type": "range", "size": 3, "frecuency": 3000, "timer": 0 }
-        ]
+            ]
+        },
+        {
+            "waveStartTime": 160,
+            "spawnsData":[
+                {"type": "melee", "size": 4, "frecuency": 3000, "timer": 0 },
+                {"type": "melee", "size": 4, "frecuency": 3000, "timer": 0 },
+                {"type": "melee", "size": 4, "frecuency": 3000, "timer": 0 },
+                {"type": "melee", "size": 4, "frecuency": 3000, "timer": 0 },
+                {"type": "melee", "size": 4, "frecuency": 3000, "timer": 0 },
+                {"type": "melee", "size": 4, "frecuency": 3000, "timer": 0 },
+                {"type": "melee", "size": 4, "frecuency": 3000, "timer": 0 },
+                {"type": "melee", "size": 4, "frecuency": 3000, "timer": 0 },
+                {"type": "range", "size": 4, "frecuency": 3000, "timer": 0 },
+                {"type": "range", "size": 4, "frecuency": 3000, "timer": 0 }
+            ]
+
+        },
+        {
+            "waveStartTime": 300,
+            "spawnsData":[
+                {"type": "melee", "size": 5, "frecuency": 3000, "timer": 0 },
+                {"type": "melee", "size": 5, "frecuency": 3000, "timer": 0 },
+                {"type": "melee", "size": 5, "frecuency": 3000, "timer": 0 },
+                {"type": "melee", "size": 5, "frecuency": 3000, "timer": 0 },
+                {"type": "melee", "size": 5, "frecuency": 3000, "timer": 0 },
+                {"type": "melee", "size": 5, "frecuency": 3000, "timer": 0 },
+                {"type": "melee", "size": 5, "frecuency": 3000, "timer": 0 },
+                {"type": "melee", "size": 5, "frecuency": 3000, "timer": 0 },
+                {"type": "range", "size": 5, "frecuency": 3000, "timer": 0 },
+                {"type": "range", "size": 5, "frecuency": 3000, "timer": 0 }
+            ]
 
         }
+    ],
+
+    "Masillas":[
+        {
+            "spawnsData":[
+                {"type": "melee", "frecuency": 7500, "timer": 0 },
+                {"type": "melee", "frecuency": 11500, "timer": 0 },
+                {"type": "melee", "frecuency": 17500, "timer": 0 },
+                {"type": "melee", "frecuency": 23500, "timer": 0 },
+                {"type": "melee", "frecuency": 27500, "timer": 0 }
+                
+            ]
+        }
+        
+
     ]
+
+    
 }

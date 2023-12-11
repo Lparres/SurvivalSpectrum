@@ -63,15 +63,6 @@ export default class MainScene extends Phaser.Scene {
     //instance
     create() {//igual es recomendable que se haga una seccion de creacion de animaciones ya que asi ya estan listas cuando hagan falta
 
-        //variables de las oleadas
-        this.waveData = {
-            waveTime: 0,
-            waveCount: 0
-        }
-        //variables de las masillas
-        this.maxMasillaTime = 500;
-        this.masillasTimer = 0;
-
         this.data = this.game.cache.json.get('data');
         this.waveJson = this.game.cache.json.get('waves');
 
@@ -84,6 +75,9 @@ export default class MainScene extends Phaser.Scene {
 
         this.sortSpawnPointsFrecuency = 5000;
         this.sortSpawnPointsTimer = 9999;
+
+        //para calcular cuando sale la nueva oleada
+        this.globalTime = 0;
 
         // Cursor personalizado
         this.input.setDefaultCursor('url(srcJuego/img/crosshair.png) 16 16, pointer');
@@ -140,14 +134,9 @@ export default class MainScene extends Phaser.Scene {
 
         this.playerMove();
 
-
-        //actualizacion de temporizadores, le sumamos el delta time, milisegundos
-        this.masillasTimer += dt;
-        this.waveData.waveTime += dt;
-
         this.oleadasLogic(dt);
 
-        //this.masillasLogic();
+        this.masillasLogic(dt);
        
 
         //la cámara sigue al jugador
@@ -369,6 +358,15 @@ export default class MainScene extends Phaser.Scene {
     //oleadas
     oleadasLogic(dt) {
 
+        this.globalTime  = (this.scene.get("UIScene").minuteCount*60)+ this.scene.get("UIScene").secondsCount;
+
+        //si ha llegado el tiempo de la siguiente oleada, cambiar de oleada,y actualizar spawnPoints
+        if(this.globalTime >= this.waveJson.NewWaves[this.currentWave +1].waveStartTime ){
+            this.currentWave = this.currentWave+1;
+            this.sortSpawnPoints();
+            this.sortSpawnPointsTimer = 0;
+        }
+
         //actualizar la posicion de los spawnPoints, cuando toque
 
         this.sortSpawnPointsTimer += dt;
@@ -412,19 +410,36 @@ export default class MainScene extends Phaser.Scene {
     }
 
     //masillas, cambiar a logica de las oleadas
-    masillasLogic() {
+    masillasLogic(dt) {
 
-        if (this.masillasTimer > this.maxMasillaTime) {
-            let vector = new Phaser.Math.Vector2(0, 0);
-            let spawn = Phaser.Math.RandomXY(vector, Phaser.Math.Between(300, 500));
-            let enemyNumber = Phaser.Math.Between(0, 2);
+          //para cada uno de los spawns de las masillas
+          for(let i = 0; i < this.waveJson.Masillas[0].spawnsData.length ;i++){
+            
+            //actualizar el contador de tiempo
+            this.waveJson.Masillas[0].spawnsData[i].timer += dt;
 
-            this.meleeEnemiesPool.spawn(this.player.x + spawn.x, this.player.y + spawn.y,
-                'enemyMove', this.data.EnemyConfigs[enemyNumber]);
-            this.masillasTimer = 0;
-            this.maxMasillaTime = Phaser.Math.Between(3000, 6000);
-        }
+            //si toca spawnear y quedan enemigos en este spawn point
+            if(this.waveJson.Masillas[0].spawnsData[i].timer >=
+                this.waveJson.Masillas[0].spawnsData[i].frecuency) 
+            {
+                
+                //spawneo del enemigo en su spawnPoint 
+                
+                //spawnear segun el tipo
+                if(this.waveJson.Masillas[0].spawnsData[i].type == "melee"){
+                    this.meleeEnemiesPool.spawn(this.spawnPositions[i].x,this.spawnPositions[i].y,'enemyMove',this.data.EnemyConfigs[0]);
+                }
+                else if(this.waveJson.Masillas[0].spawnsData[i].type == "range"){
+                    this.rangeEnemiesPool.spawn(this.spawnPositions[i].x,this.spawnPositions[i].y,'enemyMove',this.data.RangeConfigs[0]);
+                }
+                
+                //console.log("masillasssss")
+                
+                //resetear el timer
+                this.waveJson.Masillas[0].spawnsData[i].timer = 0;
+            }
 
+        }     
     }
 
 
