@@ -143,6 +143,7 @@ export default class MainScene extends Phaser.Scene {
         //booleano que detiene el movimiento de los enemigos
         this.stopEnemy = false;
 
+       
     }
 
     //game tick
@@ -381,6 +382,9 @@ export default class MainScene extends Phaser.Scene {
             this.currentWave = this.currentWave+1;
             this.sortSpawnPoints();
             this.sortSpawnPointsTimer = 0;
+
+            //actualizar la info de la UI
+            this.scene.get("UIScene").updateWaveData();
         }
 
         //actualizar la posicion de los spawnPoints, cuando toque
