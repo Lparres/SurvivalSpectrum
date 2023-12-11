@@ -31,7 +31,7 @@ export default class UI extends Phaser.Scene
         // Creación de la barra de vida
         this.healthBG = this.add.nineslice(100, 900, 'ui', 'GreyBG', 500, 50, 10, 10, 10, 10);
         this.healthBar = this.add.nineslice(100, 900, 'ui', 'GreenBar', 500, 40, 10, 20, 20, 20);
-        this.healthFrame = this.add.nineslice(100, 900, 'ui', 'GreyFrame', 500, 50, 10, 10, 10, 10);
+        this.healthFrame = this.add.nineslice(100, 900, 'ui', 'BlackFrame', 500, 50, 10, 10, 10, 10);
         this.healthBG.setOrigin(0, 0.5);
         this.healthBar.setOrigin(0, 0.5);
         this.healthFrame.setOrigin(0, 0.5);
@@ -45,14 +45,14 @@ export default class UI extends Phaser.Scene
         // Creación de la barra de furiaEureka
         this.furiaBG = this.add.nineslice(330, 1000, 'ui', 'GreyBG', 265, 50, 10, 10, 10, 10);
         this.furiaBar = this.add.nineslice(330, 1000, 'ui', 'OrangeBar', 265, 40, 10, 20, 20, 20);
-        this.furiaFrame = this.add.nineslice(330, 1000, 'ui', 'GreyFrame', 265, 50, 10, 10, 10, 10);
+        this.furiaFrame = this.add.nineslice(330, 1000, 'ui', 'BlackFrame', 265, 50, 10, 10, 10, 10);
         this.furiaBG.setOrigin(0, 0.5);
         this.furiaBar.setOrigin(0, 0.5);
         this.furiaFrame.setOrigin(0, 0.5);
 
         this.eurekaBG = this.add.nineslice(330, 1000, 'ui', 'GreyBG', 265, 50, 10, 10, 10, 10);
         this.eurekaBar = this.add.nineslice(330, 1000, 'ui', 'BlueBar', 265, 40, 10, 20, 20, 20);
-        this.eurekaFrame = this.add.nineslice(330, 1000, 'ui', 'GreyFrame', 265, 50, 10, 10, 10, 10);
+        this.eurekaFrame = this.add.nineslice(330, 1000, 'ui', 'BlackFrame', 265, 50, 10, 10, 10, 10);
         this.eurekaBG.setOrigin(1, 0.5);
         this.eurekaBar.setOrigin(1, 0.5);
         this.eurekaFrame.setOrigin(1, 0.5);
@@ -61,16 +61,16 @@ export default class UI extends Phaser.Scene
 
 
         // Creación estadísticas
-        this.add.image(1880, 50, 'estadisticas').setOrigin(1, 0).setScale(1, 1);
+        this.estadisticasImg = this.add.image(1880, 250, 'estadisticas').setOrigin(1, 0).setScale(1, 1);
 
-        this.lifeInfo = this.add.text(1860, 128, 'xxxx', { font: '30px JosefinMedium', fill: 'black' }).setOrigin(1, 0.5);
-        this.lifeRegenInfo = this.add.text(1860, 190, 'xxxx', { font: '30px JosefinMedium', fill: 'black' }).setOrigin(1, 0.5);
-        this.damageInfo = this.add.text(1860, 252, 'xxxx', { font: '30px JosefinMedium', fill: 'black' }).setOrigin(1, 0.5);
-        this.fireRateInfo = this.add.text(1860, 313, 'xxxx', { font: '30px JosefinMedium', fill: 'black' }).setOrigin(1, 0.5);
-        this.meleeArmorInfo = this.add.text(1860, 372, 'xxxx', { font: '30px JosefinMedium', fill: 'black' }).setOrigin(1, 0.5);
-        this.rangeArmorInfo = this.add.text(1860, 435, 'xxxx', { font: '30px JosefinMedium', fill: 'black' }).setOrigin(1, 0.5);
-        this.rangeInfo = this.add.text(1860, 498, 'xxxx', { font: '30px JosefinMedium', fill: 'black' }).setOrigin(1, 0.5);
-        this.speedInfo = this.add.text(1860, 557, 'xxxx', { font: '30px JosefinMedium', fill: 'black' }).setOrigin(1, 0.5);
+        this.lifeInfo = this.add.text(this.estadisticasImg.x - 20, this.estadisticasImg.y + 78, 'xxxx', { font: '30px JosefinMedium', fill: '#424242' }).setOrigin(1, 0.5);
+        this.lifeRegenInfo = this.add.text(this.estadisticasImg.x - 20, this.estadisticasImg.y + 140, 'xxxx', { font: '30px JosefinMedium', fill: '#424242' }).setOrigin(1, 0.5);
+        this.damageInfo = this.add.text(this.estadisticasImg.x - 20, this.estadisticasImg.y + 202, 'xxxx', { font: '30px JosefinMedium', fill: '#424242' }).setOrigin(1, 0.5);
+        this.fireRateInfo = this.add.text(this.estadisticasImg.x - 20, this.estadisticasImg.y + 263, 'xxxx', { font: '30px JosefinMedium', fill: '#424242' }).setOrigin(1, 0.5);
+        this.meleeArmorInfo = this.add.text(this.estadisticasImg.x - 20, this.estadisticasImg.y + 322, 'xxxx', { font: '30px JosefinMedium', fill: '#424242' }).setOrigin(1, 0.5);
+        this.rangeArmorInfo = this.add.text(this.estadisticasImg.x - 20, this.estadisticasImg.y + 385, 'xxxx', { font: '30px JosefinMedium', fill: '#424242' }).setOrigin(1, 0.5);
+        this.rangeInfo = this.add.text(this.estadisticasImg.x - 20, this.estadisticasImg.y + 448, 'xxxx', { font: '30px JosefinMedium', fill: '#424242' }).setOrigin(1, 0.5);
+        this.speedInfo = this.add.text(this.estadisticasImg.x - 20, this.estadisticasImg.y + 507, 'xxxx', { font: '30px JosefinMedium', fill: '#424242' }).setOrigin(1, 0.5);
 
 
 
@@ -129,8 +129,18 @@ export default class UI extends Phaser.Scene
 
             this.healthBar.width = ourGame.player.health/ourGame.player.maxLife * 500;
 
-            this.furiaBar.width = ourGame.player.rage/ourGame.player.rageMax * 265 + 50
-            this.eurekaBar.width = ourGame.player._eureka/ourGame.player.eurekaMax * 265 + 50
+            if(ourGame.player.rageMode){
+                this.furiaBar.width = (ourGame.player.dicTotalTime - ourGame.player.dicTime)/ourGame.player.dicTotalTime * 215 + 50
+            }else{
+                this.furiaBar.width = ourGame.player.rage/ourGame.player.rageMax * 215 + 50
+            }
+            if(ourGame.player.eurekaMode){
+                
+                this.eurekaBar.width = (ourGame.player.dicTotalTime - ourGame.player.dicTime)/ourGame.player.dicTotalTime * 215 + 50
+            }else{
+                this.eurekaBar.width = ourGame.player._eureka/ourGame.player.eurekaMax * 215 + 50
+            }
+            
         }
        this.timerUpdate(dt);
        this.updateStats();

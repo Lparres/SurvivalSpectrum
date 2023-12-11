@@ -20,7 +20,7 @@ export default class MainScene extends Phaser.Scene {
         let srcJuego = 'srcJuego';
         //carga de imagenes y SpriteSheets
         this.load.image('kirby', srcJuego + '/img/kirby.png');
-        this.load.image('polvos', srcJuego + '/img/polvos.jpg');
+        this.load.image('polvos', srcJuego + '/img/dust.png');
 
 
         //this.load.image('player',srcJuego+ '/Sprites/Character/with_hands/death_0 - copia - copia.png');   

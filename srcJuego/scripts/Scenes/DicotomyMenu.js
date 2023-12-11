@@ -41,7 +41,7 @@ export default class Menu extends Phaser.Scene {
             let MainScene = this.scene.get('level');
             this.scene.wake('UIScene');
             this.scene.sleep('Menu');
-            MainScene.scene.setActive(true);
+            MainScene.scene.setActive(true);    
         })
 
         
