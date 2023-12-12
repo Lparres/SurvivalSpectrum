@@ -57,6 +57,8 @@ export default class MainScene extends Phaser.Scene {
 
         this.load.json('waves', 'srcJuego/scripts/JSON/waves.json');
 
+        //this.load.audio('music','srcJuego/audio/musica.mp3');
+
         this.cameras.main.zoom= 2;
     }
 
@@ -143,7 +145,8 @@ export default class MainScene extends Phaser.Scene {
         //booleano que detiene el movimiento de los enemigos
         this.stopEnemy = false;
 
-       
+       //this.music = this.sound.add('music',{volume: 0.05,loop:true});
+       //this.music.play();
     }
 
     //game tick
