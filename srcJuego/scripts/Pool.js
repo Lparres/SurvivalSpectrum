@@ -1,5 +1,7 @@
 /**
  * Pool de objetos que heredan de Phaser.Sprite
+ * 
+ * Se podria pasar un objeto plantilla para rellenar la pool y que luego esta lo clonase tantas veces como fuera necesario
  */
 export default class Pool {
 
