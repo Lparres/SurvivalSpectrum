@@ -31,6 +31,7 @@
 
     setUp(objectConfig){
         this.amount = objectConfig.amount;
+        this.setDepth(10);
     }
 
 }

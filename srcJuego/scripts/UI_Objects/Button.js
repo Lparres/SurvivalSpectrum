@@ -28,4 +28,7 @@ export default class Button extends Phaser.GameObjects.Sprite{
             this.setScale(baseScale+0.05,baseScale+0.05);
         })
     }
+    preUpdate(t,dt){
+        //console.log("antonio");
+    }
 }

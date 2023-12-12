@@ -168,7 +168,7 @@ export default class MainScene extends Phaser.Scene {
         this.enemiesBulletsPool = new Pool(this, 200);
         this.meleeEnemiesPool = new Pool(this, 50);
         this.rangeEnemiesPool = new Pool(this, 50);
-        this.dustPool = new Pool(this, 100);
+        this.dustPool = new Pool(this, 100, 'polvos');
 
 
         let plBullets = [];
@@ -215,7 +215,7 @@ export default class MainScene extends Phaser.Scene {
 
         for (let i = 0; i < 100; i++) {
             let aux = new InteractuableObjects(this, 0, 0, 'polvos', this.dustPool, (amount) => {
-                aux.setDepth(10);
+                //aux.setDepth(10);
                 this.player.addDust(amount);
             });
             dustArr.push(aux);

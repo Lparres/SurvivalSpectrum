@@ -3,10 +3,11 @@
  */
 export default class Pool {
 
-    constructor(scene, size){
+    constructor(scene, size, key){
         this.group = scene.add.group();
         this.scene = scene;
         this.maxSize = size;
+        this.key=key;
 
     }
 
@@ -54,8 +55,15 @@ export default class Pool {
             entity = this.group.getFirstNth(1,true);
             this.group.remove(entity);
             this.group.add(entity);
+            if(this.key !== undefined){
+                console.log("no queda");
+            }
         }
         else{
+            if(this.key !== undefined){
+                console.log("else");
+
+            }
             //set up de la entidad
             entity.x = x;
 			entity.y = y;
@@ -65,9 +73,10 @@ export default class Pool {
 			if(animKey != ' '){
                 entity.play(animKey)
             }
+            //es posible que el set active quite configuraciones de profundidad
 			entity.setActive(true);
 			entity.setVisible(true); 
-
+            //entity.setDepth(10);
             entity.setUp(settings);
 
             //activar colisiones
