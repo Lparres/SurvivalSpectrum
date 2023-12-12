@@ -98,15 +98,14 @@ export default class UI extends Phaser.Scene
 
         this.enemies = this.add.text(100, 260,'Enemies: ',{ font: '50px JosefinMedium', fill: 'blue' });
     
-
         this.dust = this.add.text(this.sys.game.canvas.width - 20, this.sys.game.canvas.height - 70,'xxxx', 
-         { font: '50px JosefinMedium', fill: 'black', align: 'right'}).setOrigin(1,0.5);
+        { font: '50px JosefinMedium', fill: 'black', align: 'right'}).setOrigin(1,0.5);
+    
 
-
-
-
+        this.add.image(this.sys.game.canvas.width - 150,this.sys.game.canvas.height - 70, 'polvos').setScale(0.1).setOrigin(1,0.5);
+        
         this.updateWaveData();
-
+        
     }
     update(t,dt) {
         
@@ -181,15 +180,6 @@ export default class UI extends Phaser.Scene
         this.rangeArmorInfo.setText(this.player._rangeArmor);
         this.rangeInfo.setText(this.player.range);
         this.speedInfo.setText(this.player.speed);
-    //     this.statsText = 
-    //     'Life: '+this.player.maxLife+'\n'+'\n'+
-    //     'Life Reg.: '+'\n'+'\n'+
-    //     'Damage: '+this.player.damage+'\n'+'\n'+
-    //     'Melee Arm.: '+ this.player._meleeArmor+'\n'+'\n'+
-    //     'Range Arm.: '+ this.player._rangeArmor+'\n'+'\n'+
-    //     'Range: '+this.player.range+'\n'+'\n'+
-    //     'Speed: '+this.player.speed;
-    //     this.stats.setText(this.statsText);
     }
 
     //update de la info de oleadas, revisar pls
