@@ -70,7 +70,8 @@ export default class Dicotomías
      switch(dic){
           case 1:
                this.player.rageMax = this. EmotionalValue();
-               this.player.eurekaMax = this.RationalValue();
+               //this.player.eurekaMax = this.RationalValue();
+               this.player.eurekaMax =1000;
                break;
           case 2:
                this.player.range = this.ExtrovertValue(this.player.baseRange);

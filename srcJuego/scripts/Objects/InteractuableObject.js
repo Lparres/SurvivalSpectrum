@@ -14,7 +14,7 @@
         super(scene,x,y,key);
         this.collisionFunction = collisionFunction;
         this.pool = pool;
-        this.setScale(0.05);
+        this.setScale(0.02);
 
         //añadirlo a la escena
         this.scene.add.existing(this);
