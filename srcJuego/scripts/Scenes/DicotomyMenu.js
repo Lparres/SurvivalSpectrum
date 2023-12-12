@@ -13,39 +13,18 @@ export default class Menu extends Phaser.Scene {
     }
     preload() {
         this.load.image('mas', 'srcJuego/img/simbolo_mas.png')
+        this.load.image('marcoDial', 'srcJuego/ui/ImagenDial_3.png')
     }
     create() {
         this.dicotomyManager = this.scene.get('level').dicotomyManager;
         this.player = this.scene.get('level').player;
-        //console.log(this.player)
-        this.statsText =
-            'Life: ' + this.player.maxLife + '\n' +
-            'Life Reg.: ' + '\n' +
-            'Damage: ' + this.player.damage + '\n' +
-            'Melee Armor: ' + this.player._meleeArmor + '\n' +
-            'Range Armor: ' + this.player._rangeArmor + '\n' +
-            'Range: ' + this.player.range + '\n' +
-            'Speed: ' + this.player.speed + '\n';
-
-        const statsTextConfig = {
-            font: '40px JosefinBold',
-            fill: 'white',
-            aling: 'right',
-            fixedWidth: 300
-        }
-        //this.statsObj = this.add.text(200,0,this.statsText, 
-        //    {   
-        //        font: '40px JosefinBold', 
-        //        fill: 'white', 
-        //        aling:'center',
-        //        fixedWidth: 300
-        //    }).setOrigin(0.5,0.5);
 
         var centro = this.add.container(this.sys.game.canvas.width / 2, this.sys.game.canvas.height / 2);
-        const fondo = //this.add.nineslice(0, 0, 'ui', 'GreenBar', 1000, 1000, 10, 20, 20, 20);
-            this.add.rectangle(0, 0, 1000, 1000, 0x6666ff);
+        const fondo = this.add.nineslice(0, 0, 'ui', 'DicotomyMenuBG', 1000, 1000, 13, 13, 13, 13);
+            //this.add.rectangle(0, 0, 1000, 1000, 0x6666ff);
         const titulo = this.add.text(0, -450, 'Menu dicotomias', { font: '40px JosefinBold', fill: 'black', aling: 'center' }).setOrigin(0.5, 0);
 
+        //boton para salir del menú
         const unpause = new Button(this, 0, 400, 'heart', 0.15, () => {
             let UI = this.scene.get('UIScene');
             let MainScene = this.scene.get('level');
@@ -54,13 +33,15 @@ export default class Menu extends Phaser.Scene {
             MainScene.scene.setActive(true);
         })
 
-
-
         centro.add(fondo);
         centro.add(unpause);
         centro.add(titulo);
 
-        this.polvosMagicos = this.add.text(-350, -450, this.player.dust, { font: '40px JosefinBold', fill: 'black', aling: 'center' }).setOrigin(0.5, 0);
+
+
+        centro.add(this.add.image(-450,-450,'polvos').setScale(0.08).setOrigin(0,0));
+
+        this.polvosMagicos = this.add.text(-280, -450, this.player.dust, { font: '40px JosefinBold', fill: 'black', aling: 'left' }).setOrigin(1, 0);
         centro.add(this.polvosMagicos);
 
         this.container1 = new DicContainer(this, -200, -320, 1);
@@ -75,33 +56,21 @@ export default class Menu extends Phaser.Scene {
         this.container4 = new DicContainer(this, 200, -180, 4);
         centro.add(this.container4);
 
-        //var lat = new StatsContainer(this, 0,0);
-
-        //var lateral= this.add.container(220,this.sys.game.canvas.height / 2);
-        //const fondoLat = this.add.nineslice(0, 0, 'ui', 'GreyBG', 390, 800, 10, 10, 10, 10).setOrigin(0,0.5);
-
-        //lateral.add(this.statsObj);
-
+        //contenedor del bloque de estadisticas
         this.latcont = new LatContainer(this, 400, this.sys.game.canvas.height / 2).setScale(1.2);
-        //this.add.existing(this.latcont)
-        //centro.add(this.latcont);
     }
     update(t, dt) {
-        //this.statsText = 
-        //'Life: '+this.player.maxLife+'\n'+'\n'+
-        //'Life Reg.: '+'\n'+'\n'+
-        //'Damage: '+this.player.damage+'\n'+'\n'+
-        //'Melee Arm.: '+ this.player._meleeArmor+'\n'+'\n'+
-        //'Range Arm.: '+ this.player._rangeArmor+'\n'+'\n'+
-        //'Range: '+this.player.range+'\n'+'\n'+
-        //'Speed: '+this.player.speed;
-        this.polvosMagicos.setText('polvos: ' + this.player.dust);
-        //this.statsObj.setText(this.statsText);
+
+        this.polvosMagicos.setText(this.player.dust);
     }
 }
+
+/**
+ * Clase para organizar los diales de dicotomias
+ */
 class DicContainer extends Phaser.GameObjects.Container {
     constructor(scene, x, y, dic) {
-        const dicPrice = 1;
+        const dicPrice = 20;
         super(scene, x, y);
         this.dicNum = dic;
         this.dicotomyManager =scene.scene.get('level').dicotomyManager;
@@ -119,17 +88,17 @@ class DicContainer extends Phaser.GameObjects.Container {
                 this.dicPer = scene.scene.get('level').dicotomyManager.perDic4;
                 break;
         }
-        this.add(scene.add.rectangle(0, 0, 380, 90, 0xffffff));
-        this.add(scene.add.nineslice(0, 0, 'ui', 'GreyBG', 380, 90, 10, 10, 10, 10));
-        this.dicValText = scene.add.text(0, 0, this.dicotomyManager.dicName(this.dicNum) + ' '+this.dicPer, { font: '35px JosefinBold', fill: 'black', aling: 'center' }).setOrigin(0.5, 0);
+        this.add(scene.add.image(0,0,'marcoDial'));
+        //this.add(scene.add.nineslice(0, 0, 'ui', 'SilverFrame', 380, 90, 10, 10, 10, 10));
+        this.dicValText = scene.add.text(0, 0, this.dicotomyManager.dicName(this.dicNum) + ' '+this.dicPer, { font: '30px JosefinBold', fill: 'black', aling: 'center' }).setOrigin(0.5, 0);
         this.add(this.dicValText);
 
 
-        this.dial = scene.add.rectangle(20, 0, 5, 40, 0xff0000).setOrigin(0.5, 0.8).setDepth(5);
+        this.dial = scene.add.rectangle(20, 0, 5,25, 0xff0000).setOrigin(0.5, 1);
         this.add(this.dial);
 
         //boton de bajar dicotomia
-        this.add(new Button(scene, -135, 0, 'kirby', 0.10, () => {
+        this.add(new Button(scene, -135, 0, 'kirby', 0.08, () => {
             if (scene.player.dust > 0 && this.dicPer > 0) {
                 this.SubDicotomy(this.dicNum);
                 scene.scene.get('level').dicotomyManager.AplieDicotomy(this.dicNum);
@@ -199,20 +168,17 @@ class DicContainer extends Phaser.GameObjects.Container {
 
     preUpdate(t,dt){
         this.dial.x = (this.dicPer-50)*150/90;
-        //console.log(this.dial)
-        //console.log(this.dial.x, this.dicPer);
     }
     
 }
+
+/**
+ * Contenedor para el bloque de estadisticas
+ */
 class LatContainer extends Phaser.GameObjects.Container {
 
     constructor(scene, x, y) {
         super(scene, x, y)
-        //const fondoLat = scene.add.nineslice(0, 0, 'ui', 'GreyBG', 390, 800, 10, 10, 10, 10).setOrigin(0, 0.5);
-
-        //this.add(fondoLat);
-
-
 
         this.estadisticasImg = scene.add.image(0, 0, 'estadisticas').setOrigin(1, 0.5).setScale(1, 1);
         this.add(this.estadisticasImg);
@@ -228,20 +194,6 @@ class LatContainer extends Phaser.GameObjects.Container {
         this.speedInfo = scene.add.text(-20, 234, 'xxxx', { font: '30px JosefinMedium', fill: '#424242' }).setOrigin(1, 0.5);
 
 
-
-
-
-        //this.lifeText = scene.add.text(margin + x, verticalSpacing + spacig, "Life:", statsTextConfig).setOrigin(0, 1);
-        //this.lifeRegText = scene.add.text(margin + x, verticalSpacing + spacig * 2, "Life Reg:", statsTextConfig).setOrigin(0, 1);
-        //this.damageText = scene.add.text(margin + x, verticalSpacing + spacig * 3, "Damage:", statsTextConfig).setOrigin(0, 1);
-        //this.meleeArmorText = scene.add.text(margin + x, verticalSpacing + spacig * 4, "Melee Armor:", statsTextConfig).setOrigin(0, 1);
-        //this.rangeArmorText = scene.add.text(margin + x, verticalSpacing + spacig * 5, "Range Armor:", statsTextConfig).setOrigin(0, 1);
-        //this.rangeText = scene.add.text(margin + x, verticalSpacing + spacig * 6, "Range:", statsTextConfig).setOrigin(0, 1);
-        //this.speedText = scene.add.text(margin + x, verticalSpacing + spacig * 7, "Speed:", statsTextConfig).setOrigin(0, 1);
-//
-        //this.title = scene.add.text(0, 0, "Stats", statsTextConfig).setOrigin(0.5, 0);
-
-        //this.add(this.title);
         this.add(this.lifeInfo);
         this.add(this.lifeRegenInfo);
         this.add(this.damageInfo);

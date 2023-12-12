@@ -1,4 +1,7 @@
 import Button from '../UI_Objects/Button.js'
+//Va a ser necesario organizar la ui con containers para la dicotomía que la oculta para
+//que sea mas sencillo de hacer
+
 export default class UI extends Phaser.Scene    
 {
    
