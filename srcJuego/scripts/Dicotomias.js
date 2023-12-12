@@ -90,6 +90,6 @@ export default class Dicotomías
      return baseRange + baseRange*(this.perDic2/100-0.5);
    }
    IntrovertValue(baseDamage){
-     return baseDamage + baseDamage*((100-this.perDic2)/100-0.5)*8;
+     return baseDamage + baseDamage*((100-this.perDic2)/100-0.5);
    }
 }
