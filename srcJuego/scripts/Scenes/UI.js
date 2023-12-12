@@ -89,6 +89,7 @@ export default class UI extends Phaser.Scene
         this.timeText = this.add.text(800, 40,' ',{ font: '100px JosefinBold', fill: 'red' });
         this.secondsCount = 0;
         this.minuteCount = 0;
+
         //datos de la oleada (por rellenar y gestionar actualizacion)
         this.waveData = this.add.text(100, 40,'Wave: '+ (this.scene.get("level").currentWave+1),{ font: '70px JosefinMedium', fill: 'blue' });
          
@@ -96,22 +97,10 @@ export default class UI extends Phaser.Scene
         this.nextWave = this.add.text(100, 150,'Next Wave: ',{ font: '70px JosefinMedium', fill: 'blue' });
 
         this.enemies = this.add.text(100, 260,'Enemies: ',{ font: '50px JosefinMedium', fill: 'blue' });
-        
+    
 
-        // //texto de estadisticas
-        // this.statsText = 
-        // 'Life: '+this.player.maxLife+'\n'+'\n'+
-        // 'Life Reg.: '+'\n'+'\n'+
-        // 'Damage: '+this.player.damage+'\n'+'\n'+
-        // 'Melee Arm.: '+ this.player._meleeArmor+'\n'+'\n'+
-        // 'Range Arm.: '+ this.player._rangeArmor+'\n'+'\n'+
-        // 'Range: '+this.player.range+'\n'+'\n'+
-        // 'Speed: '+this.player.speed;
-        // this.stats = this.add.text(this.sys.game.canvas.width - 20, this.sys.game.canvas.height / 2, this.statsText, 
-        //     { font: '50px JosefinMedium', fill: 'white', align: 'right'}).setOrigin(1,0.5);
-
-        // this.dust = this.add.text(this.sys.game.canvas.width - 20, this.sys.game.canvas.height - 70,'Dust: ', 
-        // { font: '50px JosefinMedium', fill: 'green', align: 'right'}).setOrigin(1,0.5);
+        this.dust = this.add.text(this.sys.game.canvas.width - 20, this.sys.game.canvas.height - 70,'xxxx', 
+         { font: '50px JosefinMedium', fill: 'black', align: 'right'}).setOrigin(1,0.5);
 
 
 
@@ -145,7 +134,7 @@ export default class UI extends Phaser.Scene
        this.timerUpdate(dt);
        this.updateStats();
 
-       //this.dust.setText('Dust: ' + this.player.dust);
+       this.dust.setText(this.player.dust);
 
     }
 

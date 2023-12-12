@@ -62,6 +62,23 @@ export default class Dicotomías
                return this.perDic4;
      }
    }
+
+   /**
+    * devuelve el nombre de la dicotoia pedida
+    * @param {number} dic numero de la dicotomia
+    */
+   dicName(dic){
+     switch(dic){
+          case 1:
+               return "R/E";
+          case 2:
+               return "I/E";
+          case 3:
+               return "S/I";
+          case 4:
+               return "J/P";
+     }
+   }
    /**
     * 
     * @param {number} dic numero de dicotomia a la que quieres aplicar cambios

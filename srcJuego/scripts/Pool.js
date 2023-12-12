@@ -57,15 +57,14 @@ export default class Pool {
             entity = this.group.getFirstNth(1,true);
             this.group.remove(entity);
             this.group.add(entity);
-            if(this.key !== undefined){
-                console.log("no queda");
-            }
+            //if(this.key !== undefined){
+            //    console.log("no queda");
+            //}
         }
         else{
-            if(this.key !== undefined){
-                console.log("else");
-
-            }
+            //if(this.key !== undefined){
+            //    console.log("else");
+            //}
             //set up de la entidad
             entity.x = x;
 			entity.y = y;
