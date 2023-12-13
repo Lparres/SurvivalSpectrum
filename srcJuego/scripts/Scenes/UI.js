@@ -19,6 +19,9 @@ export default class UI extends Phaser.Scene
             this.load.image('furiaEureka', 'srcJuego/ui/FuriaEureka2.png');
             this.load.image('estadisticas', 'srcJuego/ui/estadisticas.png');
             this.load.image('statsInGame', 'srcJuego/ui/statsInGame.png');
+            this.load.image('waveInfo', 'srcJuego/ui/WaveInfo.png');
+            this.load.image('nextWave', 'srcJuego/ui/NextWave.png');
+            this.load.image('map', 'srcJuego/ui/Mapa.png');
     }
     create() {
 
@@ -64,7 +67,7 @@ export default class UI extends Phaser.Scene
 
 
         // Creación estadísticas
-        this.estadisticasImg = this.add.image(1880, 250, 'estadisticas').setOrigin(1, 0).setScale(1, 1);
+        this.estadisticasImg = this.add.image(1880, 360, 'estadisticas').setOrigin(1, 0).setScale(1, 1);
 
         this.lifeInfo = this.add.text(this.estadisticasImg.x - 20, this.estadisticasImg.y + 78, 'xxxx', { font: '30px JosefinMedium', fill: '#424242' }).setOrigin(1, 0.5);
         this.lifeRegenInfo = this.add.text(this.estadisticasImg.x - 20, this.estadisticasImg.y + 140, 'xxxx', { font: '30px JosefinMedium', fill: '#424242' }).setOrigin(1, 0.5);
@@ -75,38 +78,33 @@ export default class UI extends Phaser.Scene
         this.rangeInfo = this.add.text(this.estadisticasImg.x - 20, this.estadisticasImg.y + 448, 'xxxx', { font: '30px JosefinMedium', fill: '#424242' }).setOrigin(1, 0.5);
         this.speedInfo = this.add.text(this.estadisticasImg.x - 20, this.estadisticasImg.y + 507, 'xxxx', { font: '30px JosefinMedium', fill: '#424242' }).setOrigin(1, 0.5);
 
-
-
-        //this.healthFrame.setScale(10, 10);
-
-        // this.tweens.add({
-        //     targets: fill1,
-        //     width: 800,
-        //     duration: 3000,
-        //     ease: 'sine.inout',
-        //     yoyo: true,
-        //     repeat: -1,
-        // });
-
         //texto de crono
         this.timeText = this.add.text(800, 40,' ',{ font: '100px JosefinBold', fill: 'red' });
         this.secondsCount = 0;
         this.minuteCount = 0;
 
         //datos de la oleada (por rellenar y gestionar actualizacion)
-        this.waveData = this.add.text(100, 40,'Wave: '+ (this.scene.get("level").currentWave+1),{ font: '70px JosefinMedium', fill: 'blue' });
-         
+        this.waveData = this.add.image(150, 190, 'waveInfo').setOrigin(0.5, 0.5).setScale(1, 1);
+        this.waveN = this.add.text(this.waveData.x, this.waveData.y - 78,'xxxx',{ font: '40px JosefinMedium', fill: '#424242'}).setOrigin(0.5, 0.5);
+        this.enemiesN = this.add.text(this.waveData.x, this.waveData.y + 35,'123',{ font: '33px JosefinMedium', fill: '#424242' }).setOrigin(0.5, 0.5);
+
         //el momento en el que saldrá la siguiente oleada
-        this.nextWave = this.add.text(100, 150,'Next Wave: ',{ font: '70px JosefinMedium', fill: 'blue' });
+        this.nextWaveIMG = this.add.image(150, 450, 'nextWave').setOrigin(0.5, 0.5).setScale(1, 1);
 
-        this.enemies = this.add.text(100, 260,'Enemies: ',{ font: '50px JosefinMedium', fill: 'blue' });
-    
-        this.dust = this.add.text(this.sys.game.canvas.width - 20, this.sys.game.canvas.height - 70,'xxxx', 
-        { font: '50px JosefinMedium', fill: 'black', align: 'right'}).setOrigin(1,0.5);
-    
+        this.nextWave = this.add.text(this.nextWaveIMG.x, this.nextWaveIMG.y + 24,'xxxx',{ font: '35px JosefinMedium', fill: 'white' }).setOrigin(0.5, 0.5);    
 
-        this.add.image(this.sys.game.canvas.width - 150,this.sys.game.canvas.height - 70, 'polvos').setScale(0.1).setOrigin(1,0.5);
         
+        // Creación indicador dust
+        this.dust = this.add.text(1730, 1000,'xxxx', 
+        { font: '50px JosefinMedium', fill: 'white', align: 'right', stroke: 'black', strokeThickness: 5}).setOrigin(1,0.5);
+    
+        this.add.image(1860 , 1000, 'polvos').setScale(0.1).setOrigin(1,0.5);
+        
+
+        // Creación del mapa
+        this.map = this.add.image(1730, 180, 'map').setOrigin(0.5, 0.5).setScale(0.6, 0.6);
+
+
         this.updateWaveData();
         
     }
@@ -189,10 +187,10 @@ export default class UI extends Phaser.Scene
     updateWaveData() {
 
         //actualizar el numero de oleada
-        this.waveData.setText('Wave: '+ (this.mainScene.currentWave+1));
+        this.waveN.setText(this.mainScene.currentWave+1);
         
         //actualizar el timer de la proxima oleada
-        this.nextWave.setText('Next Wave: ' + Math.floor(this.mainScene.waveJson.NewWaves[this.mainScene.currentWave +1].waveStartTime / 60).toLocaleString('en-US', {
+        this.nextWave.setText(Math.floor(this.mainScene.waveJson.NewWaves[this.mainScene.currentWave +1].waveStartTime / 60).toLocaleString('en-US', {
             minimumIntegerDigits: 2,
             useGrouping: false,
             maximumFractionDigits:0
@@ -209,7 +207,7 @@ export default class UI extends Phaser.Scene
             nEnemies += this.mainScene.waveJson.NewWaves[this.mainScene.currentWave].spawnsData[i].size;
         }
 
-        this.enemies.setText('Total wave enemies: '+ nEnemies);
+        this.enemiesN.setText(nEnemies);
 
     }
     
