@@ -453,10 +453,10 @@ export default class MainScene extends Phaser.Scene {
                 //spawnear segun el tipo
                 
                 if(this.waveJson.NewWaves[this.currentWave].spawnsData[i].type == "melee"){
-                    this.meleeEnemiesPool.spawn(this.spawnPositions[i].x,this.spawnPositions[i].y,'enemyMove2',this.data.EnemyConfigs[0]);
+                    this.meleeEnemiesPool.spawn(this.spawnPositions[i].x,this.spawnPositions[i].y,this.waveJson.NewWaves[this.currentWave].spawnsData[i].animKey,this.data.EnemyConfigs[0]);
                 }
                 else if(this.waveJson.NewWaves[this.currentWave].spawnsData[i].type == "range"){
-                    this.rangeEnemiesPool.spawn(this.spawnPositions[i].x,this.spawnPositions[i].y,'enemyMove3',this.data.RangeConfigs[0]);
+                    this.rangeEnemiesPool.spawn(this.spawnPositions[i].x,this.spawnPositions[i].y,this.waveJson.NewWaves[this.currentWave].spawnsData[i].animKey,this.data.RangeConfigs[0]);
                 }
                
                 
@@ -488,11 +488,11 @@ export default class MainScene extends Phaser.Scene {
                 
                 //spawnear segun el tipo
                 if(this.waveJson.Masillas[0].spawnsData[i].type == "melee"){
-                    this.meleeEnemiesPool.spawn(this.spawnPositions[i].x,this.spawnPositions[i].y,'enemyMove1',this.data.EnemyConfigs[0]);
+                    this.meleeEnemiesPool.spawn(this.spawnPositions[i].x,this.spawnPositions[i].y,this.waveJson.Masillas[0].spawnsData[i].animKey,this.data.EnemyConfigs[0]);
                     //console.log("masillasssss")
                 }
                 else if(this.waveJson.Masillas[0].spawnsData[i].type == "range"){
-                    this.rangeEnemiesPool.spawn(this.spawnPositions[i].x,this.spawnPositions[i].y,'enemyMove1',this.data.RangeConfigs[0]);
+                    this.rangeEnemiesPool.spawn(this.spawnPositions[i].x,this.spawnPositions[i].y,this.waveJson.Masillas[0].spawnsData[i].animKey,this.data.RangeConfigs[0]);
                 }
                 
                 
