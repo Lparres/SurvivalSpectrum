@@ -150,19 +150,19 @@ export default class MainScene extends Phaser.Scene {
         this.stopEnemy = false;
 
         // this es Scene
-       /* let lifeRegenEvent = this.time.addEvent( {
+       let lifeRegenEvent = this.time.addEvent( {
             delay: 3000, 
-            callback: onEvent,
+            callback: this.onEvent,
             callbackScope: this,
             loop: true
-        });*/
+        });
        //this.music = this.sound.add('music',{volume: 0.05,loop:true});
        //this.music.play();
     }
 
             
     onEvent(){
-        this.player.lifeRegen();
+        this.player.lifeRegen(2);
     };
 
     //game tick

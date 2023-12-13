@@ -34,9 +34,8 @@ export default class RangeEnemy extends Enemy
         super.preUpdate(t,dt);
         if(!this.scene.stopEnemy){      
         this.UpdateRangeCooldown(dt);
-        }
-
         this.Shoot();
+        }
     }
 
 
