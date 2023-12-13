@@ -13,6 +13,4 @@ export default class MeleeEnemy extends Enemy
     preUpdate(t,dt){
         super.preUpdate(t,dt);
     }
-
-    
 }

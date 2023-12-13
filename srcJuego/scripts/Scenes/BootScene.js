@@ -9,7 +9,7 @@ export default class BootScene extends Phaser.Scene{
     preload(){
         var progressBar = this.add.graphics();
         var progressBox = this.add.graphics();
-        
+
         progressBox.fillStyle(0x222222, 0.8);
         progressBox.fillRect(240, 270, 320, 50);
 
@@ -27,6 +27,7 @@ export default class BootScene extends Phaser.Scene{
         this.load.on('complete', () => {
             console.log('complete');
             this.scene.run('level');
+            this.scene.sleep('boot');
         });
 
 
@@ -84,6 +85,24 @@ export default class BootScene extends Phaser.Scene{
          */
         this.load.json('data', 'srcJuego/scripts/JSON/data.json');
 
+
+        /**Explicacion del formato de las oleadas
+         * Cada oleada está compuesta por, un waveStartTime(en segundos) y un array de spawnsData.
+         * El waveStartTime, indica el segundo en el que empezará la oleada, cuando el reloj global llegue
+         * a ese tiempo, se lanzará esa oleada. 
+         * 
+         * El array de spawnsData contiene la informacion de cada spawn,
+         * la posicion de cada spawn se recalcula cada X tiempo(actualmente cada 5 segundos) y detetermina el
+         * punto exacto del mapa en el que salen los enemigos
+         * 
+         * La informacion que contiene cada spawn es(de momento):
+         * -type: range o melee, para saber el tipo de enemigo
+         * -size: el numero de enemigos que hay en ese spawn point
+         * -frecuency: cada cuantos segundos sale un enemigo en dicho spawn point
+         * -timer: contador de tiempo, para ir sabiendo cuando toca spawnear y cuando no
+         *
+         * 
+         */
         this.load.json('waves', 'srcJuego/scripts/JSON/waves.json');
 
         this.load.audio('music','srcJuego/audio/musica.mp3');
