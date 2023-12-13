@@ -6,7 +6,7 @@ export default class UI extends Phaser.Scene
 {
    
     constructor() {
-        super({ key: 'UIScene', active: true });
+        super({ key: 'UIScene'});
 
     }
     //data transfer
@@ -14,19 +14,9 @@ export default class UI extends Phaser.Scene
 
     }
     preload () {
-            this.load.atlas('ui', 'srcJuego/ui/AtlasTexturas.png', 'srcJuego/ui/AtlasUI.json');
-            this.load.image('heart', 'srcJuego/ui/Corazon.png');
-            this.load.image('furiaEureka', 'srcJuego/ui/FuriaEureka2.png');
-            this.load.image('estadisticas', 'srcJuego/ui/estadisticas.png');
-            this.load.image('statsInGame', 'srcJuego/ui/statsInGame.png');
-            this.load.image('waveInfo', 'srcJuego/ui/WaveInfo.png');
-            this.load.image('nextWave', 'srcJuego/ui/NextWave.png');
-            this.load.image('map', 'srcJuego/ui/Mapa.png');
+
     }
     create() {
-
-
-
         this.mainScene = this.scene.get('level');
         this.player = this.mainScene.player;
 

@@ -17,57 +17,15 @@ export default class MainScene extends Phaser.Scene {
     //load data
     preload() {
 
-        let srcJuego = 'srcJuego';
-        //carga de imagenes y SpriteSheets
-        this.load.image('kirby', srcJuego + '/img/kirby.png');
-        this.load.image('polvos', srcJuego + '/img/dust.png');
-
-
-        //this.load.image('player',srcJuego+ '/Sprites/Character/with_hands/death_0 - copia - copia.png');   
-        this.load.spritesheet('player', srcJuego + '/sprites/Character/with_hands/SpriteSheets/walkSheet.png',
-            { frameWidth: 204, frameHeight: 204});
-
-        this.load.spritesheet('idlePlayer', srcJuego + '/sprites/Character/with_hands/SpriteSheets/idleSheet.png',
-            { frameWidth: 204, frameHeight: 204 });
-
-        this.load.spritesheet('enemy1', srcJuego + '/sprites/Enemy1/SpriteSheets/walkSheet.png',
-        { frameWidth: 204, frameHeight:204})
-
-        this.load.spritesheet('enemy2', srcJuego + '/sprites/Enemy2/SpriteSheets/walk-Sheet.png',
-        { frameWidth: 204, frameHeight:204})
-
-        this.load.spritesheet('enemy3', srcJuego + '/sprites/Enemy3/SpriteSheets/fly-Sheet.png',
-            { frameWidth: 204, frameHeight:204});
-
-        this.load.spritesheet('enemy4', srcJuego + '/sprites/Enemy4/SpriteSheets/walk-Sheet.png',
-        { frameWidth: 204, frameHeight:204});
-
-        //carga del tilemap
-        this.load.tilemapTiledJSON('tilemap', srcJuego + '/tiled/prueba2.json');
-
-        //carga del tileset
-        this.load.image('patronesTilemap', srcJuego + '/tiled/arte/Dungeon_Tileset.png');
-
-
-        /**carga de json de datos de los distintos enemigos
-         * 
-         * tanto este como el siguente creo que necesitan una vuelta de tuerca para que nos sean todavia mas utiles
-         * por ejemplo guardando la clave de animacion de ese tipo de enemigo entre otras cosas 
-         * 
-         * Por otra parte creo que es util ser conscientes que todos los objetos que tenemos en el juego tienen como mucho animaciones de
-         * andar y de recibir danio (del feedback del danio creo que hace falta hablarlo)
-         */
-        this.load.json('data', 'srcJuego/scripts/JSON/data.json');
-
-        this.load.json('waves', 'srcJuego/scripts/JSON/waves.json');
-
-        //this.load.audio('music','srcJuego/audio/musica.mp3');
+        this.load.on('complete',()=>{
+            this.scene.run('UIScene')
+        });
 
         this.cameras.main.zoom = 2;
     }
 
     //instance
-    create() {//igual es recomendable que se haga una seccion de creacion de animaciones ya que asi ya estan listas cuando hagan falta
+    create() {
 
         this.data = this.game.cache.json.get('data');
 
@@ -156,8 +114,8 @@ export default class MainScene extends Phaser.Scene {
             callbackScope: this,
             loop: true
         });
-       //this.music = this.sound.add('music',{volume: 0.05,loop:true});
-       //this.music.play();
+       this.music = this.sound.add('music',{volume: 0.05,loop:true});
+       this.music.play();
     }
 
             
