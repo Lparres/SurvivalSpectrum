@@ -298,7 +298,14 @@ export default class MainScene extends Phaser.Scene {
         this.physics.add.collider(this.meleeEnemiesPool.group, this.wallLayer);
         this.physics.add.collider(this.rangeEnemiesPool.group, this.wallLayer);
 
+
         //faltan las colisiones de las balas con las paredes
+        this.physics.add.collider(this.playerBulletsPool.group,this.wallLayer, function(bullet,wall){
+            bullet.Hit(bullet.health);
+        })
+        this.physics.add.collider(this.enemiesBulletsPool.group,this.wallLayer, function(bullet,wall){
+            bullet.Hit(bullet.health);
+        })
 
 
     }
