@@ -83,7 +83,7 @@ export default class Enemy extends Mob
     /**
     * @param {SettingObject} seting necesita: {idParent, damage, speed}
     */
-    setUp(seting){
+    setUp(seting,animKey){
         this.health = seting.life;
         this.damage = seting.damage;
         this.speed = seting.velocity;
@@ -93,6 +93,9 @@ export default class Enemy extends Mob
         let dirDest = new Phaser.Math.Vector2(this.scene.player.x,this.scene.player.y);
         this.SetDirection(new Phaser.Math.Vector2(dirDest.x - this.x ,dirDest.y - this.y));
         //console.log(this.dir);
+
+        this.key[0] = '';
+        this.key[1] = animKey;
     }
 
 }

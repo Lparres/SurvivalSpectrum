@@ -159,14 +159,14 @@ export default class UI extends Phaser.Scene
     timerUpdate(dt){
         //set timer UI
 		this.secondsCount += dt/1000;
-		if(this.secondsCount > 60){
+		if(this.secondsCount >= 60){
             this.minuteCount++;
 			this.secondsCount = 0;
 		}	
-        this.timeText.setText (this.minuteCount.toLocaleString('en-US', {
+        this.timeText.setText ((this.secondsCount <59.5 ? this.minuteCount : this.minuteCount+1).toLocaleString('en-US', {
             minimumIntegerDigits: 2,
             useGrouping: false
-          })+ ':' +this.secondsCount.toLocaleString('en-US', {
+          })+ ':' +(this.secondsCount <59.5 ? this.secondsCount : 0).toLocaleString('en-US', {
             minimumIntegerDigits: 2,
             useGrouping: false,
             maximumFractionDigits:0 

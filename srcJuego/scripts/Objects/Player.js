@@ -61,7 +61,7 @@ export default class Player extends Mob
         this.dicTotalTime = 10000; // variable dentro del timer a modificar
         this.dicTime = 0;
         
-        
+        this.bulletSpeed = playerConfig.bulletSpeed;
         
         this.range = this.baseRange;
         this.damage = this.baseDamage;
@@ -116,7 +116,7 @@ export default class Player extends Mob
             let BulletSeting ={
                 idParent : true,
                 damage : this.damage,
-                velocity : 200,
+                velocity : this.bulletSpeed,
                 range: this.range
             }
 

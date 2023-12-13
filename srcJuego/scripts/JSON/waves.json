@@ -1,76 +1,64 @@
 {
-    "Waves":[
-        {
-            "x":500,
-            "y":200,
-            "waveTime" : 20000,
-            "waveType" : "range",
-            "timeBetween" : 3000,
-            "size":5
-        }
-    ],
-
-
     "NewWaves":[
         {
             "waveStartTime": 0,
             "spawnsData":[
-                {"type": "melee", "size": 2, "frecuency": 3000, "timer": 0 },
-                {"type": "melee", "size": 2, "frecuency": 3000, "timer": 0 },
-                {"type": "melee", "size": 2, "frecuency": 3000, "timer": 0 },
-                {"type": "melee", "size": 2, "frecuency": 3000, "timer": 0 },
-                {"type": "melee", "size": 2, "frecuency": 3000, "timer": 0 },
-                {"type": "melee", "size": 2, "frecuency": 3000, "timer": 0 },
-                {"type": "melee", "size": 2, "frecuency": 3000, "timer": 0 },
-                {"type": "melee", "size": 2, "frecuency": 3000, "timer": 0 },
-                {"type": "range", "size": 2, "frecuency": 3000, "timer": 0 },
-                {"type": "range", "size": 2, "frecuency": 3000, "timer": 0 } 
+                {"type": "melee","animKey": "enemyMove2", "size": 2, "frecuency": 3000, "timer": 0 },
+                {"type": "melee","animKey": "enemyMove2", "size": 2, "frecuency": 3000, "timer": 0 },
+                {"type": "melee","animKey": "enemyMove2", "size": 2, "frecuency": 3000, "timer": 0 },
+                {"type": "melee","animKey": "enemyMove2", "size": 2, "frecuency": 3000, "timer": 0 },
+                {"type": "melee","animKey": "enemyMove2", "size": 2, "frecuency": 3000, "timer": 0 },
+                {"type": "melee","animKey": "enemyMove2", "size": 2, "frecuency": 3000, "timer": 0 },
+                {"type": "melee","animKey": "enemyMove2", "size": 2, "frecuency": 3000, "timer": 0 },
+                {"type": "melee","animKey": "enemyMove2", "size": 2, "frecuency": 3000, "timer": 0 },
+                {"type": "range","animKey": "enemyMove3", "size": 2, "frecuency": 3000, "timer": 0 },
+                {"type": "range","animKey": "enemyMove3", "size": 2, "frecuency": 3000, "timer": 0 } 
             ]
         },
         {
             "waveStartTime": 65,
             "spawnsData":[
-                {"type": "melee", "size": 3, "frecuency": 3000, "timer": 0 },
-                {"type": "melee", "size": 3, "frecuency": 3000, "timer": 0 },
-                {"type": "melee", "size": 3, "frecuency": 3000, "timer": 0 },
-                {"type": "melee", "size": 3, "frecuency": 3000, "timer": 0 },
-                {"type": "melee", "size": 3, "frecuency": 3000, "timer": 0 },
-                {"type": "melee", "size": 3, "frecuency": 3000, "timer": 0 },
-                {"type": "melee", "size": 3, "frecuency": 3000, "timer": 0 },
-                {"type": "melee", "size": 3, "frecuency": 3000, "timer": 0 },
-                {"type": "range", "size": 3, "frecuency": 3000, "timer": 0 },
-                {"type": "range", "size": 3, "frecuency": 3000, "timer": 0 }
+                {"type": "melee","animKey": "enemyMove2", "size": 3, "frecuency": 3000, "timer": 0 },
+                {"type": "melee","animKey": "enemyMove2", "size": 3, "frecuency": 3000, "timer": 0 },
+                {"type": "melee","animKey": "enemyMove2", "size": 3, "frecuency": 3000, "timer": 0 },
+                {"type": "melee","animKey": "enemyMove2", "size": 3, "frecuency": 3000, "timer": 0 },
+                {"type": "melee","animKey": "enemyMove2", "size": 3, "frecuency": 3000, "timer": 0 },
+                {"type": "melee","animKey": "enemyMove2", "size": 3, "frecuency": 3000, "timer": 0 },
+                {"type": "melee","animKey": "enemyMove2", "size": 3, "frecuency": 3000, "timer": 0 },
+                {"type": "melee","animKey": "enemyMove2", "size": 3, "frecuency": 3000, "timer": 0 },
+                {"type": "range","animKey": "enemyMove3", "size": 3, "frecuency": 3000, "timer": 0 },
+                {"type": "range","animKey": "enemyMove3", "size": 3, "frecuency": 3000, "timer": 0 }
             ]
         },
         {
             "waveStartTime": 160,
             "spawnsData":[
-                {"type": "melee", "size": 4, "frecuency": 3000, "timer": 0 },
-                {"type": "melee", "size": 4, "frecuency": 3000, "timer": 0 },
-                {"type": "melee", "size": 4, "frecuency": 3000, "timer": 0 },
-                {"type": "melee", "size": 4, "frecuency": 3000, "timer": 0 },
-                {"type": "melee", "size": 4, "frecuency": 3000, "timer": 0 },
-                {"type": "melee", "size": 4, "frecuency": 3000, "timer": 0 },
-                {"type": "melee", "size": 4, "frecuency": 3000, "timer": 0 },
-                {"type": "melee", "size": 4, "frecuency": 3000, "timer": 0 },
-                {"type": "range", "size": 4, "frecuency": 3000, "timer": 0 },
-                {"type": "range", "size": 4, "frecuency": 3000, "timer": 0 }
+                {"type": "melee","animKey": "enemyMove2", "size": 4, "frecuency": 3000, "timer": 0 },
+                {"type": "melee","animKey": "enemyMove2", "size": 4, "frecuency": 3000, "timer": 0 },
+                {"type": "melee","animKey": "enemyMove2", "size": 4, "frecuency": 3000, "timer": 0 },
+                {"type": "melee","animKey": "enemyMove2", "size": 4, "frecuency": 3000, "timer": 0 },
+                {"type": "melee","animKey": "enemyMove2", "size": 4, "frecuency": 3000, "timer": 0 },
+                {"type": "melee","animKey": "enemyMove2", "size": 4, "frecuency": 3000, "timer": 0 },
+                {"type": "melee","animKey": "enemyMove2", "size": 4, "frecuency": 3000, "timer": 0 },
+                {"type": "melee","animKey": "enemyMove2", "size": 4, "frecuency": 3000, "timer": 0 },
+                {"type": "range","animKey": "enemyMove3", "size": 4, "frecuency": 3000, "timer": 0 },
+                {"type": "range","animKey": "enemyMove3", "size": 4, "frecuency": 3000, "timer": 0 }
             ]
 
         },
         {
             "waveStartTime": 300,
             "spawnsData":[
-                {"type": "melee", "size": 5, "frecuency": 3000, "timer": 0 },
-                {"type": "melee", "size": 5, "frecuency": 3000, "timer": 0 },
-                {"type": "melee", "size": 5, "frecuency": 3000, "timer": 0 },
-                {"type": "melee", "size": 5, "frecuency": 3000, "timer": 0 },
-                {"type": "melee", "size": 5, "frecuency": 3000, "timer": 0 },
-                {"type": "melee", "size": 5, "frecuency": 3000, "timer": 0 },
-                {"type": "melee", "size": 5, "frecuency": 3000, "timer": 0 },
-                {"type": "melee", "size": 5, "frecuency": 3000, "timer": 0 },
-                {"type": "range", "size": 5, "frecuency": 3000, "timer": 0 },
-                {"type": "range", "size": 5, "frecuency": 3000, "timer": 0 }
+                {"type": "melee","animKey": "enemyMove2", "size": 5, "frecuency": 3000, "timer": 0 },
+                {"type": "melee","animKey": "enemyMove2", "size": 5, "frecuency": 3000, "timer": 0 },
+                {"type": "melee","animKey": "enemyMove2", "size": 5, "frecuency": 3000, "timer": 0 },
+                {"type": "melee","animKey": "enemyMove2", "size": 5, "frecuency": 3000, "timer": 0 },
+                {"type": "melee","animKey": "enemyMove2", "size": 5, "frecuency": 3000, "timer": 0 },
+                {"type": "melee","animKey": "enemyMove2", "size": 5, "frecuency": 3000, "timer": 0 },
+                {"type": "melee","animKey": "enemyMove2", "size": 5, "frecuency": 3000, "timer": 0 },
+                {"type": "melee","animKey": "enemyMove2", "size": 5, "frecuency": 3000, "timer": 0 },
+                {"type": "range","animKey": "enemyMove3", "size": 5, "frecuency": 3000, "timer": 0 },
+                {"type": "range","animKey": "enemyMove3", "size": 5, "frecuency": 3000, "timer": 0 }
             ]
 
         }
@@ -79,12 +67,7 @@
     "Masillas":[
         {
             "spawnsData":[
-                {"type": "melee", "frecuency": 7500, "timer": 0 },
-                {"type": "melee", "frecuency": 11500, "timer": 0 },
-                {"type": "melee", "frecuency": 17500, "timer": 0 },
-                {"type": "melee", "frecuency": 23500, "timer": 0 },
-                {"type": "melee", "frecuency": 27500, "timer": 0 }
-                
+                {"type": "melee","animKey": "enemyMove1", "frecuency": 5000, "timer": 0, "spawnIndex" : 0 }               
             ]
         }
         

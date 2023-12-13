@@ -63,7 +63,7 @@ export default class MainScene extends Phaser.Scene {
 
         //this.load.audio('music','srcJuego/audio/musica.mp3');
 
-        this.cameras.main.zoom= 2;
+        this.cameras.main.zoom = 2;
     }
 
     //instance
@@ -212,7 +212,7 @@ export default class MainScene extends Phaser.Scene {
         let enemysArr = [];
 
         for (let i = 0; i < 100; i++) {
-            let aux = new Enemy(this, 0, 0, ['enemyMove1', 'enemyMove4'], this.meleeEnemiesPool);
+            let aux = new Enemy(this, 0, 0, ['','enemyMove2'], this.meleeEnemiesPool);
             aux.setDepth(10);
             enemysArr.push(aux);
         }
@@ -222,7 +222,7 @@ export default class MainScene extends Phaser.Scene {
         let rangeArr = [];
 
         for (let i = 0; i < 100; i++) {
-            let aux = new RangeEnemy(this, 0, 0, ['enemyMove1', 'enemyMove4'], this.rangeEnemiesPool);
+            let aux = new RangeEnemy(this, 0, 0, ['','enemyMove2'], this.rangeEnemiesPool);
             aux.setDepth(10);
             rangeArr.push(aux);
         }
@@ -449,14 +449,16 @@ export default class MainScene extends Phaser.Scene {
             {
                 
                 //spawneo del enemigo en su spawnPoint 
-                
+
                 //spawnear segun el tipo
+                
                 if(this.waveJson.NewWaves[this.currentWave].spawnsData[i].type == "melee"){
-                    this.meleeEnemiesPool.spawn(this.spawnPositions[i].x,this.spawnPositions[i].y,'enemyMove1',this.data.EnemyConfigs[0]);
+                    this.meleeEnemiesPool.spawn(this.spawnPositions[i].x,this.spawnPositions[i].y,this.waveJson.NewWaves[this.currentWave].spawnsData[i].animKey,this.data.EnemyConfigs[0]);
                 }
                 else if(this.waveJson.NewWaves[this.currentWave].spawnsData[i].type == "range"){
-                    this.rangeEnemiesPool.spawn(this.spawnPositions[i].x,this.spawnPositions[i].y,'enemyMove1',this.data.RangeConfigs[0]);
+                    this.rangeEnemiesPool.spawn(this.spawnPositions[i].x,this.spawnPositions[i].y,this.waveJson.NewWaves[this.currentWave].spawnsData[i].animKey,this.data.RangeConfigs[0]);
                 }
+               
                 
                 
                 //resetear el timer
@@ -484,15 +486,19 @@ export default class MainScene extends Phaser.Scene {
                 
                 //spawneo del enemigo en su spawnPoint 
                 
+                let spawnIndex = this.waveJson.Masillas[0].spawnsData[i].spawnIndex;
                 //spawnear segun el tipo
                 if(this.waveJson.Masillas[0].spawnsData[i].type == "melee"){
-                    this.meleeEnemiesPool.spawn(this.spawnPositions[i].x,this.spawnPositions[i].y,'enemyMove',this.data.EnemyConfigs[0]);
+                    this.meleeEnemiesPool.spawn(this.spawnPositions[spawnIndex].x,this.spawnPositions[spawnIndex].y,
+                                                this.waveJson.Masillas[0].spawnsData[i].animKey,this.data.EnemyConfigs[0]);
                 }
                 else if(this.waveJson.Masillas[0].spawnsData[i].type == "range"){
-                    this.rangeEnemiesPool.spawn(this.spawnPositions[i].x,this.spawnPositions[i].y,'enemyMove',this.data.RangeConfigs[0]);
+                    this.rangeEnemiesPool.spawn(this.spawnPositions[spawnIndex].x,this.spawnPositions[spawnIndex].y,
+                                                this.waveJson.Masillas[0].spawnsData[i].animKey,this.data.RangeConfigs[0]);
                 }
                 
-                //console.log("masillasssss")
+                
+                this.waveJson.Masillas[0].spawnsData[i].spawnIndex = (this.waveJson.Masillas[0].spawnsData[i].spawnIndex +1)%this.spawnPositions.length;
                 
                 //resetear el timer
                 this.waveJson.Masillas[0].spawnsData[i].timer = 0;
