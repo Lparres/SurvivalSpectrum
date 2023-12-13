@@ -100,11 +100,10 @@ export default class Player extends Mob
         this.flipX = this.scene.input.mousePointer.position.x <= (1920/2) - this.flipMargin ? true 
                     :this.scene.input.mousePointer.position.x >= (1920/2) + this.flipMargin ? false : this.flipX;
 
-
+        
         this.changeDicMode(dt);
     }
-
-
+    
     //método para disparar
     Shoot(dt) {
         //contador del tiempo
@@ -148,6 +147,13 @@ export default class Player extends Mob
        if(this.health < 0){
         console.log("Player Muerto");
        }
+    }
+
+    lifeRegen(amount){
+        this.health += amount;
+        if(this.health> this.maxLife){
+            this.health = this.maxLife;
+        }
     }
 
     // La dicotomía cambia el rango de ataque
@@ -217,10 +223,7 @@ export default class Player extends Mob
         }
         }
         else if(!this.eurekaMode && this.rageMode){
-            this.health += this.lifeSteal;
-            if(this.health> this.maxLife){
-                this.health = this.maxLife;
-            }
+            this.lifeRegen(this.lifeSteal);
         }
     }
 }
