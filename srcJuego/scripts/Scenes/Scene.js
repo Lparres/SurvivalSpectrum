@@ -30,15 +30,17 @@ export default class MainScene extends Phaser.Scene {
         this.load.spritesheet('idlePlayer', srcJuego + '/sprites/Character/with_hands/SpriteSheets/idleSheet.png',
             { frameWidth: 204, frameHeight: 204 });
 
-            this.load.spritesheet('enemy2', srcJuego + '/sprites/Enemy3/SpriteSheets/fly-Sheet.png',
-            { frameWidth: 204, frameHeight:204})
+        this.load.spritesheet('enemy1', srcJuego + '/sprites/Enemy1/SpriteSheets/walkSheet.png',
+        { frameWidth: 204, frameHeight:204})
+
+        this.load.spritesheet('enemy2', srcJuego + '/sprites/Enemy2/SpriteSheets/walk-Sheet.png',
+        { frameWidth: 204, frameHeight:204})
 
         this.load.spritesheet('enemy3', srcJuego + '/sprites/Enemy3/SpriteSheets/fly-Sheet.png',
             { frameWidth: 204, frameHeight:204});
 
-        this.load.spritesheet('idleEnemy', srcJuego + '/sprites/Enemy1/SpriteSheets/idleSheet.png',
-            { frameWidth: 2048, frameHeight: 2048 });
-
+        this.load.spritesheet('enemy4', srcJuego + '/sprites/Enemy4/SpriteSheets/walk-Sheet.png',
+        { frameWidth: 204, frameHeight:204});
 
         //carga del tilemap
         this.load.tilemapTiledJSON('tilemap', srcJuego + '/tiled/prueba2.json');
@@ -148,12 +150,12 @@ export default class MainScene extends Phaser.Scene {
         this.stopEnemy = false;
 
         // this es Scene
-        let lifeRegenEvent = this.time.addEvent( {
+       /* let lifeRegenEvent = this.time.addEvent( {
             delay: 3000, 
             callback: onEvent,
             callbackScope: this,
             loop: true
-        });
+        });*/
        //this.music = this.sound.add('music',{volume: 0.05,loop:true});
        //this.music.play();
     }
@@ -210,7 +212,7 @@ export default class MainScene extends Phaser.Scene {
         let enemysArr = [];
 
         for (let i = 0; i < 100; i++) {
-            let aux = new Enemy(this, 0, 0, ['idleEnemy', 'enemyMove'], this.meleeEnemiesPool);
+            let aux = new Enemy(this, 0, 0, ['enemyMove1', 'enemyMove4'], this.meleeEnemiesPool);
             aux.setDepth(10);
             enemysArr.push(aux);
         }
@@ -220,7 +222,7 @@ export default class MainScene extends Phaser.Scene {
         let rangeArr = [];
 
         for (let i = 0; i < 100; i++) {
-            let aux = new RangeEnemy(this, 0, 0, ['idleEnemy', 'enemyMove'], this.rangeEnemiesPool);
+            let aux = new RangeEnemy(this, 0, 0, ['enemyMove1', 'enemyMove4'], this.rangeEnemiesPool);
             aux.setDepth(10);
             rangeArr.push(aux);
         }
@@ -363,15 +365,29 @@ export default class MainScene extends Phaser.Scene {
 
         //creación de animaciones para enemigos
         this.anims.create({
-            key: 'enemyMove',
-            frames: this.anims.generateFrameNumbers('enemy', { start: 0, end: 6 }),
+            key: 'enemyMove1',
+            frames: this.anims.generateFrameNumbers('enemy1', { start: 0, end: 7 }),
             frameRate: 10, // Velocidad de la animación
             repeat: -1    // Animación en bucle
         });
 
         this.anims.create({
-            key: 'idleEnemy',
-            frames: this.anims.generateFrameNumbers('idleEnemy', { start: 0, end: 5 }),
+            key: 'enemyMove2',
+            frames: this.anims.generateFrameNumbers('enemy2', { start: 0, end: 7 }),
+            frameRate: 10, // Velocidad de la animación
+            repeat: -1    // Animación en bucle
+        });
+
+        this.anims.create({
+            key: 'enemyMove3',
+            frames: this.anims.generateFrameNumbers('enemy3', { start: 0, end: 7 }),
+            frameRate: 10, // Velocidad de la animación
+            repeat: -1    // Animación en bucle
+        });
+
+        this.anims.create({
+            key: 'enemyMove4',
+            frames: this.anims.generateFrameNumbers('enemy4', { start: 0, end: 7 }),
             frameRate: 10, // Velocidad de la animación
             repeat: -1    // Animación en bucle
         });
