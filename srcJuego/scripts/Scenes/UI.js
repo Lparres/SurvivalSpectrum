@@ -90,7 +90,7 @@ export default class UI extends Phaser.Scene
 
         //texto de crono
         this.timeText = this.add.text(800, 40,' ',{ font: '100px JosefinBold', fill: 'red' });
-        this.secondsCount = 57;
+        this.secondsCount = 0;
         this.minuteCount = 0;
 
         //datos de la oleada (por rellenar y gestionar actualizacion)

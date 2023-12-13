@@ -67,12 +67,7 @@
     "Masillas":[
         {
             "spawnsData":[
-                {"type": "melee","animKey": "enemyMove1", "frecuency": 7500, "timer": 0 },
-                {"type": "melee","animKey": "enemyMove1", "frecuency": 11500, "timer": 0 },
-                {"type": "melee","animKey": "enemyMove1", "frecuency": 17500, "timer": 0 },
-                {"type": "melee","animKey": "enemyMove1", "frecuency": 23500, "timer": 0 },
-                {"type": "melee","animKey": "enemyMove1", "frecuency": 27500, "timer": 0 }
-                
+                {"type": "melee","animKey": "enemyMove1", "frecuency": 5000, "timer": 0, "spawnIndex" : 0 }               
             ]
         }
         
