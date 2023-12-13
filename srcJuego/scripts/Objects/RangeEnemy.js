@@ -25,8 +25,8 @@ export default class RangeEnemy extends Enemy
 
         this._CDRangeTimer = 0;
 
-        this._bulletSpawnOffsetX = 15;
-        this._bulletSpawnOffsetY = 100;
+        this._bulletSpawnOffsetX = 0;
+        this._bulletSpawnOffsetY = 50;
 
     }
 
@@ -65,7 +65,7 @@ export default class RangeEnemy extends Enemy
         }
     }
 
-    setUp(settingRange){
+    setUp(settingRange,animKey){
 
         this.health = settingRange.settingMelee.life;
         this.damage = settingRange.settingMelee.damage;
@@ -80,5 +80,9 @@ export default class RangeEnemy extends Enemy
 
         let dirDest = new Phaser.Math.Vector2(this.scene.player.x,this.scene.player.y);
         this.SetDirection(new Phaser.Math.Vector2(dirDest.x - this.x ,dirDest.y - this.y));
+
+
+        this.key[0] = '';
+        this.key[1] = animKey;
     }
 }
