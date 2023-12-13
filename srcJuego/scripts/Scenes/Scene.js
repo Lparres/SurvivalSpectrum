@@ -387,7 +387,7 @@ export default class MainScene extends Phaser.Scene {
 
         this.anims.create({
             key: 'enemyMove3',
-            frames: this.anims.generateFrameNumbers('enemy3', { start: 0, end: 7 }),
+            frames: this.anims.generateFrameNumbers('enemy3', { start: 0, end: 5 }),
             frameRate: 10, // Velocidad de la animación
             repeat: -1    // Animación en bucle
         });
@@ -452,10 +452,10 @@ export default class MainScene extends Phaser.Scene {
                 
                 //spawnear segun el tipo
                 if(this.waveJson.NewWaves[this.currentWave].spawnsData[i].type == "melee"){
-                    this.meleeEnemiesPool.spawn(this.spawnPositions[i].x,this.spawnPositions[i].y,'enemyMove',this.data.EnemyConfigs[0]);
+                    this.meleeEnemiesPool.spawn(this.spawnPositions[i].x,this.spawnPositions[i].y,'enemyMove1',this.data.EnemyConfigs[0]);
                 }
                 else if(this.waveJson.NewWaves[this.currentWave].spawnsData[i].type == "range"){
-                    this.rangeEnemiesPool.spawn(this.spawnPositions[i].x,this.spawnPositions[i].y,'enemyMove',this.data.RangeConfigs[0]);
+                    this.rangeEnemiesPool.spawn(this.spawnPositions[i].x,this.spawnPositions[i].y,'enemyMove1',this.data.RangeConfigs[0]);
                 }
                 
                 
