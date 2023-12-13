@@ -313,7 +313,14 @@ export default class MainScene extends Phaser.Scene {
         this.physics.add.collider(this.meleeEnemiesPool.group, this.wallLayer);
         this.physics.add.collider(this.rangeEnemiesPool.group, this.wallLayer);
 
+
         //faltan las colisiones de las balas con las paredes
+        this.physics.add.collider(this.playerBulletsPool.group,this.wallLayer, function(bullet,wall){
+            bullet.Hit(bullet.health);
+        })
+        this.physics.add.collider(this.enemiesBulletsPool.group,this.wallLayer, function(bullet,wall){
+            bullet.Hit(bullet.health);
+        })
 
 
     }
@@ -445,10 +452,10 @@ export default class MainScene extends Phaser.Scene {
                 
                 //spawnear segun el tipo
                 if(this.waveJson.NewWaves[this.currentWave].spawnsData[i].type == "melee"){
-                    this.meleeEnemiesPool.spawn(this.spawnPositions[i].x,this.spawnPositions[i].y,'enemyMove',this.data.EnemyConfigs[0]);
+                    this.meleeEnemiesPool.spawn(this.spawnPositions[i].x,this.spawnPositions[i].y,'enemyMove1',this.data.EnemyConfigs[0]);
                 }
                 else if(this.waveJson.NewWaves[this.currentWave].spawnsData[i].type == "range"){
-                    this.rangeEnemiesPool.spawn(this.spawnPositions[i].x,this.spawnPositions[i].y,'enemyMove',this.data.RangeConfigs[0]);
+                    this.rangeEnemiesPool.spawn(this.spawnPositions[i].x,this.spawnPositions[i].y,'enemyMove1',this.data.RangeConfigs[0]);
                 }
                 
                 
