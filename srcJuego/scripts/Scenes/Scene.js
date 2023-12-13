@@ -121,13 +121,24 @@ export default class MainScene extends Phaser.Scene {
         //booleano que detiene el movimiento de los enemigos
         this.stopEnemy = false;
 
+        // this es Scene
+        let lifeRegenEvent = this.time.addEvent( {
+            delay: 3000, 
+            callback: onEvent,
+            callbackScope: this,
+            loop: true
+        });
     }
+
+            
+    onEvent(){
+        this.player.lifeRegen();
+    };
 
     //game tick
     update(t, dt) {
 
         this.playerMove();
-
 
         //actualizacion de temporizadores, le sumamos el delta time, milisegundos
         this.masillasTimer += dt;
