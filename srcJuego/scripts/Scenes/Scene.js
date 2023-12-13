@@ -20,7 +20,7 @@ export default class MainScene extends Phaser.Scene {
         let srcJuego = 'srcJuego';
         //carga de imagenes y SpriteSheets
         this.load.image('kirby', srcJuego + '/img/kirby.png');
-        this.load.image('polvos', srcJuego + '/img/polvos.jpg');
+        this.load.image('polvos', srcJuego + '/img/dust.png');
 
 
         //this.load.image('player',srcJuego+ '/Sprites/Character/with_hands/death_0 - copia - copia.png');   
@@ -30,8 +30,10 @@ export default class MainScene extends Phaser.Scene {
         this.load.spritesheet('idlePlayer', srcJuego + '/sprites/Character/with_hands/SpriteSheets/idleSheet.png',
             { frameWidth: 204, frameHeight: 204 });
 
-        //this.load.image('enemy', srcJuego+ '/Sprites/Enemy1/death_0.png');   
-        this.load.spritesheet('enemy', srcJuego + '/sprites/Enemy3/SpriteSheets/fly-Sheet.png',
+            this.load.spritesheet('enemy2', srcJuego + '/sprites/Enemy3/SpriteSheets/fly-Sheet.png',
+            { frameWidth: 204, frameHeight:204})
+
+        this.load.spritesheet('enemy3', srcJuego + '/sprites/Enemy3/SpriteSheets/fly-Sheet.png',
             { frameWidth: 204, frameHeight:204});
 
         this.load.spritesheet('idleEnemy', srcJuego + '/sprites/Enemy1/SpriteSheets/idleSheet.png',
@@ -57,21 +59,45 @@ export default class MainScene extends Phaser.Scene {
 
         this.load.json('waves', 'srcJuego/scripts/JSON/waves.json');
 
+        //this.load.audio('music','srcJuego/audio/musica.mp3');
+
         this.cameras.main.zoom= 2;
     }
 
     //instance
     create() {//igual es recomendable que se haga una seccion de creacion de animaciones ya que asi ya estan listas cuando hagan falta
 
-        //variables de las oleadas
-        this.waveData = {
-            waveTime: 0,
-            waveCount: 0
-        }
-        this.maxMasillaTime = 500;
-        this.masillasTimer = 0;
         this.data = this.game.cache.json.get('data');
-        this.wave = this.game.cache.json.get('waves');
+
+        /**Explicacion del formato de las oleadas
+         * Cada oleada está compuesta por, un waveStartTime(en segundos) y un array de spawnsData.
+         * El waveStartTime, indica el segundo en el que empezará la oleada, cuando el reloj global llegue
+         * a ese tiempo, se lanzará esa oleada. 
+         * El array de spawnsData contiene la informacion de cada spawn,
+         * la posicion de cada spawn se recalcula cada X tiempo(actualmente cada 5 segundos) y detetermina el
+         * punto exacto del mapa en el que salen los enemigos
+         * La informacion que contiene cada spawn es(de momento):
+         * -type: range o melee, para saber el tipo de enemigo
+         * -size: el numero de enemigos que hay en ese spawn point
+         * -frecuency: cada cuantos segundos sale un enemigo en dicho spawn point
+         * -timer: contador de tiempo, para ir sabiendo cuando toca spawnear y cuando no
+         *
+         * 
+         */
+        this.waveJson = this.game.cache.json.get('waves');
+
+        this.currentWave = 0;
+
+        this.spawnPositions =  [];
+
+        this.minSpawnRange =  400;
+        this.maxSpawnRange =  750;
+
+        this.sortSpawnPointsFrecuency = 5000;
+        this.sortSpawnPointsTimer = 9999;
+
+        //para calcular cuando sale la nueva oleada
+        this.globalTime = 0;
 
         // Cursor personalizado
         this.input.setDefaultCursor('url(srcJuego/img/crosshair.png) 16 16, pointer');
@@ -128,6 +154,8 @@ export default class MainScene extends Phaser.Scene {
             callbackScope: this,
             loop: true
         });
+       //this.music = this.sound.add('music',{volume: 0.05,loop:true});
+       //this.music.play();
     }
 
             
@@ -140,13 +168,9 @@ export default class MainScene extends Phaser.Scene {
 
         this.playerMove();
 
-        //actualizacion de temporizadores, le sumamos el delta time, milisegundos
-        this.masillasTimer += dt;
-        this.waveData.waveTime += dt;
+        this.oleadasLogic(dt);
 
-        this.oleadasLogic();
-
-        this.masillasLogic();
+        this.masillasLogic(dt);
 
         //la cámara sigue al jugador
         this.cameras.main.startFollow(this.player);
@@ -160,7 +184,7 @@ export default class MainScene extends Phaser.Scene {
         this.enemiesBulletsPool = new Pool(this, 200);
         this.meleeEnemiesPool = new Pool(this, 50);
         this.rangeEnemiesPool = new Pool(this, 50);
-        this.dustPool = new Pool(this, 100);
+        this.dustPool = new Pool(this, 100, 'polvos');
 
 
         let plBullets = [];
@@ -207,7 +231,7 @@ export default class MainScene extends Phaser.Scene {
 
         for (let i = 0; i < 100; i++) {
             let aux = new InteractuableObjects(this, 0, 0, 'polvos', this.dustPool, (amount) => {
-                aux.setDepth(10);
+                //aux.setDepth(10);
                 this.player.addDust(amount);
             });
             dustArr.push(aux);
@@ -313,6 +337,7 @@ export default class MainScene extends Phaser.Scene {
         //creamos el array de spawn points
         this.spawnPoints = this.map.createFromObjects('Spawns');
 
+
         //los hacemos invisibles para que no se vean
         for (let i = 0; i < this.spawnPoints.length; i++) {
             this.spawnPoints[i].setVisible(false);
@@ -364,42 +389,150 @@ export default class MainScene extends Phaser.Scene {
 
 
     //oleadas
-    oleadasLogic() {
+    oleadasLogic(dt) {
 
+        this.globalTime  = (this.scene.get("UIScene").minuteCount*60)+ this.scene.get("UIScene").secondsCount;
 
-        //console.log(this.wave.Waves[0].timeBetween);
-        //console.log(this.waveData.waveTime);
-        //si toca spawnear
-        if (this.waveData.waveTime > this.wave.Waves[0].timeBetween && this.waveData.waveCount < this.wave.Waves[0].size) {
-            //console.log(this.data.EnemyConfigs[0]);
-            this.rangeEnemiesPool.spawn(this.wave.Waves[0].x, this.wave.Waves[0].y, 'enemyMove', this.data.RangeConfigs[0]);
+        //si ha llegado el tiempo de la siguiente oleada, cambiar de oleada,y actualizar spawnPoints
+        if(this.globalTime >= this.waveJson.NewWaves[this.currentWave +1].waveStartTime ){
+            this.currentWave = this.currentWave+1;
+            this.sortSpawnPoints();
+            this.sortSpawnPointsTimer = 0;
 
-            this.waveData.waveTime = 0;
-            this.waveData.waveCount++;
+            //actualizar la info de la UI
+            this.scene.get("UIScene").updateWaveData();
         }
 
-    }
+        //actualizar la posicion de los spawnPoints, cuando toque
 
-    //masillas
-    masillasLogic() {
+        this.sortSpawnPointsTimer += dt;
 
-        if (this.masillasTimer > this.maxMasillaTime) {
-            let vector = new Phaser.Math.Vector2(0, 0);
-            let spawn = Phaser.Math.RandomXY(vector, Phaser.Math.Between(300, 500));
-            let enemyNumber = Phaser.Math.Between(0, 2);
-
-            this.meleeEnemiesPool.spawn(this.player.x + spawn.x, this.player.y + spawn.y,
-                'enemyMove', this.data.EnemyConfigs[enemyNumber]);
-            this.masillasTimer = 0;
-            this.maxMasillaTime = Phaser.Math.Between(3000, 6000);
+        if(this.sortSpawnPointsTimer >= this.sortSpawnPointsFrecuency){
+            this.sortSpawnPoints();
+            this.sortSpawnPointsTimer = 0;
         }
+        
 
+        //para cada uno de los spawns de la oleada actual
+        for(let i = 0; i < this.waveJson.NewWaves[this.currentWave].spawnsData.length ;i++){
+            
+            //actualizar el contador de tiempo
+            this.waveJson.NewWaves[this.currentWave].spawnsData[i].timer += dt;
+
+            //si toca spawnear y quedan enemigos en este spawn point
+            if(this.waveJson.NewWaves[this.currentWave].spawnsData[i].timer >=
+                this.waveJson.NewWaves[this.currentWave].spawnsData[i].frecuency && 
+                this.waveJson.NewWaves[this.currentWave].spawnsData[i].size >0 ) 
+            {
+                
+                //spawneo del enemigo en su spawnPoint 
+                
+                //spawnear segun el tipo
+                if(this.waveJson.NewWaves[this.currentWave].spawnsData[i].type == "melee"){
+                    this.meleeEnemiesPool.spawn(this.spawnPositions[i].x,this.spawnPositions[i].y,'enemyMove',this.data.EnemyConfigs[0]);
+                }
+                else if(this.waveJson.NewWaves[this.currentWave].spawnsData[i].type == "range"){
+                    this.rangeEnemiesPool.spawn(this.spawnPositions[i].x,this.spawnPositions[i].y,'enemyMove',this.data.RangeConfigs[0]);
+                }
+                
+                
+                //resetear el timer
+                this.waveJson.NewWaves[this.currentWave].spawnsData[i].timer = 0;
+                //disminuir el tamaño
+                this.waveJson.NewWaves[this.currentWave].spawnsData[i].size--;
+            }
+
+        }
     }
 
-    //buscar los 3 primeros spawn points en un rango
-    //esto se deberia llamar cada x tiempo para refrescarlo
+    //masillas, cambiar a logica de las oleadas
+    masillasLogic(dt) {
+
+          //para cada uno de los spawns de las masillas
+          for(let i = 0; i < this.waveJson.Masillas[0].spawnsData.length ;i++){
+            
+            //actualizar el contador de tiempo
+            this.waveJson.Masillas[0].spawnsData[i].timer += dt;
+
+            //si toca spawnear y quedan enemigos en este spawn point
+            if(this.waveJson.Masillas[0].spawnsData[i].timer >=
+                this.waveJson.Masillas[0].spawnsData[i].frecuency) 
+            {
+                
+                //spawneo del enemigo en su spawnPoint 
+                
+                //spawnear segun el tipo
+                if(this.waveJson.Masillas[0].spawnsData[i].type == "melee"){
+                    this.meleeEnemiesPool.spawn(this.spawnPositions[i].x,this.spawnPositions[i].y,'enemyMove',this.data.EnemyConfigs[0]);
+                }
+                else if(this.waveJson.Masillas[0].spawnsData[i].type == "range"){
+                    this.rangeEnemiesPool.spawn(this.spawnPositions[i].x,this.spawnPositions[i].y,'enemyMove',this.data.RangeConfigs[0]);
+                }
+                
+                //console.log("masillasssss")
+                
+                //resetear el timer
+                this.waveJson.Masillas[0].spawnsData[i].timer = 0;
+            }
+
+        }     
+    }
+
+
     sortSpawnPoints() {
+        
+        //array de posiciones final, lo reseteamos
+        this.spawnPositions = [];
 
+        //i, contador de posiciones validas encontradas
+        let i = 0;
+
+        let playerPos = new Phaser.Math.Vector2(this.player.x,this.player.y);
+
+        let j = 0;
+        //mientras no haya encontrado los puntos suficientes
+        while(i < this.waveJson.NewWaves[this.currentWave].spawnsData.length){
+            
+            //j, contador para recorrer los spawnPoint del array en el que estan todos
+            let encontrado = false;
+            //buscar un punto de los spawnPoints
+            while(!encontrado && j < this.spawnPoints.length){
+
+                //si cumple la condicion y no estaba antes, añadirlo
+                let point = new Phaser.Math.Vector2(this.spawnPoints[j].x,this.spawnPoints[j].y);
+                let distance = playerPos.distance(point);
+
+                //si está en el rango
+                if(distance >= this.minSpawnRange && distance <= this.maxSpawnRange){
+
+                    let enLaOtraLista = false;
+                    let k = 0;
+
+                    //verificar que no esté ya en la lista definitiva
+                    while(!enLaOtraLista && k < this.spawnPositions.length){
+                        
+                        if(point.x == this.spawnPositions[k].x &&
+                            point.y == this.spawnPositions[k].y ){
+                                enLaOtraLista = true;
+                            }
+                        k++;
+                    }
+
+                    //si no estaba en la otra lista, añadirlo
+                    if(!enLaOtraLista){
+                        this.spawnPositions.push(point);
+                        encontrado = true;
+                    }
+
+                }
+
+                j++;
+            }
+
+
+            i++;
+
+        }
     }
 
     /**

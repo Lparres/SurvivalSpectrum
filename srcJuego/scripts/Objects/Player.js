@@ -37,7 +37,7 @@ export default class Player extends Mob
         this.baseDamage = playerConfig.damage;
         this._meleeArmor = playerConfig.meleeArmor;
         this._rangeArmor = playerConfig.rangeArmor;
-        this.dust = 0;
+        this.dust = 100;
         this.baseRange = playerConfig.range;
         
         

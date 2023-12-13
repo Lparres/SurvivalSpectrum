@@ -33,7 +33,7 @@ export default class Mob extends Phaser.GameObjects.Sprite{
 
 
     /** @description Mueve el personaje y reproduce su animación de movimient se debe ajustar la dirección y la velicidad de forma externa*/
-    Move(){
+        Move(){
         //movimiento del objeto
         this.body.setVelocity(this.dir.x*this.speed,this.dir.y*this.speed);
         //animacion de movimiento

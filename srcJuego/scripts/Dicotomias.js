@@ -62,6 +62,23 @@ export default class Dicotomías
                return this.perDic4;
      }
    }
+
+   /**
+    * devuelve el nombre de la dicotoia pedida
+    * @param {number} dic numero de la dicotomia
+    */
+   dicName(dic){
+     switch(dic){
+          case 1:
+               return "R/E";
+          case 2:
+               return "I/E";
+          case 3:
+               return "S/I";
+          case 4:
+               return "J/P";
+     }
+   }
    /**
     * 
     * @param {number} dic numero de dicotomia a la que quieres aplicar cambios
@@ -70,7 +87,8 @@ export default class Dicotomías
      switch(dic){
           case 1:
                this.player.rageMax = this. EmotionalValue();
-               this.player.eurekaMax = this.RationalValue();
+               //this.player.eurekaMax = this.RationalValue();
+               this.player.eurekaMax =1000;
                break;
           case 2:
                this.player.range = this.ExtrovertValue(this.player.baseRange);
@@ -90,6 +108,6 @@ export default class Dicotomías
      return baseRange + baseRange*(this.perDic2/100-0.5);
    }
    IntrovertValue(baseDamage){
-     return baseDamage + baseDamage*((100-this.perDic2)/100-0.5)*8;
+     return baseDamage + baseDamage*((100-this.perDic2)/100-0.5);
    }
 }
