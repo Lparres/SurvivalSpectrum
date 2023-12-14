@@ -69,7 +69,8 @@ export default class UI extends Phaser.Scene
         this.speedInfo = this.add.text(this.estadisticasImg.x - 20, this.estadisticasImg.y + 507, 'xxxx', { font: '30px JosefinMedium', fill: '#424242' }).setOrigin(1, 0.5);
 
         //texto de crono
-        this.timeText = this.add.text(800, 40,' ',{ font: '100px JosefinBold', fill: 'red' });
+        this.marcoReloj = this.add.image(960, 50, 'marcoReloj').setOrigin(0.5, 0.5).setScale(1.5,1.5);
+        this.timeText = this.add.text(this.marcoReloj.x, this.marcoReloj.y + 4,' ',{ font: '60px JosefinMedium', fill: 'white' }).setOrigin(0.5, 0.5);
         this.secondsCount = 0;
         this.minuteCount = 0;
 
