@@ -94,6 +94,10 @@ export default class Dicotomías
                this.player.range = this.ExtrovertValue(this.player.baseRange);
                this.player.damage = this.IntrovertValue(this.player.baseDamage);
                break;
+          case 4:
+               console.log(this.getNCards());
+
+               
      }
    }
 
@@ -109,5 +113,9 @@ export default class Dicotomías
    }
    IntrovertValue(baseDamage){
      return baseDamage + baseDamage*((100-this.perDic2)/100-0.5);
+   }
+
+   getNCards(){
+     return 4 + Math.round((this.perDic4/25));
    }
 }

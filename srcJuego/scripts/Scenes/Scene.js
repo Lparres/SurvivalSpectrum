@@ -1,5 +1,4 @@
 import Player from '../Objects/Player.js'
-//import MeleeEnemy from './MeleeEnemy.js'
 import RangeEnemy from '../Objects/RangeEnemy.js'
 import Pool from '../Pool.js'
 import Bullet from '../Objects/Bullet.js'
