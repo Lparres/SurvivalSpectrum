@@ -1,3 +1,4 @@
+import BootScene from './Scenes/BootScene.js'
 import MainLevel from './Scenes/Scene.js'
 import UI from './Scenes/UI.js'
 import Menu from './Scenes/DicotomyMenu.js'
@@ -12,7 +13,7 @@ var config = {
 
     },
     pixelArt : true,
-    scene : [MainLevel, UI,Menu],
+    scene : [BootScene,MainLevel, UI,Menu],
     physics: {
         default: 'arcade', // elegir motor
         arcade: { // propiedades del motor

@@ -24,21 +24,21 @@ export default class Bullet extends Mob
         this._idParent = idParent;
 
         this.range;
-
-        //objeto destino que guarda la posicion 
-        //let destino = this._idParent ? this.scene.input.mousePointer : this.scene.player;
-        
+     
         //settear escala
         this.setScale(0.05);
-        
-
-        //añadido al grupo de fisicas de bullets
-
-        
+          
     }
 
     preUpdate(t,dt){
+        
+        //por si queremos que la bala tenga animacion
+        super.preUpdate(t,dt);
+
+        //movimiento de las balas
         this.Move();
+
+        //eliminar la bala segun rango o vida
         this.range -= dt*this.body.velocity.length()/1000;
         if(this.range < 0 || this.health <=0){
             //console.log("adios Mundo cruel");
@@ -79,28 +79,20 @@ export default class Bullet extends Mob
         //de tal forma que el spawn point sea el 0,0
         //para ello restamos la mitad del tamaño de la pantalla y el bulletSpawnOffset del player,
 
-
         if(this.idParent){
-            
+           
             //falta legibilidad y quitar magic numbers
             dirDest = new Phaser.Math.Vector2(  
                 this.x + (this.scene.input.mousePointer.position.x - (1920/2) -(this.scene.player._bulletSpawnOffsetX) )   , 
                 this.y + (this.scene.input.mousePointer.position.y - (1080/2) -(this.scene.player._bulletSpawnOffsetY)) );
-
-            
-                
-            //console.log(this.scene.input.mousePointer.position);
-            //this.SetDirection(this.scene.input.mousePointer.position);
-            //this.scene.playerBullets.add(this);
         }
         else{
             dirDest = new Phaser.Math.Vector2(this.scene.player.x,this.scene.player.y);
-            //this.scene.enemiesBullets.add(this);
-
         }
+
+        //setear el destino de la bala
         this.SetDirection(new Phaser.Math.Vector2(dirDest.x - this.x ,dirDest.y - this.y));
-        //console.log(this.dir);
-        
+      
     }
 
 }

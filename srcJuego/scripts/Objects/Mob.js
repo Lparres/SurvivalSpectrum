@@ -16,6 +16,7 @@ export default class Mob extends Phaser.GameObjects.Sprite{
      * @param {Pool} pool pool a la que pertenece el objeto
      */
     constructor(scene,x,y,key,hp,damage,speed, pool){
+
         super(scene,x,y,key);
         this.key = key;
         this.health = hp;
@@ -33,16 +34,18 @@ export default class Mob extends Phaser.GameObjects.Sprite{
 
 
     /** @description Mueve el personaje y reproduce su animación de movimient se debe ajustar la dirección y la velicidad de forma externa*/
-        Move(){
+    Move(){
         //movimiento del objeto
         this.body.setVelocity(this.dir.x*this.speed,this.dir.y*this.speed);
+
         //animacion de movimiento
         if(this.key !== 'kirby'){
+            //animacion de idle
             if(this.dir.y == 0 && this.dir.x == 0){
                 //this.stop();//parar la animacion
                 this.play(this.key[0],true);
             }
-            else{
+            else{//animacion de movimiento
                 this.play(this.key[1],true);//continuar la animacion
             }
         }
@@ -53,13 +56,13 @@ export default class Mob extends Phaser.GameObjects.Sprite{
      * @param {number} dmg danio a recibir
     */
     ReciveDamage(dmg){
-        //console.log(dmg);
+        
+        //reducir la vida
         this.health -= dmg;
-        //console.log(this.health);
-        if(this.health <0){
-            if(this.pool != null){
-                this.pool.release(this);
-            }
+
+        //si la vida es menor que 0, y tenemos pool , hacer release
+        if(this.health < 0 && this.pool != null){      
+            this.pool.release(this);      
         }
     }
 

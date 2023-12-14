@@ -16,75 +16,19 @@ export default class MainScene extends Phaser.Scene {
     //load data
     preload() {
 
-        let srcJuego = 'srcJuego';
-        //carga de imagenes y SpriteSheets
-        this.load.image('kirby', srcJuego + '/img/kirby.png');
-        this.load.image('polvos', srcJuego + '/img/dust.png');
+        this.load.on('complete',()=>{
+            this.scene.run('UIScene')
+        });
 
-
-        //this.load.image('player',srcJuego+ '/Sprites/Character/with_hands/death_0 - copia - copia.png');   
-        this.load.spritesheet('player', srcJuego + '/sprites/Character/with_hands/SpriteSheets/walkSheet.png',
-            { frameWidth: 204, frameHeight: 204});
-
-        this.load.spritesheet('idlePlayer', srcJuego + '/sprites/Character/with_hands/SpriteSheets/idleSheet.png',
-            { frameWidth: 204, frameHeight: 204 });
-
-        this.load.spritesheet('enemy1', srcJuego + '/sprites/Enemy1/SpriteSheets/walkSheet.png',
-        { frameWidth: 204, frameHeight:204})
-
-        this.load.spritesheet('enemy2', srcJuego + '/sprites/Enemy2/SpriteSheets/walk-Sheet.png',
-        { frameWidth: 204, frameHeight:204})
-
-        this.load.spritesheet('enemy3', srcJuego + '/sprites/Enemy3/SpriteSheets/fly-Sheet.png',
-            { frameWidth: 204, frameHeight:204});
-
-        this.load.spritesheet('enemy4', srcJuego + '/sprites/Enemy4/SpriteSheets/walk-Sheet.png',
-        { frameWidth: 204, frameHeight:204});
-
-        //carga del tilemap
-        this.load.tilemapTiledJSON('tilemap', srcJuego + '/tiled/prueba2.json');
-
-        //carga del tileset
-        this.load.image('patronesTilemap', srcJuego + '/tiled/arte/Dungeon_Tileset.png');
-
-
-        /**carga de json de datos de los distintos enemigos
-         * 
-         * tanto este como el siguente creo que necesitan una vuelta de tuerca para que nos sean todavia mas utiles
-         * por ejemplo guardando la clave de animacion de ese tipo de enemigo entre otras cosas 
-         * 
-         * Por otra parte creo que es util ser conscientes que todos los objetos que tenemos en el juego tienen como mucho animaciones de
-         * andar y de recibir danio (del feedback del danio creo que hace falta hablarlo)
-         */
-        this.load.json('data', 'srcJuego/scripts/JSON/data.json');
-
-        this.load.json('waves', 'srcJuego/scripts/JSON/waves.json');
-
-        //this.load.audio('music','srcJuego/audio/musica.mp3');
-
-        this.cameras.main.zoom= 2;
+        this.cameras.main.zoom = 2;
     }
 
     //instance
-    create() {//igual es recomendable que se haga una seccion de creacion de animaciones ya que asi ya estan listas cuando hagan falta
+    create() {
 
         this.data = this.game.cache.json.get('data');
 
-        /**Explicacion del formato de las oleadas
-         * Cada oleada está compuesta por, un waveStartTime(en segundos) y un array de spawnsData.
-         * El waveStartTime, indica el segundo en el que empezará la oleada, cuando el reloj global llegue
-         * a ese tiempo, se lanzará esa oleada. 
-         * El array de spawnsData contiene la informacion de cada spawn,
-         * la posicion de cada spawn se recalcula cada X tiempo(actualmente cada 5 segundos) y detetermina el
-         * punto exacto del mapa en el que salen los enemigos
-         * La informacion que contiene cada spawn es(de momento):
-         * -type: range o melee, para saber el tipo de enemigo
-         * -size: el numero de enemigos que hay en ese spawn point
-         * -frecuency: cada cuantos segundos sale un enemigo en dicho spawn point
-         * -timer: contador de tiempo, para ir sabiendo cuando toca spawnear y cuando no
-         *
-         * 
-         */
+        
         this.waveJson = this.game.cache.json.get('waves');
 
         this.currentWave = 0;
@@ -155,8 +99,8 @@ export default class MainScene extends Phaser.Scene {
             callbackScope: this,
             loop: true
         });
-       //this.music = this.sound.add('music',{volume: 0.05,loop:true});
-       //this.music.play();
+       this.music = this.sound.add('music',{volume: 0.05,loop:true});
+       this.music.play();
     }
 
             
@@ -211,7 +155,7 @@ export default class MainScene extends Phaser.Scene {
         let enemysArr = [];
 
         for (let i = 0; i < 100; i++) {
-            let aux = new Enemy(this, 0, 0, ['enemyMove1', 'enemyMove4'], this.meleeEnemiesPool);
+            let aux = new Enemy(this, 0, 0, ['','enemyMove2'], this.meleeEnemiesPool);
             aux.setDepth(10);
             enemysArr.push(aux);
         }
@@ -221,7 +165,7 @@ export default class MainScene extends Phaser.Scene {
         let rangeArr = [];
 
         for (let i = 0; i < 100; i++) {
-            let aux = new RangeEnemy(this, 0, 0, ['enemyMove1', 'enemyMove4'], this.rangeEnemiesPool);
+            let aux = new RangeEnemy(this, 0, 0, ['','enemyMove2'], this.rangeEnemiesPool);
             aux.setDepth(10);
             rangeArr.push(aux);
         }
@@ -416,7 +360,7 @@ export default class MainScene extends Phaser.Scene {
         this.globalTime  = (this.scene.get("UIScene").minuteCount*60)+ this.scene.get("UIScene").secondsCount;
 
         //si ha llegado el tiempo de la siguiente oleada, cambiar de oleada,y actualizar spawnPoints
-        if(this.globalTime >= this.waveJson.NewWaves[this.currentWave +1].waveStartTime ){
+        if(this.globalTime >= this.waveJson.NewWaves[this.currentWave + 1].waveStartTime ){
             this.currentWave = this.currentWave+1;
             this.sortSpawnPoints();
             this.sortSpawnPointsTimer = 0;
@@ -425,10 +369,10 @@ export default class MainScene extends Phaser.Scene {
             this.scene.get("UIScene").updateWaveData();
         }
 
+        
         //actualizar la posicion de los spawnPoints, cuando toque
-
         this.sortSpawnPointsTimer += dt;
-
+        
         if(this.sortSpawnPointsTimer >= this.sortSpawnPointsFrecuency){
             this.sortSpawnPoints();
             this.sortSpawnPointsTimer = 0;
@@ -438,123 +382,135 @@ export default class MainScene extends Phaser.Scene {
         //para cada uno de los spawns de la oleada actual
         for(let i = 0; i < this.waveJson.NewWaves[this.currentWave].spawnsData.length ;i++){
             
-            //actualizar el contador de tiempo
-            this.waveJson.NewWaves[this.currentWave].spawnsData[i].timer += dt;
+            //info de este spawn
+            let spawnData =  this.waveJson.NewWaves[this.currentWave].spawnsData[i];  
 
-            //si toca spawnear y quedan enemigos en este spawn point
-            if(this.waveJson.NewWaves[this.currentWave].spawnsData[i].timer >=
-                this.waveJson.NewWaves[this.currentWave].spawnsData[i].frecuency && 
-                this.waveJson.NewWaves[this.currentWave].spawnsData[i].size >0 ) 
-            {
-                
-                //spawneo del enemigo en su spawnPoint 
-                
-                //spawnear segun el tipo
-                if(this.waveJson.NewWaves[this.currentWave].spawnsData[i].type == "melee"){
-                    this.meleeEnemiesPool.spawn(this.spawnPositions[i].x,this.spawnPositions[i].y,'enemyMove1',this.data.EnemyConfigs[0]);
-                }
-                else if(this.waveJson.NewWaves[this.currentWave].spawnsData[i].type == "range"){
-                    this.rangeEnemiesPool.spawn(this.spawnPositions[i].x,this.spawnPositions[i].y,'enemyMove1',this.data.RangeConfigs[0]);
-                }
-                
-                
-                //resetear el timer
-                this.waveJson.NewWaves[this.currentWave].spawnsData[i].timer = 0;
-                //disminuir el tamaño
-                this.waveJson.NewWaves[this.currentWave].spawnsData[i].size--;
-            }
+            //posicion en la que vamos a spawnear
+            let spawnPos = this.spawnPositions[i];
 
+            this.spawnDataUpdate(spawnData,spawnPos,dt,false);
         }
+
+        //SPAWN DEL TOTEM ENEMY
+
+        //info del spawn del totem
+        let totemData =  this.waveJson.NewWaves[this.currentWave].totemEnemy[0];
+    
+        //posicion en la que vamos a spawnear
+        let spawnPos = this.spawnPositions[Phaser.Math.Between(0,this.spawnPositions.length-1)];
+         
+        this.spawnDataUpdate(totemData,spawnPos,dt,false);             
+         
     }
 
-    //masillas, cambiar a logica de las oleadas
+    //masillas, falta ir actualizando los config de los enemies
     masillasLogic(dt) {
 
-          //para cada uno de los spawns de las masillas
-          for(let i = 0; i < this.waveJson.Masillas[0].spawnsData.length ;i++){
+        //para cada uno de los spawns de las masillas
+        for(let i = 0; i < this.waveJson.Masillas[0].spawnsData.length ;i++){
+        
+            //info de este spawn
+            let spawnData = this.waveJson.Masillas[0].spawnsData[i];
             
-            //actualizar el contador de tiempo
-            this.waveJson.Masillas[0].spawnsData[i].timer += dt;
+            //posicion en la que vamos a spawnear
+            let spawnPos = this.spawnPositions[spawnData.spawnIndex];
+                
+            this.spawnDataUpdate(spawnData,spawnPos,dt,true);             
+        }
+             
+    };
 
-            //si toca spawnear y quedan enemigos en este spawn point
-            if(this.waveJson.Masillas[0].spawnsData[i].timer >=
-                this.waveJson.Masillas[0].spawnsData[i].frecuency) 
-            {
-                
-                //spawneo del enemigo en su spawnPoint 
-                
-                //spawnear segun el tipo
-                if(this.waveJson.Masillas[0].spawnsData[i].type == "melee"){
-                    this.meleeEnemiesPool.spawn(this.spawnPositions[i].x,this.spawnPositions[i].y,'enemyMove',this.data.EnemyConfigs[0]);
-                }
-                else if(this.waveJson.Masillas[0].spawnsData[i].type == "range"){
-                    this.rangeEnemiesPool.spawn(this.spawnPositions[i].x,this.spawnPositions[i].y,'enemyMove',this.data.RangeConfigs[0]);
-                }
-                
-                //console.log("masillasssss")
-                
-                //resetear el timer
-                this.waveJson.Masillas[0].spawnsData[i].timer = 0;
+
+    spawnDataUpdate(spawnData,spawnPos,dt,masillas) {
+
+        //actualizar el contador de tiempo
+        spawnData.timer += dt;
+    
+        //si toca spawnear y quedan enemigos en este spawn point
+        if(spawnData.timer >= spawnData.frecuency && (masillas ||spawnData.size > 0)) {
+           
+           
+           if(masillas){
+               spawnData.spawnIndex = (spawnData.spawnIndex + 1 ) % this.spawnPositions.length;
+               
+               //posicion en la que vamos a spawnear
+               spawnPos = this.spawnPositions[spawnData.spawnIndex];
+           }
+    
+            //spawnear segun el tipo, solo cambia la pool y el config
+            if(spawnData.type == "melee"){
+                this.meleeEnemiesPool.spawn(spawnPos.x,spawnPos.y,spawnData.animKey,this.data.EnemyConfigs[0]);
             }
-
-        }     
+            else if(spawnData.type == "range"){
+                this.rangeEnemiesPool.spawn(spawnPos.x,spawnPos.y,spawnData.animKey,this.data.RangeConfigs[0]);
+            }
+            
+            if(!masillas){
+               spawnData.size--;
+            }
+            //resetear el timer
+            spawnData.timer = 0;
+       }
     }
+        
+    
 
-
+    //busca los spawnPoints mas cercanos
     sortSpawnPoints() {
         
         //array de posiciones final, lo reseteamos
         this.spawnPositions = [];
 
-        //i, contador de posiciones validas encontradas
-        let i = 0;
-
+        //posicion del jugador
         let playerPos = new Phaser.Math.Vector2(this.player.x,this.player.y);
 
-        let j = 0;
-        //mientras no haya encontrado los puntos suficientes
-        while(i < this.waveJson.NewWaves[this.currentWave].spawnsData.length){
-            
-            //j, contador para recorrer los spawnPoint del array en el que estan todos
-            let encontrado = false;
-            //buscar un punto de los spawnPoints
-            while(!encontrado && j < this.spawnPoints.length){
+        //contador para recorrer los spawnPoint del array en el que estan todos
+        let spawnIndex = 0;
+           
+        //recorremos todos los spawnPoints
+        while(spawnIndex < this.spawnPoints.length){
 
-                //si cumple la condicion y no estaba antes, añadirlo
-                let point = new Phaser.Math.Vector2(this.spawnPoints[j].x,this.spawnPoints[j].y);
-                let distance = playerPos.distance(point);
+            //si cumple la condicion y no estaba antes, añadirlo
+            let point = new Phaser.Math.Vector2(this.spawnPoints[spawnIndex].x,this.spawnPoints[spawnIndex].y);
+            let distance = playerPos.distance(point);
 
-                //si está en el rango
-                if(distance >= this.minSpawnRange && distance <= this.maxSpawnRange){
+            //si está en el rango
+            if(distance >= this.minSpawnRange && distance <= this.maxSpawnRange){
 
-                    let enLaOtraLista = false;
+                //si la lista no está llena añadirlo
+                if(this.spawnPositions.length < this.waveJson.NewWaves[this.currentWave].spawnsData.length){                  
+                    this.spawnPositions.push(point);       
+                }
+                else{
+                    /**Si la lista está llena, buscar el punto mas lejano del player, comparar si el que estamos buscando es mas cercano
+                     * que ese, si lo es, lo intercambiamos
+                     */
+
                     let k = 0;
 
-                    //verificar que no esté ya en la lista definitiva
-                    while(!enLaOtraLista && k < this.spawnPositions.length){
-                        
-                        if(point.x == this.spawnPositions[k].x &&
-                            point.y == this.spawnPositions[k].y ){
-                                enLaOtraLista = true;
-                            }
+                    //indice del mas lejano
+                    let indexMax = 0;
+
+                    //buscar el mas lejano
+                    while(k < this.spawnPositions.length){
+                             
+                        if(playerPos.distance(this.spawnPositions[indexMax]) < playerPos.distance(this.spawnPositions[k])){
+                            indexMax = k;
+                        }
                         k++;
                     }
 
-                    //si no estaba en la otra lista, añadirlo
-                    if(!enLaOtraLista){
-                        this.spawnPositions.push(point);
-                        encontrado = true;
+                    //si es mas cercano que el mas lejano,intercambiarlo
+                    if(distance < playerPos.distance(this.spawnPositions[indexMax])){
+                        this.spawnPositions[indexMax] = point;
                     }
-
                 }
 
-                j++;
             }
 
+            spawnIndex++;
+        }   
 
-            i++;
-
-        }
     }
 
     /**

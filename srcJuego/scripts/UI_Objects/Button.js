@@ -1,34 +1,35 @@
+/**
+ * clase boton generico que realiza la accion que se le indique al pulsar
+ * al pasar el raton por encima se altera un poco el tamaño del sprite
+ */
 export default class Button extends Phaser.GameObjects.Sprite{
     /**
-     * 
+     * clase boton generico que realiza la accion que se le indique al pulsar
+     * al pasar el raton por encima se altera un poco el tamaño del sprite
      * @param {*} scene 
      * @param {*} x 
      * @param {*} y 
-     * @param {*} key 
+     * @param {string} key clave para acceder al sprite del boton
      * @param {number} baseScale escala a la que poner el sprite designado
-     * @param {*} func 
+     * @param {funcion} func funcion llamada al pulsar el boton
      */
     constructor(scene, x, y, key,baseScale,func){
         super(scene, x,y, key);
+
         this.setScale(baseScale,baseScale);
-        this.scene.add.existing(this);
         this.setInteractive();
+        
+        this.scene.add.existing(this);
+
+
         this.on('pointerdown',function(){
             func();
-            //this.setActive(false);
-            //this.disableInteractive();
-            //this.setVisible(false);
         })
         this.on('pointerout',function(){
-            //console.log("fuera")
             this.setScale(baseScale,baseScale);
         })
         this.on('pointerover',function(){
-            //console.log("encima")
-            this.setScale(baseScale+0.05,baseScale+0.05);
+            this.setScale(baseScale+0.03,baseScale+0.03);
         })
-    }
-    preUpdate(t,dt){
-        //console.log("antonio");
     }
 }

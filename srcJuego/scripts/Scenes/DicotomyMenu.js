@@ -12,8 +12,7 @@ export default class Menu extends Phaser.Scene {
 
     }
     preload() {
-        this.load.image('mas', 'srcJuego/img/simbolo_mas.png')
-        this.load.image('marcoDial', 'srcJuego/ui/ImagenDial_3.png')
+
     }
     create() {
         this.dicotomyManager = this.scene.get('level').dicotomyManager;
