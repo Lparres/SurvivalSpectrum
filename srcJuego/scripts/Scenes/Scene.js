@@ -86,6 +86,7 @@ export default class MainScene extends Phaser.Scene {
             this.scene.sleep('UIScene');
             this.scene.launch('Menu');
             this.scene.setActive(false);
+            this.music.pause();
         });
         // Recogida del input de movimiento en un vector
         this._inputVector = new Phaser.Math.Vector2(0, 0);
@@ -100,8 +101,13 @@ export default class MainScene extends Phaser.Scene {
             callbackScope: this,
             loop: true
         });
+
+        //sonidos
        this.music = this.sound.add('music',{volume: 0.05,loop:true});
        this.music.play();
+
+       this.hitSound = this.sound.add('golpe',{volume: 0.5});
+       this.playerHitSound = this.sound.add('golpePlayer',{volume: 0.5});
 
        this.cardList = {
         life: 0,
@@ -208,6 +214,7 @@ export default class MainScene extends Phaser.Scene {
             enemy.Hit(dmg1);
             proyectle.Hit(dmg2, false);
             enemy.scene.player.addEureka();
+            //enemy.scene.hitSound.play();
         });
         //colisiones entre las balas del jugador y los enemigos a rango
         this.physics.add.collider(this.playerBulletsPool.group, this.rangeEnemiesPool.group, function (proyectle, enemy) {
@@ -216,6 +223,7 @@ export default class MainScene extends Phaser.Scene {
             enemy.Hit(dmg1);
             proyectle.Hit(dmg2, false);
             enemy.scene.player.addEureka()
+            //enemy.scene.hitSound.play();
         });
 
 

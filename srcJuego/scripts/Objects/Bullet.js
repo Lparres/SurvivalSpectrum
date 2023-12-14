@@ -27,17 +27,17 @@ export default class Bullet extends Mob
      
         //settear escala
         this.setScale(0.05);
-          
+        
     }
-
+    
     preUpdate(t,dt){
         
         //por si queremos que la bala tenga animacion
         super.preUpdate(t,dt);
-
+        
         //movimiento de las balas
         this.Move();
-
+        
         //eliminar la bala segun rango o vida
         this.range -= dt*this.body.velocity.length()/1000;
         if(this.range < 0 || this.health <=0){
@@ -45,31 +45,30 @@ export default class Bullet extends Mob
             this.pool.release(this);
         }
     }
-
-
+    
+    
     /**
      * 
      * @param {number} damage 
-     */
-    Hit(damage, idParent)
-    {
-        //console.log(this.idParent);
-        if(this.idParent != idParent){
-            this.damage = this.health;
-            this.ReciveDamage(damage);//esto creo que es mejor cambiarlo al preupdate
-            //console.log("Damage: "+ damage);
+    */
+   Hit(damage, idParent)
+   {
+       //console.log(this.idParent);
+       if(this.idParent != idParent){
+           this.damage = this.health;
+           this.ReciveDamage(damage);//esto creo que es mejor cambiarlo al preupdate
+           //console.log("Damage: "+ damage);
         }
-        //console.log("colision bala");
     }
     /**
-    * @param {SettingObject} seting necesita: {idParent, damage, speed, range} 
+     * @param {SettingObject} seting necesita: {idParent, damage, speed, range} 
     */
-    setUp(seting){
-        this.idParent = seting.idParent;
-        this.health = seting.damage;
-        this.damage = seting.damage;
-        this.speed = seting.velocity;
-
+   setUp(seting){
+       this.idParent = seting.idParent;
+       this.health = seting.damage;
+       this.damage = seting.damage;
+       this.speed = seting.velocity;
+       
         this.range = seting.range;
 
         let dirDest;

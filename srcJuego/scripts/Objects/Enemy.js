@@ -69,6 +69,7 @@ export default class Enemy extends Mob
 
     Hit(damage){
         this.ReciveDamage(damage);
+        this.scene.hitSound.play();
         if(this.health < 0){
             let dustConfig ={
                 amount:50,
