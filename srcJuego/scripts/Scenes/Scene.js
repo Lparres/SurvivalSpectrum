@@ -5,6 +5,7 @@ import Bullet from '../Objects/Bullet.js'
 import Enemy from '../Objects/Enemy.js'
 import InteractuableObjects from '../Objects/InteractuableObject.js'
 import Dicotomías from '../Dicotomias.js'
+import Card from '../Card.js'
 export default class MainScene extends Phaser.Scene {
     constructor() {
         super({ key: "level" })
@@ -101,6 +102,16 @@ export default class MainScene extends Phaser.Scene {
         });
        this.music = this.sound.add('music',{volume: 0.05,loop:true});
        this.music.play();
+
+       this.cardList = {
+        life: 0,
+        lifeRegen:0,
+        damage: 0,
+        fireRate:0,
+        meleeArmor: 0,
+        rangeArmor: 0,
+        speed:0
+       }
     }
 
             

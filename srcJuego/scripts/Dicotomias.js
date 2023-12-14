@@ -86,19 +86,24 @@ export default class Dicotomías
    AplieDicotomy(dic){
      switch(dic){
           case 1:
-               //this.player.rageMax = this. EmotionalValue();
+               this.player.rageMax = this. EmotionalValue();
                //this.player.eurekaMax = this.RationalValue();
-               this.player.rageMax = 200;
                this.player.eurekaMax =1000;
                break;
           case 2:
                this.player.range = this.ExtrovertValue(this.player.baseRange);
                this.player.damage = this.IntrovertValue(this.player.baseDamage);
                break;
-          case 4:
-               console.log(this.getNCards());
-
-               
+          case 4:   
+               this.getNCards();
+               this.player.scene.cardList.life += this.CardValue();
+               this.player.scene.cardList.lifeRegen += this.CardValue();
+               this.player.scene.cardList.damage += this.CardValue();
+               this.player.scene.cardList.fireRate += this.CardValue();
+               this.player.scene.cardList.meleeArmor += this.CardValue();
+               this.player.scene.cardList.rangeArmor += this.CardValue();
+               this.player.scene.cardList.speed += this.CardValue();
+               console.log(this.player.scene.cardList);
      }
    }
 
@@ -118,5 +123,9 @@ export default class Dicotomías
 
    getNCards(){
      return 4 + Math.round((this.perDic4/25));
+   }
+
+   CardValue(){
+     return this.perDic4;
    }
 }
