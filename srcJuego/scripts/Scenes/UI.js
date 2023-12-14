@@ -25,6 +25,8 @@ export default class UI extends Phaser.Scene
         this.loadFont("JosefinMedium", "srcJuego/fonts/JosefinSans-Medium.ttf");
 
         // Creación de la barra de vida
+        this.GRP_BarraVida = this.add.group();
+
         this.healthBG = this.add.nineslice(100, 900, 'ui', 'GreyBG', 500, 50, 10, 10, 10, 10);
         this.healthBar = this.add.nineslice(100, 900, 'ui', 'GreenBar', 500, 40, 10, 20, 20, 20);
         this.healthFrame = this.add.nineslice(100, 900, 'ui', 'BlackFrame', 500, 50, 10, 10, 10, 10);
@@ -32,13 +34,17 @@ export default class UI extends Phaser.Scene
         this.healthBar.setOrigin(0, 0.5);
         this.healthFrame.setOrigin(0, 0.5);
 
-        this.add.image(90, 900, 'heart').setOrigin(0.5, 0.5).setScale(0.15, 0.15);
+        this.heartIMG = this.add.image(90, 900, 'heart').setOrigin(0.5, 0.5).setScale(0.15, 0.15);
 
         this.healthInfo = this.add.text(590, 945, 'xxxx', { font: '25px JosefinBold', fill: 'black' });
         this.healthInfo.setOrigin(1, 0.5)
 
+        this.GRP_BarraVida.addMultiple([this.healthBG, this.healthBar, this.healthFrame, this.heartIMG, this.healthInfo]);
+
 
         // Creación de la barra de furiaEureka
+        this.GRP_FuriaEureka = this.add.group();
+
         this.furiaBG = this.add.nineslice(330, 1000, 'ui', 'GreyBG', 265, 50, 10, 10, 10, 10);
         this.furiaBar = this.add.nineslice(330, 1000, 'ui', 'OrangeBar', 265, 40, 10, 20, 20, 20);
         this.furiaFrame = this.add.nineslice(330, 1000, 'ui', 'BlackFrame', 265, 50, 10, 10, 10, 10);
@@ -53,10 +59,14 @@ export default class UI extends Phaser.Scene
         this.eurekaBar.setOrigin(1, 0.5);
         this.eurekaFrame.setOrigin(1, 0.5);
 
-        this.add.image(330, 1000, 'furiaEureka').setOrigin(0.5, 0.5).setScale(1, 1);
+        this.furiaEurekaIMG = this.add.image(330, 1000, 'furiaEureka').setOrigin(0.5, 0.5).setScale(1, 1);
+
+        this.GRP_FuriaEureka.addMultiple([this.furiaBG, this.furiaBar, this.furiaFrame, this.eurekaBG, this.eurekaBar, this.eurekaFrame, this.furiaEurekaIMG]);
 
 
         // Creación estadísticas
+        this.GRP_Estadisticas = this.add.group();
+
         this.estadisticasImg = this.add.image(1880, 360, 'estadisticas').setOrigin(1, 0).setScale(1, 1);
 
         this.lifeInfo = this.add.text(this.estadisticasImg.x - 20, this.estadisticasImg.y + 78, 'xxxx', { font: '30px JosefinMedium', fill: '#424242' }).setOrigin(1, 0.5);
@@ -68,29 +78,39 @@ export default class UI extends Phaser.Scene
         this.rangeInfo = this.add.text(this.estadisticasImg.x - 20, this.estadisticasImg.y + 448, 'xxxx', { font: '30px JosefinMedium', fill: '#424242' }).setOrigin(1, 0.5);
         this.speedInfo = this.add.text(this.estadisticasImg.x - 20, this.estadisticasImg.y + 507, 'xxxx', { font: '30px JosefinMedium', fill: '#424242' }).setOrigin(1, 0.5);
 
+        this.GRP_Estadisticas.addMultiple([this.estadisticasImg, this.lifeInfo, this.lifeRegenInfo, this.damageInfo, this.fireRateInfo, this.meleeArmorInfo, this.rangeArmorInfo, this.rangeInfo, this.speedInfo]);
+
+
         //texto de crono
+        this.GRP_Reloj = this.add.group();
         this.marcoReloj = this.add.image(960, 50, 'marcoReloj').setOrigin(0.5, 0.5).setScale(1.5,1.5);
         this.timeText = this.add.text(this.marcoReloj.x, this.marcoReloj.y + 4,' ',{ font: '60px JosefinMedium', fill: 'white' }).setOrigin(0.5, 0.5);
         this.secondsCount = 0;
         this.minuteCount = 0;
+        this.GRP_Reloj.addMultiple([this.marcoReloj, this.timeText]);
+
 
         //datos de la oleada (por rellenar y gestionar actualizacion)
+        this.GRP_DatosOleada = this.add.group();
         this.waveData = this.add.image(150, 190, 'waveInfo').setOrigin(0.5, 0.5).setScale(1, 1);
         this.waveN = this.add.text(this.waveData.x, this.waveData.y - 78,'xxxx',{ font: '40px JosefinMedium', fill: '#424242'}).setOrigin(0.5, 0.5);
         this.enemiesN = this.add.text(this.waveData.x, this.waveData.y + 35,'123',{ font: '33px JosefinMedium', fill: '#424242' }).setOrigin(0.5, 0.5);
+        this.GRP_DatosOleada.addMultiple([this.waveData, this.waveN, this.enemiesN]);
 
-        //el momento en el que saldrá la siguiente oleada
+
+        //indicador de tiempo para la siguiente oleada
+        this.GRP_NextWave = this.add.group();
         this.nextWaveIMG = this.add.image(150, 450, 'nextWave').setOrigin(0.5, 0.5).setScale(1, 1);
-
         this.nextWave = this.add.text(this.nextWaveIMG.x, this.nextWaveIMG.y + 24,'xxxx',{ font: '35px JosefinMedium', fill: 'white' }).setOrigin(0.5, 0.5);    
-
+        this.GRP_NextWave.addMultiple([this.nextWaveIMG, this.nextWave]);
         
+
         // Creación indicador dust
+        this.GRP_Dust = this.add.group();
         this.dust = this.add.text(1730, 1000,'xxxx', 
         { font: '50px JosefinMedium', fill: 'white', align: 'right', stroke: 'black', strokeThickness: 5}).setOrigin(1,0.5);
-    
-        this.add.image(1860 , 1000, 'polvos').setScale(0.1).setOrigin(1,0.5);
-        
+        this.dustIMG = this.add.image(1860 , 1000, 'polvos').setScale(0.1).setOrigin(1,0.5);
+        this.GRP_Dust.addMultiple([this.dust, this.dustIMG]);
 
         // Creación del mapa
         this.map = this.add.image(1730, 180, 'map').setOrigin(0.5, 0.5).setScale(0.6, 0.6);
@@ -126,6 +146,10 @@ export default class UI extends Phaser.Scene
        this.updateStats();
 
        this.dust.setText(this.player.dust);
+
+
+       // Se modifica la cantidad de elementos del HUD según la dicotomía.
+       this.setVisibilidadHUD(ourGame);
 
     }
 
@@ -201,5 +225,21 @@ export default class UI extends Phaser.Scene
         this.enemiesN.setText(nEnemies);
 
     }
+
+
+    setVisibilidadHUD(mainScene){
+        let uiDicotomy = mainScene.dicotomyManager.getDic(3);
+
+        this.GRP_BarraVida.setVisible(uiDicotomy > 50);
+        this.GRP_FuriaEureka.setVisible(uiDicotomy > 51);
+        this.GRP_Estadisticas.setVisible(uiDicotomy > 52);
+        this.GRP_Reloj.setVisible(uiDicotomy > 53);
+        this.GRP_DatosOleada.setVisible(uiDicotomy > 54);
+        this.GRP_NextWave.setVisible(uiDicotomy > 55);
+        this.GRP_Dust.setVisible(uiDicotomy > 56);
+        this.map.setVisible(uiDicotomy > 57);
+
+
+        }
     
 }
