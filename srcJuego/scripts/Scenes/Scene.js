@@ -361,7 +361,7 @@ export default class MainScene extends Phaser.Scene {
         this.globalTime  = (this.scene.get("UIScene").minuteCount*60)+ this.scene.get("UIScene").secondsCount;
 
         //si ha llegado el tiempo de la siguiente oleada, cambiar de oleada,y actualizar spawnPoints
-        if(this.globalTime >= this.waveJson.NewWaves[this.currentWave +1].waveStartTime ){
+        if(this.globalTime >= this.waveJson.NewWaves[this.currentWave + 1].waveStartTime ){
             this.currentWave = this.currentWave+1;
             this.sortSpawnPoints();
             this.sortSpawnPointsTimer = 0;
@@ -370,10 +370,10 @@ export default class MainScene extends Phaser.Scene {
             this.scene.get("UIScene").updateWaveData();
         }
 
+        
         //actualizar la posicion de los spawnPoints, cuando toque
-
         this.sortSpawnPointsTimer += dt;
-
+        
         if(this.sortSpawnPointsTimer >= this.sortSpawnPointsFrecuency){
             this.sortSpawnPoints();
             this.sortSpawnPointsTimer = 0;
@@ -383,75 +383,100 @@ export default class MainScene extends Phaser.Scene {
         //para cada uno de los spawns de la oleada actual
         for(let i = 0; i < this.waveJson.NewWaves[this.currentWave].spawnsData.length ;i++){
             
+            //info de este spawn
+            let spawnData =  this.waveJson.NewWaves[this.currentWave].spawnsData[i];
             //actualizar el contador de tiempo
-            this.waveJson.NewWaves[this.currentWave].spawnsData[i].timer += dt;
+            spawnData.timer += dt;
 
             //si toca spawnear y quedan enemigos en este spawn point
-            if(this.waveJson.NewWaves[this.currentWave].spawnsData[i].timer >=
-                this.waveJson.NewWaves[this.currentWave].spawnsData[i].frecuency && 
-                this.waveJson.NewWaves[this.currentWave].spawnsData[i].size >0 ) 
-            {
-                
-                //spawneo del enemigo en su spawnPoint 
+            if(spawnData.timer >= spawnData.frecuency && spawnData.size > 0 ) {
+                   
+                //posicion en la que vamos a spawnear
+                let spawnPos = this.spawnPositions[i];
 
-                //spawnear segun el tipo
-                
-                if(this.waveJson.NewWaves[this.currentWave].spawnsData[i].type == "melee"){
-                    this.meleeEnemiesPool.spawn(this.spawnPositions[i].x,this.spawnPositions[i].y,this.waveJson.NewWaves[this.currentWave].spawnsData[i].animKey,this.data.EnemyConfigs[0]);
+                //spawnear segun el tipo, solo cambia la pool y el config
+                if(spawnData.type == "melee"){
+                    this.meleeEnemiesPool.spawn(spawnPos.x,spawnPos.y,spawnData.animKey,this.data.EnemyConfigs[0]);
                 }
-                else if(this.waveJson.NewWaves[this.currentWave].spawnsData[i].type == "range"){
-                    this.rangeEnemiesPool.spawn(this.spawnPositions[i].x,this.spawnPositions[i].y,this.waveJson.NewWaves[this.currentWave].spawnsData[i].animKey,this.data.RangeConfigs[0]);
-                }
-               
-                
+                else if(spawnData.type == "range"){
+                    this.rangeEnemiesPool.spawn(spawnPos.x,spawnPos.y,spawnData.animKey,this.data.RangeConfigs[0]);
+                }           
                 
                 //resetear el timer
-                this.waveJson.NewWaves[this.currentWave].spawnsData[i].timer = 0;
+                spawnData.timer = 0;
                 //disminuir el tamaño
-                this.waveJson.NewWaves[this.currentWave].spawnsData[i].size--;
+                spawnData.size--;
             }
 
         }
+
+        
+        //SPAWN DEL TOTEM ENEMY
+
+         //info del spawn del totem
+         let totemData =  this.waveJson.NewWaves[this.currentWave].totemEnemy[0];
+         //actualizar el contador de tiempo
+         totemData.timer += dt;
+
+
+         //si toca spawnear y todavia no se ha spawneado
+         if(totemData.timer >= totemData.frecuency && totemData.size > 0 ) {
+                
+             //posicion en la que vamos a spawnear
+             let spawnPos = this.spawnPositions[Phaser.Math.Between(0,this.spawnPositions.length-1)];
+
+             //spawnear segun el tipo, solo cambia la pool y el config
+             if(totemData.type == "melee"){
+                 this.meleeEnemiesPool.spawn(spawnPos.x,spawnPos.y,totemData.animKey,this.data.EnemyConfigs[0]);
+             }
+             else if(totemData.type == "range"){
+                 this.rangeEnemiesPool.spawn(spawnPos.x,spawnPos.y,totemData.animKey,this.data.RangeConfigs[0]);
+             }           
+             
+             //resetear el timer
+             totemData.timer = 0;
+             //disminuir el tamaño
+             totemData.size--;
+         }
     }
 
-    //masillas, cambiar a logica de las oleadas
+    //masillas, falta ir actualizando los config de los enemies
     masillasLogic(dt) {
 
           //para cada uno de los spawns de las masillas
           for(let i = 0; i < this.waveJson.Masillas[0].spawnsData.length ;i++){
             
+             //info de este spawn
+            let spawnData = this.waveJson.Masillas[0].spawnsData[i];
+
             //actualizar el contador de tiempo
-            this.waveJson.Masillas[0].spawnsData[i].timer += dt;
+            spawnData.timer += dt;
 
             //si toca spawnear y quedan enemigos en este spawn point
-            if(this.waveJson.Masillas[0].spawnsData[i].timer >=
-                this.waveJson.Masillas[0].spawnsData[i].frecuency) 
-            {
+            if(spawnData.timer >= spawnData.frecuency) {
                 
-                //spawneo del enemigo en su spawnPoint 
+                //actualizar el spawnIndex(para q no se spawneenSiempre en el mismo lugar)
+                spawnData.spawnIndex = (spawnData.spawnIndex + 1 ) %this.spawnPositions.length;
                 
-                let spawnIndex = this.waveJson.Masillas[0].spawnsData[i].spawnIndex;
-                //spawnear segun el tipo
-                if(this.waveJson.Masillas[0].spawnsData[i].type == "melee"){
-                    this.meleeEnemiesPool.spawn(this.spawnPositions[spawnIndex].x,this.spawnPositions[spawnIndex].y,
-                                                this.waveJson.Masillas[0].spawnsData[i].animKey,this.data.EnemyConfigs[0]);
+                //posicion en la que vamos a spawnear
+                let spawnPos = this.spawnPositions[spawnData.spawnIndex];
+                 
+                //spawnear segun el tipo, solo cambia la pool y el config
+                if(spawnData.type == "melee"){
+                    this.meleeEnemiesPool.spawn(spawnPos.x,spawnPos.y,spawnData.animKey,this.data.EnemyConfigs[0]);
                 }
-                else if(this.waveJson.Masillas[0].spawnsData[i].type == "range"){
-                    this.rangeEnemiesPool.spawn(this.spawnPositions[spawnIndex].x,this.spawnPositions[spawnIndex].y,
-                                                this.waveJson.Masillas[0].spawnsData[i].animKey,this.data.RangeConfigs[0]);
+                else if(spawnData.type == "range"){
+                    this.rangeEnemiesPool.spawn(spawnPos.x,spawnPos.y,spawnData.animKey,this.data.RangeConfigs[0]);
                 }
-                
-                
-                this.waveJson.Masillas[0].spawnsData[i].spawnIndex = (this.waveJson.Masillas[0].spawnsData[i].spawnIndex +1)%this.spawnPositions.length;
                 
                 //resetear el timer
-                this.waveJson.Masillas[0].spawnsData[i].timer = 0;
+                spawnData.timer = 0;
             }
 
         }     
     }
 
-
+    //retocar para buscar los mas cercanos
     sortSpawnPoints() {
         
         //array de posiciones final, lo reseteamos
