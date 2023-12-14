@@ -410,7 +410,7 @@ export default class MainScene extends Phaser.Scene {
 
         }
 
-        
+
         //SPAWN DEL TOTEM ENEMY
 
          //info del spawn del totem
@@ -476,61 +476,62 @@ export default class MainScene extends Phaser.Scene {
         }     
     }
 
-    //retocar para buscar los mas cercanos
+    //busca los spawnPoints mas cercanos
     sortSpawnPoints() {
         
         //array de posiciones final, lo reseteamos
         this.spawnPositions = [];
 
-        //i, contador de posiciones validas encontradas
-        let i = 0;
-
+        //posicion del jugador
         let playerPos = new Phaser.Math.Vector2(this.player.x,this.player.y);
 
-        let j = 0;
-        //mientras no haya encontrado los puntos suficientes
-        while(i < this.waveJson.NewWaves[this.currentWave].spawnsData.length){
-            
-            //j, contador para recorrer los spawnPoint del array en el que estan todos
-            let encontrado = false;
-            //buscar un punto de los spawnPoints
-            while(!encontrado && j < this.spawnPoints.length){
+        //contador para recorrer los spawnPoint del array en el que estan todos
+        let spawnIndex = 0;
+           
+        //recorremos todos los spawnPoints
+        while(spawnIndex < this.spawnPoints.length){
 
-                //si cumple la condicion y no estaba antes, añadirlo
-                let point = new Phaser.Math.Vector2(this.spawnPoints[j].x,this.spawnPoints[j].y);
-                let distance = playerPos.distance(point);
+            //si cumple la condicion y no estaba antes, añadirlo
+            let point = new Phaser.Math.Vector2(this.spawnPoints[spawnIndex].x,this.spawnPoints[spawnIndex].y);
+            let distance = playerPos.distance(point);
 
-                //si está en el rango
-                if(distance >= this.minSpawnRange && distance <= this.maxSpawnRange){
+            //si está en el rango
+            if(distance >= this.minSpawnRange && distance <= this.maxSpawnRange){
 
-                    let enLaOtraLista = false;
+                //si la lista no está llena añadirlo
+                if(this.spawnPositions.length < this.waveJson.NewWaves[this.currentWave].spawnsData.length){                  
+                    this.spawnPositions.push(point);       
+                }
+                else{
+                    /**Si la lista está llena, buscar el punto mas lejano del player, comparar si el que estamos buscando es mas cercano
+                     * que ese, si lo es, lo intercambiamos
+                     */
+
                     let k = 0;
 
-                    //verificar que no esté ya en la lista definitiva
-                    while(!enLaOtraLista && k < this.spawnPositions.length){
-                        
-                        if(point.x == this.spawnPositions[k].x &&
-                            point.y == this.spawnPositions[k].y ){
-                                enLaOtraLista = true;
-                            }
+                    //indice del mas lejano
+                    let indexMax = 0;
+
+                    //buscar el mas lejano
+                    while(k < this.spawnPositions.length){
+                             
+                        if(playerPos.distance(this.spawnPositions[indexMax]) < playerPos.distance(this.spawnPositions[k])){
+                            indexMax = k;
+                        }
                         k++;
                     }
 
-                    //si no estaba en la otra lista, añadirlo
-                    if(!enLaOtraLista){
-                        this.spawnPositions.push(point);
-                        encontrado = true;
+                    //si es mas cercano que el mas lejano,intercambiarlo
+                    if(distance < playerPos.distance(this.spawnPositions[indexMax])){
+                        this.spawnPositions[indexMax] = point;
                     }
-
                 }
 
-                j++;
             }
 
+            spawnIndex++;
+        }   
 
-            i++;
-
-        }
     }
 
     /**
