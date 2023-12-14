@@ -25,8 +25,6 @@ export default class Enemy extends Mob
 
         this._moveVector = new Phaser.Math.Vector2(0,0);
 
-        //asignar escala
-        //this.setScale(0.3);
         //añadir a la escena
         this.scene.add.existing(this);
 
@@ -43,20 +41,25 @@ export default class Enemy extends Mob
     }
 
     preUpdate(t,dt){
-        if(!this.scene.stopEnemy){
-        //para la animación
-        super.preUpdate(t,dt);
 
-        let dirDest = new Phaser.Math.Vector2(this.scene.player.x,this.scene.player.y);
-        this.SetDirection(new Phaser.Math.Vector2(dirDest.x - this.x ,dirDest.y - this.y));
-        
-        //flipear en relacion al jugador
-        this.flipX = this.scene.player.x <= this.x - this.flipMargin ? true 
-                    :this.scene.player.x >= this.x + this.flipMargin ? false : this.flipX;
-        this.Move();        
-        this.UpdateMeleeCooldown(dt);
+        //si no estamos parados, comportamiento normal
+        if(!this.scene.stopEnemy){
+
+            //para la animación
+            super.preUpdate(t,dt);
+
+            let dirDest = new Phaser.Math.Vector2(this.scene.player.x,this.scene.player.y);
+            this.SetDirection(new Phaser.Math.Vector2(dirDest.x - this.x ,dirDest.y - this.y));
+            
+            //flipear en relacion al jugador
+            this.flipX = this.scene.player.x <= this.x - this.flipMargin ? true 
+                        :this.scene.player.x >= this.x + this.flipMargin ? false : this.flipX;
+
+            this.Move();        
+            this.UpdateMeleeCooldown(dt);
         }
         else{
+            //si estamos parados, setteamos la velocidad a 0
             this.body.setVelocity(0,0);
         }
 
@@ -84,6 +87,7 @@ export default class Enemy extends Mob
     * @param {SettingObject} seting necesita: {idParent, damage, speed}
     */
     setUp(seting,animKey){
+
         this.health = seting.life;
         this.damage = seting.damage;
         this.speed = seting.velocity;
@@ -91,9 +95,10 @@ export default class Enemy extends Mob
         this._CDMeleeTimer = 0;
 
         let dirDest = new Phaser.Math.Vector2(this.scene.player.x,this.scene.player.y);
-        this.SetDirection(new Phaser.Math.Vector2(dirDest.x - this.x ,dirDest.y - this.y));
-        //console.log(this.dir);
+        this.SetDirection(new Phaser.Math.Vector2(dirDest.x - this.x ,dirDest.y - this.y))
 
+
+        //para la animacion de movimiento
         this.key[0] = '';
         this.key[1] = animKey;
     }

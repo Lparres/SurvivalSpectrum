@@ -86,8 +86,9 @@ export default class Dicotomías
    AplieDicotomy(dic){
      switch(dic){
           case 1:
-               this.player.rageMax = this. EmotionalValue();
+               //this.player.rageMax = this. EmotionalValue();
                //this.player.eurekaMax = this.RationalValue();
+               this.player.rageMax = 200;
                this.player.eurekaMax =1000;
                break;
           case 2:

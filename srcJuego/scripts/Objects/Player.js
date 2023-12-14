@@ -73,8 +73,6 @@ export default class Player extends Mob
         //vector de movimiento
         this._moveVector = new Phaser.Math.Vector2(0,0);
         
-        //escala y añadir a la escena
-        //this.setScale(0.3);
  
         //ajustar el tamaño del colider
         this.body.setSize(45,70,false);
@@ -109,10 +107,8 @@ export default class Player extends Mob
         //contador del tiempo
         this._elapsedTime += dt;
         if(this._elapsedTime >= this._atkCD){
-            //new Bullet(this.scene,this.x + this._bulletSpawnOffsetX,this.y+this._bulletSpawnOffsetY,'kirby',true,10,1000);    
-
-
-            //cambiar magic numbers por las variables del player
+               
+            //cambiar de sitio
             let BulletSeting ={
                 idParent : true,
                 damage : this.damage,
@@ -123,7 +119,7 @@ export default class Player extends Mob
         
 
             this.scene.playerBulletsPool.spawn(this.x + this._bulletSpawnOffsetX,this.y+this._bulletSpawnOffsetY,' ',BulletSeting);
-            //console.log(this.damage);
+
             this._elapsedTime = 0;
         }
     }
@@ -145,7 +141,7 @@ export default class Player extends Mob
        this.ReciveDamage(damage*damageReduction);
 
        if(this.health < 0){
-        console.log("Player Muerto");
+            //console.log("Player Muerto");
        }
     }
 

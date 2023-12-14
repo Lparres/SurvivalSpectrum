@@ -15,9 +15,13 @@ export default class Button extends Phaser.GameObjects.Sprite{
      */
     constructor(scene, x, y, key,baseScale,func){
         super(scene, x,y, key);
+
         this.setScale(baseScale,baseScale);
-        this.scene.add.existing(this);
         this.setInteractive();
+        
+        this.scene.add.existing(this);
+
+
         this.on('pointerdown',function(){
             func();
         })

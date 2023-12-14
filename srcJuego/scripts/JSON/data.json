@@ -6,7 +6,7 @@
         "range": 250,
         "meleeArmor": 10,
         "rangeArmor": 10,
-        "life": 200,
+        "life": 500,
         "Cooldown": 500,
         "bulletSpeed": 300
     },
@@ -16,7 +16,7 @@
             "life": 30,
             "damage": 20,
             "velocity": 50,
-            "meleeAttackCD": 100
+            "meleeAttackCD": 1000
         },
         {
             "life": 100,
