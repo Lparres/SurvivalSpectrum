@@ -30,6 +30,7 @@ export default class Menu extends Phaser.Scene {
             this.scene.wake('UIScene');
             this.scene.sleep('Menu');
             MainScene.scene.setActive(true);
+            MainScene.music.resume();
         })
 
         centro.add(fondo);

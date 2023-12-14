@@ -42,6 +42,7 @@ export default class BootScene extends Phaser.Scene{
         this.load.image('map', 'srcJuego/ui/Mapa.png');
         this.load.image('mas', 'srcJuego/img/simbolo_mas.png');
         this.load.image('marcoDial', 'srcJuego/ui/ImagenDial_3.png');
+        this.load.image('marcoReloj', 'srcJuego/ui/MarcoReloj.png');
 
         let srcJuego = 'srcJuego';
 
@@ -104,6 +105,11 @@ export default class BootScene extends Phaser.Scene{
          * 
          */
         this.load.json('waves', 'srcJuego/scripts/JSON/waves.json');
+
+
+        //sonidos
+        this.load.audio('golpe','srcJuego/audio/golpe_VSDC.wav');
+        this.load.audio('golpePlayer','srcJuego/audio/playerHit_VSDC.wav');
 
         this.load.audio('music','srcJuego/audio/musica.mp3');
 
