@@ -51,6 +51,19 @@ export default class MainScene extends Phaser.Scene {
         //creacion del jugador
         this.player = new Player(this, 960, 540, ['idlePlayer', 'PlayerMove'], this.data.PlayerConfig);
 
+        
+        this.cardList = {
+            life: 0,
+            lifeRegen:0,
+            damage: 0,
+            fireRate:0,
+            meleeArmor: 0,
+            rangeArmor: 0,
+            speed:0
+        }
+        this.statKeyList = ['life', 'lifeRegen', 'damage','fireRate', 'meleeArmor', 'rangeArmor', 'speed'];
+        this.deck = [];
+
         this.dicotomyManager = new Dicotomías(this.player, 50, 50, 50, 50);
         this.dicotomyManager.AplieDicotomy(1);
         this.dicotomyManager.AplieDicotomy(2);
@@ -86,6 +99,8 @@ export default class MainScene extends Phaser.Scene {
             this.scene.sleep('UIScene');
             this.scene.launch('Menu');
             this.scene.setActive(false);
+            this.dicotomyManager.deckFill(this.deck);
+            console.log(this.deck);
         });
         // Recogida del input de movimiento en un vector
         this._inputVector = new Phaser.Math.Vector2(0, 0);
@@ -102,16 +117,6 @@ export default class MainScene extends Phaser.Scene {
         });
        this.music = this.sound.add('music',{volume: 0.05,loop:true});
        this.music.play();
-
-       this.cardList = {
-        life: 0,
-        lifeRegen:0,
-        damage: 0,
-        fireRate:0,
-        meleeArmor: 0,
-        rangeArmor: 0,
-        speed:0
-       }
     }
 
             

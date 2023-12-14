@@ -95,7 +95,7 @@ export default class Dicotomías
                this.player.damage = this.IntrovertValue(this.player.baseDamage);
                break;
           case 4:   
-               this.getNCards();
+               //this.getNCards();
                this.player.scene.cardList.life += this.CardValue();
                this.player.scene.cardList.lifeRegen += this.CardValue();
                this.player.scene.cardList.damage += this.CardValue();
@@ -127,5 +127,17 @@ export default class Dicotomías
 
    CardValue(){
      return this.perDic4;
+   }
+
+   /**
+    * Método para rellenar la deck cuando sacamos el menú de las dicotomías
+    * @param {object} deck 
+    */
+   deckFill(deck){
+     while(deck.length > 0)
+          deck.pop(); 
+     
+     for( var i = 0;i < this.getNCards();i++)
+          deck.push(this.player.scene.statKeyList[Phaser.Math.Between(0,  6)])
    }
 }
