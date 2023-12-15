@@ -82,8 +82,8 @@ export default class Bullet extends Mob
            
             //falta legibilidad y quitar magic numbers
             dirDest = new Phaser.Math.Vector2(  
-                this.x + (this.scene.input.mousePointer.position.x - (1920/2) -(this.scene.player._bulletSpawnOffsetX) )   , 
-                this.y + (this.scene.input.mousePointer.position.y - (1080/2) -(this.scene.player._bulletSpawnOffsetY)) );
+                this.scene.player.x + (this.scene.input.mousePointer.position.x - (1920/2) -(this.scene.player._bulletSpawnOffsetX) )   , 
+                this.scene.player.y + (this.scene.input.mousePointer.position.y - (1080/2) -(this.scene.player._bulletSpawnOffsetY)) );
         }
         else{
             dirDest = new Phaser.Math.Vector2(this.scene.player.x,this.scene.player.y);

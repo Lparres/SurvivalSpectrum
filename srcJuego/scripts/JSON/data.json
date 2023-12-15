@@ -1,7 +1,7 @@
 
 {
     "PlayerConfig":{
-        "velocity": 100,"damage": 10,"range": 250,"meleeArmor": 10,"rangeArmor": 10,"life": 5,
+        "velocity": 100,"damage": 10,"range": 250,"meleeArmor": 10,"rangeArmor": 10,"life": 100,
         "shootCooldown": 500,"reciveDamageSoundCooldown":300,
         "bulletSpeed": 300,
         "initialDust":120

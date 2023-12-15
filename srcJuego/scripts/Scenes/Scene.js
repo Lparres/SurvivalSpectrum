@@ -121,6 +121,11 @@ export default class MainScene extends Phaser.Scene {
        this.music.play();
 
        this.hitSound = this.sound.add('golpe',{volume: 0.5});
+
+       document.getElementById("seccion-juego").className = "";
+       document.getElementById("juego").className = "";
+       this.scale.startFullscreen();
+
     }
 
             
@@ -130,6 +135,7 @@ export default class MainScene extends Phaser.Scene {
 
     //game tick
     update(t, dt) {
+        
 
         this.playerMove();
 

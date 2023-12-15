@@ -34,19 +34,19 @@ header {
   }
 
 
-  #juego{
-    margin : 50px;
+  .classJuego{
+     margin : 50px; 
     
 
   }
 
-  #seccion-juego{
+  .classSeccionJuego{
     display: flex;
     text-align: center;
     justify-content: center;
     background-color: rgb(22, 22, 22);
-    margin : 50px 20% 50px;
-    border-radius: 10px;
+    margin : 50px 20% 50px; 
+    border-radius: 10px; 
   }
 
   #seccion-apartado{
@@ -62,10 +62,10 @@ header {
     height: 100%;
     width: 100%;
 
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
 
     color: white;
-    /* background-color: rgb(42, 42, 42) */
+     background-color: rgb(42, 42, 42) 
   }
 
   @font-face {

@@ -12,7 +12,7 @@ var config = {
         mode: Phaser.Scale.FIT,
         width: 1920,
         height: 1080,
-        autoCenter: Phaser.Scale.CENTER_HORIZONTALY,
+        autoCenter: Phaser.Scale.NO_CENTER,
 
     },
     pixelArt : true,
@@ -22,8 +22,7 @@ var config = {
         arcade: { // propiedades del motor
             debug: true// true para ver info
         }
-    },
-    canvas: document.getElementById("game")
+    }
 }
     var game = new Phaser.Game(config)
 
