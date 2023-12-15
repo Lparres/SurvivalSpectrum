@@ -154,14 +154,9 @@ export default class Player extends Mob
         }
     }
 
-    // La dicotomía cambia el rango de ataque
-    cambiaRange(damageOffset){
-        //vacío de momento
-    }
 
     addDust(amount){
         this.dust += amount;
-        //console.log('polvos: ' + this.dust);
     }
 
     changeDicMode(dt){
@@ -170,6 +165,7 @@ export default class Player extends Mob
         }
         else{  
             this.dicTime=0;
+            
             if(this.rageMode){
                 this.damage /= 2;
                 this._meleeArmor *= 2;

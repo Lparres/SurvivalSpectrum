@@ -70,6 +70,8 @@ export default class Enemy extends Mob
     
 
     Hit(damage){
+
+        //animacion de golpeo
         this.hitTween = this.scene.tweens.add({
             targets:[this],
             ease:'Cubic.easeOut',
@@ -80,8 +82,12 @@ export default class Enemy extends Mob
             paused:true
         });
         this.hitTween.play();
+
+        //procesado del daño
         this.ReciveDamage(damage);
         this.scene.hitSound.play();
+
+        
         if(this.health < 0){
             //cantidad del polvo
             let dustConfig ={
