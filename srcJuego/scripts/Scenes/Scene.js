@@ -52,7 +52,7 @@ export default class MainScene extends Phaser.Scene {
         this.input.setDefaultCursor('url(srcJuego/img/crosshair.png) 16 16, pointer');
 
         //creacion del jugador
-        this.player = new Player(this, 960, 540, ['idlePlayer', 'PlayerMove'], this.data.PlayerConfig);
+        this.player = new Player(this, 960, 540, ['idlePlayer', 'PlayerMove','deathPlayer'], this.data.PlayerConfig);
 
         
         this.cardMap = {
@@ -109,7 +109,7 @@ export default class MainScene extends Phaser.Scene {
         this.stopEnemy = false;
 
         // this es Scene
-       let lifeRegenEvent = this.time.addEvent( {
+        let lifeRegenEvent = this.time.addEvent( {
             delay: 3000, 
             callback: this.onEvent,
             callbackScope: this,
@@ -355,6 +355,13 @@ export default class MainScene extends Phaser.Scene {
             repeat: -1    // Animación en bucle
         });
 
+        this.anims.create({
+            key: 'deathPlayer',
+            frames: this.anims.generateFrameNumbers('deathPlayer', { start: 0, end: 9 }),
+            frameRate: 10, // Velocidad de la animación
+            repeat: 0    // Animación en bucle
+        });
+
         //creación de animaciones para enemigos
         this.anims.create({
             key: 'enemyMove1',
@@ -587,5 +594,9 @@ export default class MainScene extends Phaser.Scene {
         console.log(this.deck);
         this.player.applyCard(this.deck[0]);
         this.music.pause();
+    }
+
+    playerDeath(){
+
     }
 }

@@ -71,6 +71,9 @@ export default class BootScene extends Phaser.Scene{
         this.load.spritesheet('idlePlayer', srcJuego + '/sprites/Character/with_hands/SpriteSheets/idleSheet.png',
             { frameWidth: 204, frameHeight: 204 });
 
+        this.load.spritesheet('deathPlayer', srcJuego + '/sprites/Character/with_hands/SpriteSheets/deathSheet.png',
+            { frameWidth: 204, frameHeight: 204 });
+
         this.load.spritesheet('enemy1', srcJuego + '/sprites/Enemy1/SpriteSheets/walkSheet.png',
         { frameWidth: 204, frameHeight:204})
 
