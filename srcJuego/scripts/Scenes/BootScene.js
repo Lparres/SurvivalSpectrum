@@ -13,26 +13,28 @@ export default class BootScene extends Phaser.Scene{
 
         let textosRandom =["Cargando imagenes", "Cargando mapa","Cargando sonidos"]
         var texto = this.add.text(960,700,"Cargando",{ font: '50px JosefinMedium', fill: 'white' }).setOrigin(0.5,0.5);
+        var porcentaje = this.add.text(960,870,"55%",{ font: '50px JosefinMedium', fill: 'white' }).setOrigin(0.5,0.5);
 
         progressBox.fillStyle(0x222222, 0.8);
         progressBox.fillRect(710, 800, 500, 30);
 
 
         this.load.on('progress', function (value) {
-            console.log(value);
+            //console.log(value);
 
             texto.setText(textosRandom[value < 0.33 ? 0 : value < 0.66 ? 1 : 2]);
 
+            porcentaje.setText(Phaser.Math.RoundTo(value*100,0)+ '%');
             progressBar.clear();
             progressBar.fillStyle(0xffffff, 1);
             progressBar.fillRect(710, 800, 500 * value, 30);
         });
                     
         this.load.on('fileprogress', function (file) {
-            console.log(file.src);
+            //console.log(file.src);
         });
         this.load.on('complete', () => {
-            console.log('complete');
+            //console.log('complete');
             this.scene.run('level');
             this.scene.sleep('boot');
         });
@@ -57,6 +59,8 @@ export default class BootScene extends Phaser.Scene{
         let srcJuego = 'srcJuego';
 
         this.load.image('kirby', srcJuego + '/img/kirby.png');
+        this.load.image('bulletPlayer', srcJuego + '/img/bulletPlayer.png');
+        this.load.image('bulletEnemy', srcJuego + '/img/bulletEnemy.png');
         this.load.image('polvos', srcJuego + '/img/dust.png');
 
 

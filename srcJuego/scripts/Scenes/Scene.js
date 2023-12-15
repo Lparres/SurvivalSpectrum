@@ -156,7 +156,7 @@ export default class MainScene extends Phaser.Scene {
         let plBullets = [];
 
         for (let i = 0; i < 100; i++) {
-            let aux = new Bullet(this, 0, 0, 'kirby', true, 0, 0, this.playerBulletsPool);
+            let aux = new Bullet(this, 0, 0, 'bulletPlayer', true, 0, 0, this.playerBulletsPool);
             aux.setDepth(10);
             plBullets.push(aux);
         }
@@ -167,7 +167,7 @@ export default class MainScene extends Phaser.Scene {
         let enBullets = [];
 
         for (let i = 0; i < 100; i++) {
-            let aux = new Bullet(this, 0, 0, 'kirby', true, 0, 0, this.enemiesBulletsPool);
+            let aux = new Bullet(this, 0, 0, 'bulletEnemy', true, 0, 0, this.enemiesBulletsPool);
             aux.setDepth(10);
             enBullets.push(aux);
         }

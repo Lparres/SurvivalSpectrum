@@ -77,7 +77,7 @@ export default class Player extends Mob
         this.damage = this.baseDamage;
         
         //offset del origen de la bala
-        this._bulletSpawnOffsetX = 15;
+        this._bulletSpawnOffsetX = 0;
         this._bulletSpawnOffsetY = 50;
 
         //vector de movimiento
@@ -119,7 +119,6 @@ export default class Player extends Mob
         if(this.reciveDamageSoundTimer > 0){
             this.reciveDamageSoundTimer -= dt;
         }
-
                 
     }
     
@@ -233,7 +232,7 @@ export default class Player extends Mob
            if(this.rage >= this.rageMax){
 
                 this.rageMode = true;
-
+                console.log(this.rageMode);     
                 //reducir eureca
                 this._eureka = this._eureka - (this._eureka * 20/100);
 
@@ -243,8 +242,7 @@ export default class Player extends Mob
                 this._meleeArmor /= 2;
                 this._rangeArmor /=2;
                 this.speed *= 3;
-
-                this.dicTotalTime = this.rageTime;
+               
                 //console.log(this.damage + " " + this._meleeArmor + " " + this._rangeArmor + " ");
            }
         } 
