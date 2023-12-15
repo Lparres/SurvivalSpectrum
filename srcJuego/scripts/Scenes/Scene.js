@@ -6,6 +6,9 @@ import Enemy from '../Objects/Enemy.js'
 import InteractuableObjects from '../Objects/InteractuableObject.js'
 import Dicotomías from '../Dicotomias.js'
 import Card from '../Card.js'
+import Dust from '../Objects/Dust.js'
+import Totem from '../Objects/Totem.js'
+
 export default class MainScene extends Phaser.Scene {
     constructor() {
         super({ key: "level" })
@@ -96,13 +99,8 @@ export default class MainScene extends Phaser.Scene {
 
 
         this.esc.on('down', event => {
-            this.scene.sleep('UIScene');
-            this.scene.launch('Menu');
-            this.scene.setActive(false);
-            // necesitamos rellenar la deck para que aparexcan cartas nuevas al cargar el menú
-            this.dicotomyManager.deckFill(this.deck);
-            //console.log(this.deck);
-            this.music.pause();
+            this.activePauseMenu();
+
         });
         // Recogida del input de movimiento en un vector
         this._inputVector = new Phaser.Math.Vector2(0, 0);
@@ -163,6 +161,7 @@ export default class MainScene extends Phaser.Scene {
         this.meleeEnemiesPool = new Pool(this, 50);
         this.rangeEnemiesPool = new Pool(this, 50);
         this.dustPool = new Pool(this, 100, 'polvos');
+        this.totemPool = new Pool(this,20,'kirby')
 
 
         let plBullets = [];
@@ -208,7 +207,7 @@ export default class MainScene extends Phaser.Scene {
         let dustArr = [];
 
         for (let i = 0; i < 100; i++) {
-            let aux = new InteractuableObjects(this, 0, 0, 'polvos', this.dustPool, (amount) => {
+            let aux = new Dust(this, 0, 0, 'polvos', this.dustPool, (amount) => {
                 //aux.setDepth(10);
                 this.player.addDust(amount);
             });
@@ -216,6 +215,18 @@ export default class MainScene extends Phaser.Scene {
         }
 
         this.dustPool.addMultipleEntity(dustArr);
+
+
+        let totemArr = [];
+
+        for (let i = 0; i < 20; i++) {
+            let aux = new Totem(this, 0, 0, 'kirby', this.totemPool, () => {
+                this.activePauseMenu();
+            });
+            totemArr.push(aux);
+        }
+
+        this.totemPool.addMultipleEntity(totemArr);
     }
     /**configuracion de las colisiones y triggers */
     setCollisions() {
@@ -278,8 +289,15 @@ export default class MainScene extends Phaser.Scene {
         //colisiones con el trigger de los polvos
         this.physics.add.overlap(this.player, this.dustPool.group, function (player, dust) {
             dust.Hit();
-            player.addDust(dust.amount);
+            //player.addDust(dust.amount);
         })
+
+         //colisiones con el trigger de los totem
+         this.physics.add.overlap(this.player, this.totemPool.group, function (player, totem) {
+            totem.Hit();
+            //player.addDust(dust.amount);
+        })
+
 
         // Colisiones de las capas del tilemap
 
@@ -423,7 +441,7 @@ export default class MainScene extends Phaser.Scene {
             //posicion en la que vamos a spawnear
             let spawnPos = this.spawnPositions[i];
 
-            this.spawnDataUpdate(spawnData,spawnPos,dt,false);
+            this.spawnDataUpdate(spawnData,spawnPos,dt,false,false);
         }
 
         //SPAWN DEL TOTEM ENEMY
@@ -434,7 +452,7 @@ export default class MainScene extends Phaser.Scene {
         //posicion en la que vamos a spawnear
         let spawnPos = this.spawnPositions[Phaser.Math.Between(0,this.spawnPositions.length-1)];
          
-        this.spawnDataUpdate(totemData,spawnPos,dt,false);             
+        this.spawnDataUpdate(totemData,spawnPos,dt,false,true);             
          
     }
 
@@ -450,13 +468,13 @@ export default class MainScene extends Phaser.Scene {
             //posicion en la que vamos a spawnear
             let spawnPos = this.spawnPositions[spawnData.spawnIndex];
                 
-            this.spawnDataUpdate(spawnData,spawnPos,dt,true);             
+            this.spawnDataUpdate(spawnData,spawnPos,dt,true,false);             
         }
              
     };
 
 
-    spawnDataUpdate(spawnData,spawnPos,dt,masillas) {
+    spawnDataUpdate(spawnData,spawnPos,dt,masillas,totem) {
 
         //actualizar el contador de tiempo
         spawnData.timer += dt;
@@ -465,6 +483,7 @@ export default class MainScene extends Phaser.Scene {
         if(spawnData.timer >= spawnData.frecuency && (masillas ||spawnData.size > 0)) {
            
            
+            //si es una masilla hay que cambiar el indice del spawn para el proximo
            if(masillas){
                spawnData.spawnIndex = (spawnData.spawnIndex + 1 ) % this.spawnPositions.length;
                
@@ -472,14 +491,27 @@ export default class MainScene extends Phaser.Scene {
                spawnPos = this.spawnPositions[spawnData.spawnIndex];
            }
     
+           let configIndex = 0;
+
+           if(totem){
+                //esto tiene que estar ligado al data
+                configIndex = 3;
+           }
+
+
+
             //spawnear segun el tipo, solo cambia la pool y el config
             if(spawnData.type == "melee"){
-                this.meleeEnemiesPool.spawn(spawnPos.x,spawnPos.y,spawnData.animKey,this.data.EnemyConfigs[0]);
+                this.meleeEnemiesPool.spawn(spawnPos.x,spawnPos.y,spawnData.animKey,this.data.EnemyConfigs[configIndex]);
             }
             else if(spawnData.type == "range"){
-                this.rangeEnemiesPool.spawn(spawnPos.x,spawnPos.y,spawnData.animKey,this.data.RangeConfigs[0]);
+                this.rangeEnemiesPool.spawn(spawnPos.x,spawnPos.y,spawnData.animKey,this.data.RangeConfigs[configIndex]);
             }
             
+
+
+
+            //si no es masilla, reducimos el size
             if(!masillas){
                spawnData.size--;
             }
@@ -555,5 +587,16 @@ export default class MainScene extends Phaser.Scene {
     isTimeToStop(value){
         this.stopEnemy = value ;
         
+    }
+
+    activePauseMenu(){
+        this.scene.sleep('UIScene');
+        this.scene.launch('Menu');
+        this.scene.setActive(false);
+        // necesitamos rellenar la deck para que aparexcan cartas nuevas al cargar el menú
+        this.dicotomyManager.deckFill(this.deck);
+        //console.log(this.deck);
+        this.music.pause();
+
     }
 }

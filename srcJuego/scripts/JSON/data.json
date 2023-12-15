@@ -12,37 +12,17 @@
     },
     
     "EnemyConfigs": [
-        {
-            "life": 30,
-            "damage": 20,
-            "velocity": 50,
-            "meleeAttackCD": 1000
-        },
-        {
-            "life": 100,
-            "damage": 10,
-            "velocity": 25,
-            "meleeAttackCD": 100
-        },
-        {
-            "life": 5,
-            "damage": 3,
-            "velocity": 100,
-            "meleeAttackCD": 100
-        }
+        {"life": 30, "damage": 20,"velocity": 50, "meleeAttackCD": 1000},
+        {"life": 100,"damage": 10,"velocity": 25, "meleeAttackCD": 1000},
+        {"life": 5,  "damage": 3, "velocity": 100,"meleeAttackCD": 1000},
+        {"life": 30, "damage": 20, "velocity": 50,"meleeAttackCD": 1000,"totem": true}
     ],
+
     "RangeConfigs":[
         {
-            "settingMelee" : {
-                "life": 50,
-                "damage": 3,
-                "velocity": 35,
-                "meleeAttackCD": 100
-            },
-            "range": 200,
-            "rangeDamage": 20,
-            "rangeAttackCD": 1500,
-            "bulletSpeed": 200
+            "settingMelee" : {"life": 50,"damage": 3,"velocity": 35,"meleeAttackCD": 1000},
+
+            "range": 200,"rangeDamage": 20,"rangeAttackCD": 1500,"bulletSpeed": 200
         }
     ]
     

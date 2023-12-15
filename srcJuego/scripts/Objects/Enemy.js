@@ -83,11 +83,18 @@ export default class Enemy extends Mob
         this.ReciveDamage(damage);
         this.scene.hitSound.play();
         if(this.health < 0){
+            //cantidad del polvo
             let dustConfig ={
                 amount:50,
             }
             
+            //spawear un polvo
             this.scene.dustPool.spawn(this.x,this.y, ' ', dustConfig);
+
+            //spawnear un totem
+            if(this.totem){
+                this.scene.totemPool.spawn(this.x,this.y,' ');
+            }
         }
     }
 
@@ -114,6 +121,12 @@ export default class Enemy extends Mob
         //para la animacion de movimiento
         this.key[0] = '';
         this.key[1] = animKey;
+    
+
+        //variable para saber si este enemigo suelta el totem o no
+        this.totem = seting.totem != undefined;
     }
+
+
 
 }
