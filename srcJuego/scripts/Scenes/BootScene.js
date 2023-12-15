@@ -13,6 +13,7 @@ export default class BootScene extends Phaser.Scene{
 
         let textosRandom =["Cargando imagenes", "Cargando mapa","Cargando sonidos"]
         var texto = this.add.text(960,700,"Cargando",{ font: '50px JosefinMedium', fill: 'white' }).setOrigin(0.5,0.5);
+        var porcentaje = this.add.text(960,870,"55%",{ font: '50px JosefinMedium', fill: 'white' }).setOrigin(0.5,0.5);
 
         progressBox.fillStyle(0x222222, 0.8);
         progressBox.fillRect(710, 800, 500, 30);
@@ -23,6 +24,7 @@ export default class BootScene extends Phaser.Scene{
 
             texto.setText(textosRandom[value < 0.33 ? 0 : value < 0.66 ? 1 : 2]);
 
+            porcentaje.setText(Phaser.Math.RoundTo(value*100,0)+ '%');
             progressBar.clear();
             progressBar.fillStyle(0xffffff, 1);
             progressBar.fillRect(710, 800, 500 * value, 30);
