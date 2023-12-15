@@ -231,15 +231,6 @@ export default class Player extends Mob
             
            //entrar en rabia
            if(this.rage >= this.rageMax){
-               //console.log('rage mode');
-               this.rageMode = true;
-               this._eureka = this._eureka - (this._eureka * 20/100);
-               this.rage = 0;
-               this.damage *= 2;
-               this._meleeArmor /= 2;
-               this._rangeArmor /=2;
-               this.speed *= 3;
-               //console.log(this.damage + " " + this._meleeArmor + " " + this._rangeArmor + " ");
 
                 this.rageMode = true;
 

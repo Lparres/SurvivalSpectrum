@@ -100,11 +100,7 @@ export default class MainScene extends Phaser.Scene {
 
         this.esc.on('down', event => {
             this.activeDicotomyMenu();
-            this.scene.sleep('UIScene');
-            this.scene.launch('Pause');
-            this.scene.setActive(false);
-            //console.log(this.deck);
-            this.music.pause();
+
         });
         // Recogida del input de movimiento en un vector
         this._inputVector = new Phaser.Math.Vector2(0, 0);
