@@ -40,6 +40,12 @@ export default class Enemy extends Mob
 
         this.hitTween = null;
 
+        this.dustSpawnOffsetX = 0;
+        this.dustSpawnOffsetY = 50;
+
+        this.totemSpawnOffsetX = 0;
+        this.totemSpawnOffsetY = 50;
+
     }
 
     preUpdate(t,dt){
@@ -89,11 +95,11 @@ export default class Enemy extends Mob
             }
             
             //spawear un polvo
-            this.scene.dustPool.spawn(this.x,this.y, ' ', dustConfig);
+            this.scene.dustPool.spawn(this.x + this.dustSpawnOffsetX,this.y + this.dustSpawnOffsetY, ' ', dustConfig);
 
             //spawnear un totem
             if(this.totem){
-                this.scene.totemPool.spawn(this.x,this.y,' ');
+                this.scene.totemPool.spawn(this.x + this.totemSpawnOffsetX,this.y+ this.totemSpawnOffsetY,' ');
             }
         }
     }

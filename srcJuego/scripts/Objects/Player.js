@@ -165,62 +165,85 @@ export default class Player extends Mob
     }
 
     changeDicMode(dt){
+
+        //si estamos en modo rabia o eureka, actualizamos el timer
         if((this.rageMode || this.eurekaMode) && this.dicTime <= this.dicTotalTime){
             this.dicTime += dt;
         }
         else{  
-            this.dicTime=0;
+
+            this.dicTime = 0;
+            
+            //resetar las estadisticas a como estaban antes
             if(this.rageMode){
+
+                this.rageMode = false;
+
                 this.damage /= 2;
                 this._meleeArmor *= 2;
                 this._rangeArmor *=2;
                 this.speed /= 3;
-                this.rageMode = false;
+
                 //Sconsole.log(this.damage + " " + this._meleeArmor + " " + this._rangeArmor + " ");
-                }
-                else if(this.eurekaMode){
-                    this.eurekaMode=false;
-                    this.scene.isTimeToStop(false);
-                }
+            }
+            else if(this.eurekaMode){//despausar a los enemigos
+
+                this.eurekaMode = false;
+                this.scene.isTimeToStop(false);
+            }
         }
     }
 
     addRage(){
-        if(!this.rageMode && !this.eurekaMode && !this.rageMode){
+
+        //si no estamos en rabia ni en eureca
+        if(!this.rageMode && !this.eurekaMode){
+
+            //sumar rabia
             this.rage += this.dicUp;
             //console.log('dickUp' + this.dicUp);
             console.log('rage: ' + this.rage);
+
+            
+           //entrar en rabia
            if(this.rage >= this.rageMax){
-               //console.log('rage mode');
-               this.rageMode = true;
-               this._eureka = this._eureka - (this._eureka * 20/100);
-               this.rage = 0;
-               this.damage *= 2;
-               this._meleeArmor /= 2;
-               this._rangeArmor /=2;
-               this.speed *= 3;
-               this.dicTotalTime = this.rageTime;
-               //console.log(this.damage + " " + this._meleeArmor + " " + this._rangeArmor + " ");
+                this.rageMode = true;
+
+                //reducir eureca
+                this._eureka = this._eureka - (this._eureka * 20/100);
+
+                //cambiar estadisticas
+                this.rage = 0;
+                this.damage *= 2;
+                this._meleeArmor /= 2;
+                this._rangeArmor /=2;
+                this.speed *= 3;
+
+                this.dicTotalTime = this.rageTime;
+                //console.log(this.damage + " " + this._meleeArmor + " " + this._rangeArmor + " ");
            }
         } 
     }
 
     addEureka(){
+
+        //si no estamos en rabia ni en eureca
         if(!this.eurekaMode && !this.rageMode){
+
             this._eureka += this.dicUp;
         
-       // console.log('eureka: ' + this._eureka);
+            // console.log('eureka: ' + this._eureka);
         
-        if(this._eureka >= this.eurekaMax){
-           // console.log('eureka mode');
-            this.eurekaMode = true;
-            this.rage = this.rage - (this.rage * 20/100);
-            this._eureka = 0;
-            this.dicTotalTime = this.eurekaTime;
-            this.scene.isTimeToStop(true);
+            if(this._eureka >= this.eurekaMax){
+                // console.log('eureka mode');
+                this.eurekaMode = true;
+                this.rage = this.rage - (this.rage * 20/100);
+                this._eureka = 0;
+                this.dicTotalTime = this.eurekaTime;
+                this.scene.isTimeToStop(true);
+            }
         }
-        }
-        else if(!this.eurekaMode && this.rageMode){
+        else if(!this.eurekaMode && this.rageMode){//si estamos en rabia sumar vida
             this.lifeRegen(this.lifeSteal);
         }
     }
