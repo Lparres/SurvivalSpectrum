@@ -58,6 +58,7 @@ export default class Menu extends Phaser.Scene {
 
         //contenedor del bloque de estadisticas
         this.latcont = new LatContainer(this, 400, this.sys.game.canvas.height / 2).setScale(1.2);
+
     }
 
     
@@ -219,4 +220,8 @@ class LatContainer extends Phaser.GameObjects.Container {
         this.rangeInfo.setText(Phaser.Math.RoundTo(this.scene.player.range));
         this.speedInfo.setText(Phaser.Math.RoundTo(this.scene.player.speed));
     }
+}
+
+class CardsZone extends Phaser.GameObjects.Container{
+
 }

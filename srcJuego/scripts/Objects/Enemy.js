@@ -40,6 +40,12 @@ export default class Enemy extends Mob
 
         this.hitTween = null;
 
+        this.dustSpawnOffsetX = 0;
+        this.dustSpawnOffsetY = 50;
+
+        this.totemSpawnOffsetX = 0;
+        this.totemSpawnOffsetY = 50;
+
     }
 
     preUpdate(t,dt){
@@ -70,6 +76,8 @@ export default class Enemy extends Mob
     
 
     Hit(damage){
+
+        //animacion de golpeo
         this.hitTween = this.scene.tweens.add({
             targets:[this],
             ease:'Cubic.easeOut',
@@ -80,8 +88,12 @@ export default class Enemy extends Mob
             paused:true
         });
         this.hitTween.play();
+
+        //procesado del daño
         this.ReciveDamage(damage);
         this.scene.hitSound.play();
+
+        
         if(this.health < 0){
             //cantidad del polvo
             let dustConfig ={
@@ -89,11 +101,11 @@ export default class Enemy extends Mob
             }
             
             //spawear un polvo
-            this.scene.dustPool.spawn(this.x,this.y, ' ', dustConfig);
+            this.scene.dustPool.spawn(this.x + this.dustSpawnOffsetX,this.y + this.dustSpawnOffsetY, ' ', dustConfig);
 
             //spawnear un totem
             if(this.totem){
-                this.scene.totemPool.spawn(this.x,this.y,' ');
+                this.scene.totemPool.spawn(this.x + this.totemSpawnOffsetX,this.y+ this.totemSpawnOffsetY,' ');
             }
         }
     }

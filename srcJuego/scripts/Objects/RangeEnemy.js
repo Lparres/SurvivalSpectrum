@@ -20,7 +20,8 @@ export default class RangeEnemy extends Enemy
 
         this._range;
         this._rangeDamage = 0;
-        this._rangeAttackCD = 0;
+        this._minRangeAttackCD = 0;
+        this._maxRangeAttackCD = 0;
         this._bulletSpeed = 0;
 
         this._CDRangeTimer = 0;
@@ -62,7 +63,8 @@ export default class RangeEnemy extends Enemy
             }
 
             this.scene.enemiesBulletsPool.spawn(this.x + this._bulletSpawnOffsetX,this.y+this._bulletSpawnOffsetY,' ',BulletSeting);            
-            this._CDRangeTimer = this._rangeAttackCD;
+           
+            this._CDRangeTimer = Phaser.Math.Between(this._minRangeAttackCD,this._maxRangeAttackCD);
         }
     }
 
@@ -76,7 +78,13 @@ export default class RangeEnemy extends Enemy
 
         this._range = settingRange.range;
         this._rangeDamage = settingRange.rangeDamage;
-        this._rangeAttackCD = settingRange.rangeAttackCD;
+
+        this._minRangeAttackCD= settingRange.minRangeAttackCD;
+        this._maxRangeAttackCD= settingRange.maxRangeAttackCD;
+
+        //inicializamos el timer con un valor aleatorio
+        this._CDRangeTimer = Phaser.Math.Between(this._minRangeAttackCD,this._maxRangeAttackCD);
+
         this._bulletSpeed = settingRange.bulletSpeed;
 
         let dirDest = new Phaser.Math.Vector2(this.scene.player.x,this.scene.player.y);
