@@ -37,15 +37,27 @@ export default class Player extends Mob
         this.baseDamage = playerConfig.damage;
         this._meleeArmor = playerConfig.meleeArmor;
         this._rangeArmor = playerConfig.rangeArmor;
-        this.dust = 100;
         this.baseRange = playerConfig.range;
+        
+        this.bulletSpeed = playerConfig.bulletSpeed;
+
+
+        //inicializar los polvos con los que empezamos
+        this.dust = playerConfig.initialDust;
         
         
         //atack cooldown en milisegundos
-        this._atkCD = playerConfig.Cooldown; 
+        this._atkCD = playerConfig.shootCooldown; 
         //para la recarga del ataque
-        this._elapsedTime = 0;
+        this._timerAtackCooldown = 0;
         
+        //cooldown del sonido de recibir daño
+        this.reciveDamageSoundCooldown = playerConfig.reciveDamageSoundCooldown;
+
+        //timer para el sonido de recibir daño
+        this.reciveDamageSoundTimer = 0;
+
+
         //dicotomias
         this.dicUp = 10;
         this.rage = 0;
@@ -61,7 +73,7 @@ export default class Player extends Mob
         this.dicTotalTime = 10000; // variable dentro del timer a modificar
         this.dicTime = 0;
         
-        this.bulletSpeed = playerConfig.bulletSpeed;
+
         
         this.range = this.baseRange;
         this.damage = this.baseDamage;
@@ -82,6 +94,7 @@ export default class Player extends Mob
         //margen para flipear el sprite
         this.flipMargin = 30;
 
+        //sonido del hit
         this.playerHitSound = scene.sound.add('golpePlayer',{volume: 0.5});
     }
 
@@ -95,34 +108,39 @@ export default class Player extends Mob
              
         this.Shoot(dt);
 
+        this.changeDicMode(dt);
+
+
         //flipeo del jugador segun la posicicon del raton
         //cambiar el magic number por el ancho de la pantalla
         this.flipX = this.scene.input.mousePointer.position.x <= (1920/2) - this.flipMargin ? true 
                     :this.scene.input.mousePointer.position.x >= (1920/2) + this.flipMargin ? false : this.flipX;
 
         
-        this.changeDicMode(dt);
+        //update del timer del sonido hit
+        this.reciveDamageSoundTimer -= dt;
+
+                
     }
     
     //método para disparar
     Shoot(dt) {
         //contador del tiempo
-        this._elapsedTime += dt;
-        if(this._elapsedTime >= this._atkCD){
+        this._timerAtackCooldown += dt;
+        //si toca disparar
+        if(this._timerAtackCooldown >= this._atkCD){
                
-            //cambiar de sitio
+            //cambiar de sitio, data de la bala
             let BulletSeting ={
                 idParent : true,
                 damage : this.damage,
                 velocity : this.bulletSpeed,
                 range: this.range
             }
-
-        
-
+            //spawnear la bala
             this.scene.playerBulletsPool.spawn(this.x + this._bulletSpawnOffsetX,this.y+this._bulletSpawnOffsetY,' ',BulletSeting);
-
-            this._elapsedTime = 0;
+            //reset del tiempo
+            this._timerAtackCooldown = 0;
         }
     }
     /**
@@ -131,24 +149,30 @@ export default class Player extends Mob
      * @param {number} damageType 1: melee 2: range
      */
     Hit(damage, damageType) {
-        this.playerHitSound.play();
+
+        //sonido de recibir daño
+        if(this.reciveDamageSoundTimer <= 0){
+            this.playerHitSound.play();
+            this.reciveDamageSoundTimer = this.reciveDamageSoundCooldown;
+        }
+
+        //determinar la reduccion de daño
         let damageReduction;
         if(damageType == 1) damageReduction = 100 / (100 + this._meleeArmor);
         else if (damageType == 2) damageReduction = 100 / (100 + this._rangeArmor);
-        //this._currentLife -= damage * damageReduction;
 
-        /*cuando herede de mob llamar al metodo ReciveDamage(damage*damageReduction) este ya se encarga de matar al jugador si es necesario
-        en este caso se puede añadir un callback para detectar cuando muere el jugador y hacer las llamadas de fin de juego
-        */
+       //recibir el daño(metodo de mob)
        this.ReciveDamage(damage*damageReduction);
 
        if(this.health < 0){
-            //console.log("Player Muerto");
+            //player muerto , hacer cosas
        }
     }
 
     lifeRegen(amount){
+        //sumar vida
         this.health += amount;
+        //limitar la vida a la vida maxima
         if(this.health> this.maxLife){
             this.health = this.maxLife;
         }
@@ -202,7 +226,7 @@ export default class Player extends Mob
             //sumar rabia
             this.rage += this.dicUp;
             //console.log('dickUp' + this.dicUp);
-            console.log('rage: ' + this.rage);
+            //console.log('rage: ' + this.rage);
 
             
            //entrar en rabia
@@ -237,9 +261,11 @@ export default class Player extends Mob
             if(this._eureka >= this.eurekaMax){
                 // console.log('eureka mode');
                 this.eurekaMode = true;
+
                 this.rage = this.rage - (this.rage * 20/100);
                 this._eureka = 0;
                 this.dicTotalTime = this.eurekaTime;
+
                 this.scene.isTimeToStop(true);
             }
         }
