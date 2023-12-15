@@ -117,12 +117,13 @@ export default class UI extends Phaser.Scene
 
 
         this.updateWaveData();
+
         
     }
     update(t,dt) {
         
         const ourGame = this.scene.get('level');
-
+        //console.log("UI created");
 
         if(ourGame.player != undefined){
             this.healthInfo.setText(Phaser.Math.RoundTo(ourGame.player.health, 0) + ' / ' + Phaser.Math.RoundTo(ourGame.player.maxLife, 0));

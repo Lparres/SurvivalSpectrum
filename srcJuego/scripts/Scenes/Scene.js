@@ -18,7 +18,7 @@ export default class MainScene extends Phaser.Scene {
     preload() {
 
         this.load.on('complete',()=>{
-            this.scene.run('UIScene')
+            this.scene.run('UIScene');
         });
 
         this.cameras.main.zoom = 2;
@@ -123,7 +123,7 @@ export default class MainScene extends Phaser.Scene {
        this.music.play();
 
        this.hitSound = this.sound.add('golpe',{volume: 0.5});
-       this.playerHitSound = this.sound.add('golpePlayer',{volume: 0.5});
+       
 
        this.cardList = {
         life: 0,
