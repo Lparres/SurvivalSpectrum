@@ -38,6 +38,8 @@ export default class Enemy extends Mob
         //margen para flipear el sprite
         this.flipMargin = 30;
 
+        this.hitTween = null;
+
     }
 
     preUpdate(t,dt){
@@ -68,7 +70,18 @@ export default class Enemy extends Mob
     
 
     Hit(damage){
+        this.hitTween = this.scene.tweens.add({
+            targets:[this],
+            ease:'Cubic.easeOut',
+            duration:30,
+            alpha: 0.2,
+            repeat: 2,
+            yoyo:true,
+            paused:true
+        });
+        this.hitTween.play();
         this.ReciveDamage(damage);
+        this.scene.hitSound.play();
         if(this.health < 0){
             let dustConfig ={
                 amount:50,

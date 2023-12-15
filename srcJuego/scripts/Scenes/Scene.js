@@ -18,7 +18,7 @@ export default class MainScene extends Phaser.Scene {
     preload() {
 
         this.load.on('complete',()=>{
-            this.scene.run('UIScene')
+            this.scene.run('UIScene');
         });
 
         this.cameras.main.zoom = 2;
@@ -50,6 +50,19 @@ export default class MainScene extends Phaser.Scene {
 
         //creacion del jugador
         this.player = new Player(this, 960, 540, ['idlePlayer', 'PlayerMove'], this.data.PlayerConfig);
+
+        
+        this.cardList = {
+            life: 0,
+            lifeRegen:0,
+            damage: 0,
+            fireRate:0,
+            meleeArmor: 0,
+            rangeArmor: 0,
+            speed:0
+        }
+        this.statKeyList = ['life', 'lifeRegen', 'damage','fireRate', 'meleeArmor', 'rangeArmor', 'speed'];
+        this.deck = [];
 
         this.dicotomyManager = new Dicotomías(this.player, 50, 50, 50, 50);
         this.dicotomyManager.AplieDicotomy(1);
@@ -86,6 +99,10 @@ export default class MainScene extends Phaser.Scene {
             this.scene.sleep('UIScene');
             this.scene.launch('Menu');
             this.scene.setActive(false);
+            // necesitamos rellenar la deck para que aparexcan cartas nuevas al cargar el menú
+            this.dicotomyManager.deckFill(this.deck);
+            //console.log(this.deck);
+            this.music.pause();
         });
         // Recogida del input de movimiento en un vector
         this._inputVector = new Phaser.Math.Vector2(0, 0);
@@ -100,8 +117,13 @@ export default class MainScene extends Phaser.Scene {
             callbackScope: this,
             loop: true
         });
+
+        //sonidos
        this.music = this.sound.add('music',{volume: 0.05,loop:true});
        this.music.play();
+
+       this.hitSound = this.sound.add('golpe',{volume: 0.5});
+       
 
        this.cardList = {
         life: 0,
@@ -208,6 +230,7 @@ export default class MainScene extends Phaser.Scene {
             enemy.Hit(dmg1);
             proyectle.Hit(dmg2, false);
             enemy.scene.player.addEureka();
+            //enemy.scene.hitSound.play();
         });
         //colisiones entre las balas del jugador y los enemigos a rango
         this.physics.add.collider(this.playerBulletsPool.group, this.rangeEnemiesPool.group, function (proyectle, enemy) {
@@ -216,6 +239,7 @@ export default class MainScene extends Phaser.Scene {
             enemy.Hit(dmg1);
             proyectle.Hit(dmg2, false);
             enemy.scene.player.addEureka()
+            //enemy.scene.hitSound.play();
         });
 
 

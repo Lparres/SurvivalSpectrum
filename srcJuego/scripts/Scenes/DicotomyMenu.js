@@ -30,6 +30,7 @@ export default class Menu extends Phaser.Scene {
             this.scene.wake('UIScene');
             this.scene.sleep('Menu');
             MainScene.scene.setActive(true);
+            MainScene.music.resume();
         })
 
         centro.add(fondo);
@@ -58,6 +59,8 @@ export default class Menu extends Phaser.Scene {
         //contenedor del bloque de estadisticas
         this.latcont = new LatContainer(this, 400, this.sys.game.canvas.height / 2).setScale(1.2);
     }
+
+    
     update(t, dt) {
 
         this.polvosMagicos.setText(this.player.dust);

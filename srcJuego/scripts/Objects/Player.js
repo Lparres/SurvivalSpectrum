@@ -81,6 +81,8 @@ export default class Player extends Mob
         
         //margen para flipear el sprite
         this.flipMargin = 30;
+
+        this.playerHitSound = scene.sound.add('golpePlayer',{volume: 0.5});
     }
 
     //métodos
@@ -129,7 +131,7 @@ export default class Player extends Mob
      * @param {number} damageType 1: melee 2: range
      */
     Hit(damage, damageType) {
-
+        this.playerHitSound.play();
         let damageReduction;
         if(damageType == 1) damageReduction = 100 / (100 + this._meleeArmor);
         else if (damageType == 2) damageReduction = 100 / (100 + this._rangeArmor);
