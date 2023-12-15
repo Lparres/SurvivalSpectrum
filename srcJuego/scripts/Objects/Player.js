@@ -77,7 +77,7 @@ export default class Player extends Mob
         this.damage = this.baseDamage;
         
         //offset del origen de la bala
-        this._bulletSpawnOffsetX = 15;
+        this._bulletSpawnOffsetX = 0;
         this._bulletSpawnOffsetY = 50;
 
         //vector de movimiento
@@ -119,7 +119,6 @@ export default class Player extends Mob
         if(this.reciveDamageSoundTimer > 0){
             this.reciveDamageSoundTimer -= dt;
         }
-
                 
     }
     

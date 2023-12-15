@@ -20,7 +20,7 @@ export default class BootScene extends Phaser.Scene{
 
 
         this.load.on('progress', function (value) {
-            console.log(value);
+            //console.log(value);
 
             texto.setText(textosRandom[value < 0.33 ? 0 : value < 0.66 ? 1 : 2]);
 
@@ -31,10 +31,10 @@ export default class BootScene extends Phaser.Scene{
         });
                     
         this.load.on('fileprogress', function (file) {
-            console.log(file.src);
+            //console.log(file.src);
         });
         this.load.on('complete', () => {
-            console.log('complete');
+            //console.log('complete');
             this.scene.run('level');
             this.scene.sleep('boot');
         });
@@ -59,6 +59,8 @@ export default class BootScene extends Phaser.Scene{
         let srcJuego = 'srcJuego';
 
         this.load.image('kirby', srcJuego + '/img/kirby.png');
+        this.load.image('bulletPlayer', srcJuego + '/img/bulletPlayer.png');
+        this.load.image('bulletEnemy', srcJuego + '/img/bulletEnemy.png');
         this.load.image('polvos', srcJuego + '/img/dust.png');
 
 
