@@ -118,7 +118,9 @@ export default class Player extends Mob
 
         
         //update del timer del sonido hit
-        this.reciveDamageSoundTimer -= dt;
+        if(this.reciveDamageSoundTimer > 0){
+            this.reciveDamageSoundTimer -= dt;
+        }
 
                 
     }

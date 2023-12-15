@@ -39,7 +39,7 @@ export default class Mob extends Phaser.GameObjects.Sprite{
         this.body.setVelocity(this.dir.x*this.speed,this.dir.y*this.speed);
 
         //animacion de movimiento
-        if(this.key !== 'kirby'){
+        if(this.key !== 'kirby'){//si no somos una bala
             //animacion de idle
             if(this.dir.y == 0 && this.dir.x == 0){
                 //this.stop();//parar la animacion
