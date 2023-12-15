@@ -166,6 +166,10 @@ export default class Player extends Mob
        if(this.health <= 0){
             //animacion de muerte
             this.play(this.key[2],true);
+
+            this.scene.scene.sleep('UIScene')
+            this.scene.scene.sleep('level')
+            this.scene.scene.run('FinalScene');
        }
     }
 

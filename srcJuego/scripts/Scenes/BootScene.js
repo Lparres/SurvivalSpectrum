@@ -35,7 +35,7 @@ export default class BootScene extends Phaser.Scene{
         });
         this.load.on('complete', () => {
             //console.log('complete');
-            this.scene.run('level');
+            this.scene.run('StartMenu');
             this.scene.sleep('boot');
         });
 

@@ -16,7 +16,7 @@ var config = {
 
     },
     pixelArt : true,
-    scene : [StartMenu,BootScene,MainLevel, UI,Menu,Pause,FinalScene],
+    scene : [BootScene,StartMenu,,MainLevel, UI,Menu,Pause,FinalScene],
     physics: {
         default: 'arcade', // elegir motor
         arcade: { // propiedades del motor

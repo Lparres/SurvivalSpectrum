@@ -1,3 +1,5 @@
+import Button from "../UI_Objects/Button.js";
+
 export default class FinalScene extends Phaser.Scene {
 
     constructor() {
@@ -10,7 +12,7 @@ export default class FinalScene extends Phaser.Scene {
     }
 
     preload(){
-        this.load.image('tryAgainButton', 'srcJuego/img/try again.png')
+        this.load.image('tryAgainButton', 'srcJuego/img/try_again.png')
     }
 
     create(){
