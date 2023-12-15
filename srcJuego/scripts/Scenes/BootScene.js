@@ -43,6 +43,9 @@ export default class BootScene extends Phaser.Scene{
         this.load.image('mas', 'srcJuego/img/simbolo_mas.png');
         this.load.image('marcoDial', 'srcJuego/ui/ImagenDial_3.png');
         this.load.image('marcoReloj', 'srcJuego/ui/MarcoReloj.png');
+        this.load.image('marcoDialBG', 'srcJuego/ui/MarcoDialBG.png');
+        this.load.image('marcoDialFrame', 'srcJuego/ui/MarcoDialFrame.png');
+        this.load.image('fondoDicotomias', 'srcJuego/ui/FondoDicotomias.png');
 
         let srcJuego = 'srcJuego';
 

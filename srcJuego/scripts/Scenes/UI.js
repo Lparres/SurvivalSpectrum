@@ -116,6 +116,33 @@ export default class UI extends Phaser.Scene
         this.map = this.add.image(1730, 180, 'map').setOrigin(0.5, 0.5).setScale(0.6, 0.6);
 
 
+
+        // Creación de las dicotomías
+        this.GRP_Dicotomias = this.add.group();
+
+        this.GRP_Dicotomias.add(this.add.image(1100, 929, 'fondoDicotomias').setOrigin(0.5, 0.5));
+
+        this.GRP_Dicotomias.add(this.add.image(800, 950, 'marcoDialBG').setOrigin(0.5, 0.5));
+        this.GRP_Dicotomias.add(this.dicValText1 = this.add.text(800, 990,  this.mainScene.dicotomyManager.dicName(1) + ' ' + this.mainScene.dicotomyManager.getDic(1), { font: '30px JosefinMedium', fill: 'white' }).setOrigin(0.5, 0.5));
+        this.GRP_Dicotomias.add(this.dial1 = this.add.rectangle(800, 950, 5,25, 0xff0000).setOrigin(0.5, 0.5));
+        this.GRP_Dicotomias.add(this.add.image(800, 950, 'marcoDialFrame').setOrigin(0.5, 0.5));
+
+        this.GRP_Dicotomias.add(this.add.image(1000, 950, 'marcoDialBG').setOrigin(0.5, 0.5));
+        this.GRP_Dicotomias.add(this.dicValText2 = this.add.text(1000, 990,  this.mainScene.dicotomyManager.dicName(2) + ' ' + this.mainScene.dicotomyManager.getDic(2), { font: '30px JosefinMedium', fill: 'white' }).setOrigin(0.5, 0.5));
+        this.GRP_Dicotomias.add(this.dial2 = this.add.rectangle(1000, 950, 5,25, 0xff0000).setOrigin(0.5, 0.5));
+        this.GRP_Dicotomias.add(this.add.image(1000, 950, 'marcoDialFrame').setOrigin(0.5, 0.5));
+
+        this.GRP_Dicotomias.add(this.add.image(1200, 950, 'marcoDialBG').setOrigin(0.5, 0.5));
+        this.GRP_Dicotomias.add(this.dicValText3 = this.add.text(1200, 990,  this.mainScene.dicotomyManager.dicName(3) + ' ' + this.mainScene.dicotomyManager.getDic(3), { font: '30px JosefinMedium', fill: 'white' }).setOrigin(0.5, 0.5));
+        this.GRP_Dicotomias.add(this.dial3 = this.add.rectangle(1200, 950, 5,25, 0xff0000).setOrigin(0.5, 0.5));
+        this.GRP_Dicotomias.add(this.add.image(1200, 950, 'marcoDialFrame').setOrigin(0.5, 0.5));
+
+        this.GRP_Dicotomias.add(this.add.image(1400, 950, 'marcoDialBG').setOrigin(0.5, 0.5));
+        this.GRP_Dicotomias.add(this.dial4 = this.dicValText4 = this.add.text(1400, 990,  this.mainScene.dicotomyManager.dicName(4) + ' ' + this.mainScene.dicotomyManager.getDic(4), { font: '30px JosefinMedium', fill: 'white' }).setOrigin(0.5, 0.5));
+        this.GRP_Dicotomias.add(this.add.rectangle(1400, 950, 5,25, 0xff0000).setOrigin(0.5, 0.5));
+        this.GRP_Dicotomias.add(this.add.image(1400, 950, 'marcoDialFrame').setOrigin(0.5, 0.5));
+        
+
         this.updateWaveData();
         
     }
@@ -144,6 +171,8 @@ export default class UI extends Phaser.Scene
         }
        this.timerUpdate(dt);
        this.updateStats();
+
+       this.updateDicotomias();
 
        this.dust.setText(this.player.dust);
 
@@ -226,18 +255,31 @@ export default class UI extends Phaser.Scene
 
     }
 
+    updateDicotomias(){
+        this.dicValText1.setText(this.mainScene.dicotomyManager.dicName(1) + ' ' + this.mainScene.dicotomyManager.getDic(1));
+        this.dicValText2.setText(this.mainScene.dicotomyManager.dicName(2) + ' ' + this.mainScene.dicotomyManager.getDic(2));
+        this.dicValText3.setText(this.mainScene.dicotomyManager.dicName(3) + ' ' + this.mainScene.dicotomyManager.getDic(3));
+        this.dicValText4.setText(this.mainScene.dicotomyManager.dicName(4) + ' ' + this.mainScene.dicotomyManager.getDic(4));
+
+        this.dial1.x = this.dicValText1.x-75 + this.mainScene.dicotomyManager.getDic(1) * 150/100;
+        this.dial2.x = this.dicValText2.x-75 + this.mainScene.dicotomyManager.getDic(2) * 150/100;
+        this.dial3.x = this.dicValText3.x-75 + this.mainScene.dicotomyManager.getDic(3) * 150/100;
+        this.dial4.x = this.dicValText4.x-75 + this.mainScene.dicotomyManager.getDic(4) * 150/100;
+
+    }
 
     setVisibilidadHUD(mainScene){
         let uiDicotomy = mainScene.dicotomyManager.getDic(3);
 
-        this.GRP_BarraVida.setVisible(uiDicotomy > 50);
-        this.GRP_FuriaEureka.setVisible(uiDicotomy > 51);
-        this.GRP_Estadisticas.setVisible(uiDicotomy > 52);
-        this.GRP_Reloj.setVisible(uiDicotomy > 53);
-        this.GRP_DatosOleada.setVisible(uiDicotomy > 54);
-        this.GRP_NextWave.setVisible(uiDicotomy > 55);
-        this.GRP_Dust.setVisible(uiDicotomy > 56);
-        this.map.setVisible(uiDicotomy > 57);
+        this.GRP_BarraVida.setVisible(uiDicotomy > 40);
+        this.GRP_FuriaEureka.setVisible(uiDicotomy > 41);
+        this.GRP_Estadisticas.setVisible(uiDicotomy > 42);
+        this.GRP_Reloj.setVisible(uiDicotomy > 43);
+        this.GRP_DatosOleada.setVisible(uiDicotomy > 44);
+        this.GRP_NextWave.setVisible(uiDicotomy > 45);
+        this.GRP_Dust.setVisible(uiDicotomy > 46);
+        this.map.setVisible(uiDicotomy > 47);
+        this.GRP_Dicotomias.setVisible(uiDicotomy > 48);
 
 
         }
