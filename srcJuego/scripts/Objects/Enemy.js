@@ -106,7 +106,7 @@ export default class Enemy extends Mob
             //spawnear un totem
             if(this.totem){
                 this.scene.totemPool.spawn(this.x + this.totemSpawnOffsetX,this.y+ this.totemSpawnOffsetY,' ');
-                
+                console.log("tu vieja");
             }
         }
     }
@@ -138,6 +138,8 @@ export default class Enemy extends Mob
 
         //variable para saber si este enemigo suelta el totem o no
         this.totem = seting.totem != undefined;
+
+        
 
         if(this.totem){
             //this.tint = 0xed3419;, buscar un color/ otra forma de hacerlo

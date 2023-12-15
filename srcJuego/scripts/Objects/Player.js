@@ -163,7 +163,7 @@ export default class Player extends Mob
        //recibir el daño(metodo de mob)
        this.ReciveDamage(damage*damageReduction);
 
-       if(this.health <= 0){
+       if(this.health < 0){
             //animacion de muerte
             this.play(this.key[2],true);
 
