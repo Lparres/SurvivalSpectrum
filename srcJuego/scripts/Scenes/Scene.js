@@ -55,7 +55,7 @@ export default class MainScene extends Phaser.Scene {
         this.player = new Player(this, 960, 540, ['idlePlayer', 'PlayerMove'], this.data.PlayerConfig);
 
         
-        this.cardList = {
+        this.cardMap = {
             life: 0,
             lifeRegen:0,
             damage: 0,
@@ -99,7 +99,7 @@ export default class MainScene extends Phaser.Scene {
 
 
         this.esc.on('down', event => {
-            this.activePauseMenu();
+            this.activeDicotomyMenu();
 
         });
         // Recogida del input de movimiento en un vector
@@ -121,17 +121,6 @@ export default class MainScene extends Phaser.Scene {
        this.music.play();
 
        this.hitSound = this.sound.add('golpe',{volume: 0.5});
-       
-
-       this.cardList = {
-        life: 0,
-        lifeRegen:0,
-        damage: 0,
-        fireRate:0,
-        meleeArmor: 0,
-        rangeArmor: 0,
-        speed:0
-       }
     }
 
             
@@ -221,7 +210,7 @@ export default class MainScene extends Phaser.Scene {
 
         for (let i = 0; i < 20; i++) {
             let aux = new Totem(this, 0, 0, 'kirby', this.totemPool, () => {
-                this.activePauseMenu();
+                this.activeDicotomyMenu();
             });
             totemArr.push(aux);
         }
@@ -589,14 +578,14 @@ export default class MainScene extends Phaser.Scene {
         
     }
 
-    activePauseMenu(){
+    activeDicotomyMenu(){
         this.scene.sleep('UIScene');
         this.scene.launch('Menu');
         this.scene.setActive(false);
         // necesitamos rellenar la deck para que aparexcan cartas nuevas al cargar el menú
         this.dicotomyManager.deckFill(this.deck);
-        //console.log(this.deck);
+        console.log(this.deck);
+        this.player.applyCard(this.deck[0]);
         this.music.pause();
-
     }
 }

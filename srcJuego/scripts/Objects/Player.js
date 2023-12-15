@@ -56,8 +56,6 @@ export default class Player extends Mob
         this.eurekaMode = false;
         this.rageDamageMultiply = 1;
         this.lifeSteal = 10;
-        this.rageTime = 10000; // variable que indica el tiempo que dura la rabia
-        this.eurekaTime = 10000; // variable que indica el tiempo que dura el eureka
         this.dicTotalTime = 10000; // variable dentro del timer a modificar
         this.dicTime = 0;
         
@@ -199,7 +197,6 @@ export default class Player extends Mob
                this._meleeArmor /= 2;
                this._rangeArmor /=2;
                this.speed *= 3;
-               this.dicTotalTime = this.rageTime;
                //console.log(this.damage + " " + this._meleeArmor + " " + this._rangeArmor + " ");
            }
         } 
@@ -216,12 +213,26 @@ export default class Player extends Mob
             this.eurekaMode = true;
             this.rage = this.rage - (this.rage * 20/100);
             this._eureka = 0;
-            this.dicTotalTime = this.eurekaTime;
             this.scene.isTimeToStop(true);
         }
         }
         else if(!this.eurekaMode && this.rageMode){
             this.lifeRegen(this.lifeSteal);
+        }
+    }
+
+    applyCard(key){
+        switch(key){
+            case 'life':
+                this.life += this.scene.cardList.life;
+                break;
+            case 'lifeRegen':
+                this.lifeSteal += this.scene.cardList.lifeRegen
+                break;
+            case 'damage':
+                this.damage += this.scene.cardList.fireRate;
+                break;
+
         }
     }
 }
