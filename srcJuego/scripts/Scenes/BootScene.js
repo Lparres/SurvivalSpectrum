@@ -10,15 +10,22 @@ export default class BootScene extends Phaser.Scene{
         var progressBar = this.add.graphics();
         var progressBox = this.add.graphics();
 
+
+        let textosRandom =["Cargando imagenes", "Cargando mapa","Cargando sonidos"]
+        var texto = this.add.text(960,700,"Cargando",{ font: '50px JosefinMedium', fill: 'white' }).setOrigin(0.5,0.5);
+
         progressBox.fillStyle(0x222222, 0.8);
-        progressBox.fillRect(240, 270, 320, 50);
+        progressBox.fillRect(710, 800, 500, 30);
 
 
         this.load.on('progress', function (value) {
             console.log(value);
+
+            texto.setText(textosRandom[value < 0.33 ? 0 : value < 0.66 ? 1 : 2]);
+
             progressBar.clear();
             progressBar.fillStyle(0xffffff, 1);
-            progressBar.fillRect(250, 280, 300 * value, 30);
+            progressBar.fillRect(710, 800, 500 * value, 30);
         });
                     
         this.load.on('fileprogress', function (file) {

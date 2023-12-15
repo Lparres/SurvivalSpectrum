@@ -37,15 +37,27 @@ export default class Player extends Mob
         this.baseDamage = playerConfig.damage;
         this._meleeArmor = playerConfig.meleeArmor;
         this._rangeArmor = playerConfig.rangeArmor;
-        this.dust = 100;
         this.baseRange = playerConfig.range;
+        
+        this.bulletSpeed = playerConfig.bulletSpeed;
+
+
+        //inicializar los polvos con los que empezamos
+        this.dust = playerConfig.initialDust;
         
         
         //atack cooldown en milisegundos
-        this._atkCD = playerConfig.Cooldown; 
+        this._atkCD = playerConfig.shootCooldown; 
         //para la recarga del ataque
-        this._elapsedTime = 0;
+        this._timerAtackCooldown = 0;
         
+        //cooldown del sonido de recibir daño
+        this.reciveDamageSoundCooldown = playerConfig.reciveDamageSoundCooldown;
+
+        //timer para el sonido de recibir daño
+        this.reciveDamageSoundTimer = 0;
+
+
         //dicotomias
         this.dicUp = 10;
         this.rage = 0;
@@ -61,7 +73,7 @@ export default class Player extends Mob
         this.dicTotalTime = 10000; // variable dentro del timer a modificar
         this.dicTime = 0;
         
-        this.bulletSpeed = playerConfig.bulletSpeed;
+
         
         this.range = this.baseRange;
         this.damage = this.baseDamage;
@@ -82,6 +94,7 @@ export default class Player extends Mob
         //margen para flipear el sprite
         this.flipMargin = 30;
 
+        //sonido del hit
         this.playerHitSound = scene.sound.add('golpePlayer',{volume: 0.5});
     }
 
@@ -95,34 +108,41 @@ export default class Player extends Mob
              
         this.Shoot(dt);
 
+        this.changeDicMode(dt);
+
+
         //flipeo del jugador segun la posicicon del raton
         //cambiar el magic number por el ancho de la pantalla
         this.flipX = this.scene.input.mousePointer.position.x <= (1920/2) - this.flipMargin ? true 
                     :this.scene.input.mousePointer.position.x >= (1920/2) + this.flipMargin ? false : this.flipX;
 
         
-        this.changeDicMode(dt);
+        //update del timer del sonido hit
+        if(this.reciveDamageSoundTimer > 0){
+            this.reciveDamageSoundTimer -= dt;
+        }
+
+                
     }
     
     //método para disparar
     Shoot(dt) {
         //contador del tiempo
-        this._elapsedTime += dt;
-        if(this._elapsedTime >= this._atkCD){
+        this._timerAtackCooldown += dt;
+        //si toca disparar
+        if(this._timerAtackCooldown >= this._atkCD){
                
-            //cambiar de sitio
+            //cambiar de sitio, data de la bala
             let BulletSeting ={
                 idParent : true,
                 damage : this.damage,
                 velocity : this.bulletSpeed,
                 range: this.range
             }
-
-        
-
+            //spawnear la bala
             this.scene.playerBulletsPool.spawn(this.x + this._bulletSpawnOffsetX,this.y+this._bulletSpawnOffsetY,' ',BulletSeting);
-
-            this._elapsedTime = 0;
+            //reset del tiempo
+            this._timerAtackCooldown = 0;
         }
     }
     /**
@@ -131,92 +151,127 @@ export default class Player extends Mob
      * @param {number} damageType 1: melee 2: range
      */
     Hit(damage, damageType) {
-        this.playerHitSound.play();
+
+        //sonido de recibir daño
+        if(this.reciveDamageSoundTimer <= 0){
+            this.playerHitSound.play();
+            this.reciveDamageSoundTimer = this.reciveDamageSoundCooldown;
+        }
+
+        //determinar la reduccion de daño
         let damageReduction;
         if(damageType == 1) damageReduction = 100 / (100 + this._meleeArmor);
         else if (damageType == 2) damageReduction = 100 / (100 + this._rangeArmor);
-        //this._currentLife -= damage * damageReduction;
 
-        /*cuando herede de mob llamar al metodo ReciveDamage(damage*damageReduction) este ya se encarga de matar al jugador si es necesario
-        en este caso se puede añadir un callback para detectar cuando muere el jugador y hacer las llamadas de fin de juego
-        */
+       //recibir el daño(metodo de mob)
        this.ReciveDamage(damage*damageReduction);
 
        if(this.health < 0){
-            //console.log("Player Muerto");
+            //player muerto , hacer cosas
        }
     }
 
     lifeRegen(amount){
+        //sumar vida
         this.health += amount;
+        //limitar la vida a la vida maxima
         if(this.health> this.maxLife){
             this.health = this.maxLife;
         }
     }
 
+    // La dicotomía cambia el rango de ataque
+    cambiaRange(damageOffset){
+        //vacío de momento
+    }
 
     addDust(amount){
         this.dust += amount;
+        //console.log('polvos: ' + this.dust);
     }
 
     changeDicMode(dt){
+
+        //si estamos en modo rabia o eureka, actualizamos el timer
         if((this.rageMode || this.eurekaMode) && this.dicTime <= this.dicTotalTime){
             this.dicTime += dt;
         }
         else{  
-            this.dicTime=0;
+
+            this.dicTime = 0;
             
+            //resetar las estadisticas a como estaban antes
             if(this.rageMode){
+
+                this.rageMode = false;
+
                 this.damage /= 2;
                 this._meleeArmor *= 2;
                 this._rangeArmor *=2;
                 this.speed /= 3;
-                this.rageMode = false;
+
                 //Sconsole.log(this.damage + " " + this._meleeArmor + " " + this._rangeArmor + " ");
-                }
-                else if(this.eurekaMode){
-                    this.eurekaMode=false;
-                    this.scene.isTimeToStop(false);
-                }
+            }
+            else if(this.eurekaMode){//despausar a los enemigos
+
+                this.eurekaMode = false;
+                this.scene.isTimeToStop(false);
+            }
         }
     }
 
     addRage(){
-        if(!this.rageMode && !this.eurekaMode && !this.rageMode){
+
+        //si no estamos en rabia ni en eureca
+        if(!this.rageMode && !this.eurekaMode){
+
+            //sumar rabia
             this.rage += this.dicUp;
             //console.log('dickUp' + this.dicUp);
-            console.log('rage: ' + this.rage);
+            //console.log('rage: ' + this.rage);
+
+            
+           //entrar en rabia
            if(this.rage >= this.rageMax){
-               //console.log('rage mode');
-               this.rageMode = true;
-               this._eureka = this._eureka - (this._eureka * 20/100);
-               this.rage = 0;
-               this.damage *= 2;
-               this._meleeArmor /= 2;
-               this._rangeArmor /=2;
-               this.speed *= 3;
-               this.dicTotalTime = this.rageTime;
-               //console.log(this.damage + " " + this._meleeArmor + " " + this._rangeArmor + " ");
+                this.rageMode = true;
+
+                //reducir eureca
+                this._eureka = this._eureka - (this._eureka * 20/100);
+
+                //cambiar estadisticas
+                this.rage = 0;
+                this.damage *= 2;
+                this._meleeArmor /= 2;
+                this._rangeArmor /=2;
+                this.speed *= 3;
+
+                this.dicTotalTime = this.rageTime;
+                //console.log(this.damage + " " + this._meleeArmor + " " + this._rangeArmor + " ");
            }
         } 
     }
 
     addEureka(){
+
+        //si no estamos en rabia ni en eureca
         if(!this.eurekaMode && !this.rageMode){
+
             this._eureka += this.dicUp;
         
-       // console.log('eureka: ' + this._eureka);
+            // console.log('eureka: ' + this._eureka);
         
-        if(this._eureka >= this.eurekaMax){
-           // console.log('eureka mode');
-            this.eurekaMode = true;
-            this.rage = this.rage - (this.rage * 20/100);
-            this._eureka = 0;
-            this.dicTotalTime = this.eurekaTime;
-            this.scene.isTimeToStop(true);
+            if(this._eureka >= this.eurekaMax){
+                // console.log('eureka mode');
+                this.eurekaMode = true;
+
+                this.rage = this.rage - (this.rage * 20/100);
+                this._eureka = 0;
+                this.dicTotalTime = this.eurekaTime;
+
+                this.scene.isTimeToStop(true);
+            }
         }
-        }
-        else if(!this.eurekaMode && this.rageMode){
+        else if(!this.eurekaMode && this.rageMode){//si estamos en rabia sumar vida
             this.lifeRegen(this.lifeSteal);
         }
     }
