@@ -13,7 +13,7 @@ export default class Button extends Phaser.GameObjects.Sprite{
      * @param {number} baseScale escala a la que poner el sprite designado
      * @param {funcion} func funcion llamada al pulsar el boton
      */
-    constructor(scene, x, y, key,baseScale,func){
+    constructor(scene, x, y, key,baseScale,func,hover = true){
         super(scene, x,y, key);
 
         this.setScale(baseScale,baseScale);
@@ -26,10 +26,12 @@ export default class Button extends Phaser.GameObjects.Sprite{
             func();
         })
         this.on('pointerout',function(){
-            this.setScale(baseScale,baseScale);
+            if(hover)
+                this.setScale(baseScale,baseScale);
         })
         this.on('pointerover',function(){
-            this.setScale(baseScale+0.03,baseScale+0.03);
+            if(hover)
+                this.setScale(baseScale+0.03,baseScale+0.03);
         })
     }
 }

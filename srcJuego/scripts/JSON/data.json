@@ -1,24 +1,25 @@
 
 {
     "PlayerConfig":{
-        "velocity": 100,"damage": 10,"range": 250,"meleeArmor": 10,"rangeArmor": 10,"life": 100,
+        "velocity": 100,"damage": 10,"range": 250,"meleeArmor": 10,"rangeArmor": 10,
+        "life": 100,"lifeRegen":3,
         "shootCooldown": 500,"reciveDamageSoundCooldown":300,
         "bulletSpeed": 300,
         "initialDust":120
     },
     
     "EnemyConfigs": [
-        {"life": 30, "damage": 20,"velocity": 50, "meleeAttackCD": 1000},
-        {"life": 100,"damage": 10,"velocity": 25, "meleeAttackCD": 1000},
-        {"life": 5,  "damage": 3, "velocity": 100,"meleeAttackCD": 1000},
-        {"life": 30, "damage": 20, "velocity": 50,"meleeAttackCD": 1000,"totem": true}
+        {"life": 30, "damage": 10,"velocity": 50, "meleeAttackCD": 500},
+        {"life": 100,"damage": 5,"velocity": 25, "meleeAttackCD": 500},
+        {"life": 5,  "damage": 3, "velocity": 100,"meleeAttackCD": 500},
+        {"life": 30, "damage": 10, "velocity": 50,"meleeAttackCD": 500,"totem": true}
     ],
 
     "RangeConfigs":[
         {
-            "settingMelee" : {"life": 50,"damage": 3,"velocity": 35,"meleeAttackCD": 1000},
+            "settingMelee" : {"life": 50,"damage": 3,"velocity": 35,"meleeAttackCD": 500},
 
-            "range": 200,"rangeDamage": 20,"minRangeAttackCD": 1500,"maxRangeAttackCD": 2000,"bulletSpeed": 200
+            "range": 200,"rangeDamage": 15,"minRangeAttackCD": 1500,"maxRangeAttackCD": 2000,"bulletSpeed": 200
         }
     ]
     

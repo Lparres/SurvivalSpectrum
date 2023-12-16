@@ -219,9 +219,9 @@ export default class UI extends Phaser.Scene
     }
     updateStats(){
         this.lifeInfo.setText(this.player.maxLife);
-        this.lifeRegenInfo.setText("xxxx");
+        this.lifeRegenInfo.setText(this.player.lifeReg);
         this.damageInfo.setText(this.player.damage);
-        this.fireRateInfo.setText("xxxx");
+        this.fireRateInfo.setText(this.player._atkCD / 1000);
         this.meleeArmorInfo.setText(this.player._meleeArmor);
         this.rangeArmorInfo.setText(this.player._rangeArmor);
         this.rangeInfo.setText(this.player.range);

@@ -5,7 +5,7 @@ import Bullet from '../Objects/Bullet.js'
 import Enemy from '../Objects/Enemy.js'
 import InteractuableObjects from '../Objects/InteractuableObject.js'
 import Dicotomías from '../Dicotomias.js'
-import Card from '../Card.js'
+import Card from '../UI_Objects/Card.js'
 import Dust from '../Objects/Dust.js'
 import Totem from '../Objects/Totem.js'
 
@@ -15,20 +15,22 @@ export default class MainScene extends Phaser.Scene {
     }
     //data transfer
     init() {
-
+        
     }
     //load data
     preload() {
-
+        
         this.load.on('complete',()=>{
             this.scene.run('UIScene');
         });
-
+        
         this.cameras.main.zoom = 2;
     }
-
+    
     //instance
     create() {
+        
+        this.scale.startFullscreen();
 
         this.data = this.game.cache.json.get('data');
 
@@ -95,27 +97,30 @@ export default class MainScene extends Phaser.Scene {
         this.down = this.input.keyboard.addKey('S');
         this.right = this.input.keyboard.addKey('D');
 
-        this.esc = this.input.keyboard.addKey('ESC');
+        this.pause = this.input.keyboard.addKey('P');
 
 
-        this.esc.on('down', event => {
+        this.pause.on('down', event => {
             this.activeDicotomyMenu();
 
         });
+
+
+        this.esc = this.input.keyboard.addKey('ESC');
+
+        this.esc.on('down', event => {
+            this.scale.toggleFullscreen();
+        })
+
+
+
         // Recogida del input de movimiento en un vector
         this._inputVector = new Phaser.Math.Vector2(0, 0);
 
         //booleano que detiene el movimiento de los enemigos
         this.stopEnemy = false;
 
-        // this es Scene
-        let lifeRegenEvent = this.time.addEvent( {
-            delay: 3000, 
-            callback: this.onEvent,
-            callbackScope: this,
-            loop: true
-        });
-
+        
         //sonidos
        this.music = this.sound.add('music',{volume: 0.05,loop:true});
        this.music.play();
@@ -124,19 +129,12 @@ export default class MainScene extends Phaser.Scene {
 
        document.getElementById("seccion-juego").className = "";
        document.getElementById("juego").className = "";
-       this.scale.startFullscreen();
 
     }
-
-            
-    onEvent(){
-        this.player.lifeRegen(2);
-    };
 
     //game tick
     update(t, dt) {
         
-
         this.playerMove();
 
         this.oleadasLogic(dt);
@@ -594,11 +592,15 @@ export default class MainScene extends Phaser.Scene {
     activeDicotomyMenu(){
         this.scene.sleep('UIScene');
         this.scene.launch('Menu');
+
         this.scene.setActive(false);
+
+        this.scale.startFullscreen();
+
         // necesitamos rellenar la deck para que aparexcan cartas nuevas al cargar el menú
-        this.dicotomyManager.deckFill(this.deck);
+        //this.dicotomyManager.deckFill(this.deck);
         console.log(this.deck);
-        this.player.applyCard(this.deck[0]);
+        //this.player.applyCard(this.deck[0]);
         this.music.pause();
     }
 

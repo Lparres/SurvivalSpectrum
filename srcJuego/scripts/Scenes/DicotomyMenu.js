@@ -1,5 +1,5 @@
 import Button from "../UI_Objects/Button.js";
-import MainScene from "./Scene.js";
+import Card from "../UI_Objects/Card.js"
 
 export default class Menu extends Phaser.Scene {
 
@@ -17,6 +17,8 @@ export default class Menu extends Phaser.Scene {
     create() {
         this.dicotomyManager = this.scene.get('level').dicotomyManager;
         this.player = this.scene.get('level').player;
+
+        this.cardsToPick = 3;
 
         var centro = this.add.container(this.sys.game.canvas.width / 2, this.sys.game.canvas.height / 2);
         const fondo = this.add.nineslice(0, 0, 'ui', 'DicotomyMenuBG', 1000, 1000, 13, 13, 13, 13);
@@ -44,17 +46,18 @@ export default class Menu extends Phaser.Scene {
         this.polvosMagicos = this.add.text(-280, -450, this.player.dust, { font: '40px JosefinBold', fill: 'black', aling: 'left' }).setOrigin(1, 0);
         centro.add(this.polvosMagicos);
 
+
         this.container1 = new DicContainer(this, -200, -320, 1);
         centro.add(this.container1);
-
         this.container2 = new DicContainer(this, 200, -320, 2);
         centro.add(this.container2);
-
         this.container3 = new DicContainer(this, -200, -180, 3);
         centro.add(this.container3);
-
         this.container4 = new DicContainer(this, 200, -180, 4);
         centro.add(this.container4);
+
+        this.cards = new CardsZone(this,0,150,8);
+        centro.add(this.cards);
 
         //contenedor del bloque de estadisticas
         this.latcont = new LatContainer(this, 400, this.sys.game.canvas.height / 2).setScale(1.2);
@@ -212,16 +215,48 @@ class LatContainer extends Phaser.GameObjects.Container {
 
     preUpdate(t, dt) {
         this.lifeInfo.setText(this.scene.player.maxLife);
-        this.lifeRegenInfo.setText("xxxx");
+        this.lifeRegenInfo.setText(this.scene.player.lifeReg);
         this.damageInfo.setText(Phaser.Math.RoundTo(this.scene.player.damage,-3));
-        this.fireRateInfo.setText("xxxx");
+        this.fireRateInfo.setText(this.scene.player._atkCD /1000);
         this.meleeArmorInfo.setText(Phaser.Math.RoundTo(this.scene.player._meleeArmor));
         this.rangeArmorInfo.setText(Phaser.Math.RoundTo(this.scene.player._rangeArmor));
         this.rangeInfo.setText(Phaser.Math.RoundTo(this.scene.player.range));
         this.speedInfo.setText(Phaser.Math.RoundTo(this.scene.player.speed));
     }
 }
-
+/**
+ * Clase para las zona de las cartas (en progreso)
+ * Genera tantas cartas en forma de matriz como se le diga a la constructora
+ */
 class CardsZone extends Phaser.GameObjects.Container{
+    constructor(scene,x,y, cardsNum){
+        super(scene,x,y);
 
+        this.w = 800;
+        this.h = 400;
+
+        this.cardW = 100;
+        this.cardH = 140;
+
+        this.spacingHor = 100;
+
+        //marco de la zona
+        this.add(scene.add.nineslice(0, 0, 'ui', 'DicotomyMenuBG', this.w, this.h , 20, 20, 20, 20));
+
+        this.card1= new Card(this.scene,-this.w/2 +50, -this.h/2 +40,'kirby',3);
+        //this.card1.setOrigin(0,0)
+        this.add(this.card1);
+
+        /*posicionamiento de cartas en forma de matriz respecto de la carta 1
+        * se puede aprovechar para indicar la carta que toca
+        */
+        for(var i=1 ; i< cardsNum; i++){
+            this.card2= new Card(this.scene,this.card1.x + (i%4) * (this.cardW + this.spacingHor),this.card1.y + Math.floor(i/4)*150,'kirby',3);
+            //this.card2.setOrigin(0,0)
+            this.add(this.card2);
+        }
+
+
+        this.scene.add.existing(this);
+    }
 }

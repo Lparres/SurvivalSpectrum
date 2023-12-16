@@ -38,6 +38,7 @@ export default class Player extends Mob
         this._meleeArmor = playerConfig.meleeArmor;
         this._rangeArmor = playerConfig.rangeArmor;
         this.baseRange = playerConfig.range;
+        this.lifeReg = playerConfig.lifeRegen;
         
         this.bulletSpeed = playerConfig.bulletSpeed;
 
@@ -82,6 +83,16 @@ export default class Player extends Mob
 
         //vector de movimiento
         this._moveVector = new Phaser.Math.Vector2(0,0);
+
+        //Evento de la regeneracion de vida
+        this.regEvent = this.scene.time.addEvent( {
+            args: [this.lifeReg],
+            delay: 1000, 
+            callback: this.lifeRegen,
+            callbackScope: this,
+            loop: true
+        });
+
         
  
         //ajustar el tamaño del colider
@@ -170,6 +181,7 @@ export default class Player extends Mob
             this.scene.scene.sleep('UIScene')
             this.scene.scene.sleep('level')
             this.scene.scene.run('FinalScene');
+            this.scene.music.stop();
        }
     }
 
@@ -180,6 +192,7 @@ export default class Player extends Mob
         if(this.health> this.maxLife){
             this.health = this.maxLife;
         }
+        console.log(amount + " curado")
     }
 
     // La dicotomía cambia el rango de ataque
