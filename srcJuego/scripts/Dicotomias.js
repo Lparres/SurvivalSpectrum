@@ -21,30 +21,6 @@ export default class Dicotomías
         this.perDic4=perDic4;
    }
 
-   //métodos
-   //método que sube un porcentage a una dicotomía
-   SubeDic = function(dic, plusPer)
-   {
-    //método vacío
-   }
-
-   /**
-    * 
-    * @param {number} type // quiero el primer valor o el segundo
-    * @returns {number} devuelve la interpertacion según el porcentaje de la dicotomía dic y el extremo de type
-    */
-   TakeGeometricNumber(type, dicx)
-   {
-     let dic = this.getDic(dicx);
-     //rage
-     if(type == 1){
-          return dic/100;
-     }
-     //eureka
-     else{
-          return 1 - (dic/100);
-     }
-   }
 /**
  * 
  * @param {number} dic numero de dicotomia

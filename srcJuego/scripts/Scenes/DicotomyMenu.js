@@ -104,7 +104,7 @@ class DicContainer extends Phaser.GameObjects.Container {
         this.add(this.dial);
 
         //boton de bajar dicotomia
-        this.add(new Button(scene, -135, 0, 'kirby', 0.08, () => {
+        this.add(new Button(scene, -135, 0, 'decrease', 1, () => {
             if (scene.player.dust > 0 && this.dicPer > 0) {
                 this.SubDicotomy(this.dicNum);
                 scene.scene.get('level').dicotomyManager.AplieDicotomy(this.dicNum);
@@ -114,7 +114,7 @@ class DicContainer extends Phaser.GameObjects.Container {
         }))
 
         //boton de subir dicotomia
-        this.add(new Button(scene, 135, 0, 'mas', 0.10, () => {
+        this.add(new Button(scene, 135, 0, 'increase', 1, () => {
             if (scene.player.dust > 0 && this.dicPer < 100) {
                 this.AddDicotomy(this.dicNum);
                 scene.scene.get('level').dicotomyManager.AplieDicotomy(this.dicNum);
