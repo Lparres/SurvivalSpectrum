@@ -22,7 +22,10 @@ export default class Card extends Phaser.GameObjects.Container{
         this.cardGB.setDisplaySize(100,140);
         this.add(this.cardGB);
 
-        var textValue =scene.add.text(50, 100, stat, { font: '25px JosefinMedium', fill: '#424242' }).setOrigin(0.5, 0.5);
+        this.add(scene.add.nineslice(50, 60, 'ui', 'DicotomyMenuBG', 50,60, 5, 5, 5, 5));
+
+        var textValue =scene.add.text(50, 100, stat+ " "+ amount, 
+        { font: '25px JosefinMedium', fill: '#424242' }).setOrigin(0.5, 0.5);
         this.add(textValue);
         this.scene.add.existing(this);
     }
