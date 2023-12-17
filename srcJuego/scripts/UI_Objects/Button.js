@@ -16,6 +16,7 @@ export default class Button extends Phaser.GameObjects.Sprite{
     constructor(scene, x, y, key,baseScale,func,hover = true){
         super(scene, x,y, key);
 
+        this.setOrigin(0.5 , 0.5)
         this.setScale(baseScale,baseScale);
         this.setInteractive();
         

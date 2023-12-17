@@ -12,8 +12,7 @@ export default class StartMenu extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('startButton', 'srcJuego/img/start.png')
-        this.load.spritesheet('fullscreen', 'srcJuego/ui/fullscreen.png', { frameWidth: 362, frameHeight: 84 });
+       
     }
 
     create() {

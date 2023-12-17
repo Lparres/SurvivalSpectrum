@@ -100,7 +100,7 @@ export default class MainScene extends Phaser.Scene {
 
 
         this.pause.on('down', event => {
-            this.activeDicotomyMenu();
+            this.activePauseMenu();
 
         });
 
@@ -579,6 +579,13 @@ export default class MainScene extends Phaser.Scene {
     isTimeToStop(value){
         this.stopEnemy = value ;
         
+    }
+
+    activePauseMenu(){
+        this.scene.sleep('UIScene');
+        this.scene.launch('Pause');
+        this.scene.setActive(false);
+        this.music.pause();
     }
 
     activeDicotomyMenu(){
