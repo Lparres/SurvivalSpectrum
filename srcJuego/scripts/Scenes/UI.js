@@ -179,7 +179,8 @@ export default class UI extends Phaser.Scene
 
 
        // Se modifica la cantidad de elementos del HUD según la dicotomía.
-       this.setVisibilidadHUD(ourGame);
+       //this.setVisibilidadHUD(ourGame);
+       this.mainScene.dicotomyManager.AplieDicotomy(3);
 
     }
 
@@ -268,20 +269,5 @@ export default class UI extends Phaser.Scene
         this.dial4.x = this.dicValText4.x-75 + this.mainScene.dicotomyManager.getDic(4) * 150/100;
 
     }
-
-    setVisibilidadHUD(mainScene){
-        let uiDicotomy = mainScene.dicotomyManager.getDic(3);
-
-        this.GRP_BarraVida.setVisible(uiDicotomy > 10);
-        this.GRP_FuriaEureka.setVisible(uiDicotomy > 20);
-        this.GRP_Estadisticas.setVisible(uiDicotomy > 30);
-        this.GRP_Reloj.setVisible(uiDicotomy > 40);
-        this.GRP_DatosOleada.setVisible(uiDicotomy > 50);
-        this.GRP_NextWave.setVisible(uiDicotomy > 60);
-        this.GRP_Dust.setVisible(uiDicotomy > 70);
-        this.map.setVisible(uiDicotomy > 80);
-        this.GRP_Dicotomias.setVisible(uiDicotomy > 90);
-
-        }
     
 }
