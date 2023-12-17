@@ -62,6 +62,12 @@ export default class Menu extends Phaser.Scene {
         //contenedor del bloque de estadisticas
         this.latcont = new LatContainer(this, 400, this.sys.game.canvas.height / 2).setScale(1.2);
 
+        const start = new Button(this, this.cameras.main.centerX, this.cameras.main.centerY, 'startButton', 1, () => {
+            document.getElementById("seccion-juego").className = "";
+            document.getElementById("juego").className = "";
+            this.scale.startFullscreen();
+
+        })
     }
 
     

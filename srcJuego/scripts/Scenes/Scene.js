@@ -30,7 +30,6 @@ export default class MainScene extends Phaser.Scene {
     //instance
     create() {
         
-        this.scale.startFullscreen();
 
         this.data = this.game.cache.json.get('data');
 
@@ -106,11 +105,7 @@ export default class MainScene extends Phaser.Scene {
         });
 
 
-        this.esc = this.input.keyboard.addKey('ESC');
-
-        this.esc.on('down', event => {
-            this.scale.toggleFullscreen();
-        })
+       
 
 
 
@@ -126,9 +121,6 @@ export default class MainScene extends Phaser.Scene {
        this.music.play();
 
        this.hitSound = this.sound.add('golpe',{volume: 0.5});
-
-       document.getElementById("seccion-juego").className = "";
-       document.getElementById("juego").className = "";
 
     }
 
@@ -594,8 +586,6 @@ export default class MainScene extends Phaser.Scene {
         this.scene.launch('Menu');
 
         this.scene.setActive(false);
-
-        this.scale.startFullscreen();
 
         // necesitamos rellenar la deck para que aparexcan cartas nuevas al cargar el menú
         //this.dicotomyManager.deckFill(this.deck);
