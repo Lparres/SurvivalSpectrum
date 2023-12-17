@@ -15,33 +15,33 @@ export default class MainScene extends Phaser.Scene {
     }
     //data transfer
     init() {
-        
+
     }
     //load data
     preload() {
-        
-        this.load.on('complete',()=>{
+
+        this.load.on('complete', () => {
             this.scene.run('UIScene');
         });
-        
+
         this.cameras.main.zoom = 2;
     }
-    
+
     //instance
     create() {
-        
+
 
         this.data = this.game.cache.json.get('data');
 
-        
+
         this.waveJson = this.game.cache.json.get('waves');
 
         this.currentWave = 0;
 
-        this.spawnPositions =  [];
+        this.spawnPositions = [];
 
-        this.minSpawnRange =  400;
-        this.maxSpawnRange =  750;
+        this.minSpawnRange = 400;
+        this.maxSpawnRange = 750;
 
         this.sortSpawnPointsFrecuency = 5000;
         this.sortSpawnPointsTimer = 9999;
@@ -53,19 +53,19 @@ export default class MainScene extends Phaser.Scene {
         this.input.setDefaultCursor('url(srcJuego/img/crosshair.png) 16 16, pointer');
 
         //creacion del jugador
-        this.player = new Player(this, 960, 540, ['idlePlayer', 'PlayerMove','deathPlayer'], this.data.PlayerConfig);
+        this.player = new Player(this, 960, 540, ['idlePlayer', 'PlayerMove', 'deathPlayer'], this.data.PlayerConfig);
 
-        
+
         this.cardMap = {
             life: 0,
-            lifeRegen:0,
+            lifeRegen: 0,
             damage: 0,
-            fireRate:0,
+            fireRate: 0,
             meleeArmor: 0,
             rangeArmor: 0,
-            speed:0
+            speed: 0
         }
-        this.statKeyList = ['life', 'lifeRegen', 'damage','fireRate', 'meleeArmor', 'rangeArmor', 'speed'];
+        this.statKeyList = ['life', 'lifeRegen', 'damage', 'fireRate', 'meleeArmor', 'rangeArmor', 'speed'];
         this.deck = [];
 
         this.dicotomyManager = new Dicotomías(this.player, 50, 50, 50, 50);
@@ -97,7 +97,7 @@ export default class MainScene extends Phaser.Scene {
         this.right = this.input.keyboard.addKey('D');
 
         this.pause = this.input.keyboard.addKey('P');
-
+        this.esc = this.input.keyboard.addKey('ESC');
 
         this.pause.on('down', event => {
             this.activePauseMenu();
@@ -105,7 +105,15 @@ export default class MainScene extends Phaser.Scene {
         });
 
 
-       
+
+        this.esc.on('up', event => {
+            this.scale.stopFullscreen();
+            document.getElementById("seccion-juego").className = "classSeccionJuego";
+            document.getElementById("juego").className = "classJuego";
+        })
+
+
+
 
 
 
@@ -115,18 +123,18 @@ export default class MainScene extends Phaser.Scene {
         //booleano que detiene el movimiento de los enemigos
         this.stopEnemy = false;
 
-        
-        //sonidos
-       this.music = this.sound.add('music',{volume: 0.05,loop:true});
-       this.music.play();
 
-       this.hitSound = this.sound.add('golpe',{volume: 0.5});
+        //sonidos
+        this.music = this.sound.add('music', { volume: 0.05, loop: true });
+        this.music.play();
+
+        this.hitSound = this.sound.add('golpe', { volume: 0.5 });
 
     }
 
     //game tick
     update(t, dt) {
-        
+
         this.playerMove();
 
         this.oleadasLogic(dt);
@@ -146,7 +154,7 @@ export default class MainScene extends Phaser.Scene {
         this.meleeEnemiesPool = new Pool(this, 50);
         this.rangeEnemiesPool = new Pool(this, 50);
         this.dustPool = new Pool(this, 100, 'polvos');
-        this.totemPool = new Pool(this,20,'kirby')
+        this.totemPool = new Pool(this, 20, 'kirby')
 
 
         let plBullets = [];
@@ -172,7 +180,7 @@ export default class MainScene extends Phaser.Scene {
         let enemysArr = [];
 
         for (let i = 0; i < 100; i++) {
-            let aux = new Enemy(this, 0, 0, ['','enemyMove2'], this.meleeEnemiesPool);
+            let aux = new Enemy(this, 0, 0, ['', 'enemyMove2'], this.meleeEnemiesPool);
             aux.setDepth(10);
             enemysArr.push(aux);
         }
@@ -182,7 +190,7 @@ export default class MainScene extends Phaser.Scene {
         let rangeArr = [];
 
         for (let i = 0; i < 100; i++) {
-            let aux = new RangeEnemy(this, 0, 0, ['','enemyMove2'], this.rangeEnemiesPool);
+            let aux = new RangeEnemy(this, 0, 0, ['', 'enemyMove2'], this.rangeEnemiesPool);
             aux.setDepth(10);
             rangeArr.push(aux);
         }
@@ -277,8 +285,8 @@ export default class MainScene extends Phaser.Scene {
             //player.addDust(dust.amount);
         })
 
-         //colisiones con el trigger de los totem
-         this.physics.add.overlap(this.player, this.totemPool.group, function (player, totem) {
+        //colisiones con el trigger de los totem
+        this.physics.add.overlap(this.player, this.totemPool.group, function (player, totem) {
             totem.Hit();
             //player.addDust(dust.amount);
         })
@@ -296,10 +304,10 @@ export default class MainScene extends Phaser.Scene {
 
 
         //faltan las colisiones de las balas con las paredes
-        this.physics.add.collider(this.playerBulletsPool.group,this.wallLayer, function(bullet,wall){
+        this.physics.add.collider(this.playerBulletsPool.group, this.wallLayer, function (bullet, wall) {
             bullet.Hit(bullet.health);
         })
-        this.physics.add.collider(this.enemiesBulletsPool.group,this.wallLayer, function(bullet,wall){
+        this.physics.add.collider(this.enemiesBulletsPool.group, this.wallLayer, function (bullet, wall) {
             bullet.Hit(bullet.health);
         })
 
@@ -402,11 +410,11 @@ export default class MainScene extends Phaser.Scene {
     //oleadas
     oleadasLogic(dt) {
 
-        this.globalTime  = (this.scene.get("UIScene").minuteCount*60)+ this.scene.get("UIScene").secondsCount;
+        this.globalTime = (this.scene.get("UIScene").minuteCount * 60) + this.scene.get("UIScene").secondsCount;
 
         //si ha llegado el tiempo de la siguiente oleada, cambiar de oleada,y actualizar spawnPoints
-        if(this.globalTime >= this.waveJson.NewWaves[this.currentWave + 1].waveStartTime ){
-            this.currentWave = this.currentWave+1;
+        if (this.globalTime >= this.waveJson.NewWaves[this.currentWave + 1].waveStartTime) {
+            this.currentWave = this.currentWave + 1;
             this.sortSpawnPoints();
             this.sortSpawnPointsTimer = 0;
 
@@ -414,133 +422,133 @@ export default class MainScene extends Phaser.Scene {
             this.scene.get("UIScene").updateWaveData();
         }
 
-        
+
         //actualizar la posicion de los spawnPoints, cuando toque
         this.sortSpawnPointsTimer += dt;
-        
-        if(this.sortSpawnPointsTimer >= this.sortSpawnPointsFrecuency){
+
+        if (this.sortSpawnPointsTimer >= this.sortSpawnPointsFrecuency) {
             this.sortSpawnPoints();
             this.sortSpawnPointsTimer = 0;
         }
-        
+
 
         //para cada uno de los spawns de la oleada actual
-        for(let i = 0; i < this.waveJson.NewWaves[this.currentWave].spawnsData.length ;i++){
-            
+        for (let i = 0; i < this.waveJson.NewWaves[this.currentWave].spawnsData.length; i++) {
+
             //info de este spawn
-            let spawnData =  this.waveJson.NewWaves[this.currentWave].spawnsData[i];  
+            let spawnData = this.waveJson.NewWaves[this.currentWave].spawnsData[i];
 
             //posicion en la que vamos a spawnear
             let spawnPos = this.spawnPositions[i];
 
-            this.spawnDataUpdate(spawnData,spawnPos,dt,false,false);
+            this.spawnDataUpdate(spawnData, spawnPos, dt, false, false);
         }
 
         //SPAWN DEL TOTEM ENEMY
 
         //info del spawn del totem
-        let totemData =  this.waveJson.NewWaves[this.currentWave].totemEnemy[0];
-    
+        let totemData = this.waveJson.NewWaves[this.currentWave].totemEnemy[0];
+
         //posicion en la que vamos a spawnear
-        let spawnPos = this.spawnPositions[Phaser.Math.Between(0,this.spawnPositions.length-1)];
-         
-        this.spawnDataUpdate(totemData,spawnPos,dt,false,true);             
-         
+        let spawnPos = this.spawnPositions[Phaser.Math.Between(0, this.spawnPositions.length - 1)];
+
+        this.spawnDataUpdate(totemData, spawnPos, dt, false, true);
+
     }
 
     //masillas, falta ir actualizando los config de los enemies
     masillasLogic(dt) {
 
         //para cada uno de los spawns de las masillas
-        for(let i = 0; i < this.waveJson.Masillas[0].spawnsData.length ;i++){
-        
+        for (let i = 0; i < this.waveJson.Masillas[0].spawnsData.length; i++) {
+
             //info de este spawn
             let spawnData = this.waveJson.Masillas[0].spawnsData[i];
-            
+
             //posicion en la que vamos a spawnear
             let spawnPos = this.spawnPositions[spawnData.spawnIndex];
-                
-            this.spawnDataUpdate(spawnData,spawnPos,dt,true,false);             
+
+            this.spawnDataUpdate(spawnData, spawnPos, dt, true, false);
         }
-             
+
     };
 
 
-    spawnDataUpdate(spawnData,spawnPos,dt,masillas,totem) {
+    spawnDataUpdate(spawnData, spawnPos, dt, masillas, totem) {
 
         //actualizar el contador de tiempo
         spawnData.timer += dt;
-    
-        //si toca spawnear y quedan enemigos en este spawn point
-        if(spawnData.timer >= spawnData.frecuency && (masillas ||spawnData.size > 0)) {
-           
-           
-            //si es una masilla hay que cambiar el indice del spawn para el proximo
-           if(masillas){
-               spawnData.spawnIndex = (spawnData.spawnIndex + 1 ) % this.spawnPositions.length;
-               
-               //posicion en la que vamos a spawnear
-               spawnPos = this.spawnPositions[spawnData.spawnIndex];
-           }
-    
-           let configIndex = 0;
 
-           if(totem){
+        //si toca spawnear y quedan enemigos en este spawn point
+        if (spawnData.timer >= spawnData.frecuency && (masillas || spawnData.size > 0)) {
+
+
+            //si es una masilla hay que cambiar el indice del spawn para el proximo
+            if (masillas) {
+                spawnData.spawnIndex = (spawnData.spawnIndex + 1) % this.spawnPositions.length;
+
+                //posicion en la que vamos a spawnear
+                spawnPos = this.spawnPositions[spawnData.spawnIndex];
+            }
+
+            let configIndex = 0;
+
+            if (totem) {
                 //esto tiene que estar ligado al data
                 configIndex = 3;
-           }
+            }
 
 
 
             //spawnear segun el tipo, solo cambia la pool y el config
-            if(spawnData.type == "melee"){
-                this.meleeEnemiesPool.spawn(spawnPos.x,spawnPos.y,spawnData.animKey,this.data.EnemyConfigs[configIndex]);
+            if (spawnData.type == "melee") {
+                this.meleeEnemiesPool.spawn(spawnPos.x, spawnPos.y, spawnData.animKey, this.data.EnemyConfigs[configIndex]);
             }
-            else if(spawnData.type == "range"){
-                this.rangeEnemiesPool.spawn(spawnPos.x,spawnPos.y,spawnData.animKey,this.data.RangeConfigs[configIndex]);
+            else if (spawnData.type == "range") {
+                this.rangeEnemiesPool.spawn(spawnPos.x, spawnPos.y, spawnData.animKey, this.data.RangeConfigs[configIndex]);
             }
-            
+
 
 
 
             //si no es masilla, reducimos el size
-            if(!masillas){
-               spawnData.size--;
+            if (!masillas) {
+                spawnData.size--;
             }
             //resetear el timer
             spawnData.timer = 0;
-       }
+        }
     }
-        
-    
+
+
 
     //busca los spawnPoints mas cercanos
     sortSpawnPoints() {
-        
+
         //array de posiciones final, lo reseteamos
         this.spawnPositions = [];
 
         //posicion del jugador
-        let playerPos = new Phaser.Math.Vector2(this.player.x,this.player.y);
+        let playerPos = new Phaser.Math.Vector2(this.player.x, this.player.y);
 
         //contador para recorrer los spawnPoint del array en el que estan todos
         let spawnIndex = 0;
-           
+
         //recorremos todos los spawnPoints
-        while(spawnIndex < this.spawnPoints.length){
+        while (spawnIndex < this.spawnPoints.length) {
 
             //si cumple la condicion y no estaba antes, añadirlo
-            let point = new Phaser.Math.Vector2(this.spawnPoints[spawnIndex].x,this.spawnPoints[spawnIndex].y);
+            let point = new Phaser.Math.Vector2(this.spawnPoints[spawnIndex].x, this.spawnPoints[spawnIndex].y);
             let distance = playerPos.distance(point);
 
             //si está en el rango
-            if(distance >= this.minSpawnRange && distance <= this.maxSpawnRange){
+            if (distance >= this.minSpawnRange && distance <= this.maxSpawnRange) {
 
                 //si la lista no está llena añadirlo
-                if(this.spawnPositions.length < this.waveJson.NewWaves[this.currentWave].spawnsData.length){                  
-                    this.spawnPositions.push(point);       
+                if (this.spawnPositions.length < this.waveJson.NewWaves[this.currentWave].spawnsData.length) {
+                    this.spawnPositions.push(point);
                 }
-                else{
+                else {
                     /**Si la lista está llena, buscar el punto mas lejano del player, comparar si el que estamos buscando es mas cercano
                      * que ese, si lo es, lo intercambiamos
                      */
@@ -551,16 +559,16 @@ export default class MainScene extends Phaser.Scene {
                     let indexMax = 0;
 
                     //buscar el mas lejano
-                    while(k < this.spawnPositions.length){
-                             
-                        if(playerPos.distance(this.spawnPositions[indexMax]) < playerPos.distance(this.spawnPositions[k])){
+                    while (k < this.spawnPositions.length) {
+
+                        if (playerPos.distance(this.spawnPositions[indexMax]) < playerPos.distance(this.spawnPositions[k])) {
                             indexMax = k;
                         }
                         k++;
                     }
 
                     //si es mas cercano que el mas lejano,intercambiarlo
-                    if(distance < playerPos.distance(this.spawnPositions[indexMax])){
+                    if (distance < playerPos.distance(this.spawnPositions[indexMax])) {
                         this.spawnPositions[indexMax] = point;
                     }
                 }
@@ -568,7 +576,7 @@ export default class MainScene extends Phaser.Scene {
             }
 
             spawnIndex++;
-        }   
+        }
 
     }
 
@@ -576,19 +584,19 @@ export default class MainScene extends Phaser.Scene {
      * método que detiene el tiempo al llegar el eureka
      * @param {boolean} value 
      */
-    isTimeToStop(value){
-        this.stopEnemy = value ;
-        
+    isTimeToStop(value) {
+        this.stopEnemy = value;
+
     }
 
-    activePauseMenu(){
+    activePauseMenu() {
         this.scene.sleep('UIScene');
         this.scene.launch('Pause');
         this.scene.setActive(false);
         this.music.pause();
     }
 
-    activeDicotomyMenu(){
+    activeDicotomyMenu() {
         this.scene.sleep('UIScene');
         this.scene.launch('Menu');
 
@@ -601,7 +609,7 @@ export default class MainScene extends Phaser.Scene {
         this.music.pause();
     }
 
-    playerDeath(){
+    playerDeath() {
 
     }
 }
