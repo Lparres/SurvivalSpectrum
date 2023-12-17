@@ -68,6 +68,7 @@ export default class BootScene extends Phaser.Scene{
         let srcJuego = 'srcJuego';
 
         this.load.image('kirby', srcJuego + '/img/kirby.png');
+        this.load.image('chest', srcJuego + '/img/Chest.png');
         this.load.image('bulletPlayer', srcJuego + '/img/bulletPlayer.png');
         this.load.image('bulletEnemy', srcJuego + '/img/bulletEnemy.png');
         this.load.image('polvos', srcJuego + '/img/dust.png');

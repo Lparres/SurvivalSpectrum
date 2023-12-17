@@ -22,6 +22,6 @@ export default class Dust extends InteractuableObjects{
       //metodo virtual
       setUp(objectConfig){
           this.amount = objectConfig.amount;
-          this.setDepth(10);
+          this.setDepth(9);
       }
 }

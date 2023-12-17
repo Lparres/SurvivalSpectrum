@@ -213,7 +213,7 @@ export default class MainScene extends Phaser.Scene {
         let totemArr = [];
 
         for (let i = 0; i < 20; i++) {
-            let aux = new Totem(this, 0, 0, 'kirby', this.totemPool, () => {
+            let aux = new Totem(this, 0, 0, 'chest', this.totemPool, () => {
                 this.activeDicotomyMenu();
             });
             totemArr.push(aux);
