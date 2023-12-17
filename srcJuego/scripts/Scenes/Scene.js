@@ -98,6 +98,13 @@ export default class MainScene extends Phaser.Scene {
 
         this.pause = this.input.keyboard.addKey('P');
         this.esc = this.input.keyboard.addKey('ESC');
+        this.cum = this.input.keyboard.addKey('Q');
+
+
+        this.cum.on('down', event => {
+            this.activeDicotomyMenu();
+
+        });
 
         this.pause.on('down', event => {
             this.activePauseMenu();

@@ -222,6 +222,7 @@ El número de **cartas** que a aprecen y el numero de cartas que se pueden selec
 
 * **Sector3**: *Estadísticas*. 
 A la izquierda se muestra el estado de las **estadisticas** del jugador. Estas cambiaran de forma dinamica al elegir **cartas** o al desbalancear la dicotomia **I/E**.
+
 ![Alt text](image-3.png)
 ### Menu in game
 ![Imagen de toda la UI cargada](image-4.png)

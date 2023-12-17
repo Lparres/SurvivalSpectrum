@@ -42,6 +42,7 @@ export default class BootScene extends Phaser.Scene{
 
         //imagenes de la UI
         this.load.atlas('ui', 'srcJuego/ui/AtlasTexturas.png', 'srcJuego/ui/AtlasUI.json');
+        this.load.atlas('stats','srcJuego/ui/StatsInGame.png','srcJuego/scripts/JSON/ATLASStatsIcons.json');
         this.load.image('heart', 'srcJuego/ui/Corazon.png');
         this.load.image('furiaEureka', 'srcJuego/ui/FuriaEureka2.png');
         this.load.image('estadisticas', 'srcJuego/ui/estadisticas.png');

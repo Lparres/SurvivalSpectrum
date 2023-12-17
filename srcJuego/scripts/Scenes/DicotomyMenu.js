@@ -243,7 +243,7 @@ class CardsZone extends Phaser.GameObjects.Container{
         //marco de la zona
         this.add(scene.add.nineslice(0, 0, 'ui', 'DicotomyMenuBG', this.w, this.h , 20, 20, 20, 20));
 
-        this.card1= new Card(this.scene,-this.w/2 +50, -this.h/2 +40,'kirby',3);
+        this.card1= new Card(this.scene,-this.w/2 +50, -this.h/2 +40,'Atack',3);
         //this.card1.setOrigin(0,0)
         this.add(this.card1);
 
@@ -251,7 +251,7 @@ class CardsZone extends Phaser.GameObjects.Container{
         * se puede aprovechar para indicar la carta que toca
         */
         for(var i=1 ; i< cardsNum; i++){
-            this.card2= new Card(this.scene,this.card1.x + (i%4) * (this.cardW + this.spacingHor),this.card1.y + Math.floor(i/4)*150,'kirby',i);
+            this.card2= new Card(this.scene,this.card1.x + (i%4) * (this.cardW + this.spacingHor),this.card1.y + Math.floor(i/4)*150,'Atack',i);
             //this.card2.setOrigin(0,0)
             this.add(this.card2);
         }

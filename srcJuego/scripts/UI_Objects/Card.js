@@ -12,7 +12,7 @@ export default class Card extends Phaser.GameObjects.Container{
 
         super(scene,x,y)
 
-        this.cardGB = new Button(scene,0,0,stat,1,()=>{
+        this.cardGB = new Button(scene,0,0,'kirby',1,()=>{
             if(scene.cardsToPick > 0){
                 this.setVisible(false)
                 scene.cardsToPick--;
@@ -22,7 +22,7 @@ export default class Card extends Phaser.GameObjects.Container{
         this.cardGB.setDisplaySize(100,140);
         this.add(this.cardGB);
 
-        this.add(scene.add.nineslice(50, 60, 'ui', 'DicotomyMenuBG', 50,60, 5, 5, 5, 5));
+        this.add(scene.add.nineslice(50, 60, 'stats', stat, 70,70, 5, 5, 5, 5));
 
         var textValue =scene.add.text(50, 100, stat+ " "+ amount, 
         { font: '25px JosefinMedium', fill: '#424242' }).setOrigin(0.5, 0.5);
