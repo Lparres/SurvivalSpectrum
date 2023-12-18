@@ -42,8 +42,8 @@ export default class Menu extends Phaser.Scene {
         
         //centro.add(this.add.image(-5,-80,'polvos').setScale(0.08).setOrigin(1,0.5));
         
-        this.dustCost = this.add.text(5, -80,'xxxx', 
-        { font: '40px JosefinMedium', fill: 'white', align: 'right', stroke: 'black', strokeThickness: 5}).setOrigin(0.5,0.5)
+        this.dustCost = this.add.text(5, -95,'xxxx', 
+        { font: '35px JosefinMedium', fill: 'white', align: 'right', stroke: 'black', strokeThickness: 5}).setOrigin(0.5,0.5)
         
         centro.add(this.dustCost);
         
@@ -54,16 +54,16 @@ export default class Menu extends Phaser.Scene {
         { font: '50px JosefinMedium', fill: 'white', align: 'right', stroke: 'black', strokeThickness: 5}).setOrigin(1,0.5);
         this.dustIMG = this.add.image(1860 , 1000, 'polvos').setScale(0.1).setOrigin(1,0.5);
         
-        this.container1 = new DicContainer(this, -200, -320, 1);
+        this.container1 = new DicContainer(this, -220, -320, 1);
         centro.add(this.container1);
-        this.container2 = new DicContainer(this, 200, -320, 2);
+        this.container2 = new DicContainer(this, 220, -320, 2);
         centro.add(this.container2);
-        this.container3 = new DicContainer(this, -200, -180, 3);
+        this.container3 = new DicContainer(this, -220, -180, 3);
         centro.add(this.container3);
-        this.container4 = new DicContainer(this, 200, -180, 4);
+        this.container4 = new DicContainer(this, 220, -180, 4);
         centro.add(this.container4);
         
-        this.cards = new CardsZone(this,0,160,3);
+        this.cards = new CardsZone(this,0,160,8);
         centro.add(this.cards);
         
         //contenedor del bloque de estadisticas
@@ -74,7 +74,7 @@ export default class Menu extends Phaser.Scene {
     
     
     update(t, dt) {
-        this.dustCost.setText("Change Price: " +this.dicPrice);
+        this.dustCost.setText("Adjustment cost: " +this.dicPrice);
         this.dust.setText(this.player.dust);
     }
 }
@@ -241,7 +241,7 @@ class CardsZone extends Phaser.GameObjects.Container{
     constructor(scene,x,y, cardsNum){
         super(scene,x,y);
 
-        this.w = 800;
+        this.w = 850;
         this.h = 400;
 
         this.cardW = 100;
@@ -252,6 +252,8 @@ class CardsZone extends Phaser.GameObjects.Container{
         //marco de la zona
         this.add(scene.add.nineslice(0, 0, 'ui', 'CardsMenu', this.w, this.h , 20, 20, 20, 20));
 
+        this.cartasRestantes = scene.add.text(this.w/2 - 20, this.h/2 - 15, "xxxx", { font: '30px JosefinMedium', fill: 'black' }).setOrigin(1, 1,);
+        this.add(this.cartasRestantes);
         this.card1= new Card(this.scene,-this.w/2 +50, -this.h/2 +40,'Atack',3);
         //this.card1.setOrigin(0,0)
         this.add(this.card1);

@@ -12,7 +12,7 @@ export default class Card extends Phaser.GameObjects.Container{
 
         super(scene,x,y)
 
-        this.cardGB = new Button(scene,0,0,'kirby',1,()=>{
+        this.cardGB = new Button(scene,0,0,'cardBG',1,()=>{
             if(scene.cardsToPick > 0){
                 this.setVisible(false)
                 scene.cardsToPick--;
