@@ -8,7 +8,7 @@ export default class Dicotomías {
       * 
       * @param {*} perDic1 Valor del emocional
       * @param {*} perDic2 Valor del extrovertido
-      * @param {*} perDic3 
+      * @param {*} perDic3 Valor del sensitivo
       * @param {*} perDic4 
       */
      constructor(player, perDic1, perDic2, perDic3, perDic4, UI) {
@@ -18,9 +18,9 @@ export default class Dicotomías {
           this.perDic3 = perDic3;
           this.perDic4 = perDic4;
           this.UI = UI;
+          this.levelScene = this.UI.scene.get('level');
 
-
-          this.rageBaseAmount = 250;
+          this.rageBaseAmount = this.levelScene.data.PlayerConfig.life;
           this.eurekaBaseAmount = 500;
      }
 
@@ -73,6 +73,7 @@ export default class Dicotomías {
                     this.player.damage = this.IntrovertValue(this.player.baseDamage);
                     break;
                case 3:
+                    //dicotomia de  mostar mas o menos  cosas  en la  UI
                     this.UI.GRP_BarraVida.setVisible(this.perDic3 > 10);
                     this.UI.GRP_FuriaEureka.setVisible(this.perDic3 > 20);
                     this.UI.GRP_Estadisticas.setVisible(this.perDic3 > 30);
@@ -97,10 +98,12 @@ export default class Dicotomías {
           }
      }
 
+     //devuelve el porcentaje  de  rabia
      EmotionalValue() {
           return this.perDic1;
      }
 
+     //devuelve el  porcentaje  de eureka
      RationalValue() {
           return (100 - this.perDic1);
      }
