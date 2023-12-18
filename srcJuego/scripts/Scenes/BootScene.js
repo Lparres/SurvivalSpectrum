@@ -63,6 +63,8 @@ export default class BootScene extends Phaser.Scene{
         this.load.image('resume','srcJuego/ui/ResumeButton.png')
         this.load.image('restart','srcJuego/ui/RestartButton.png')
         this.load.image('quit','srcJuego/ui/QuitButton.png')
+        this.load.image('freezeEffect', 'srcJuego/ui/FreezeEffect.png')
+        this.load.image('bloodEffect', 'srcJuego/ui/BloodEffect2.png')
         this.load.spritesheet('fullscreenMenu', 'srcJuego/ui/EnableDisableFullScreenButton.png', { frameWidth: 330, frameHeight: 118 });
         this.load.spritesheet('fullscreen', 'srcJuego/ui/fullscreen.png', { frameWidth: 362, frameHeight: 84 });
 
