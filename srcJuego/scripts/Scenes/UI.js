@@ -142,6 +142,9 @@ export default class UI extends Phaser.Scene
         this.GRP_Dicotomias.add(this.add.rectangle(1400, 950, 5,25, 0xff0000).setOrigin(0.5, 0.5));
         this.GRP_Dicotomias.add(this.add.image(1400, 950, 'marcoDialFrame').setOrigin(0.5, 0.5));
         
+        // Imagenes efectos rage/eureka
+        this.rageEffect = this.add.image(0, 0, 'bloodEffect').setOrigin(0,0).setDisplaySize(1920, 1080).setAlpha(0.3);
+        this.eurekaEffect = this.add.image(0, 0, 'freezeEffect').setOrigin(0,0).setDisplaySize(1920, 1080).setAlpha(0.6);
 
         this.updateWaveData();
 
@@ -158,14 +161,17 @@ export default class UI extends Phaser.Scene
             this.healthBar.width = ourGame.player.health/ourGame.player.maxLife * 500;
 
             if(ourGame.player.rageMode){
+                this.rageEffect.setVisible(true)
                 this.furiaBar.width = (ourGame.player.dicTotalTime - ourGame.player.dicTime)/ourGame.player.dicTotalTime * 215 + 50
             }else{
+                this.rageEffect.setVisible(false)
                 this.furiaBar.width = ourGame.player.rage/ourGame.player.rageMax * 215 + 50
             }
             if(ourGame.player.eurekaMode){
-                
+                this.eurekaEffect.setVisible(true)
                 this.eurekaBar.width = (ourGame.player.dicTotalTime - ourGame.player.dicTime)/ourGame.player.dicTotalTime * 215 + 50
             }else{
+                this.eurekaEffect.setVisible(false)
                 this.eurekaBar.width = ourGame.player._eureka/ourGame.player.eurekaMax * 215 + 50
             }
             
