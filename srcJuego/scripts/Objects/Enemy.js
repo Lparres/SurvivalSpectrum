@@ -144,8 +144,19 @@ export default class Enemy extends Mob
         if(this.totem){
             //this.tint = 0xed3419;, buscar un color/ otra forma de hacerlo
         }
+
+        //para asegurarnos que la opacidad esta bien
+        this.alpha = 1;
     }
 
+    ReciveDamage(dmg){
+        super.ReciveDamage(dmg);
 
+        if(this.health < 0){   
+            this.scene.killedEnemies++;
+            this.scene.currentEnemies--;
+        }
+     
+    }
 
 }

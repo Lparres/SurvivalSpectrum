@@ -93,5 +93,9 @@ export default class RangeEnemy extends Enemy
         //para la animacion de movimiento
         this.key[0] = '';
         this.key[1] = animKey;
+
+
+         //para asegurarnos que la opacidad esta bien
+         this.alpha = 1;
     }
 }

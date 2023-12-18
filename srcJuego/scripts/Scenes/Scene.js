@@ -127,12 +127,14 @@ export default class MainScene extends Phaser.Scene {
         this.hitSound = this.sound.add('golpe', { volume: 0.5 });
 
 
+        this.killedEnemies = 0;
+        this.currentEnemies = 0;
+
         this.wavesProbe = new Waves(this,"");
     }
 
     //game tick
     update(t, dt) {
-
         this.playerMove();
 
         //la cámara sigue al jugador

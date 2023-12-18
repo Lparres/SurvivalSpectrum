@@ -151,6 +151,11 @@ export default class Waves extends Phaser.GameObjects.GameObject{
             }
             //resetear el timer
             spawnData.timer = 0;
+
+
+            //si hemos spawneado, añadimos un enemigo al contador
+
+            this.scene.currentEnemies++;
         }
     }
 
