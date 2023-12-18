@@ -20,13 +20,13 @@ export default class Menu extends Phaser.Scene {
         
         this.cardsToPick = 3;
         
-        var centro = this.add.container(this.sys.game.canvas.width / 2, this.sys.game.canvas.height / 2);
-        const fondo = this.add.nineslice(0, 0, 'ui', 'DicotomyMenuBG', 1000, 1000, 13, 13, 13, 13);
+        var centro = this.add.container(this.sys.game.canvas.width / 2, this.sys.game.canvas.height / 2 );
+        const fondo = this.add.nineslice(0, -30 , 'ui', 'DicotomyMenuBG', 1000, 900, 13, 13, 13, 13);
         //this.add.rectangle(0, 0, 1000, 1000, 0x6666ff);
-        const titulo = this.add.text(0, -450, 'Build your Personality', { font: '40px JosefinBold', fill: 'black', aling: 'center' }).setOrigin(0.5, 0);
-        
+        const titulo = this.add.text(0, -478, 'Build your Personality', { font: '40px JosefinBold', fill: 'white', aling: 'center' }).setOrigin(0.5, 0);
+        const cabecera = this.add.image(0, -450, 'cabeceraDicos').setOrigin(0.5, 0.5);
         //boton para salir del menú
-        const unpause = new Button(this, 0, 420, 'confirm', 1, () => {
+        const unpause = new Button(this, 0, 415, 'confirm', 1, () => {
             let UI = this.scene.get('UIScene');
             let MainScene = this.scene.get('level');
             this.scene.wake('UIScene');
@@ -36,10 +36,9 @@ export default class Menu extends Phaser.Scene {
         })
         
         centro.add(fondo);
-        centro.add(unpause);
+        centro.add(unpause);    
+        centro.add(cabecera);
         centro.add(titulo);
-        
-        
         
         //centro.add(this.add.image(-5,-80,'polvos').setScale(0.08).setOrigin(1,0.5));
         
@@ -64,7 +63,7 @@ export default class Menu extends Phaser.Scene {
         this.container4 = new DicContainer(this, 200, -180, 4);
         centro.add(this.container4);
         
-        this.cards = new CardsZone(this,0,160,8);
+        this.cards = new CardsZone(this,0,160,3);
         centro.add(this.cards);
         
         //contenedor del bloque de estadisticas
