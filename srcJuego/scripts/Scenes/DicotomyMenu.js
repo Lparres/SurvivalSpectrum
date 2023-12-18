@@ -2,29 +2,29 @@ import Button from "../UI_Objects/Button.js";
 import Card from "../UI_Objects/Card.js"
 
 export default class Menu extends Phaser.Scene {
-
-
+    
+    
     constructor() {
         super({ key: "Menu" });
-
+        
     }
     init() {
-
+        
     }
     preload() {
-
+        
     }
     create() {
         this.dicotomyManager = this.scene.get('level').dicotomyManager;
         this.player = this.scene.get('level').player;
-
+        
         this.cardsToPick = 3;
-
+        
         var centro = this.add.container(this.sys.game.canvas.width / 2, this.sys.game.canvas.height / 2);
         const fondo = this.add.nineslice(0, 0, 'ui', 'DicotomyMenuBG', 1000, 1000, 13, 13, 13, 13);
-            //this.add.rectangle(0, 0, 1000, 1000, 0x6666ff);
-        const titulo = this.add.text(0, -450, 'Menu dicotomias', { font: '40px JosefinBold', fill: 'black', aling: 'center' }).setOrigin(0.5, 0);
-
+        //this.add.rectangle(0, 0, 1000, 1000, 0x6666ff);
+        const titulo = this.add.text(0, -450, 'Build your Personality', { font: '40px JosefinBold', fill: 'black', aling: 'center' }).setOrigin(0.5, 0);
+        
         //boton para salir del menú
         const unpause = new Button(this, 0, 400, 'heart', 0.15, () => {
             let UI = this.scene.get('UIScene');
@@ -34,20 +34,27 @@ export default class Menu extends Phaser.Scene {
             MainScene.scene.setActive(true);
             MainScene.music.resume();
         })
-
+        
         centro.add(fondo);
         centro.add(unpause);
         centro.add(titulo);
-
-
-
-        centro.add(this.add.image(0,-80,'polvos').setScale(0.08).setOrigin(0.5,0.5));
-
-
+        
+        
+        
+        //centro.add(this.add.image(-5,-80,'polvos').setScale(0.08).setOrigin(1,0.5));
+        
+        this.dustCost = this.add.text(5, -80,'xxxx', 
+        { font: '40px JosefinMedium', fill: 'white', align: 'right', stroke: 'black', strokeThickness: 5}).setOrigin(0.5,0.5)
+        
+        centro.add(this.dustCost);
+        
+        
+        this.dustIMG = this.add.image(1860 , 1000, 'polvos').setScale(0.1).setOrigin(1,0.5);
+        
         this.dust = this.add.text(1730, 1000,'xxxx', 
         { font: '50px JosefinMedium', fill: 'white', align: 'right', stroke: 'black', strokeThickness: 5}).setOrigin(1,0.5);
         this.dustIMG = this.add.image(1860 , 1000, 'polvos').setScale(0.1).setOrigin(1,0.5);
-
+        
         this.container1 = new DicContainer(this, -200, -320, 1);
         centro.add(this.container1);
         this.container2 = new DicContainer(this, 200, -320, 2);
@@ -56,28 +63,28 @@ export default class Menu extends Phaser.Scene {
         centro.add(this.container3);
         this.container4 = new DicContainer(this, 200, -180, 4);
         centro.add(this.container4);
-
-        this.cards = new CardsZone(this,0,150,8);
+        
+        this.cards = new CardsZone(this,0,160,8);
         centro.add(this.cards);
-
+        
         //contenedor del bloque de estadisticas
         this.latcont = new LatContainer(this, 400, this.sys.game.canvas.height / 2).setScale(1.2);
-
+        
+        this.dicPrice = 20;
     }
-
+    
     
     update(t, dt) {
-
+        this.dustCost.setText("Change Price: " +this.dicPrice);
         this.dust.setText(this.player.dust);
     }
 }
 
 /**
  * Clase para organizar los diales de dicotomias
- */
+*/
 class DicContainer extends Phaser.GameObjects.Container {
     constructor(scene, x, y, dic) {
-        const dicPrice = 20;
         super(scene, x, y);
         this.dicNum = dic;
         this.dicotomyManager =scene.scene.get('level').dicotomyManager;
@@ -106,21 +113,23 @@ class DicContainer extends Phaser.GameObjects.Container {
 
         //boton de bajar dicotomia
         this.add(new Button(scene, -135, 0, 'decrease', 1, () => {
-            if (scene.player.dust > 0 && this.dicPer > 0) {
+            if (scene.player.dust > scene.dicPrice && this.dicPer > 0) {
                 this.SubDicotomy(this.dicNum);
                 scene.scene.get('level').dicotomyManager.AplieDicotomy(this.dicNum);
                 this.dicValText.setText(this.dicotomyManager.dicName(this.dicNum) + ' ' + this.dicPer);
-                scene.player.dust -= dicPrice;
+                scene.player.dust -= scene.dicPrice;
+                scene.dicPrice += 5;
             }
         }))
 
         //boton de subir dicotomia
         this.add(new Button(scene, 135, 0, 'increase', 1, () => {
-            if (scene.player.dust > 0 && this.dicPer < 100) {
+            if (scene.player.dust > scene.dicPrice && this.dicPer < 100) {
                 this.AddDicotomy(this.dicNum);
                 scene.scene.get('level').dicotomyManager.AplieDicotomy(this.dicNum);
                 this.dicValText.setText(this.dicotomyManager.dicName(this.dicNum) + ' ' + this.dicPer);
-                scene.player.dust -= dicPrice;//pasar a un parametro que pueda aumentar segun algun criterio
+                scene.player.dust -= scene.dicPrice;//pasar a un parametro que pueda aumentar segun algun criterio
+                scene.dicPrice += 5;
             }
         }))
 
