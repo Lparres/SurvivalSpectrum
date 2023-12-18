@@ -242,11 +242,11 @@ export default class UI extends Phaser.Scene
         this.waveN.setText(this.mainScene.currentWave+1);
         
         //actualizar el timer de la proxima oleada
-        this.nextWave.setText(Math.floor(this.mainScene.waveJson.NewWaves[this.mainScene.currentWave +1].waveStartTime / 60).toLocaleString('en-US', {
+        this.nextWave.setText(Math.floor(this.mainScene.waveJson.NewWaves[this.mainScene.wavesProbe.currentWave +1].waveStartTime / 60).toLocaleString('en-US', {
             minimumIntegerDigits: 2,
             useGrouping: false,
             maximumFractionDigits:0
-        })+ ':' +(this.mainScene.waveJson.NewWaves[this.mainScene.currentWave +1].waveStartTime % 60).toLocaleString('en-US', {
+        })+ ':' +(this.mainScene.waveJson.NewWaves[this.mainScene.wavesProbe.currentWave +1].waveStartTime % 60).toLocaleString('en-US', {
             minimumIntegerDigits: 2,
             useGrouping: false,
             maximumFractionDigits:0 
@@ -255,8 +255,8 @@ export default class UI extends Phaser.Scene
 
         //calculo de los enemigos de esta oleada
         let nEnemies = 0;
-        for(let i = 0; i< this.mainScene.waveJson.NewWaves[this.mainScene.currentWave].spawnsData.length;i++){
-            nEnemies += this.mainScene.waveJson.NewWaves[this.mainScene.currentWave].spawnsData[i].size;
+        for(let i = 0; i< this.mainScene.waveJson.NewWaves[this.mainScene.wavesProbe.currentWave].spawnsData.length;i++){
+            nEnemies += this.mainScene.waveJson.NewWaves[this.mainScene.wavesProbe.currentWave].spawnsData[i].size;
         }
 
         this.enemiesN.setText(nEnemies);

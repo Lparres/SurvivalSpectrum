@@ -41,11 +41,12 @@ export default class Menu extends Phaser.Scene {
 
 
 
-        centro.add(this.add.image(-450,-450,'polvos').setScale(0.08).setOrigin(0,0));
+        centro.add(this.add.image(0,-80,'polvos').setScale(0.08).setOrigin(0.5,0.5));
 
-        this.polvosMagicos = this.add.text(-280, -450, this.player.dust, { font: '40px JosefinBold', fill: 'black', aling: 'left' }).setOrigin(1, 0);
-        centro.add(this.polvosMagicos);
 
+        this.dust = this.add.text(1730, 1000,'xxxx', 
+        { font: '50px JosefinMedium', fill: 'white', align: 'right', stroke: 'black', strokeThickness: 5}).setOrigin(1,0.5);
+        this.dustIMG = this.add.image(1860 , 1000, 'polvos').setScale(0.1).setOrigin(1,0.5);
 
         this.container1 = new DicContainer(this, -200, -320, 1);
         centro.add(this.container1);
@@ -67,7 +68,7 @@ export default class Menu extends Phaser.Scene {
     
     update(t, dt) {
 
-        this.polvosMagicos.setText(this.player.dust);
+        this.dust.setText(this.player.dust);
     }
 }
 
