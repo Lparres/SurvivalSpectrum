@@ -1,36 +1,36 @@
 {
     "frames": {
-        "Health": {
+        "life": {
             "frame": {
                 "x": 0,"y": 0,
                 "w": 73,"h": 66
             }
         },
-        "HealthReg": {
+        "lifeRegen": {
             "frame": {
                 "x": 0,"y": 66,
                 "w": 73,"h": 66
             }
         },
-        "Atack": {
+        "damage": {
             "frame": {
                 "x": 0,"y": 132,
                 "w": 73,"h": 66
             }
         },
-        "AtackSpd": {
+        "fireRate": {
             "frame": {
                 "x": 0,"y": 198,
                 "w": 73,"h": 66
             }
         },
-        "MeleeArmor": {
+        "meleeArmor": {
             "frame": {
                 "x": 0,"y": 264,
                 "w": 73,"h": 66
             }
         },
-        "RangeArmor": {
+        "rangeArmor": {
             "frame": {
                 "x": 0,"y": 330,
                 "w": 73,"h": 66
@@ -42,7 +42,7 @@
                 "w": 73,"h": 66
             }
         },
-        "Speed": {
+        "speed": {
             "frame": {
                 "x": 0,"y": 462,
                 "w": 73,"h": 66

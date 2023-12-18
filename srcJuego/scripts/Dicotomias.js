@@ -87,14 +87,14 @@ export default class Dicotomías {
 
                case 4:
                     //this.getNCards();
-                    this.player.scene.cardList.life += this.CardValue();
-                    this.player.scene.cardList.lifeRegen += this.CardValue();
-                    this.player.scene.cardList.damage += this.CardValue();
-                    this.player.scene.cardList.fireRate += this.CardValue();
-                    this.player.scene.cardList.meleeArmor += this.CardValue();
-                    this.player.scene.cardList.rangeArmor += this.CardValue();
-                    this.player.scene.cardList.speed += this.CardValue();
-                    console.log(this.player.scene.cardList);
+                    /*this.player.scene.cardMap.life += this.CardValue();
+                    this.player.scene.cardMap.lifeRegen += this.CardValue();
+                    this.player.scene.cardMap.damage += this.CardValue();
+                    this.player.scene.cardMap.fireRate += this.CardValue();
+                    this.player.scene.cardMap.meleeArmor += this.CardValue();
+                    this.player.scene.cardMap.rangeArmor += this.CardValue();
+                    this.player.scene.cardMap.speed += this.CardValue();
+                    console.log(this.player.scene.cardMap);*/
           }
      }
 
@@ -128,10 +128,15 @@ export default class Dicotomías {
       * @param {object} deck 
       */
      deckFill(deck) {
-          while (deck.length > 0)
-               deck.pop();
-
-          for (var i = 0; i < this.getNCards(); i++)
-               deck.push(this.player.scene.statKeyList[Phaser.Math.Between(0, 6)])
+          //vacía el deck
+          while (deck.length > 0){
+               deck.pop();//popea mientras la longitud de la deck no sea 0
+          }
+               
+          
+          // relllena el mazo con n cartas aleatorias cada vez que entras en el dicotomy menu
+          for (var i = 0; i < this.getNCards(); i++){
+               deck.push(this.player.scene.statKeyList[Phaser.Math.Between(0, 6)]);
+          }
      }
 }

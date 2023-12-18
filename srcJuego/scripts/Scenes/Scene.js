@@ -426,9 +426,9 @@ export default class MainScene extends Phaser.Scene {
 
         this.scene.setActive(false);
 
-        // necesitamos rellenar la deck para que aparexcan cartas nuevas al cargar el menú
-        //this.dicotomyManager.deckFill(this.deck);
-        console.log(this.deck);
+        //necesitamos rellenar la deck para que aparexcan cartas nuevas al cargar el menú
+        this.dicotomyManager.deckFill(this.deck); //rellena la deck con ncards con la dicotomía
+        console.log(this.deck); // escribe la deck
         //this.player.applyCard(this.deck[0]);
         this.music.pause();
     }

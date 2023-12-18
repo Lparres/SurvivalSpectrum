@@ -15,8 +15,10 @@ export default class Menu extends Phaser.Scene {
         
     }
     create() {
-        this.dicotomyManager = this.scene.get('level').dicotomyManager;
-        this.player = this.scene.get('level').player;
+        this.levelScene = this.scene.get('level');
+        this.dicotomyManager = this.levelScene.dicotomyManager;
+        this.player = this.levelScene.player;
+        this.deck = this.levelScene.deck;
         
         this.cardsToPick = 3;
         
@@ -63,7 +65,7 @@ export default class Menu extends Phaser.Scene {
         this.container4 = new DicContainer(this, 220, -180, 4);
         centro.add(this.container4);
         
-        this.cards = new CardsZone(this,0,160,8);
+        this.cards = new CardsZone(this,0,160,this.deck);
         centro.add(this.cards);
         
         //contenedor del bloque de estadisticas
@@ -233,38 +235,50 @@ class LatContainer extends Phaser.GameObjects.Container {
         this.speedInfo.setText(Phaser.Math.RoundTo(this.scene.player.speed));
     }
 }
+
 /**
  * Clase para las zona de las cartas (en progreso)
  * Genera tantas cartas en forma de matriz como se le diga a la constructora
+ * el deck es un objeto con el array de cartas
  */
 class CardsZone extends Phaser.GameObjects.Container{
-    constructor(scene,x,y, cardsNum){
-        super(scene,x,y);
-
+    constructor(scene,x,y, deck){
+        //llamada a la constructora de super
+        super(scene,x,y); 
+        this.deck = deck;
+        //dimensiones de la zona
         this.w = 850;
         this.h = 400;
 
+        //dimensiones de cada carta
         this.cardW = 100;
         this.cardH = 140;
 
+        //padding horizontal entre cartas
         this.spacingHor = 100;
 
         //marco de la zona
         this.add(scene.add.nineslice(0, 0, 'ui', 'CardsMenu', this.w, this.h , 20, 20, 20, 20));
 
-        this.cartasRestantes = scene.add.text(this.w/2 - 20, this.h/2 - 15, "xxxx", { font: '30px JosefinMedium', fill: 'black' }).setOrigin(1, 1,);
+        //texto de cartas restantes
+        this.cartasRestantes = scene.add.text(this.w/2 - 20, this.h/2 - 15, "cards left: " + this.scene.cardsToPick, { font: '30px JosefinMedium', fill: 'black' }).setOrigin(1, 1,);
         this.add(this.cartasRestantes);
-        this.card1= new Card(this.scene,-this.w/2 +50, -this.h/2 +40,'Atack',3);
+
+        //crea una carta
+        this.card1= new Card(this.scene,-this.w/2 +50, -this.h/2 +40,this.deck[0],this.scene.scene.get('level').cardMap[this.deck[0]]);
         //this.card1.setOrigin(0,0)
         this.add(this.card1);
 
         /*posicionamiento de cartas en forma de matriz respecto de la carta 1
         * se puede aprovechar para indicar la carta que toca
         */
-        for(var i=1 ; i< cardsNum; i++){
-            this.card2= new Card(this.scene,this.card1.x + (i%4) * (this.cardW + this.spacingHor),this.card1.y + Math.floor(i/4)*150,'Atack',i);
+        for(let i=1 ; i< this.deck.length; i++){
+            let x = this.card1.x + (i%4) * (this.cardW + this.spacingHor);
+            let y = this.card1.y + Math.floor(i/4)*150;
+            //creamos la carta desde la deck
+            let aux= new Card(this.scene, x ,y,this.deck[i],this.scene.scene.get('level').cardMap[this.deck[i]]);
             //this.card2.setOrigin(0,0)
-            this.add(this.card2);
+            this.add(aux);
         }
 
         this.scene.add.existing(this);
