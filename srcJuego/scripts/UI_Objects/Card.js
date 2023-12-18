@@ -24,7 +24,7 @@ export default class Card extends Phaser.GameObjects.Container{
 
         this.add(scene.add.nineslice(50, 60, 'stats', stat, 70,70, 5, 5, 5, 5));
 
-        var textValue =scene.add.text(50, 100, stat+ " "+ amount, 
+        var textValue =scene.add.text(50, 100, stat+ " +"+ amount, 
         { font: '25px JosefinMedium', fill: '#424242' }).setOrigin(0.5, 0.5);
         this.add(textValue);
         this.scene.add.existing(this);
