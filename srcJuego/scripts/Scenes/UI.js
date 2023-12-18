@@ -225,14 +225,46 @@ export default class UI extends Phaser.Scene
           })) ;
     }
     updateStats(){
-        this.lifeInfo.setText(this.player.maxLife);
-        this.lifeRegenInfo.setText(this.player.lifeReg);
-        this.damageInfo.setText(this.player.damage);
-        this.fireRateInfo.setText(this.player._atkCD / 1000);
-        this.meleeArmorInfo.setText(this.player._meleeArmor);
-        this.rangeArmorInfo.setText(this.player._rangeArmor);
-        this.rangeInfo.setText(this.player.range);
-        this.speedInfo.setText(this.player.speed);
+        this.lifeInfo.setText((this.player.maxLife).toLocaleString('en-US', {
+            minimumIntegerDigits: 1,
+            useGrouping: false,
+            maximumFractionDigits:2
+          }));
+        this.lifeRegenInfo.setText((this.player.lifeReg).toLocaleString('en-US', {
+            minimumIntegerDigits: 1,
+            useGrouping: false,
+            maximumFractionDigits:2
+          }));
+        this.damageInfo.setText((this.player.damage).toLocaleString('en-US', {
+            minimumIntegerDigits: 1,
+            useGrouping: false,
+            maximumFractionDigits:2
+          }));
+        this.fireRateInfo.setText((this.player._atkCD / 1000).toLocaleString('en-US', {
+            minimumIntegerDigits: 1,
+            useGrouping: false,
+            maximumFractionDigits:2 
+          }));
+        this.meleeArmorInfo.setText((this.player._meleeArmor).toLocaleString('en-US', {
+            minimumIntegerDigits: 1,
+            useGrouping: false,
+            maximumFractionDigits:2
+          }));
+        this.rangeArmorInfo.setText((this.player._rangeArmor).toLocaleString('en-US', {
+            minimumIntegerDigits: 1,
+            useGrouping: false,
+            maximumFractionDigits:2 
+          }));
+        this.rangeInfo.setText((this.player.range).toLocaleString('en-US', {
+            minimumIntegerDigits: 1,
+            useGrouping: false,
+            maximumFractionDigits:2
+          }));
+        this.speedInfo.setText((this.player.speed).toLocaleString('en-US', {
+            minimumIntegerDigits: 1,
+            useGrouping: false,
+            maximumFractionDigits:2
+          }));
     }
 
     //update de la info de oleadas, revisar pls

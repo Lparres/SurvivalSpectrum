@@ -15,7 +15,8 @@ export default class Card extends Phaser.GameObjects.Container{
         this.cardGB = new Button(scene,0,0,'cardBG',1,()=>{
             if(scene.cardsToPick > 0){
                 this.setVisible(false)
-                scene.cardsToPick--;
+                scene.updateCardsLeft();
+                this.scene.scene.get('level').player.applyCard(stat);
             }
         },false).setOrigin(0,0)
 

@@ -16,6 +16,8 @@ export default class Menu extends Phaser.Scene {
     }
     create() {
         this.levelScene = this.scene.get('level');
+
+        ///obtener variables del level
         this.dicotomyManager = this.levelScene.dicotomyManager;
         this.player = this.levelScene.player;
         this.deck = this.levelScene.deck;
@@ -23,10 +25,11 @@ export default class Menu extends Phaser.Scene {
         this.cardsToPick = 3;
         
         var centro = this.add.container(this.sys.game.canvas.width / 2, this.sys.game.canvas.height / 2 );
+
         const fondo = this.add.nineslice(0, -30 , 'ui', 'DicotomyMenuBG', 1000, 900, 13, 13, 13, 13);
-        //this.add.rectangle(0, 0, 1000, 1000, 0x6666ff);
         const titulo = this.add.text(0, -478, 'Build your Personality', { font: '40px JosefinBold', fill: 'white', aling: 'center' }).setOrigin(0.5, 0);
         const cabecera = this.add.image(0, -450, 'cabeceraDicos').setOrigin(0.5, 0.5);
+
         //boton para salir del menú
         const unpause = new Button(this, 0, 415, 'confirm', 1, () => {
             let UI = this.scene.get('UIScene');
@@ -37,16 +40,19 @@ export default class Menu extends Phaser.Scene {
             MainScene.music.resume();
         })
         
+        //añadir al contenedor central
         centro.add(fondo);
         centro.add(unpause);    
         centro.add(cabecera);
         centro.add(titulo);
         
-        //centro.add(this.add.image(-5,-80,'polvos').setScale(0.08).setOrigin(1,0.5));
+        centro.add(this.add.image(170,-90,'polvos').setScale(0.08).setOrigin(0,0.5));
         
+        //texto de coste de polvos
         this.dustCost = this.add.text(5, -95,'xxxx', 
         { font: '35px JosefinMedium', fill: 'white', align: 'right', stroke: 'black', strokeThickness: 5}).setOrigin(0.5,0.5)
         
+        //añadir texto al contenedor
         centro.add(this.dustCost);
         
         
@@ -56,6 +62,7 @@ export default class Menu extends Phaser.Scene {
         { font: '50px JosefinMedium', fill: 'white', align: 'right', stroke: 'black', strokeThickness: 5}).setOrigin(1,0.5);
         this.dustIMG = this.add.image(1860 , 1000, 'polvos').setScale(0.1).setOrigin(1,0.5);
         
+        //añadir las barras de las dicotomías
         this.container1 = new DicContainer(this, -220, -320, 1);
         centro.add(this.container1);
         this.container2 = new DicContainer(this, 220, -320, 2);
@@ -65,19 +72,23 @@ export default class Menu extends Phaser.Scene {
         this.container4 = new DicContainer(this, 220, -180, 4);
         centro.add(this.container4);
         
+        //añadir la zona de las cartas
         this.cards = new CardsZone(this,0,160,this.deck);
         centro.add(this.cards);
         
         //contenedor del bloque de estadisticas
         this.latcont = new LatContainer(this, 400, this.sys.game.canvas.height / 2).setScale(1.2);
-        
-        this.dicPrice = 20;
     }
     
     
     update(t, dt) {
-        this.dustCost.setText("Adjustment cost: " +this.dicPrice);
+        this.dustCost.setText("Adjustment cost: " +this.levelScene.dicPrice);
         this.dust.setText(this.player.dust);
+    }
+
+    updateCardsLeft(){
+        this.cardsToPick --;
+        this.cards.updateCardsLeftText();
     }
 }
 
@@ -114,23 +125,23 @@ class DicContainer extends Phaser.GameObjects.Container {
 
         //boton de bajar dicotomia
         this.add(new Button(scene, -135, 0, 'decrease', 1, () => {
-            if (scene.player.dust > scene.dicPrice && this.dicPer > 0) {
+            if (scene.player.dust > scene.levelScene.dicPrice && this.dicPer > 0) {
                 this.SubDicotomy(this.dicNum);
                 scene.scene.get('level').dicotomyManager.AplieDicotomy(this.dicNum);
                 this.dicValText.setText(this.dicotomyManager.dicName(this.dicNum) + ' ' + this.dicPer);
-                scene.player.dust -= scene.dicPrice;
-                scene.dicPrice += 5;
+                scene.player.dust -= scene.levelScene.dicPrice;
+                scene.levelScene.dicPrice += 5;
             }
         }))
 
         //boton de subir dicotomia
         this.add(new Button(scene, 135, 0, 'increase', 1, () => {
-            if (scene.player.dust > scene.dicPrice && this.dicPer < 100) {
+            if (scene.player.dust > scene.levelScene.dicPrice && this.dicPer < 100) {
                 this.AddDicotomy(this.dicNum);
                 scene.scene.get('level').dicotomyManager.AplieDicotomy(this.dicNum);
                 this.dicValText.setText(this.dicotomyManager.dicName(this.dicNum) + ' ' + this.dicPer);
-                scene.player.dust -= scene.dicPrice;//pasar a un parametro que pueda aumentar segun algun criterio
-                scene.dicPrice += 5;
+                scene.player.dust -= scene.levelScene.dicPrice;//pasar a un parametro que pueda aumentar segun algun criterio
+                scene.levelScene.dicPrice += 5;
             }
         }))
 
@@ -282,5 +293,9 @@ class CardsZone extends Phaser.GameObjects.Container{
         }
 
         this.scene.add.existing(this);
+    }
+
+    updateCardsLeftText(){
+        this.cartasRestantes.setText("cards left: " + this.scene.cardsToPick);
     }
 }

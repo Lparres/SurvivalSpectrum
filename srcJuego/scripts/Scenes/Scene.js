@@ -44,13 +44,13 @@ export default class MainScene extends Phaser.Scene {
 
 
         this.cardMap = {
-            life: 0,
-            lifeRegen: 0,
-            damage: 0,
-            fireRate: 0,
-            meleeArmor: 0,
-            rangeArmor: 0,
-            speed: 0
+            life: 20,
+            lifeRegen: 0.5,
+            damage: 2,
+            fireRate: 5,
+            meleeArmor: 5,
+            rangeArmor: 5,
+            speed: 5
         }
 
         this.statKeyList = ['life', 'lifeRegen', 'damage', 'fireRate', 'meleeArmor', 'rangeArmor', 'speed'];
@@ -131,6 +131,9 @@ export default class MainScene extends Phaser.Scene {
         this.currentEnemies = 0;
 
         this.wavesProbe = new Waves(this,"");
+
+        //precio de subir las dicótomías (ahora se mantiene)
+        this.dicPrice = 20;
     }
 
     //game tick

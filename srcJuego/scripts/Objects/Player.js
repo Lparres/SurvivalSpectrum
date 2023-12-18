@@ -86,7 +86,6 @@ export default class Player extends Mob
 
         //Evento de la regeneracion de vida
         this.regEvent = this.scene.time.addEvent( {
-            args: [this.lifeReg],
             delay: 1000, 
             callback: this.lifeRegen,
             callbackScope: this,
@@ -184,9 +183,9 @@ export default class Player extends Mob
        }
     }
 
-    lifeRegen(amount){
+    lifeRegen(){
         //sumar vida
-        this.health += amount;
+        this.health += this.lifeReg;
         //limitar la vida a la vida maxima
         if(this.health> this.maxLife){
             this.health = this.maxLife;
@@ -295,15 +294,26 @@ export default class Player extends Mob
     applyCard(key){
         switch(key){
             case 'life':
-                this.life += this.scene.cardList.life;
+                this.maxLife += this.scene.cardMap.life;
                 break;
             case 'lifeRegen':
-                this.lifeSteal += this.scene.cardList.lifeRegen
+                this.lifeReg += this.scene.cardMap.lifeRegen;
                 break;
             case 'damage':
-                this.damage += this.scene.cardList.fireRate;
+                this.damage += this.scene.cardMap.damage;
                 break;
-
+            case 'fireRate':
+                this._atkCD -= this.scene.cardMap.fireRate;
+                break;
+            case 'meleeArmor':
+                this._meleeArmor += this.scene.cardMap.meleeArmor;
+                break;
+            case 'rangeArmor':
+                this._rangeArmor += this.scene.cardMap.rangeArmor;
+                break;
+            case 'speed':
+                this.speed += this.scene.cardMap.speed;
+                break;
         }
     }
 }
