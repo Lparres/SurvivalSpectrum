@@ -178,10 +178,9 @@ export default class Player extends Mob
             //animacion de muerte
             this.play(this.key[2],true);
 
-            this.scene.scene.sleep('UIScene')
-            this.scene.scene.sleep('level')
-            this.scene.scene.run('FinalScene');
-            this.scene.music.stop();
+            //llamar a la escena
+
+            this.scene.playerDeath();
        }
     }
 
@@ -192,7 +191,7 @@ export default class Player extends Mob
         if(this.health> this.maxLife){
             this.health = this.maxLife;
         }
-        console.log(amount + " curado")
+        //console.log(amount + " curado")
     }
 
     // La dicotomía cambia el rango de ataque
@@ -282,7 +281,8 @@ export default class Player extends Mob
 
                 this.rage = this.rage - (this.rage * 20/100);
                 this._eureka = 0;
-                this.dicTotalTime = this.eurekaTime;
+
+                //this.dicTotalTime = this.eurekaTime;, this.eurekaTime no  existe
 
                 this.scene.isTimeToStop(true);
             }

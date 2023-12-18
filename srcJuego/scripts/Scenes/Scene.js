@@ -31,6 +31,7 @@ export default class MainScene extends Phaser.Scene {
     //instance
     create() {
 
+        //leer los json, de data y oleadas
         this.data = this.game.cache.json.get('data');
 
         this.waveJson = this.game.cache.json.get('waves');
@@ -87,19 +88,20 @@ export default class MainScene extends Phaser.Scene {
         this.esc = this.input.keyboard.addKey('ESC');
         this.cum = this.input.keyboard.addKey('Q');
 
-
+        //entrar al menu de dicotomías, solo para testeo
         this.cum.on('down', event => {
             this.activeDicotomyMenu();
 
         });
 
+        //entrar al menu de pausa
         this.pause.on('down', event => {
             this.activePauseMenu();
 
         });
 
 
-
+        //salir de pantalla completa
         this.esc.on('up', event => {
             this.scale.stopFullscreen();
             document.getElementById("seccion-juego").className = "classSeccionJuego";
@@ -430,6 +432,9 @@ export default class MainScene extends Phaser.Scene {
     }
 
     playerDeath() {
-
+        this.scene.sleep('UIScene')
+        this.scene.sleep('level')
+        this.scene.run('FinalScene');
+        this.music.stop();
     }
 }

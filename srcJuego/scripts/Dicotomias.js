@@ -18,6 +18,10 @@ export default class Dicotomías {
           this.perDic3 = perDic3;
           this.perDic4 = perDic4;
           this.UI = UI;
+
+
+          this.rageBaseAmount = 250;
+          this.eurekaBaseAmount = 500;
      }
 
      /**
@@ -61,9 +65,8 @@ export default class Dicotomías {
      AplieDicotomy(dic) {
           switch (dic) {
                case 1:
-                    this.player.rageMax = this.EmotionalValue();
-                    //this.player.eurekaMax = this.RationalValue();
-                    this.player.eurekaMax = 1000;
+                    this.player.rageMax = (this.EmotionalValue()/100)* this.rageBaseAmount;
+                    this.player.eurekaMax = (this.RationalValue()/100)*this.eurekaBaseAmount;
                     break;
                case 2:
                     this.player.range = this.ExtrovertValue(this.player.baseRange);
@@ -97,6 +100,7 @@ export default class Dicotomías {
      EmotionalValue() {
           return this.perDic1;
      }
+
      RationalValue() {
           return (100 - this.perDic1);
      }

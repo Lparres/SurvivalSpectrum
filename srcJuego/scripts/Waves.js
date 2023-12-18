@@ -2,12 +2,16 @@ export default class Waves extends Phaser.GameObjects.GameObject{
 
 
     constructor(scene,type){
+        //constructor del super
         super(scene,type);
 
-        this.waveJson =  this.scene.scene.get("level").waveJson;
-
+        //hacemos una copia del json orignal
+        this.waveJson = structuredClone(this.scene.waveJson);
+        
+        //leemos la data
         this.data = this.scene.scene.get("level").data;
 
+        //leer variables del level
         this.meleeEnemiesPool = this.scene.scene.get("level").meleeEnemiesPool;
 
         this.rangeEnemiesPool = this.scene.scene.get("level").rangeEnemiesPool;
@@ -16,14 +20,17 @@ export default class Waves extends Phaser.GameObjects.GameObject{
 
         this.spawnPoints = this.scene.scene.get("level").spawnPoints;
 
+        //la escena actual
         this.currentWave = 0;
-
+        
         this.spawnPositions = [];
 
+        //rangos para la distancia de spawn de los enemigos
         this.minSpawnRange = 400;
         this.maxSpawnRange = 750;
 
-        this.sortSpawnPointsFrecuency = 5000;
+        //cada cuanto tiempo se realculan los spawn points
+        this.sortSpawnPointsFrecuency = 4000;
         this.sortSpawnPointsTimer = 9999;
 
         //para calcular cuando sale la nueva oleada
@@ -34,8 +41,7 @@ export default class Waves extends Phaser.GameObjects.GameObject{
 
         this.oleadasLogic(dt);
 
-        this.masillasLogic(dt);  
-               
+        this.masillasLogic(dt);             
     }
 
     //oleadas
@@ -50,7 +56,7 @@ export default class Waves extends Phaser.GameObjects.GameObject{
             this.sortSpawnPointsTimer = 0;
 
             //actualizar la info de la UI
-            this.scene.get("UIScene").updateWaveData();
+            this.scene.scene.get("UIScene").updateWaveData();
         }
 
 
@@ -105,6 +111,7 @@ export default class Waves extends Phaser.GameObjects.GameObject{
     };
 
 
+    //funcion generica para spawnear un enemigo, valida para oleadas, masillas y el enemigo con el totem
     spawnDataUpdate(spawnData, spawnPos, dt, masillas, totem) {
 
         //actualizar el contador de tiempo
@@ -112,7 +119,6 @@ export default class Waves extends Phaser.GameObjects.GameObject{
 
         //si toca spawnear y quedan enemigos en este spawn point
         if (spawnData.timer >= spawnData.frecuency && (masillas || spawnData.size > 0)) {
-
 
             //si es una masilla hay que cambiar el indice del spawn para el proximo
             if (masillas) {
@@ -125,10 +131,9 @@ export default class Waves extends Phaser.GameObjects.GameObject{
             let configIndex = 0;
 
             if (totem) {
-                //esto tiene que estar ligado al data
+                //esto tiene que estar ligado al data,solo hay un tipo de enemigo con el totem a true
                 configIndex = 3;
             }
-
 
 
             //spawnear segun el tipo, solo cambia la pool y el config
@@ -138,8 +143,6 @@ export default class Waves extends Phaser.GameObjects.GameObject{
             else if (spawnData.type == "range") {
                 this.rangeEnemiesPool.spawn(spawnPos.x, spawnPos.y, spawnData.animKey, this.data.RangeConfigs[configIndex]);
             }
-
-
 
 
             //si no es masilla, reducimos el size
