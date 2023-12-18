@@ -107,7 +107,7 @@ class DicContainer extends Phaser.GameObjects.Container {
         this.add(this.dicValText);
 
 
-        this.dial = scene.add.rectangle(20, 0, 5,25, 0xff0000).setOrigin(0.5, 1);
+        this.dial = scene.add.rectangle(20, -2, 5,26, 0xff0000).setOrigin(0.5, 1);
         this.add(this.dial);
 
         //boton de bajar dicotomia
