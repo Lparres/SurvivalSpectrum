@@ -26,7 +26,7 @@ export default class Menu extends Phaser.Scene {
         const titulo = this.add.text(0, -450, 'Menu dicotomias', { font: '40px JosefinBold', fill: 'black', aling: 'center' }).setOrigin(0.5, 0);
 
         //boton para salir del menú
-        const unpause = new Button(this, 0, 400, 'heart', 0.15, () => {
+        const unpause = new Button(this, 0, 420, 'confirm', 1, () => {
             let UI = this.scene.get('UIScene');
             let MainScene = this.scene.get('level');
             this.scene.wake('UIScene');
