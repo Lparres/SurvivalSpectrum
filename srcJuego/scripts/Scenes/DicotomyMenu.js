@@ -241,7 +241,7 @@ class CardsZone extends Phaser.GameObjects.Container{
         this.spacingHor = 100;
 
         //marco de la zona
-        this.add(scene.add.nineslice(0, 0, 'ui', 'DicotomyMenuBG', this.w, this.h , 20, 20, 20, 20));
+        this.add(scene.add.nineslice(0, 0, 'ui', 'CardsMenu', this.w, this.h , 20, 20, 20, 20));
 
         this.card1= new Card(this.scene,-this.w/2 +50, -this.h/2 +40,'Atack',3);
         //this.card1.setOrigin(0,0)
