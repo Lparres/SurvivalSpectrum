@@ -86,6 +86,15 @@ export default class FinalScene extends Phaser.Scene {
 
         this.totalDustText = this.add.text(-220, 70,"Total Dust: "+ this.totalDust,textFormat)
         right.add(this.totalDustText);
+
+        this.esc = this.input.keyboard.addKey('ESC');
+
+        //salir de pantalla completa
+        this.esc.on('up', event => {
+            this.scale.stopFullscreen();
+            document.getElementById("seccion-juego").className = "classSeccionJuego";
+            document.getElementById("juego").className = "classJuego";
+        })
     
     }
 /**

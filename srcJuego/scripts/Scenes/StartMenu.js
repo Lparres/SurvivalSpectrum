@@ -48,6 +48,15 @@ export default class StartMenu extends Phaser.Scene {
             }
         }, this);
 
+        this.esc = this.input.keyboard.addKey('ESC');
+
+        //salir de pantalla completa
+        this.esc.on('up', event => {
+            this.scale.stopFullscreen();
+            document.getElementById("seccion-juego").className = "classSeccionJuego";
+            document.getElementById("juego").className = "classJuego";
+        })
+
     }
     update() {
 
