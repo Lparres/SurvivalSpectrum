@@ -177,8 +177,9 @@ export default class UI extends Phaser.Scene
             
         }
        this.timerUpdate(dt);
+       //se puede llamar en el momento en el que se entra en rabia o mediante un callback
        this.updateStats();
-
+       //se puede llamar en otro momento no es necesario acutualizarlo constantemente
        this.updateDicotomias();
 
        this.dust.setText(this.player.dust);

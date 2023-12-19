@@ -9,6 +9,8 @@ export default class FinalScene extends Phaser.Scene {
 
     init(data){
         this.dicotomyManager = data.dicManager;
+        this.finalTime = data.finalTime;
+        console.log(this.finalTime.minutes + ":"+this.finalTime.seconds);
     }
 
     preload(){
@@ -35,26 +37,37 @@ export default class FinalScene extends Phaser.Scene {
         this.dic3 = left.add(new DicContainer(this,0,100,3));
         this.dic4 = left.add(new DicContainer(this,0,300,4));
         
-
+        /**
+         * Zona central donde se encuentra el nombre de la personalidad y a futuro un icono de la misma
+         */
         const center = this.add.container(this.sys.game.canvas.width /2, this.sys.game.canvas.height / 2 );
         this.BGC = this.add.nineslice(0, 0, 'ui', 'CardsMenu', 650, 800 , 20, 20, 20, 20);
-        center.add(this.BGC);
-        //calculo del nombre de la personalidad
-        this.resultName = '';
-        this.resultName += this.dicotomyManager.perDic1 < 50 ? 'T':'E';
-        this.resultName += this.dicotomyManager.perDic2 < 50 ? 'E':'I';
-        this.resultName += this.dicotomyManager.perDic3 < 50 ? 'S':'N';
-        this.resultName += this.dicotomyManager.perDic4 < 50 ? 'J':'P';
-
-        this.personality = this.add.text(0, 0, "Your final personality:\n"+this.resultName, 
+        center.add(this.BGC);    
+        this.personality = this.add.text(0, 0, "Your final personality:\n"+this.getPesonalityName(), 
         { font: '64px Arial', fill: '#FFFFFF',align:'center' }).setOrigin(0.5,0.5);
-
         center.add(this.personality);
 
 
+        const textFormat = { font: '64px Arial', fill: '#FFFFFF',align:'left' };
+        /**
+         * Zona derecha donde se mostrara informacion del rendimiento de la partida (Pasar a clase container??????)
+         */
         const right= this.add.container(this.sys.game.canvas.width / 2 + 600, this.sys.game.canvas.height / 2 );
         this.BGR = this.add.nineslice(0, 0, 'ui', 'CardsMenu', 500, 800 , 20, 20, 20, 20);
         right.add(this.BGR);
+        this.endTime = this.add.text(-220, 0,"End time: "+ this.finalTime.minutes+":"+this.finalTime.seconds,textFormat)
+        right.add(this.endTime);
+    }
+/**
+ * calcula el nombre de la personlidad en funcion de las dicotomias
+ */
+    getPesonalityName(){
+        let name = '';
+        name += this.dicotomyManager.perDic1 < 50 ? 'T':'E';
+        name += this.dicotomyManager.perDic2 < 50 ? 'E':'I';
+        name += this.dicotomyManager.perDic3 < 50 ? 'S':'N';
+        name += this.dicotomyManager.perDic4 < 50 ? 'J':'P';
+        return name;
     }
 
     update(){

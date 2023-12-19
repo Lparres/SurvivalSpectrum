@@ -439,7 +439,21 @@ export default class MainScene extends Phaser.Scene {
     playerDeath() {
         this.scene.sleep('UIScene')
         this.scene.sleep('level')
-        this.scene.launch('FinalScene',{dicManager: this.dicotomyManager});
+        this.scene.launch('FinalScene',
+        {dicManager: this.dicotomyManager, 
+            finalTime:{
+                minutes: this.scene.get("UIScene").minuteCount.toLocaleString('en-US', {
+                    minimumIntegerDigits: 2,
+                    useGrouping: false,
+                    maximumFractionDigits:0 
+                  }),
+                seconds: this.scene.get("UIScene").secondsCount.toLocaleString('en-US', {
+                    minimumIntegerDigits: 2,
+                    useGrouping: false,
+                    maximumFractionDigits:0 
+                  })
+        }
+    });
         this.music.stop();
     }
 }
