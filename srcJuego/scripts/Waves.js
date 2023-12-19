@@ -9,7 +9,7 @@ export default class Waves extends Phaser.GameObjects.GameObject{
         this.waveJson = structuredClone(this.scene.waveJson);
         
         //leemos la data
-        this.data = this.scene.scene.get("level").data;
+        this.data = structuredClone(this.scene.data);
 
         //leer variables del level
         this.meleeEnemiesPool = this.scene.scene.get("level").meleeEnemiesPool;
@@ -39,6 +39,18 @@ export default class Waves extends Phaser.GameObjects.GameObject{
         this.waveType = Phaser.Math.Between(0,(this.waveJson.Waves.length-1));
 
 
+        //escalado por rondas
+        //0,1 = 10%
+        this.scaleMeleeLifeFactor = 0.07;
+        this.scaleMeleeDamageFactor = 0.07;
+
+
+        this.scaleRangeLifeFactor = 0.07;
+        this.scaleRangeEnemyRangeDamageFactor = 0.07;
+
+
+        this.scaleWaveNumberFactor = 2;
+
     }
 
     update(dt){
@@ -60,11 +72,14 @@ export default class Waves extends Phaser.GameObjects.GameObject{
             this.sortSpawnPointsTimer = 0;
 
             //actualizar la info de la UI
-            this.scene.scene.get("UIScene").updateWaveData();
 
             this.waveType = Phaser.Math.Between(0,(this.waveJson.Waves.length-1));
             this.waveJson = structuredClone(this.scene.waveJson);
+            this.data = structuredClone(this.scene.data);
+            this.scaleDatas();
+            this.scaleWaves();
 
+            this.scene.scene.get("UIScene").updateWaveData();
         }
 
 
@@ -232,5 +247,28 @@ export default class Waves extends Phaser.GameObjects.GameObject{
 
     nextWaveStartTime(){
         return 40 + (this.currentWave*50);
+    }
+
+    scaleDatas(){
+        for(let i = 0; i < this.data.EnemyConfigs.length;i++){
+            this.data.EnemyConfigs[i].life *= (1 +(this.scaleMeleeLifeFactor*this.currentWave)); 
+            this.data.EnemyConfigs[i].damage *= (1 +(this.scaleMeleeDamageFactor*this.currentWave)); 
+        }
+
+        for(let i = 0;i < this.data.RangeConfigs.length;i++){
+            this.data.RangeConfigs[i].settingMelee.life *= (1 +(this.scaleRangeLifeFactor*this.currentWave)); 
+            this.data.RangeConfigs[i].rangeDamage *= (1 +(this.scaleRangeEnemyRangeDamageFactor*this.currentWave)); 
+        }
+    }
+
+
+    scaleWaves(){
+        for(let i = 0; i < this.waveJson.Waves.length;i++){
+            for(let j = 0; j < this.waveJson.Waves[i].spawnsData.length;j++){
+                this.waveJson.Waves[i].spawnsData[j].size *= (1 +(this.scaleWaveNumberFactor*this.currentWave));
+            }
+        }
+
+
     }
 }
