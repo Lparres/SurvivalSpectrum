@@ -44,8 +44,8 @@ export default class MainScene extends Phaser.Scene {
 
 
         this.cardMap = {
-            life: 20,
-            lifeRegen: 2,
+            life: 30,
+            lifeRegen: 0.5,
             damage: 2,
             fireRate: 5,
             meleeArmor: 5,
