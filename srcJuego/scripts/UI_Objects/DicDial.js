@@ -29,7 +29,7 @@ export  default class DicContainer extends Phaser.GameObjects.Container {
 
         //boton de bajar dicotomia
         this.add(new Button(scene, -135, 0, 'decrease', 1, () => {
-            if (scene.player.dust > scene.levelScene.dicPrice && this.dicPer > 0) {
+            if (scene.player.dust >= scene.levelScene.dicPrice && this.dicPer > 0) {
                 this.SubDicotomy(this.dicNum);
                 scene.scene.get('level').dicotomyManager.AplieDicotomy(this.dicNum);
                 this.dicValText.setText(this.dicotomyManager.dicName(this.dicNum) + ' ' + this.dicPer);
@@ -40,7 +40,7 @@ export  default class DicContainer extends Phaser.GameObjects.Container {
 
         //boton de subir dicotomia
         this.add(new Button(scene, 135, 0, 'increase', 1, () => {
-            if (scene.player.dust > scene.levelScene.dicPrice && this.dicPer < 100) {
+            if (scene.player.dust >= scene.levelScene.dicPrice && this.dicPer < 100) {
                 this.AddDicotomy(this.dicNum);
                 scene.scene.get('level').dicotomyManager.AplieDicotomy(this.dicNum);
                 this.dicValText.setText(this.dicotomyManager.dicName(this.dicNum) + ' ' + this.dicPer);
