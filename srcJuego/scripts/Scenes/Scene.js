@@ -333,8 +333,11 @@ export default class MainScene extends Phaser.Scene {
 
         // creamos las diferentes capas a través del tileset. El nombre de la capa debe aparecer en el .json del tilemap cargado
         this.groundLayer = this.map.createLayer('Suelo', tileset1);
+        this.behindLayer = this.map.createLayer('Detras', tileset1);
         this.wallLayer = this.map.createLayer('Pared', tileset1);
 
+        //para que el player se renderize detras
+        this.behindLayer.setDepth(100);
 
         //creamos el array de spawn points
         this.spawnPoints = this.map.createFromObjects('Spawns');

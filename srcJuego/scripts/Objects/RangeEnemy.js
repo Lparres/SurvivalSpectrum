@@ -29,6 +29,11 @@ export default class RangeEnemy extends Enemy
         this._bulletSpawnOffsetX = 0;
         this._bulletSpawnOffsetY = 50;
 
+        //ajustar el tamaño del colider
+        this.body.setSize(40,40,false);
+        //ajustar el offset del colider
+        this.body.setOffset(82,120);
+
     }
 
     preUpdate(t,dt){
