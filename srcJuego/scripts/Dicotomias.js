@@ -76,6 +76,8 @@ export default class Dicotomías {
                case 2: //dicotomia de mas daño o mas rango
                     this.player.range = this.ExtrovertValue(this.player.baseRange);
                     this.player.damage = this.IntrovertValue(this.player.baseDamage);
+                    console.log(this.player.range);
+                    console.log(this.player.damage);
                     break;
                case 3: //dicotomia de  mostar mas o menos  cosas  en la  UI
                     
@@ -100,11 +102,11 @@ export default class Dicotomías {
      */
      //devuelve el porcentaje  de  rabia
      EmotionalValue() {
-          return (0.2 + (0.6*(this.perDic1/100))) * this.rageBaseAmount;
+          return (0.2 + (0.6*((100 - this.perDic1)/100)))* this.rageBaseAmount;
      }
      //devuelve el  porcentaje  de eureka
      RationalValue() {
-          return (0.2 + (0.6*((100 - this.perDic1)/100))) *this.eurekaBaseAmount;
+          return (0.2 + (0.6*(this.perDic1/100))) * this.eurekaBaseAmount;
      }
 
 
@@ -116,10 +118,10 @@ export default class Dicotomías {
 
      */
      ExtrovertValue(baseRange) {
-          return baseRange + baseRange * (this.perDic2 / 100 - 0.5);
+          return baseRange + baseRange * ((100 - this.perDic2) / 100 - 0.5);
      }
      IntrovertValue(baseDamage) {
-          return baseDamage + baseDamage * ((100 - this.perDic2) / 100 - 0.5);
+          return baseDamage + baseDamage * (this.perDic2 / 100 - 0.5);
      }
 
      /*   EXPLICACION DEL NUMERO DE CARTAS A ELEGIR
