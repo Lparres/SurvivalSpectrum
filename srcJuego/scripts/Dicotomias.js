@@ -139,6 +139,7 @@ export default class Dicotomías {
 
 
      //Esta funcion deberia hacer que los valores de las cartas escalen o se modifiquen, segun el valor de la dicotomia
+     
      CardValue(key) {
           return this.player.scene.cardMap[key]/((this.perDic4 + 50)/100);
      }
