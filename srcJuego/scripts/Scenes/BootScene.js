@@ -149,7 +149,8 @@ export default class BootScene extends Phaser.Scene{
         this.load.audio('golpePlayer','srcJuego/audio/playerHit_VSDC.wav');
 
         this.load.audio('music','srcJuego/audio/musica.mp3');
-
+        this.load.audio('cardClick', 'srcJuego/audio/card_Click.wav')
+        this.load.audio('freeze', 'srcJuego/audio/freezeEfect.wav')
     }
     create(){
 

@@ -282,7 +282,9 @@ export default class Player extends Mob
                 this.lifeReg += Math.round(this.scene.dicotomyManager.CardValue(key));
                 break;
             case 'damage':
-                this.damage += Math.round(this.scene.dicotomyManager.CardValue(key));
+                //this.damage += Math.round(this.scene.dicotomyManager.CardValue(key));
+                this.baseDamage += Math.round(this.scene.dicotomyManager.CardValue(key));
+                this.scene.dicotomyManager.AplieDicotomy(2);
                 break;
             case 'fireRate':
                 this._atkCD -= this.scene.dicotomyManager.CardValue(key);
