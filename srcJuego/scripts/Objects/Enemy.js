@@ -31,9 +31,9 @@ export default class Enemy extends Mob
         //cambiar magic number por cte
 
         //ajustar el tamaño del colider
-        this.body.setSize(45,70,false);
+        this.body.setSize(40,60,false);
         //ajustar el offset del colider
-        this.body.setOffset(82,106);
+        this.body.setOffset(82,116);
 
         //margen para flipear el sprite
         this.flipMargin = 30;
