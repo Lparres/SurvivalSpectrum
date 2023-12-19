@@ -89,10 +89,10 @@ export default class MainScene extends Phaser.Scene {
         this.cum = this.input.keyboard.addKey('Q');
 
         //entrar al menu de dicotomías, solo para testeo
-        this.cum.on('down', event => {
+        /*this.cum.on('down', event => {
             this.activeDicotomyMenu();
 
-        });
+        });*/
 
         //entrar al menu de pausa
         this.pause.on('down', event => {
