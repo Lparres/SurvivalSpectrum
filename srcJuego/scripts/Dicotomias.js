@@ -89,18 +89,6 @@ export default class Dicotomías {
                     this.UI.map.setVisible(this.perDic3 > 80);
                     this.UI.GRP_Dicotomias.setVisible(this.perDic3 > 90);
                     break;
-
-               case 4: // dicotomia de más o menos cartas, con diferentes valores
-                    
-                    //this.getNCards();
-                    /*this.player.scene.cardMap.life += this.CardValue();
-                    this.player.scene.cardMap.lifeRegen += this.CardValue();
-                    this.player.scene.cardMap.damage += this.CardValue();
-                    this.player.scene.cardMap.fireRate += this.CardValue();
-                    this.player.scene.cardMap.meleeArmor += this.CardValue();
-                    this.player.scene.cardMap.rangeArmor += this.CardValue();
-                    this.player.scene.cardMap.speed += this.CardValue();
-                    console.log(this.player.scene.cardMap);*/
           }
      }
 
@@ -149,8 +137,8 @@ export default class Dicotomías {
 
 
      //Esta funcion deberia hacer que los valores de las cartas escalen o se modifiquen, segun el valor de la dicotomia
-     CardValue() {
-          return this.perDic4;
+     CardValue(key) {
+          return this.player.scene.cardMap[key]/((this.perDic4 + 50)/100);
      }
 
      /**

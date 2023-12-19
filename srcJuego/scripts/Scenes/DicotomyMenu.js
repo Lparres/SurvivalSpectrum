@@ -174,7 +174,11 @@ class CardsZone extends Phaser.GameObjects.Container{
         this.add(this.cartasRestantes);
 
         //crea una carta
-        this.card1= new Card(this.scene,-this.w/2 +50, -this.h/2 +40,this.deck[0],this.scene.scene.get('level').cardMap[this.deck[0]]);
+        this.card1= new Card(this.scene,-this.w/2 +50, -this.h/2 +40,this.deck[0],Math.round(this.scene.scene.get('level').dicotomyManager.CardValue([this.deck[0]]).toLocaleString('en-US', {
+            minimumIntegerDigits: 1,
+            useGrouping: false,
+            maximumFractionDigits:2
+          })));
         //this.card1.setOrigin(0,0)
         this.add(this.card1);
 
@@ -185,7 +189,11 @@ class CardsZone extends Phaser.GameObjects.Container{
             let x = this.card1.x + (i%4) * (this.cardW + this.spacingHor);
             let y = this.card1.y + Math.floor(i/4)*150;
             //creamos la carta desde la deck
-            let aux= new Card(this.scene, x ,y,this.deck[i],this.scene.scene.get('level').cardMap[this.deck[i]]);
+            let aux= new Card(this.scene, x ,y,this.deck[i],Math.round(this.scene.scene.get('level').dicotomyManager.CardValue([this.deck[i]]).toLocaleString('en-US', {
+                minimumIntegerDigits: 1,
+                useGrouping: false,
+                maximumFractionDigits:2
+              })));
             //this.card2.setOrigin(0,0)
             this.add(aux);
         }
