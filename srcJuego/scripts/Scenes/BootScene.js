@@ -46,6 +46,7 @@ export default class BootScene extends Phaser.Scene{
         this.load.image('heart', 'srcJuego/ui/Corazon.png');
         this.load.image('furiaEureka', 'srcJuego/ui/FuriaEureka2.png');
         this.load.image('estadisticas', 'srcJuego/ui/estadisticas.png');
+        this.load.image('estadisticasOpaco', 'srcJuego/ui/EstadisticasOpaco.png');
         this.load.image('statsInGame', 'srcJuego/ui/statsInGame.png');
         this.load.image('waveInfo', 'srcJuego/ui/WaveInfo.png');
         this.load.image('nextWave', 'srcJuego/ui/NextWave.png');

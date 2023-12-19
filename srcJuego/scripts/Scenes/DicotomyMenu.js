@@ -106,7 +106,7 @@ class LatContainer extends Phaser.GameObjects.Container {
     constructor(scene, x, y) {
         super(scene, x, y)
 
-        this.estadisticasImg = scene.add.image(0, 0, 'estadisticas').setOrigin(1, 0.5).setScale(1, 1);
+        this.estadisticasImg = scene.add.image(0, 0, 'estadisticasOpaco').setOrigin(1, 0.5).setScale(1, 1);
         this.add(this.estadisticasImg);
 
 
