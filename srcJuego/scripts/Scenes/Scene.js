@@ -126,11 +126,13 @@ export default class MainScene extends Phaser.Scene {
 
         this.hitSound = this.sound.add('golpe', { volume: 0.5 });
 
+        this.wavesProbe = new Waves(this,"");
+
 
         this.killedEnemies = 0;
         this.currentEnemies = 0;
+        this.totalDust = this.data.PlayerConfig.initialDust;
 
-        this.wavesProbe = new Waves(this,"");
 
         //precio de subir las dicótomías (ahora se mantiene)
         this.dicPrice = 20;
@@ -204,6 +206,7 @@ export default class MainScene extends Phaser.Scene {
             let aux = new Dust(this, 0, 0, 'polvos', this.dustPool, (amount) => {
                 //aux.setDepth(10);
                 this.player.addDust(amount);
+                this.totalDust += amount;
             });
             dustArr.push(aux);
         }
@@ -441,12 +444,17 @@ export default class MainScene extends Phaser.Scene {
         this.scene.sleep('level')
         this.scene.launch('FinalScene',
         //Json que se pasa a la escena final para recabar datos
-        {dicManager: this.dicotomyManager, 
+        {dicManager: 
+            this.dicotomyManager, 
             //Tiempo
             finalTime:{
                 minutes: this.scene.get("UIScene").minuteCount.toLocaleString('en-US', {minimumIntegerDigits: 2,useGrouping: false,maximumFractionDigits:0 }),
                 seconds: this.scene.get("UIScene").secondsCount.toLocaleString('en-US', {minimumIntegerDigits: 2,useGrouping: false,maximumFractionDigits:0 })
-            }
+            },
+            wave: this.wavesProbe.currentWave+1,
+            killedEnemies:  this.killedEnemies,
+            totalDust: this.totalDust
+
         });
         this.music.stop();
     }
