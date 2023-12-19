@@ -3,23 +3,28 @@ export default class Dicotomías {
      *Las variable con barra baja son las de la clase, si barra baja son las variables de la sobrecarga
      perDic es el porcentaje (percentage) de cada dicotomía
      */
-     //Realmente se puede hacer tremendo constructor vacío y tirando
      /**
       * 
       * @param {*} perDic1 Valor del emocional
       * @param {*} perDic2 Valor del extrovertido
       * @param {*} perDic3 Valor del sensitivo
-      * @param {*} perDic4 
+      * @param {*} perDic4 Valor del perspective
       */
      constructor(player, perDic1, perDic2, perDic3, perDic4, UI) {
-          this.player = player;
+          //porcentajes de las dicotomias
           this.perDic1 = perDic1;
           this.perDic2 = perDic2;
           this.perDic3 = perDic3;
           this.perDic4 = perDic4;
+
+          this.player = player;
           this.UI = UI;
+
+          //escena de nivel
           this.levelScene = this.UI.scene.get('level');
 
+
+          //variables para los valores base de las dicotomias, estos deberian ir actualizandose, por ejemplo el de la vida del player
           this.rageBaseAmount = this.levelScene.data.PlayerConfig.life;
           this.eurekaBaseAmount = 500;
      }
@@ -64,16 +69,16 @@ export default class Dicotomías {
       */
      AplieDicotomy(dic) {
           switch (dic) {
-               case 1:
-                    this.player.rageMax = (this.EmotionalValue()/100)* this.rageBaseAmount;
-                    this.player.eurekaMax = (this.RationalValue()/100)*this.eurekaBaseAmount;
+               case 1: //dicotomia de mas o menos eureka            
+                    this.player.rageMax = this.EmotionalValue();
+                    this.player.eurekaMax = this.RationalValue();
                     break;
-               case 2:
+               case 2: //dicotomia de mas daño o mas rango
                     this.player.range = this.ExtrovertValue(this.player.baseRange);
                     this.player.damage = this.IntrovertValue(this.player.baseDamage);
                     break;
-               case 3:
-                    //dicotomia de  mostar mas o menos  cosas  en la  UI
+               case 3: //dicotomia de  mostar mas o menos  cosas  en la  UI
+                    
                     this.UI.GRP_BarraVida.setVisible(this.perDic3 > 10);
                     this.UI.GRP_FuriaEureka.setVisible(this.perDic3 > 20);
                     this.UI.GRP_Estadisticas.setVisible(this.perDic3 > 30);
@@ -85,7 +90,8 @@ export default class Dicotomías {
                     this.UI.GRP_Dicotomias.setVisible(this.perDic3 > 90);
                     break;
 
-               case 4:
+               case 4: // dicotomia de más o menos cartas, con diferentes valores
+                    
                     //this.getNCards();
                     /*this.player.scene.cardMap.life += this.CardValue();
                     this.player.scene.cardMap.lifeRegen += this.CardValue();
@@ -98,16 +104,29 @@ export default class Dicotomías {
           }
      }
 
+     /* EXPLICACION DEL CALCULO APLICADO AL EMOTIONAL VALUE Y AL RATIONAL VALUE
+          calculo para clampear los valores de la siguiente forma 
+          si la dicotomia esta en 0, el valor sera un 20% del original
+          si la dicotomia esta em 100, el valor sera un 80% del original
+          es decir la dicotomia solo modifica el 60% entre esos margenes
+     */
      //devuelve el porcentaje  de  rabia
      EmotionalValue() {
-          return this.perDic1;
+          return (0.2 + (0.6*(this.perDic1/100))) * this.rageBaseAmount;
      }
-
      //devuelve el  porcentaje  de eureka
      RationalValue() {
-          return (100 - this.perDic1);
+          return (0.2 + (0.6*((100 - this.perDic1)/100))) *this.eurekaBaseAmount;
      }
 
+
+     /*   EXPLICACION DEL CALCULO APLICADO AL EMOTIONAL VALUE Y AL RATIONAL VALUE
+          Se devuelve el valor base +- 50%
+          si la dicotomia esta en 0, -50%
+          si la dicotomia esta en 100, +50%
+          si la dicotomia esta en 50, +0%, se queda igual
+
+     */
      ExtrovertValue(baseRange) {
           return baseRange + baseRange * (this.perDic2 / 100 - 0.5);
      }
@@ -115,10 +134,21 @@ export default class Dicotomías {
           return baseDamage + baseDamage * ((100 - this.perDic2) / 100 - 0.5);
      }
 
+     /*   EXPLICACION DEL NUMERO DE CARTAS A ELEGIR
+          Hay 4 cartas a elegir + 1 , cada 25 puntos de la dicotomia
+          Si la dicotomia es 0-24, 4 cartas
+          Si la dicotomia es 25-49,5 cartas
+          Si la dicotomia es 50-74,6 cartas
+          Si la dicotomia es 75-99,7 cartas
+          Si la dicotomia es 100, 8 cartas
+     
+     */
      getNCards() {
           return 4 + Math.round((this.perDic4 / 25));
      }
 
+
+     //Esta funcion deberia hacer que los valores de las cartas escalen o se modifiquen, segun el valor de la dicotomia
      CardValue() {
           return this.perDic4;
      }

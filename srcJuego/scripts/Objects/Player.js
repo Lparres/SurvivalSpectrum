@@ -177,8 +177,8 @@ export default class Player extends Mob
             //animacion de muerte
             this.play(this.key[2],true);
 
+            
             //llamar a la escena
-
             this.scene.playerDeath();
        }
     }
@@ -190,17 +190,10 @@ export default class Player extends Mob
         if(this.health> this.maxLife){
             this.health = this.maxLife;
         }
-        //console.log(amount + " curado")
-    }
-
-    // La dicotomía cambia el rango de ataque
-    cambiaRange(damageOffset){
-        //vacío de momento
     }
 
     addDust(amount){
         this.dust += amount;
-        //console.log('polvos: ' + this.dust);
     }
 
     changeDicMode(dt){
@@ -223,7 +216,6 @@ export default class Player extends Mob
                 this._rangeArmor *=2;
                 this.speed /= 3;
 
-                //Sconsole.log(this.damage + " " + this._meleeArmor + " " + this._rangeArmor + " ");
             }
             else if(this.eurekaMode){//despausar a los enemigos
 
@@ -240,16 +232,13 @@ export default class Player extends Mob
 
             //sumar rabia
             this.rage += this.dicUp;
-            //console.log('dickUp' + this.dicUp);
-            //console.log('rage: ' + this.rage);
-
             
            //entrar en rabia
            if(this.rage >= this.rageMax){
 
                 this.rageMode = true;
-                console.log(this.rageMode);     
-                //reducir eureca
+     
+                //reducir eureka
                 this._eureka = this._eureka - (this._eureka * 20/100);
 
                 //cambiar estadisticas
@@ -258,8 +247,6 @@ export default class Player extends Mob
                 this._meleeArmor /= 2;
                 this._rangeArmor /=2;
                 this.speed *= 3;
-               
-                //console.log(this.damage + " " + this._meleeArmor + " " + this._rangeArmor + " ");
            }
         } 
     }
@@ -269,19 +256,13 @@ export default class Player extends Mob
         //si no estamos en rabia ni en eureca
         if(!this.eurekaMode && !this.rageMode){
 
-            this._eureka += this.dicUp;
-        
-            // console.log('eureka: ' + this._eureka);
-        
+            this._eureka += this.dicUp;     
 
             if(this._eureka >= this.eurekaMax){
-                // console.log('eureka mode');
                 this.eurekaMode = true;
-
-                this.rage = this.rage - (this.rage * 20/100);
                 this._eureka = 0;
 
-                //this.dicTotalTime = this.eurekaTime;, this.eurekaTime no  existe
+                this.rage = this.rage - (this.rage * 20/100);
 
                 this.scene.isTimeToStop(true);
             }
@@ -291,6 +272,7 @@ export default class Player extends Mob
         }
     }
 
+    //sumar el valor de la carta a la estadistica adecuada
     applyCard(key){
         switch(key){
             case 'life':
