@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="left-up" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="891">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="left-up" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="977">
  <editorsettings>
   <export target="prueba2.json" format="json"/>
  </editorsettings>
@@ -212,7 +212,7 @@
 52,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,52,53,53,53,53,53,53,53,53,53,53,53,54
 </data>
  </layer>
- <objectgroup id="3" name="Spawns" visible="0">
+ <objectgroup id="3" name="Spawns">
   <object id="454" x="78.7879" y="160.606">
    <point/>
   </object>
@@ -246,9 +246,6 @@
   <object id="465" x="1684" y="156">
    <point/>
   </object>
-  <object id="466" x="1848" y="168">
-   <point/>
-  </object>
   <object id="468" x="1996" y="152">
    <point/>
   </object>
@@ -276,28 +273,22 @@
   <object id="476" x="86.7879" y="300.606">
    <point/>
   </object>
-  <object id="477" x="252" y="296">
+  <object id="477" x="297.455" y="244.485">
    <point/>
   </object>
   <object id="478" x="393.333" y="297.333">
    <point/>
   </object>
-  <object id="479" x="577.333" y="297.333">
+  <object id="481" x="821.333" y="302.666">
    <point/>
   </object>
-  <object id="480" x="712" y="292">
+  <object id="482" x="1081.33" y="236">
    <point/>
   </object>
-  <object id="481" x="904" y="301.333">
+  <object id="483" x="1213.33" y="264">
    <point/>
   </object>
-  <object id="482" x="1032" y="276">
-   <point/>
-  </object>
-  <object id="483" x="1196" y="280">
-   <point/>
-  </object>
-  <object id="484" x="1352" y="276">
+  <object id="484" x="1376" y="258.667">
    <point/>
   </object>
   <object id="485" x="1528" y="272">
@@ -306,7 +297,7 @@
   <object id="486" x="1692" y="296">
    <point/>
   </object>
-  <object id="487" x="1856" y="308">
+  <object id="487" x="1862.06" y="326.182">
    <point/>
   </object>
   <object id="488" x="2004" y="292">
@@ -315,7 +306,7 @@
   <object id="489" x="2164" y="304">
    <point/>
   </object>
-  <object id="490" x="2332" y="296">
+  <object id="490" x="2295.64" y="323.273">
    <point/>
   </object>
   <object id="491" x="2496" y="284">
@@ -342,12 +333,6 @@
   <object id="498" x="397.333" y="473.333">
    <point/>
   </object>
-  <object id="499" x="581.333" y="473.333">
-   <point/>
-  </object>
-  <object id="500" x="716" y="468">
-   <point/>
-  </object>
   <object id="501" x="908" y="477.333">
    <point/>
   </object>
@@ -366,13 +351,10 @@
   <object id="506" x="1696" y="472">
    <point/>
   </object>
-  <object id="507" x="1860" y="484">
-   <point/>
-  </object>
   <object id="508" x="2008" y="468">
    <point/>
   </object>
-  <object id="509" x="2168" y="480">
+  <object id="509" x="2168" y="473.939">
    <point/>
   </object>
   <object id="510" x="2336" y="472">
@@ -384,13 +366,10 @@
   <object id="512" x="2636" y="440">
    <point/>
   </object>
-  <object id="513" x="2784" y="440">
+  <object id="513" x="2853.7" y="436.97">
    <point/>
   </object>
   <object id="514" x="2948" y="452">
-   <point/>
-  </object>
-  <object id="515" x="3116" y="440">
    <point/>
   </object>
   <object id="536" x="86.7879" y="612.606">
@@ -402,10 +381,10 @@
   <object id="538" x="393.333" y="609.333">
    <point/>
   </object>
-  <object id="539" x="577.333" y="609.333">
+  <object id="539" x="572" y="556">
    <point/>
   </object>
-  <object id="540" x="712" y="604">
+  <object id="540" x="741.333" y="549.333">
    <point/>
   </object>
   <object id="541" x="904" y="613.333">
@@ -414,10 +393,10 @@
   <object id="542" x="1032" y="588">
    <point/>
   </object>
-  <object id="543" x="1196" y="592">
+  <object id="543" x="1177.33" y="625.333">
    <point/>
   </object>
-  <object id="544" x="1352" y="588">
+  <object id="544" x="1298.67" y="532">
    <point/>
   </object>
   <object id="545" x="1528" y="584">
@@ -432,7 +411,7 @@
   <object id="548" x="2004" y="604">
    <point/>
   </object>
-  <object id="549" x="2164" y="616">
+  <object id="549" x="2106.42" y="652.364">
    <point/>
   </object>
   <object id="550" x="2332" y="608">
@@ -450,22 +429,19 @@
   <object id="554" x="2944" y="588">
    <point/>
   </object>
-  <object id="555" x="3112" y="576">
-   <point/>
-  </object>
   <object id="556" x="110.788" y="760.606">
    <point/>
   </object>
   <object id="557" x="276" y="756">
    <point/>
   </object>
-  <object id="558" x="417.333" y="757.333">
+  <object id="558" x="387.03" y="790.666">
    <point/>
   </object>
   <object id="559" x="557.333" y="692.666">
    <point/>
   </object>
-  <object id="560" x="696.667" y="688.667">
+  <object id="560" x="708.667" y="768.667">
    <point/>
   </object>
   <object id="561" x="894" y="713.333">
@@ -501,7 +477,7 @@
   <object id="571" x="2469.33" y="681.333">
    <point/>
   </object>
-  <object id="572" x="2640" y="678.667">
+  <object id="572" x="2679.39" y="693.819">
    <point/>
   </object>
   <object id="573" x="2794.67" y="688">
@@ -516,19 +492,13 @@
   <object id="576" x="110.788" y="1036.61">
    <point/>
   </object>
-  <object id="577" x="276" y="1032">
-   <point/>
-  </object>
-  <object id="578" x="417.333" y="1033.33">
-   <point/>
-  </object>
   <object id="579" x="601.333" y="1033.33">
    <point/>
   </object>
   <object id="580" x="736" y="1028">
    <point/>
   </object>
-  <object id="581" x="928" y="1037.33">
+  <object id="581" x="883" y="1072.33">
    <point/>
   </object>
   <object id="582" x="1056" y="1012">
@@ -540,12 +510,6 @@
   <object id="584" x="1376" y="1012">
    <point/>
   </object>
-  <object id="585" x="1552" y="1008">
-   <point/>
-  </object>
-  <object id="586" x="1716" y="1032">
-   <point/>
-  </object>
   <object id="587" x="1880" y="1044">
    <point/>
   </object>
@@ -555,13 +519,13 @@
   <object id="589" x="2188" y="1040">
    <point/>
   </object>
-  <object id="590" x="2356" y="1032">
+  <object id="590" x="2425.7" y="962.303">
    <point/>
   </object>
   <object id="591" x="2520" y="1020">
    <point/>
   </object>
-  <object id="592" x="2656" y="1000">
+  <object id="592" x="2616" y="998">
    <point/>
   </object>
   <object id="593" x="2804" y="1000">
@@ -598,12 +562,6 @@
    <point/>
   </object>
   <object id="604" x="1372" y="1168">
-   <point/>
-  </object>
-  <object id="605" x="1540" y="1110.67">
-   <point/>
-  </object>
-  <object id="606" x="1701.33" y="1131.33">
    <point/>
   </object>
   <object id="607" x="1866.67" y="1131.33">
@@ -663,16 +621,10 @@
   <object id="625" x="1540" y="1452">
    <point/>
   </object>
-  <object id="626" x="1704" y="1476">
-   <point/>
-  </object>
   <object id="627" x="1868" y="1488">
    <point/>
   </object>
   <object id="628" x="2016" y="1472">
-   <point/>
-  </object>
-  <object id="629" x="2176" y="1484">
    <point/>
   </object>
   <object id="630" x="2344" y="1476">
@@ -705,12 +657,6 @@
   <object id="639" x="581.333" y="1629.33">
    <point/>
   </object>
-  <object id="640" x="716" y="1624">
-   <point/>
-  </object>
-  <object id="641" x="908" y="1633.33">
-   <point/>
-  </object>
   <object id="642" x="1036" y="1608">
    <point/>
   </object>
@@ -741,10 +687,10 @@
   <object id="651" x="2500" y="1616">
    <point/>
   </object>
-  <object id="652" x="2636" y="1596">
+  <object id="652" x="2308.73" y="2329.33">
    <point/>
   </object>
-  <object id="653" x="2784" y="1596">
+  <object id="653" x="2456.73" y="2329.33">
    <point/>
   </object>
   <object id="654" x="2948" y="1608">
@@ -763,12 +709,6 @@
    <point/>
   </object>
   <object id="659" x="555.333" y="1727.33">
-   <point/>
-  </object>
-  <object id="660" x="684" y="1703.33">
-   <point/>
-  </object>
-  <object id="661" x="864" y="1699.33">
    <point/>
   </object>
   <object id="662" x="1048" y="1764">
@@ -801,25 +741,16 @@
   <object id="671" x="2504" y="1722">
    <point/>
   </object>
-  <object id="672" x="2656" y="1704">
+  <object id="672" x="2328.73" y="2437.33">
    <point/>
   </object>
-  <object id="673" x="2796" y="1708">
+  <object id="673" x="2468.73" y="2441.33">
    <point/>
   </object>
   <object id="674" x="2960" y="1764">
    <point/>
   </object>
   <object id="675" x="3128" y="1752">
-   <point/>
-  </object>
-  <object id="676" x="98.7879" y="2056.61">
-   <point/>
-  </object>
-  <object id="677" x="264" y="2052">
-   <point/>
-  </object>
-  <object id="678" x="405.333" y="2053.33">
    <point/>
   </object>
   <object id="679" x="589.333" y="2053.33">
@@ -855,10 +786,10 @@
   <object id="689" x="2176" y="2060">
    <point/>
   </object>
-  <object id="690" x="2344" y="2052">
+  <object id="690" x="2044" y="2303.52">
    <point/>
   </object>
-  <object id="691" x="2508" y="2040">
+  <object id="691" x="2208" y="2291.52">
    <point/>
   </object>
   <object id="692" x="2644" y="2020">
@@ -874,12 +805,6 @@
    <point/>
   </object>
   <object id="716" x="90.7879" y="2216.61">
-   <point/>
-  </object>
-  <object id="717" x="256" y="2212">
-   <point/>
-  </object>
-  <object id="718" x="397.333" y="2213.33">
    <point/>
   </object>
   <object id="719" x="581.333" y="2213.33">
@@ -906,22 +831,16 @@
   <object id="726" x="1696" y="2212">
    <point/>
   </object>
-  <object id="727" x="1860" y="2224">
-   <point/>
-  </object>
   <object id="728" x="2030" y="2154">
    <point/>
   </object>
   <object id="729" x="2168" y="2166">
    <point/>
   </object>
-  <object id="730" x="2334" y="2150">
+  <object id="730" x="2034" y="2401.52">
    <point/>
   </object>
-  <object id="731" x="2500" y="2138">
-   <point/>
-  </object>
-  <object id="732" x="2636" y="2180">
+  <object id="731" x="2200" y="2389.52">
    <point/>
   </object>
   <object id="733" x="2784" y="2180">
@@ -940,9 +859,6 @@
    <point/>
   </object>
   <object id="738" x="397.333" y="2785.33">
-   <point/>
-  </object>
-  <object id="739" x="581.333" y="2785.33">
    <point/>
   </object>
   <object id="740" x="716" y="2780">
@@ -969,18 +885,6 @@
   <object id="747" x="1860" y="2796">
    <point/>
   </object>
-  <object id="748" x="2008" y="2780">
-   <point/>
-  </object>
-  <object id="749" x="2168" y="2792">
-   <point/>
-  </object>
-  <object id="750" x="2336" y="2784">
-   <point/>
-  </object>
-  <object id="751" x="2500" y="2772">
-   <point/>
-  </object>
   <object id="752" x="2636" y="2752">
    <point/>
   </object>
@@ -999,9 +903,6 @@
   <object id="757" x="268" y="2940">
    <point/>
   </object>
-  <object id="758" x="409.333" y="2941.33">
-   <point/>
-  </object>
   <object id="759" x="593.333" y="2941.33">
    <point/>
   </object>
@@ -1014,9 +915,6 @@
   <object id="762" x="1048" y="2920">
    <point/>
   </object>
-  <object id="763" x="1212" y="2924">
-   <point/>
-  </object>
   <object id="764" x="1368" y="2920">
    <point/>
   </object>
@@ -1027,18 +925,6 @@
    <point/>
   </object>
   <object id="767" x="1872" y="2952">
-   <point/>
-  </object>
-  <object id="768" x="2020" y="2936">
-   <point/>
-  </object>
-  <object id="769" x="2180" y="2948">
-   <point/>
-  </object>
-  <object id="770" x="2348" y="2940">
-   <point/>
-  </object>
-  <object id="771" x="2512" y="2928">
    <point/>
   </object>
   <object id="772" x="2648" y="2908">
@@ -1089,24 +975,6 @@
   <object id="807" x="1868" y="3096">
    <point/>
   </object>
-  <object id="808" x="2016" y="3080">
-   <point/>
-  </object>
-  <object id="809" x="2176" y="3092">
-   <point/>
-  </object>
-  <object id="810" x="2344" y="3084">
-   <point/>
-  </object>
-  <object id="811" x="2508" y="3072">
-   <point/>
-  </object>
-  <object id="812" x="2644" y="3052">
-   <point/>
-  </object>
-  <object id="813" x="2792" y="3052">
-   <point/>
-  </object>
   <object id="814" x="2956" y="3064">
    <point/>
   </object>
@@ -1114,12 +982,6 @@
    <point/>
   </object>
   <object id="816" x="123.758" y="891.152">
-   <point/>
-  </object>
-  <object id="817" x="288.97" y="886.546">
-   <point/>
-  </object>
-  <object id="818" x="430.303" y="887.879">
    <point/>
   </object>
   <object id="819" x="1081.33" y="882.061">
@@ -1131,7 +993,7 @@
   <object id="821" x="1387.88" y="878.788">
    <point/>
   </object>
-  <object id="822" x="2002.55" y="882.061">
+  <object id="822" x="2020.55" y="882.061">
    <point/>
   </object>
   <object id="823" x="2167.76" y="877.455">
@@ -1149,7 +1011,7 @@
   <object id="827" x="3145.45" y="869.697">
    <point/>
   </object>
-  <object id="828" x="2841.94" y="1294.18">
+  <object id="828" x="2790.42" y="1291.15">
    <point/>
   </object>
   <object id="829" x="3007.15" y="1289.58">
@@ -1183,9 +1045,6 @@
    <point/>
   </object>
   <object id="839" x="448.485" y="1318.18">
-   <point/>
-  </object>
-  <object id="840" x="163.152" y="1903.27">
    <point/>
   </object>
   <object id="841" x="328.364" y="1898.67">
@@ -1233,7 +1092,7 @@
   <object id="858" x="607.757" y="2332.6">
    <point/>
   </object>
-  <object id="859" x="742.424" y="2327.27">
+  <object id="859" x="836.363" y="2245.45">
    <point/>
   </object>
   <object id="860" x="129.333" y="2478.31">
@@ -1245,10 +1104,10 @@
   <object id="862" x="435.878" y="2475.03">
    <point/>
   </object>
-  <object id="863" x="619.878" y="2475.03">
+  <object id="863" x="601.696" y="2468.97">
    <point/>
   </object>
-  <object id="864" x="754.545" y="2469.7">
+  <object id="864" x="1021.21" y="2309.09">
    <point/>
   </object>
   <object id="865" x="111.152" y="2611.64">
@@ -1284,7 +1143,7 @@
   <object id="875" x="1890.91" y="2490.91">
    <point/>
   </object>
-  <object id="876" x="1465.94" y="2585.21">
+  <object id="876" x="1244.73" y="2612.48">
    <point/>
   </object>
   <object id="877" x="1629.94" y="2609.21">
@@ -1327,6 +1186,126 @@
    <point/>
   </object>
   <object id="890" x="3093.94" y="2578.79">
+   <point/>
+  </object>
+  <object id="937" x="1169.88" y="2287.76">
+   <point/>
+  </object>
+  <object id="938" x="1287.88" y="2275.76">
+   <point/>
+  </object>
+  <object id="939" x="872.909" y="2612">
+   <point/>
+  </object>
+  <object id="940" x="990.909" y="2600">
+   <point/>
+  </object>
+  <object id="941" x="1118.18" y="2584.85">
+   <point/>
+  </object>
+  <object id="942" x="2021.21" y="2648.48">
+   <point/>
+  </object>
+  <object id="943" x="2215.15" y="2636.36">
+   <point/>
+  </object>
+  <object id="944" x="2412.12" y="2639.39">
+   <point/>
+  </object>
+  <object id="945" x="2475.76" y="1890.91">
+   <point/>
+  </object>
+  <object id="946" x="2612.12" y="1857.58">
+   <point/>
+  </object>
+  <object id="947" x="2621.21" y="1260.61">
+   <point/>
+  </object>
+  <object id="948" x="2436.36" y="1254.55">
+   <point/>
+  </object>
+  <object id="949" x="2539.39" y="830.303">
+   <point/>
+  </object>
+  <object id="950" x="2690.91" y="806.061">
+   <point/>
+  </object>
+  <object id="951" x="2412.12" y="778.788">
+   <point/>
+  </object>
+  <object id="952" x="1539.39" y="833.333">
+   <point/>
+  </object>
+  <object id="953" x="1696.97" y="818.182">
+   <point/>
+  </object>
+  <object id="954" x="1781.82" y="942.424">
+   <point/>
+  </object>
+  <object id="955" x="1815.15" y="769.697">
+   <point/>
+  </object>
+  <object id="956" x="1745.45" y="1090.91">
+   <point/>
+  </object>
+  <object id="957" x="1854.55" y="1257.58">
+   <point/>
+  </object>
+  <object id="958" x="1660.61" y="1290.91">
+   <point/>
+  </object>
+  <object id="959" x="1515.15" y="1300">
+   <point/>
+  </object>
+  <object id="960" x="521.212" y="863.636">
+   <point/>
+  </object>
+  <object id="961" x="815.152" y="809.091">
+   <point/>
+  </object>
+  <object id="962" x="604" y="1282">
+   <point/>
+  </object>
+  <object id="963" x="736" y="1354">
+   <point/>
+  </object>
+  <object id="964" x="850" y="1358">
+   <point/>
+  </object>
+  <object id="965" x="922" y="1250">
+   <point/>
+  </object>
+  <object id="966" x="670" y="1806">
+   <point/>
+  </object>
+  <object id="967" x="798" y="1800">
+   <point/>
+  </object>
+  <object id="968" x="932" y="1794">
+   <point/>
+  </object>
+  <object id="969" x="748" y="1904">
+   <point/>
+  </object>
+  <object id="970" x="910" y="1902">
+   <point/>
+  </object>
+  <object id="971" x="826" y="1980">
+   <point/>
+  </object>
+  <object id="972" x="486" y="2128">
+   <point/>
+  </object>
+  <object id="973" x="820" y="2102">
+   <point/>
+  </object>
+  <object id="974" x="820" y="2102">
+   <point/>
+  </object>
+  <object id="975" x="1674" y="1876">
+   <point/>
+  </object>
+  <object id="976" x="1852" y="1858">
    <point/>
   </object>
  </objectgroup>

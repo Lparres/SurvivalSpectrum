@@ -49,7 +49,7 @@ export default class Waves extends Phaser.GameObjects.GameObject{
         this.scaleRangeEnemyRangeDamageFactor = 0.07;
 
 
-        this.scaleWaveNumberFactor = 2;
+        this.scaleWaveNumberFactor = 0.2;
 
     }
 
