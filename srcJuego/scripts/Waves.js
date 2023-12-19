@@ -35,6 +35,10 @@ export default class Waves extends Phaser.GameObjects.GameObject{
 
         //para calcular cuando sale la nueva oleada
         this.globalTime = 0;
+
+        this.waveType = Phaser.Math.Between(0,(this.waveJson.Waves.length-1));
+
+
     }
 
     update(dt){
@@ -50,13 +54,17 @@ export default class Waves extends Phaser.GameObjects.GameObject{
         this.globalTime = (this.scene.scene.get("UIScene").minuteCount * 60) + this.scene.scene.get("UIScene").secondsCount;
 
         //si ha llegado el tiempo de la siguiente oleada, cambiar de oleada,y actualizar spawnPoints
-        if (this.globalTime >= this.waveJson.NewWaves[this.currentWave + 1].waveStartTime) {
+        if (this.globalTime >= this.nextWaveStartTime()) {
             this.currentWave = this.currentWave + 1;
             this.sortSpawnPoints();
             this.sortSpawnPointsTimer = 0;
 
             //actualizar la info de la UI
             this.scene.scene.get("UIScene").updateWaveData();
+
+            this.waveType = Phaser.Math.Between(0,(this.waveJson.Waves.length-1));
+            this.waveJson = structuredClone(this.scene.waveJson);
+
         }
 
 
@@ -70,13 +78,14 @@ export default class Waves extends Phaser.GameObjects.GameObject{
 
 
         //para cada uno de los spawns de la oleada actual
-        for (let i = 0; i < this.waveJson.NewWaves[this.currentWave].spawnsData.length; i++) {
+        for (let i = 0; i < this.waveJson.Waves[this.waveType].spawnsData.length; i++) {
 
             //info de este spawn
-            let spawnData = this.waveJson.NewWaves[this.currentWave].spawnsData[i];
+            let spawnData = this.waveJson.Waves[this.waveType].spawnsData[i];
 
             //posicion en la que vamos a spawnear
             let spawnPos = this.spawnPositions[i];
+    
 
             this.spawnDataUpdate(spawnData, spawnPos, dt, false, false);
         }
@@ -84,7 +93,7 @@ export default class Waves extends Phaser.GameObjects.GameObject{
         //SPAWN DEL TOTEM ENEMY
 
         //info del spawn del totem
-        let totemData = this.waveJson.NewWaves[this.currentWave].totemEnemy[0];
+        let totemData = this.waveJson.Waves[this.waveType].totemEnemy[0];
 
         //posicion en la que vamos a spawnear
         let spawnPos = this.spawnPositions[Phaser.Math.Between(0, this.spawnPositions.length - 1)];
@@ -183,7 +192,7 @@ export default class Waves extends Phaser.GameObjects.GameObject{
             if (distance >= this.minSpawnRange && distance <= this.maxSpawnRange) {
 
                 //si la lista no está llena añadirlo
-                if (this.spawnPositions.length < this.waveJson.NewWaves[this.currentWave].spawnsData.length) {
+                if (this.spawnPositions.length < this.waveJson.Waves[this.waveType].spawnsData.length) {
                     this.spawnPositions.push(point);
                 }
                 else {
@@ -216,7 +225,12 @@ export default class Waves extends Phaser.GameObjects.GameObject{
             spawnIndex++;
         }
 
+
+      
     }
 
 
+    nextWaveStartTime(){
+        return 40 + (this.currentWave*50);
+    }
 }
