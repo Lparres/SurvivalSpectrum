@@ -18,12 +18,14 @@ export default class StartMenu extends Phaser.Scene {
     create() {
         this.title = this.add.text(this.cameras.main.centerX - 300, this.cameras.main.centerY / 3, 'Survival Spectrum', { font: '64px Arial', fill: '#FFFFFF' });
 
-        const start = new Button(this, this.cameras.main.centerX, this.cameras.main.centerY, 'startButton', 1, () => {
+        this.add.image(0,0, 'fondoMainMenu').setOrigin(0, 0);
+
+        const start = new Button(this, this.cameras.main.centerX, this.cameras.main.centerY, 'startMainMenu', 1, () => {
             this.scene.launch('level');
             this.scene.sleep('StartMenu');
         })
 
-        const fullScreenButton = this.add.image(960, 900, 'fullscreen', 0).setOrigin(0.5, 0.5).setInteractive();
+        const fullScreenButton = this.add.image(330, 980, 'fullscreen', 0).setOrigin(0.5, 0.5).setInteractive();
         if (this.scale.isFullscreen) { fullScreenButton.setFrame(1); }
         else { fullScreenButton.setFrame(0); }
 
