@@ -440,20 +440,14 @@ export default class MainScene extends Phaser.Scene {
         this.scene.sleep('UIScene')
         this.scene.sleep('level')
         this.scene.launch('FinalScene',
+        //Json que se pasa a la escena final para recabar datos
         {dicManager: this.dicotomyManager, 
+            //Tiempo
             finalTime:{
-                minutes: this.scene.get("UIScene").minuteCount.toLocaleString('en-US', {
-                    minimumIntegerDigits: 2,
-                    useGrouping: false,
-                    maximumFractionDigits:0 
-                  }),
-                seconds: this.scene.get("UIScene").secondsCount.toLocaleString('en-US', {
-                    minimumIntegerDigits: 2,
-                    useGrouping: false,
-                    maximumFractionDigits:0 
-                  })
-        }
-    });
+                minutes: this.scene.get("UIScene").minuteCount.toLocaleString('en-US', {minimumIntegerDigits: 2,useGrouping: false,maximumFractionDigits:0 }),
+                seconds: this.scene.get("UIScene").secondsCount.toLocaleString('en-US', {minimumIntegerDigits: 2,useGrouping: false,maximumFractionDigits:0 })
+            }
+        });
         this.music.stop();
     }
 }
