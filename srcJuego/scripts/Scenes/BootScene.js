@@ -70,6 +70,7 @@ export default class BootScene extends Phaser.Scene{
         this.load.image('cabeceraDicos', 'srcJuego/ui/CabeceraDicos.png');
         this.load.spritesheet('fullscreenMenu', 'srcJuego/ui/EnableDisableFullScreenButton.png', { frameWidth: 330, frameHeight: 118 });
         this.load.spritesheet('fullscreen', 'srcJuego/ui/fullscreen.png', { frameWidth: 362, frameHeight: 84 });
+        this.load.image('tryAgainButton', 'srcJuego/img/try_again.png')
 
         let srcJuego = 'srcJuego';
 
