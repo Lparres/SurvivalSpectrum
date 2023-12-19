@@ -1,4 +1,4 @@
-# Vampiro Sobrevivir del Chino
+# Survival Spectrum
 Este Proyecto es un trabajo universitario de alumnos de la *Universidad Complutense de Madrid* para la asignatura de **Programación de Videojuegos en Lenguajes Interpretados**, dentro del **Grado en Desarrollo de Videojuegos**.
 
 Para este proyecto se ha creado una cuenta de [Instagram](https://www.instagram.com/_scriptedgames/) para el estudio donde se irán subiendo progresos del desarrollo del juego.

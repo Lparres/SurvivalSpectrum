@@ -17,6 +17,7 @@ export default class Card extends Phaser.GameObjects.Container{
                 this.setVisible(false)
                 scene.updateCardsLeft();
                 this.scene.scene.get('level').player.applyCard(stat);
+                this.scene.cardClick.play();
             }
         },false).setOrigin(0,0)
 
