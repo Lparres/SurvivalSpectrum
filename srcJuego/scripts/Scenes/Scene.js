@@ -105,6 +105,7 @@ export default class MainScene extends Phaser.Scene {
             });
         }
 
+
         //entrar al menu de pausa
         this.pause.on('down', event => {
             this.activePauseMenu();

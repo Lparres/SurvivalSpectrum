@@ -276,27 +276,26 @@ export default class Player extends Mob
     applyCard(key){
         switch(key){
             case 'life':
-                this.maxLife += Math.round(this.scene.dicotomyManager.CardValue(key));
+                this.maxLife += this.scene.dicotomyManager.CardValue(key);
                 break;
             case 'lifeRegen':
-                this.lifeReg += Math.round(this.scene.dicotomyManager.CardValue(key));
+                this.lifeReg += this.scene.dicotomyManager.CardValue(key);
                 break;
             case 'damage':
-                //this.damage += Math.round(this.scene.dicotomyManager.CardValue(key));
-                this.baseDamage += Math.round(this.scene.dicotomyManager.CardValue(key));
+                this.baseDamage +=this.scene.dicotomyManager.CardValue(key);
                 this.scene.dicotomyManager.AplieDicotomy(2);
                 break;
             case 'fireRate':
                 this._atkCD -= this.scene.dicotomyManager.CardValue(key);
                 break;
             case 'meleeArmor':
-                this._meleeArmor += Math.round(this.scene.dicotomyManager.CardValue(key));
+                this._meleeArmor += this.scene.dicotomyManager.CardValue(key);
                 break;
             case 'rangeArmor':
-                this._rangeArmor += Math.round(this.scene.dicotomyManager.CardValue(key));
+                this._rangeArmor += this.scene.dicotomyManager.CardValue(key);
                 break;
             case 'speed':
-                this.speed += Math.round(this.scene.dicotomyManager.CardValue(key));
+                this.speed += this.scene.dicotomyManager.CardValue(key);
                 break;
         }
     }
