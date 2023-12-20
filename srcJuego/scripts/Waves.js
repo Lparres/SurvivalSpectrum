@@ -41,13 +41,13 @@ export default class Waves extends Phaser.GameObjects.GameObject{
 
         //escalado por rondas
         //0,1 = 10%
-        this.scaleMeleeLifeFactor = 0.07;
-        this.scaleMeleeDamageFactor = 0.07;
-        this.scaleSpeedFactor = 0.05;
+        this.scaleMeleeLifeFactor = 0.12;
+        this.scaleMeleeDamageFactor = 0.12;
+        this.scaleSpeedFactor = 0.08;
 
 
-        this.scaleRangeLifeFactor = 0.07;
-        this.scaleRangeEnemyRangeDamageFactor = 0.07;
+        this.scaleRangeLifeFactor = 0.12;
+        this.scaleRangeEnemyRangeDamageFactor = 0.12;
 
         this.scaleWaveNumberFactor = 0.07;
 
