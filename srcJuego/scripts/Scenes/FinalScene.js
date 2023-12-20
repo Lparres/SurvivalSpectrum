@@ -14,6 +14,8 @@ export default class FinalScene extends Phaser.Scene {
         this.killedEnemies = data.killedEnemies;
 
         this.totalDust = data.totalDust; 
+
+        this.personalityTexts = data.personalityTexts;
     }
 
     preload(){
@@ -97,9 +99,9 @@ export default class FinalScene extends Phaser.Scene {
         })
     
     }
-/**
- * calcula el nombre de la personlidad en funcion de las dicotomias
- */
+    /**
+     * calcula el nombre de la personlidad en funcion de las dicotomias
+     */
     getPesonalityName(){
         let name = '';
         name += this.dicotomyManager.perDic1 < 50 ? 'T':'E';
