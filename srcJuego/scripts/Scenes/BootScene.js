@@ -144,6 +144,8 @@ export default class BootScene extends Phaser.Scene{
         this.load.json('waves', 'srcJuego/scripts/JSON/waves.json');
 
 
+
+        this.load.json('personality', 'srcJuego/scripts/JSON/personality.json');
         //sonidos
         this.load.audio('golpe','srcJuego/audio/golpe_VSDC.wav');
         this.load.audio('golpePlayer','srcJuego/audio/playerHit_VSDC.wav');

@@ -33,12 +33,16 @@ export default class Menu extends Phaser.Scene {
 
         //boton para salir del menú
         const unpause = new Button(this, 0, 415, 'confirm', 1, () => {
+         
+          if(this.cardsToPick <= 0){
+
             let UI = this.scene.get('UIScene');
             let MainScene = this.scene.get('level');
             this.scene.wake('UIScene');
             this.scene.sleep('Menu');
             MainScene.scene.setActive(true);
             MainScene.music.resume();
+          }
         })
         
         //añadir al contenedor central

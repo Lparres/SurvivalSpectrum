@@ -33,9 +33,9 @@ export default class MainScene extends Phaser.Scene {
 
         //leer los json, de data y oleadas
         this.data = this.game.cache.json.get('data');
-
+        
         this.waveJson = this.game.cache.json.get('waves');
-
+        
         this.personalityJson = this.game.cache.json.get('personality');
 
         this.personalityTexts = this.personalityJson.PersonalityTexts;
@@ -94,7 +94,7 @@ export default class MainScene extends Phaser.Scene {
         this.cum = this.input.keyboard.addKey('Q');
 
 
-        this.testing = true;
+        this.testing = false;
 
         if(this.testing){
 

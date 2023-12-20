@@ -59,13 +59,32 @@ export default class FinalScene extends Phaser.Scene {
         this.BGC = this.add.nineslice(0, 0, 'ui', 'CardsMenu', 650, 800 , 20, 20, 20, 20);
         center.add(this.BGC);    
 
-        this.personality = this.add.text(0, 0, "Your final personality:\n"+this.getPesonalityName(), 
+        //texto siglas personalidad
+        this.personality = this.add.text(0, -300, "Your final personality:\n"+this.getPesonalityName(), 
         { font: '64px Arial', fill: '#FFFFFF',align:'center' }).setOrigin(0.5,0.5);
+
         center.add(this.personality);
 
+        //texto nombre personalidad
+        this.nameText = this.add.text(0, -200, this.personalityTexts[this.getPesonalityName()].name, 
+        { font: '64px Arial', fill: '#FFFFFF',align:'center' }).setOrigin(0.5,0.5);
+           
+        center.add(this.nameText);
+
+        //texto descripcion
+        this.descText = this.add.text(0,0, this.personalityTexts[this.getPesonalityName()].text, 
+        { font: '40px Arial', fill: '#FFFFFF',align:'center' }).setOrigin(0.5,0.5);
+           
+        center.add(this.descText);
 
         const textFormat = { font: '64px Arial', fill: '#FFFFFF',align:'left' };
 
+
+         //texto autor
+         this.authorText = this.add.text(-50, 250,"-"+this.personalityTexts[this.getPesonalityName()].author, 
+         { font: '64px Arial', fill: '#FFFFFF',align:'center' }).setOrigin(0.5,0.5);
+            
+         center.add(this.authorText);
 
         /**
          * Zona derecha donde se mostrara informacion del rendimiento de la partida (Pasar a clase container??????)
@@ -104,10 +123,10 @@ export default class FinalScene extends Phaser.Scene {
      */
     getPesonalityName(){
         let name = '';
-        name += this.dicotomyManager.perDic1 < 50 ? 'T':'E';
-        name += this.dicotomyManager.perDic2 < 50 ? 'E':'I';
-        name += this.dicotomyManager.perDic3 < 50 ? 'S':'N';
-        name += this.dicotomyManager.perDic4 < 50 ? 'J':'P';
+        name += this.dicotomyManager.perDic2 > 50 ? 'E':'I';
+        name += this.dicotomyManager.perDic3 > 50 ? 'S':'N';
+        name += this.dicotomyManager.perDic1 > 50 ? 'T':'F';
+        name += this.dicotomyManager.perDic4 > 50 ? 'J':'P';
         return name;
     }
 
