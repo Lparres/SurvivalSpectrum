@@ -1,6 +1,6 @@
 {
 
-    "PersonalityTexts":[
+    "PersonalityTexts":
         {
             "INTJ":{
                 "name":"Architect",
@@ -83,10 +83,6 @@
                 "author": "ELTON JOHN"
             }
 
-        }
-        
-
-    ]
-
+        }   
 
 }

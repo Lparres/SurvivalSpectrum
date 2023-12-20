@@ -33,9 +33,9 @@ export default class MainScene extends Phaser.Scene {
 
         //leer los json, de data y oleadas
         this.data = this.game.cache.json.get('data');
-
+        
         this.waveJson = this.game.cache.json.get('waves');
-
+        
         this.personalityJson = this.game.cache.json.get('personality');
 
         this.personalityTexts = this.personalityJson.PersonalityTexts;

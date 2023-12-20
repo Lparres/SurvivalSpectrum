@@ -43,11 +43,11 @@ export default class Waves extends Phaser.GameObjects.GameObject{
         //0,1 = 10%
         this.scaleMeleeLifeFactor = 0.07;
         this.scaleMeleeDamageFactor = 0.07;
+        this.scaleSpeedFactor = 0.05;
 
 
         this.scaleRangeLifeFactor = 0.07;
         this.scaleRangeEnemyRangeDamageFactor = 0.07;
-
 
         this.scaleWaveNumberFactor = 0.07;
 
@@ -253,10 +253,12 @@ export default class Waves extends Phaser.GameObjects.GameObject{
         for(let i = 0; i < this.data.EnemyConfigs.length;i++){
             this.data.EnemyConfigs[i].life *= (1 +(this.scaleMeleeLifeFactor*this.currentWave)); 
             this.data.EnemyConfigs[i].damage *= (1 +(this.scaleMeleeDamageFactor*this.currentWave)); 
+            this.data.EnemyConfigs[i].velocity *= (1 +(this.scaleSpeedFactor*this.currentWave));
         }
 
         for(let i = 0;i < this.data.RangeConfigs.length;i++){
             this.data.RangeConfigs[i].settingMelee.life *= (1 +(this.scaleRangeLifeFactor*this.currentWave)); 
+            this.data.RangeConfigs[i].settingMelee.velocity *= (1 +(this.scaleSpeedFactor*this.currentWave)); 
             this.data.RangeConfigs[i].rangeDamage *= (1 +(this.scaleRangeEnemyRangeDamageFactor*this.currentWave)); 
         }
     }

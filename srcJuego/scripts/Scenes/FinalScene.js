@@ -61,8 +61,17 @@ export default class FinalScene extends Phaser.Scene {
 
         this.personality = this.add.text(0, 0, "Your final personality:\n"+this.getPesonalityName(), 
         { font: '64px Arial', fill: '#FFFFFF',align:'center' }).setOrigin(0.5,0.5);
+
         center.add(this.personality);
 
+        //console.log(this.getPesonalityName());
+        //console.log(this.personalityTexts["EINP"]);
+        this.text = this.add.text(0, 300, this.personalityTexts[this.getPesonalityName()].name, 
+        { font: '40px Arial', fill: '#FFFFFF',align:'center' }).setOrigin(0.5,0.5);
+        
+        
+        
+        center.add(this.text);
 
         const textFormat = { font: '64px Arial', fill: '#FFFFFF',align:'left' };
 
@@ -104,9 +113,9 @@ export default class FinalScene extends Phaser.Scene {
      */
     getPesonalityName(){
         let name = '';
-        name += this.dicotomyManager.perDic1 < 50 ? 'T':'E';
-        name += this.dicotomyManager.perDic2 < 50 ? 'E':'I';
-        name += this.dicotomyManager.perDic3 < 50 ? 'S':'N';
+        name += this.dicotomyManager.perDic1 < 50 ? 'E':'I';
+        name += this.dicotomyManager.perDic2 < 50 ? 'N':'S';
+        name += this.dicotomyManager.perDic3 < 50 ? 'T':'F';
         name += this.dicotomyManager.perDic4 < 50 ? 'J':'P';
         return name;
     }

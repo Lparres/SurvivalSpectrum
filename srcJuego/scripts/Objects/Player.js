@@ -214,7 +214,7 @@ export default class Player extends Mob
                 this.damage /= 2;
                 this._meleeArmor *= 2;
                 this._rangeArmor *=2;
-                this.speed /= 3;
+                this.speed /= 2;
 
             }
             else if(this.eurekaMode){//despausar a los enemigos
@@ -246,7 +246,7 @@ export default class Player extends Mob
                 this.damage *= 2;
                 this._meleeArmor /= 2;
                 this._rangeArmor /=2;
-                this.speed *= 3;
+                this.speed *= 2;
            }
         } 
     }
