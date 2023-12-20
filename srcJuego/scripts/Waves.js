@@ -30,7 +30,7 @@ export default class Waves extends Phaser.GameObjects.GameObject{
         this.maxSpawnRange = 750;
 
         //cada cuanto tiempo se realculan los spawn points
-        this.sortSpawnPointsFrecuency = 4000;
+        this.sortSpawnPointsFrecuency = 3000;
         this.sortSpawnPointsTimer = 9999;
 
         //para calcular cuando sale la nueva oleada

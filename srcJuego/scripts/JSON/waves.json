@@ -53,7 +53,7 @@
         {
             "totemEnemy":[{"type": "melee","animKey": "enemyMove4", "size": 1,"frecuency": 10000, "timer": 0 }],
             "spawnsData":[
-                {"type": "range","animKey": "enemyMove2", "size": 4, "frecuency": 4000, "timer": 4000 },
+                {"type": "range","animKey": "enemyMove3", "size": 4, "frecuency": 4000, "timer": 4000 },
                 {"type": "range","animKey": "enemyMove3", "size": 4, "frecuency": 4000, "timer": 4000 },
                 {"type": "range","animKey": "enemyMove3", "size": 4, "frecuency": 4000, "timer": 4000 },
                 {"type": "range","animKey": "enemyMove3", "size": 4, "frecuency": 4000, "timer": 4000 },

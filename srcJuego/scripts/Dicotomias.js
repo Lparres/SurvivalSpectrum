@@ -25,8 +25,8 @@ export default class Dicotomías {
 
 
           //variables para los valores base de las dicotomias, estos deberian ir actualizandose, por ejemplo el de la vida del player
-          this.rageBaseAmount = this.levelScene.data.PlayerConfig.life;
-          this.eurekaBaseAmount = 500;
+          this.rageBaseAmount = this.levelScene.data.PlayerConfig.life *1.5;
+          this.eurekaBaseAmount = this.levelScene.player.dicUp   *150;
      }
 
      /**

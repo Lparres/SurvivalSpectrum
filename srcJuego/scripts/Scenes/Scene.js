@@ -94,7 +94,7 @@ export default class MainScene extends Phaser.Scene {
         this.cum = this.input.keyboard.addKey('Q');
 
 
-        this.testing = true;
+        this.testing = false;
 
         if(this.testing){
 
