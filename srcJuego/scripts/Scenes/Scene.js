@@ -36,6 +36,11 @@ export default class MainScene extends Phaser.Scene {
 
         this.waveJson = this.game.cache.json.get('waves');
 
+        this.personalityJson = this.game.cache.json.get('personality');
+
+        this.personalityTexts = this.personalityJson.PersonalityTexts;
+
+
         // Cursor personalizado
         this.input.setDefaultCursor('url(srcJuego/img/crosshair.png) 16 16, pointer');
 
@@ -88,11 +93,18 @@ export default class MainScene extends Phaser.Scene {
         this.esc = this.input.keyboard.addKey('ESC');
         this.cum = this.input.keyboard.addKey('Q');
 
-        //entrar al menu de dicotomías, solo para testeo
-        this.cum.on('down', event => {
-            this.activeDicotomyMenu();
 
-        });
+        this.testing = true;
+
+        if(this.testing){
+
+            //entrar al menu de dicotomías, solo para testeo
+            this.cum.on('down', event => {
+                this.activeDicotomyMenu();
+                
+            });
+        }
+
 
         //entrar al menu de pausa
         this.pause.on('down', event => {
@@ -456,8 +468,9 @@ export default class MainScene extends Phaser.Scene {
         this.scene.sleep('level')
         this.scene.launch('FinalScene',
         //Json que se pasa a la escena final para recabar datos
-        {dicManager: 
-            this.dicotomyManager, 
+        {
+            dicManager: this.dicotomyManager, 
+            personalityTexts: this.personalityTexts,
             //Tiempo
             finalTime:{
                 minutes: this.scene.get("UIScene").minuteCount.toLocaleString('en-US', {minimumIntegerDigits: 2,useGrouping: false,maximumFractionDigits:0 }),
