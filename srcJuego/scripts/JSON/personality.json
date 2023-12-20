@@ -4,32 +4,32 @@
         {
             "INTJ":{
                 "name":"Architect",
-                "text":"Thought constitutes the greatness of man. Man is a reed, the feeblest thing in nature, but he is a thinking reed.",
+                "text":"Thought constitutes the greatness\n of man. Man is a reed, the feeblest\n thing in nature,\n but he is a thinking reed.",
                 "author":"BLAISE PASCAL"
             },          
             "INTP":{
                 "name":"Logician",
-                "text": "The important thing is not to stop questioning. Curiosity has its own reason for existence.",
+                "text": "The important thing is not to stop\n questioning.Curiosity has its own\n reason for existence.",
                 "author": "ALBERT EINSTEIN"
             },
             "ENTJ":{
                 "name":"Commander",
-                "text": "Your time is limited, so don’t waste it living someone else’s life.",
+                "text": "Your time is limited, so don’t waste\n it living someone else’s life.",
                 "author": "Steve Jobs"
             },
             "ENTP":{
                 "name":"Debater",
-                "text": "Follow the path of the unsafe, independent thinker. Expose your ideas to the dangers of controversy.",
+                "text": "Follow the path of the unsafe, \nindependent thinker.\n Expose your ideas\n to the dangers of controversy.",
                 "author": "Thomas J. Watson"
             },
             "INFJ":{
                 "name":"Advocate",
-                "text": "Treat people as if they were what they ought to be and you help them to become what they are capable of being.",
+                "text": "Treat people as if they were what\n they ought to be and you help\n them to become what they\n are capable of being.",
                 "author": "Johann Wolfgang Von Goethe"
             },
             "INFP":{
                 "name":"Mediator",
-                "text": "All that is gold does not glitter; not all those who wander are lost; the old that is strong does not wither; deep roots are not reached by the frost.",
+                "text": "All that is gold does not glitter; not all those who wander are lost;\n the old that is strong does not wither; deep roots are not reached\n by the frost.",
                 "author": "J. R. R. TOLKIEN"
             },
             "ENFJ":{
@@ -39,17 +39,17 @@
             },
             "ENFP":{
                 "name":"Campaigner",
-                "text": "It doesn’t interest me what you do for a living. I want to know what you ache for – and if you dare to dream of meeting your heart’s longing.",
+                "text": "It doesn’t interest me what you do for a living. I want to know\n what you ache for – and if you dare to dream of\n meeting your heart’s longing.",
                 "author": "ORIAH MOUNTAIN DREAMER"
             },
             "ISTJ":{
                 "name":"Logistician",
-                "text": "I’d be more frightened by not using whatever abilities I’d been given. I’d be more frightened by procrastination and laziness.",
+                "text": "I’d be more frightened by not using whatever abilities I’d been given.\n I’d be more frightened by procrastination and laziness.",
                 "author": "DENZEL WASHINGTON"
             },
             "ISFJ":{
                 "name":"Defender",
-                "text": "Love only grows by sharing. You can only have more for yourself by giving it away to others.",
+                "text": "Love only grows by sharing. You can only have more for yourself\n by giving it away to others.",
                 "author": "Brian Tracy"
             },
             "ESTJ":{
@@ -59,17 +59,17 @@
             },
             "ESFJ":{
                 "name":"Consul",
-                "text": "Encourage, lift, and strengthen one another. For the positive energy spread to one will be felt by us all.",
+                "text": "Encourage, lift, and strengthen one another.\n For the positive energy spread to one will be felt by us all.",
                 "author": "Deborah Day"
             },
             "ISTP":{
                 "name":"Virtuoso",
-                "text": "I wanted to live the life, a different life. I didn’t want to go to the same place every day and see the same people and do the same job. I wanted interesting challenges.",
+                "text": "I wanted to live the life, a different \nlife. I didn’t want to go to the same \nplace every day and see the same \npeople and do the same job. I \nwanted interesting challenges.",
                 "author": "Harrison Ford"
             },
             "ISFP":{
                 "name":"Adventurer",
-                "text": "I change during the course of a day. I wake and I’m one person, and when I go to sleep I know for certain I’m somebody else.",
+                "text": "I change during the course of a day. I wake\n and I’m one person, and when I go to sleep I know\n for certain I’m somebody else.",
                 "author": "Bob Dylan"
             },
             "ESTP":{

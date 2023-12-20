@@ -59,22 +59,32 @@ export default class FinalScene extends Phaser.Scene {
         this.BGC = this.add.nineslice(0, 0, 'ui', 'CardsMenu', 650, 800 , 20, 20, 20, 20);
         center.add(this.BGC);    
 
-        this.personality = this.add.text(0, 0, "Your final personality:\n"+this.getPesonalityName(), 
+        //texto siglas personalidad
+        this.personality = this.add.text(0, -300, "Your final personality:\n"+this.getPesonalityName(), 
         { font: '64px Arial', fill: '#FFFFFF',align:'center' }).setOrigin(0.5,0.5);
 
         center.add(this.personality);
 
-        //console.log(this.getPesonalityName());
-        //console.log(this.personalityTexts["EINP"]);
-        this.text = this.add.text(0, 300, this.personalityTexts[this.getPesonalityName()].name, 
+        //texto nombre personalidad
+        this.nameText = this.add.text(0, -200, this.personalityTexts[this.getPesonalityName()].name, 
+        { font: '64px Arial', fill: '#FFFFFF',align:'center' }).setOrigin(0.5,0.5);
+           
+        center.add(this.nameText);
+
+        //texto descripcion
+        this.descText = this.add.text(0,0, this.personalityTexts['INFJ'].text, 
         { font: '40px Arial', fill: '#FFFFFF',align:'center' }).setOrigin(0.5,0.5);
-        
-        
-        
-        center.add(this.text);
+           
+        center.add(this.descText);
 
         const textFormat = { font: '64px Arial', fill: '#FFFFFF',align:'left' };
 
+
+         //texto autor
+         this.authorText = this.add.text(-150, 250,"-"+this.personalityTexts[this.getPesonalityName()].author, 
+         { font: '64px Arial', fill: '#FFFFFF',align:'center' }).setOrigin(0.5,0.5);
+            
+         center.add(this.authorText);
 
         /**
          * Zona derecha donde se mostrara informacion del rendimiento de la partida (Pasar a clase container??????)
