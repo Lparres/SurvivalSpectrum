@@ -29,37 +29,37 @@
             },
             "INFP":{
                 "name":"Mediator",
-                "text": "All that is gold does not glitter; not all those who wander are lost;\n the old that is strong does not wither; deep roots are not reached\n by the frost.",
+                "text": "All that is gold does not glitter;\n not all those who wander are lost;\n the old that is strong does\n not wither; deep roots are \nnot reached by the frost.",
                 "author": "J. R. R. TOLKIEN"
             },
             "ENFJ":{
                 "name":"Protagonist",
-                "text": "When the whole world is silent, even one voice becomes powerful.",
+                "text": "When the whole world is silent,\n even one voice becomes powerful.",
                 "author": "MALALA YOUSAFZAI"
             },
             "ENFP":{
                 "name":"Campaigner",
-                "text": "It doesn’t interest me what you do for a living. I want to know\n what you ache for – and if you dare to dream of\n meeting your heart’s longing.",
+                "text": "It doesn’t interest me what you do \nfor a living. I want to know\n what you ache for – and\n if you dare to dream of\n meeting your heart’s longing.",
                 "author": "ORIAH MOUNTAIN DREAMER"
             },
             "ISTJ":{
                 "name":"Logistician",
-                "text": "I’d be more frightened by not using whatever abilities I’d been given.\n I’d be more frightened by procrastination and laziness.",
+                "text": "I’d be more frightened by not using \nwhatever abilities I’d been given.\n I’d be more frightened by \nprocrastination and laziness.",
                 "author": "DENZEL WASHINGTON"
             },
             "ISFJ":{
                 "name":"Defender",
-                "text": "Love only grows by sharing. You can only have more for yourself\n by giving it away to others.",
+                "text": "Love only grows by sharing.\n You can only have more for yourself \nby giving it away to others.",
                 "author": "Brian Tracy"
             },
             "ESTJ":{
                 "name":"Executive",
-                "text": "Good order is the foundation of all things.",
+                "text": "Good order is the foundation\n of all things.",
                 "author": "Edmund Burke"
             },
             "ESFJ":{
                 "name":"Consul",
-                "text": "Encourage, lift, and strengthen one another.\n For the positive energy spread to one will be felt by us all.",
+                "text": "Encourage, lift, and strengthen\n one another. For the positive \nenergy spread to one will be \nfelt by us all.",
                 "author": "Deborah Day"
             },
             "ISTP":{
@@ -69,17 +69,17 @@
             },
             "ISFP":{
                 "name":"Adventurer",
-                "text": "I change during the course of a day. I wake\n and I’m one person, and when I go to sleep I know\n for certain I’m somebody else.",
+                "text": " I change during the course of a day. \nI wake and I’m one person, and \nwhen I go to sleep I know\n for certain I’m somebody else.",
                 "author": "Bob Dylan"
             },
             "ESTP":{
                 "name":"Entrepreneur",
-                "text": "Life is either a daring adventure or nothing at all.",
+                "text": "Life is either a daring \nadventure or nothing at all.",
                 "author": "Helen Keller"
             },
             "ESFP":{
                 "name":"Entertainer",
-                "text": "Live for each second without hesitation.",
+                "text": "Live for each second \nwithout hesitation.",
                 "author": "ELTON JOHN"
             }
 

@@ -72,7 +72,7 @@ export default class FinalScene extends Phaser.Scene {
         center.add(this.nameText);
 
         //texto descripcion
-        this.descText = this.add.text(0,0, this.personalityTexts['INFJ'].text, 
+        this.descText = this.add.text(0,0, this.personalityTexts[this.getPesonalityName()].text, 
         { font: '40px Arial', fill: '#FFFFFF',align:'center' }).setOrigin(0.5,0.5);
            
         center.add(this.descText);
@@ -81,7 +81,7 @@ export default class FinalScene extends Phaser.Scene {
 
 
          //texto autor
-         this.authorText = this.add.text(-150, 250,"-"+this.personalityTexts[this.getPesonalityName()].author, 
+         this.authorText = this.add.text(-50, 250,"-"+this.personalityTexts[this.getPesonalityName()].author, 
          { font: '64px Arial', fill: '#FFFFFF',align:'center' }).setOrigin(0.5,0.5);
             
          center.add(this.authorText);
@@ -123,10 +123,10 @@ export default class FinalScene extends Phaser.Scene {
      */
     getPesonalityName(){
         let name = '';
-        name += this.dicotomyManager.perDic1 < 50 ? 'E':'I';
-        name += this.dicotomyManager.perDic2 < 50 ? 'N':'S';
-        name += this.dicotomyManager.perDic3 < 50 ? 'T':'F';
-        name += this.dicotomyManager.perDic4 < 50 ? 'J':'P';
+        name += this.dicotomyManager.perDic2 > 50 ? 'E':'I';
+        name += this.dicotomyManager.perDic3 > 50 ? 'S':'N';
+        name += this.dicotomyManager.perDic1 > 50 ? 'T':'F';
+        name += this.dicotomyManager.perDic4 > 50 ? 'J':'P';
         return name;
     }
 
