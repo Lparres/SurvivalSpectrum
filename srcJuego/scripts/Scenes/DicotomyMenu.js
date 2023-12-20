@@ -23,7 +23,7 @@ export default class Menu extends Phaser.Scene {
         this.player = this.levelScene.player;
         this.deck = this.levelScene.deck;
         
-        this.cardsToPick = 3;
+        this.cardsToPick =   this.dicotomyManager.getCardsToPick();
         
         var centro = this.add.container(this.sys.game.canvas.width / 2, this.sys.game.canvas.height / 2 );
 
@@ -136,14 +136,46 @@ class LatContainer extends Phaser.GameObjects.Container {
     }
 
     preUpdate(t, dt) {
-        this.lifeInfo.setText(this.scene.player.maxLife);
-        this.lifeRegenInfo.setText(this.scene.player.lifeReg);
-        this.damageInfo.setText(Phaser.Math.RoundTo(this.scene.player.damage,-3));
-        this.fireRateInfo.setText(this.scene.player._atkCD /1000);
-        this.meleeArmorInfo.setText(Phaser.Math.RoundTo(this.scene.player._meleeArmor));
-        this.rangeArmorInfo.setText(Phaser.Math.RoundTo(this.scene.player._rangeArmor));
-        this.rangeInfo.setText(Phaser.Math.RoundTo(this.scene.player.range));
-        this.speedInfo.setText(Phaser.Math.RoundTo(this.scene.player.speed));
+        this.lifeInfo.setText((this.scene.player.maxLife).toLocaleString('en-US', {
+            minimumIntegerDigits: 1,
+            useGrouping: false,
+            maximumFractionDigits:2
+          }));
+        this.lifeRegenInfo.setText((this.scene.player.lifeReg).toLocaleString('en-US', {
+            minimumIntegerDigits: 1,
+            useGrouping: false,
+            maximumFractionDigits:2
+          }));
+        this.damageInfo.setText((Phaser.Math.RoundTo(this.scene.player.damage,-3)).toLocaleString('en-US', {
+            minimumIntegerDigits: 1,
+            useGrouping: false,
+            maximumFractionDigits:2
+          }));
+        this.fireRateInfo.setText((this.scene.player._atkCD /1000).toLocaleString('en-US', {
+            minimumIntegerDigits: 1,
+            useGrouping: false,
+            maximumFractionDigits:2
+          }));
+        this.meleeArmorInfo.setText((Phaser.Math.RoundTo(this.scene.player._meleeArmor)).toLocaleString('en-US', {
+            minimumIntegerDigits: 1,
+            useGrouping: false,
+            maximumFractionDigits:2
+          }));
+        this.rangeArmorInfo.setText((Phaser.Math.RoundTo(this.scene.player._rangeArmor)).toLocaleString('en-US', {
+            minimumIntegerDigits: 1,
+            useGrouping: false,
+            maximumFractionDigits:2
+          }));
+        this.rangeInfo.setText((Phaser.Math.RoundTo(this.scene.player.range)).toLocaleString('en-US', {
+            minimumIntegerDigits: 1,
+            useGrouping: false,
+            maximumFractionDigits:2
+          }));
+        this.speedInfo.setText((Phaser.Math.RoundTo(this.scene.player.speed)).toLocaleString('en-US', {
+            minimumIntegerDigits: 1,
+            useGrouping: false,
+            maximumFractionDigits:2
+          }));
     }
 }
 
@@ -176,11 +208,11 @@ class CardsZone extends Phaser.GameObjects.Container{
         this.add(this.cartasRestantes);
 
         //crea una carta
-        this.card1= new Card(this.scene,-this.w/2 +50, -this.h/2 +40,this.deck[0],Math.round(this.scene.scene.get('level').dicotomyManager.CardValue([this.deck[0]]).toLocaleString('en-US', {
+        this.card1= new Card(this.scene,-this.w/2 +50, -this.h/2 +40,this.deck[0],this.scene.scene.get('level').dicotomyManager.CardValue([this.deck[0]]).toLocaleString('en-US', {
             minimumIntegerDigits: 1,
             useGrouping: false,
             maximumFractionDigits:2
-          })));
+          }));
         //this.card1.setOrigin(0,0)
         this.add(this.card1);
 
@@ -191,11 +223,11 @@ class CardsZone extends Phaser.GameObjects.Container{
             let x = this.card1.x + (i%4) * (this.cardW + this.spacingHor);
             let y = this.card1.y + Math.floor(i/4)*150;
             //creamos la carta desde la deck
-            let aux= new Card(this.scene, x ,y,this.deck[i],Math.round(this.scene.scene.get('level').dicotomyManager.CardValue([this.deck[i]]).toLocaleString('en-US', {
+            let aux= new Card(this.scene, x ,y,this.deck[i],this.scene.scene.get('level').dicotomyManager.CardValue([this.deck[i]]).toLocaleString('en-US', {
                 minimumIntegerDigits: 1,
                 useGrouping: false,
                 maximumFractionDigits:2
-              })));
+              }));
             //this.card2.setOrigin(0,0)
             this.add(aux);
         }

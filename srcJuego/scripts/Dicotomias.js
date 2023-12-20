@@ -102,7 +102,7 @@ export default class Dicotomías {
      */
      //devuelve el porcentaje  de  rabia
      EmotionalValue() {
-          return (0.2 + (0.6*((100 - this.perDic1)/100)))* this.rageBaseAmount;
+          return (0.2 + (0.6*((100 - this.perDic1)/100))) * this.rageBaseAmount;
      }
      //devuelve el  porcentaje  de eureka
      RationalValue() {
@@ -134,14 +134,22 @@ export default class Dicotomías {
      
      */
      getNCards() {
-          return 4 + Math.round((this.perDic4 / 25));
+          return 1 + Math.trunc((this.perDic4 / 13));
      }
 
 
-     //Esta funcion deberia hacer que los valores de las cartas escalen o se modifiquen, segun el valor de la dicotomia
-     
+     /**
+      * este método devuelve el valor de la carta
+      * La suma de valores de todas las cartas dependerá del número de cartas que haya para elegir. 
+      * de la siguiente manera:
+      * - si tenemos oslamente una carta la suma de los valores será el 100% del valor.
+      * - por cada carta extra la suma de los valores disminuirá un 5%.
+      * -El valor de cada carta será el valor de la suma de los valores de las cartas dividido entre el número de cartas a pickear.
+      * @param {string} key 
+      * @returns 
+      */
      CardValue(key) {
-          return this.player.scene.cardMap[key]/((this.perDic4 + 50)/100);
+          return (this.player.scene.cardMap[key] * (1 - (0.05 * (this.getCardsToPick() -1))))/ this.getCardsToPick();
      }
 
      /**
@@ -159,5 +167,12 @@ export default class Dicotomías {
           for (var i = 0; i < this.getNCards(); i++){
                deck.push(this.player.scene.statKeyList[Phaser.Math.Between(0, 6)]);
           }
+     }
+
+     /**
+      * devuelve las cartas a coger cada vez que abres el menú
+      */
+     getCardsToPick(){
+          return Math.trunc(1 + (this.perDic4 / 25));
      }
 }
