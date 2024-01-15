@@ -25,29 +25,13 @@ export default class UI extends Phaser.Scene
         this.loadFont("JosefinBold", "srcJuego/fonts/JosefinSans-Bold.ttf");
         this.loadFont("JosefinMedium", "srcJuego/fonts/JosefinSans-Medium.ttf");
 
+
+        //parres voy a bombardear la vaguada a ver si asi orientas a objetros cabron
         //zona barra de vida
         this.GRP_BarraVida = new HealthBar(this,100,900);
 
         // Creación de la barra de furiaEureka
-        this.GRP_FuriaEureka = this.add.group();
-
-        this.furiaBG = this.add.nineslice(330, 1000, 'ui', 'GreyBG', 265, 50, 10, 10, 10, 10);
-        this.furiaBar = this.add.nineslice(330, 1000, 'ui', 'OrangeBar', 265, 40, 10, 20, 20, 20);
-        this.furiaFrame = this.add.nineslice(330, 1000, 'ui', 'BlackFrame', 265, 50, 10, 10, 10, 10);
-        this.furiaBG.setOrigin(0, 0.5);
-        this.furiaBar.setOrigin(0, 0.5);
-        this.furiaFrame.setOrigin(0, 0.5);
-
-        this.eurekaBG = this.add.nineslice(330, 1000, 'ui', 'GreyBG', 265, 50, 10, 10, 10, 10);
-        this.eurekaBar = this.add.nineslice(330, 1000, 'ui', 'BlueBar', 265, 40, 10, 20, 20, 20);
-        this.eurekaFrame = this.add.nineslice(330, 1000, 'ui', 'BlackFrame', 265, 50, 10, 10, 10, 10);
-        this.eurekaBG.setOrigin(1, 0.5);
-        this.eurekaBar.setOrigin(1, 0.5);
-        this.eurekaFrame.setOrigin(1, 0.5);
-
-        this.furiaEurekaIMG = this.add.image(330, 1000, 'furiaEureka').setOrigin(0.5, 0.5).setScale(1, 1);
-
-        this.GRP_FuriaEureka.addMultiple([this.furiaBG, this.furiaBar, this.furiaFrame, this.eurekaBG, this.eurekaBar, this.eurekaFrame, this.furiaEurekaIMG]);
+        this.GRP_FuriaEureka = new RageEureka(this,330,1000);
 
 
         // Creación estadísticas
@@ -140,7 +124,6 @@ export default class UI extends Phaser.Scene
         
         const ourGame = this.scene.get('level');
         //console.log("UI created");
-        //this.prueba.setValue(ourGame.player.health);
 
         
         if(ourGame.player != undefined){
@@ -149,17 +132,19 @@ export default class UI extends Phaser.Scene
 
             if(ourGame.player.rageMode){
                 this.rageEffect.setVisible(true)
-                this.furiaBar.width = (ourGame.player.dicTotalTime - ourGame.player.dicTime)/ourGame.player.dicTotalTime * 215 + 50
+                this.GRP_FuriaEureka.setRage((ourGame.player.dicTotalTime - ourGame.player.dicTime),ourGame.player.dicTotalTime)
+                
             }else{
                 this.rageEffect.setVisible(false)
-                this.furiaBar.width = ourGame.player.rage/ourGame.player.rageMax * 215 + 50
+                this.GRP_FuriaEureka.setRage(ourGame.player.rage,ourGame.player.rageMax)
+                
             }
             if(ourGame.player.eurekaMode){
                 this.eurekaEffect.setVisible(true)
-                this.eurekaBar.width = (ourGame.player.dicTotalTime - ourGame.player.dicTime)/ourGame.player.dicTotalTime * 215 + 50
+                this.GRP_FuriaEureka.setEureka((ourGame.player.dicTotalTime - ourGame.player.dicTime),ourGame.player.dicTotalTime);
             }else{
                 this.eurekaEffect.setVisible(false)
-                this.eurekaBar.width = ourGame.player._eureka/ourGame.player.eurekaMax * 215 + 50
+                this.GRP_FuriaEureka.setEureka(ourGame.player._eureka,ourGame.player.eurekaMax)
             }
             
         }
@@ -339,7 +324,42 @@ class HealthBar extends Phaser.GameObjects.Container{
     }
 }
 
-
 class RageEureka extends Phaser.GameObjects.Container{
-    
+    constructor(scene,x,y){
+        super(scene,x,y)
+
+        let spritesRageBar = {
+            background: "GreyBG",
+            fill:"OrangeBar",
+            frame:"BlackFrame",
+        }
+        let spritesEurekaBar = {
+            background: "GreyBG",
+            fill:"BlueBar",
+            frame:"BlackFrame",
+        }
+        let sizeHealthBar = {
+            width: 265,
+            heith: 50
+        }
+
+        this.icono = scene.add.image(0, 0, 'furiaEureka').setOrigin(0.5, 0.5).setScale(1, 1);
+
+        this.rageBar = new Bar(scene,18,0,215,spritesRageBar,sizeHealthBar);
+
+        this.eurekaBar = new Bar(scene,-18,0,215,spritesEurekaBar,sizeHealthBar,false);
+        	
+        this.add([this.rageBar,this.eurekaBar,this.icono]);
+
+        scene.add.existing(this);
+
+    }
+    setRage(value,maxValue){
+        this.rageBar.setValue(value);
+        this.rageBar.setMaxValue(maxValue);
+    }
+    setEureka(value,maxValue){
+        this.eurekaBar.setValue(value);
+        this.eurekaBar.setMaxValue(maxValue);
+    }
 }
