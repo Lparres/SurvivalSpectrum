@@ -6,7 +6,8 @@ export default class Bar extends Phaser.GameObjects.Container{
      * @param {number} y 
      * @param {number} maxValue
      * @param {Object} spritesConfig 
-     * @param {Object} sizeConfig 
+     * @param {Object} sizeConfig
+     * @param {boolean} right determina si la barra es izquierda a derecha o derecha a izquierda
      */
     constructor(scene,x,y,maxValue,spritesConfig,sizeConfig,right = true){
         const marginHeith = 0;
@@ -18,7 +19,6 @@ export default class Bar extends Phaser.GameObjects.Container{
         this.barWidth = sizeConfig.width;
 
         this.dir = right? 0 : 1;
-        console.log(this.dir);
         this.background = scene.add.nineslice(0, 0, 'ui', spritesConfig.background, sizeConfig.width, sizeConfig.heith, 10, 10, 10, 10).setOrigin(this.dir,0.5);
         this.barFill = scene.add.nineslice(0, 0, 'ui', spritesConfig.fill, sizeConfig.width, sizeConfig.heith-marginHeith, 10, 20, 20, 20).setOrigin(this.dir,0.5);
         this.barFrame = scene.add.nineslice(0, 0, 'ui', spritesConfig.frame, sizeConfig.width, sizeConfig.heith, 10, 10, 10, 10).setOrigin(this.dir,0.5);
@@ -32,11 +32,18 @@ export default class Bar extends Phaser.GameObjects.Container{
 
     }
 
+    /**
+     * Establece el valor que representa la barra
+     * @param {*} value 
+     */
     setValue(value){
         let valueCal = (value/this.maxValue * this.barWidth);
-
         this.barFill.width = valueCal < this.barWidth ? valueCal : this.barWidth;
     }
+    /**
+     * Establece el valor maximo que puede alcanzar la barra
+     * @param {*} val 
+     */
     setMaxValue(val){
         this.maxValue = val;
     }

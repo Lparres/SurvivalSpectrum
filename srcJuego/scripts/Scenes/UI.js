@@ -1,5 +1,6 @@
-import Button from '../UI_Objects/Button.js'
-import Bar from '../UI_Objects/FillableBar.js';
+import HealthBar from '../UI_Parts/HealthBar.js';
+import RageEureka from '../UI_Parts/EurekaRageBar.js';
+import Stats from '../UI_Dicotomy_Parts/Stats.js';
 //Va a ser necesario organizar la ui con containers para la dicotomía que la oculta para
 //que sea mas sencillo de hacer
 
@@ -21,10 +22,8 @@ export default class UI extends Phaser.Scene
         this.mainScene = this.scene.get('level');
         this.player = this.mainScene.player;
 
-
         this.loadFont("JosefinBold", "srcJuego/fonts/JosefinSans-Bold.ttf");
         this.loadFont("JosefinMedium", "srcJuego/fonts/JosefinSans-Medium.ttf");
-
 
         //parres voy a bombardear la vaguada a ver si asi orientas a objetros cabron
         //zona barra de vida
@@ -32,24 +31,9 @@ export default class UI extends Phaser.Scene
 
         // Creación de la barra de furiaEureka
         this.GRP_FuriaEureka = new RageEureka(this,330,1000);
-
-
+   
         // Creación estadísticas
-        this.GRP_Estadisticas = this.add.group();
-
-        this.estadisticasImg = this.add.image(1880, 360, 'estadisticas').setOrigin(1, 0).setScale(1, 1);
-
-        this.lifeInfo = this.add.text(this.estadisticasImg.x - 20, this.estadisticasImg.y + 78, 'xxxx', { font: '30px JosefinMedium', fill: '#424242' }).setOrigin(1, 0.5);
-        this.lifeRegenInfo = this.add.text(this.estadisticasImg.x - 20, this.estadisticasImg.y + 140, 'xxxx', { font: '30px JosefinMedium', fill: '#424242' }).setOrigin(1, 0.5);
-        this.damageInfo = this.add.text(this.estadisticasImg.x - 20, this.estadisticasImg.y + 202, 'xxxx', { font: '30px JosefinMedium', fill: '#424242' }).setOrigin(1, 0.5);
-        this.fireRateInfo = this.add.text(this.estadisticasImg.x - 20, this.estadisticasImg.y + 263, 'xxxx', { font: '30px JosefinMedium', fill: '#424242' }).setOrigin(1, 0.5);
-        this.meleeArmorInfo = this.add.text(this.estadisticasImg.x - 20, this.estadisticasImg.y + 322, 'xxxx', { font: '30px JosefinMedium', fill: '#424242' }).setOrigin(1, 0.5);
-        this.rangeArmorInfo = this.add.text(this.estadisticasImg.x - 20, this.estadisticasImg.y + 385, 'xxxx', { font: '30px JosefinMedium', fill: '#424242' }).setOrigin(1, 0.5);
-        this.rangeInfo = this.add.text(this.estadisticasImg.x - 20, this.estadisticasImg.y + 448, 'xxxx', { font: '30px JosefinMedium', fill: '#424242' }).setOrigin(1, 0.5);
-        this.speedInfo = this.add.text(this.estadisticasImg.x - 20, this.estadisticasImg.y + 507, 'xxxx', { font: '30px JosefinMedium', fill: '#424242' }).setOrigin(1, 0.5);
-
-        this.GRP_Estadisticas.addMultiple([this.estadisticasImg, this.lifeInfo, this.lifeRegenInfo, this.damageInfo, this.fireRateInfo, this.meleeArmorInfo, this.rangeArmorInfo, this.rangeInfo, this.speedInfo]);
-
+        this.GRP_Estadisticas = new Stats(this, this.sys.game.canvas.width -35, this.sys.game.canvas.height / 2 + 100).setScale(1);
 
         //texto de crono
         this.GRP_Reloj = this.add.group();
@@ -77,15 +61,12 @@ export default class UI extends Phaser.Scene
 
         // Creación indicador dust
         this.GRP_Dust = this.add.group();
-        this.dust = this.add.text(1730, 1000,'xxxx', 
-        { font: '50px JosefinMedium', fill: 'white', align: 'right', stroke: 'black', strokeThickness: 5}).setOrigin(1,0.5);
+        this.dust = this.add.text(1730, 1000,'xxxx', { font: '50px JosefinMedium', fill: 'white', align: 'right', stroke: 'black', strokeThickness: 5}).setOrigin(1,0.5);
         this.dustIMG = this.add.image(1860 , 1000, 'polvos').setScale(0.1).setOrigin(1,0.5);
         this.GRP_Dust.addMultiple([this.dust, this.dustIMG]);
 
         // Creación del mapa
         this.map = this.add.image(1730, 180, 'map').setOrigin(0.5, 0.5).setScale(0.6, 0.6);
-
-
 
         // Creación de las dicotomías
         this.GRP_Dicotomias = this.add.group();
@@ -117,50 +98,37 @@ export default class UI extends Phaser.Scene
         this.eurekaEffect = this.add.image(0, 0, 'freezeEffect').setOrigin(0,0).setDisplaySize(1920, 1080).setAlpha(0.6);
 
         this.updateWaveData();
-
-        
+        this.mainScene.dicotomyManager.AplieDicotomy(3);
+        this.updateDicotomias(); 
     }
     update(t,dt) {
         
         const ourGame = this.scene.get('level');
         //console.log("UI created");
 
-        
-        if(ourGame.player != undefined){
-            
-            this.GRP_BarraVida.setValues(ourGame.player.health,ourGame.player.maxLife);
+
+        if (ourGame.player != undefined) {
+
+            this.GRP_BarraVida.setValues(ourGame.player.health, ourGame.player.maxLife);
+
+            this.rageEffect.setVisible(ourGame.player.rageMode)          
+            this.eurekaEffect.setVisible(ourGame.player.eurekaMode)
 
             if(ourGame.player.rageMode){
-                this.rageEffect.setVisible(true)
-                this.GRP_FuriaEureka.setRage((ourGame.player.dicTotalTime - ourGame.player.dicTime),ourGame.player.dicTotalTime)
-                
+                this.GRP_FuriaEureka.setRage((ourGame.player.dicTotalTime - ourGame.player.dicTime), ourGame.player.dicTotalTime)
+            }else if(ourGame.player.eurekaMode){
+                this.GRP_FuriaEureka.setEureka((ourGame.player.dicTotalTime - ourGame.player.dicTime), ourGame.player.dicTotalTime);
             }else{
-                this.rageEffect.setVisible(false)
-                this.GRP_FuriaEureka.setRage(ourGame.player.rage,ourGame.player.rageMax)
-                
+                this.GRP_FuriaEureka.setRage(ourGame.player.rage, ourGame.player.rageMax)
+                this.GRP_FuriaEureka.setEureka(ourGame.player._eureka, ourGame.player.eurekaMax)
             }
-            if(ourGame.player.eurekaMode){
-                this.eurekaEffect.setVisible(true)
-                this.GRP_FuriaEureka.setEureka((ourGame.player.dicTotalTime - ourGame.player.dicTime),ourGame.player.dicTotalTime);
-            }else{
-                this.eurekaEffect.setVisible(false)
-                this.GRP_FuriaEureka.setEureka(ourGame.player._eureka,ourGame.player.eurekaMax)
-            }
-            
         }
-       this.timerUpdate(dt);
-       //se puede llamar en el momento en el que se entra en rabia o mediante un callback
-       this.updateStats();
-       //se puede llamar en otro momento no es necesario acutualizarlo constantemente
-       this.updateDicotomias();
 
-       this.dust.setText(this.player.dust);
-
-
-       // Se modifica la cantidad de elementos del HUD según la dicotomía.
-       //this.setVisibilidadHUD(ourGame);
-       this.mainScene.dicotomyManager.AplieDicotomy(3);
-
+        this.timerUpdate(dt);
+        //se puede llamar en el momento en el que se entra en rabia o mediante un callback
+        this.GRP_Estadisticas.updateStats(this.player);
+        
+        this.dust.setText(this.player.dust);
     }
 
     loadFont(name, url) {
@@ -197,48 +165,6 @@ export default class UI extends Phaser.Scene
             maximumFractionDigits:0 
           })) ;
     }
-    updateStats(){
-        this.lifeInfo.setText((this.player.maxLife).toLocaleString('en-US', {
-            minimumIntegerDigits: 1,
-            useGrouping: false,
-            maximumFractionDigits:2
-          }));
-        this.lifeRegenInfo.setText((this.player.lifeReg).toLocaleString('en-US', {
-            minimumIntegerDigits: 1,
-            useGrouping: false,
-            maximumFractionDigits:2
-          }));
-        this.damageInfo.setText((this.player.damage).toLocaleString('en-US', {
-            minimumIntegerDigits: 1,
-            useGrouping: false,
-            maximumFractionDigits:2
-          }));
-        this.fireRateInfo.setText((this.player._atkCD / 1000).toLocaleString('en-US', {
-            minimumIntegerDigits: 1,
-            useGrouping: false,
-            maximumFractionDigits:2 
-          }));
-        this.meleeArmorInfo.setText((this.player._meleeArmor).toLocaleString('en-US', {
-            minimumIntegerDigits: 1,
-            useGrouping: false,
-            maximumFractionDigits:2
-          }));
-        this.rangeArmorInfo.setText((this.player._rangeArmor).toLocaleString('en-US', {
-            minimumIntegerDigits: 1,
-            useGrouping: false,
-            maximumFractionDigits:2 
-          }));
-        this.rangeInfo.setText((this.player.range).toLocaleString('en-US', {
-            minimumIntegerDigits: 1,
-            useGrouping: false,
-            maximumFractionDigits:2
-          }));
-        this.speedInfo.setText((this.player.speed).toLocaleString('en-US', {
-            minimumIntegerDigits: 1,
-            useGrouping: false,
-            maximumFractionDigits:2
-          }));
-    }
 
     //update de la info de oleadas, revisar pls
     updateWaveData() {
@@ -257,7 +183,7 @@ export default class UI extends Phaser.Scene
             maximumFractionDigits:0 
         })) ;
         
-
+        //samuel puto sinverguenza paga el polen y calcula las cosas fuera de la UI borracho putero estafador
         //calculo de los enemigos de esta oleada
         let nEnemies = 0;
         for(let i = 0; i< this.mainScene.waveJson.Waves[this.mainScene.wavesProbe.waveType].spawnsData.length;i++){
@@ -279,87 +205,5 @@ export default class UI extends Phaser.Scene
         this.dial3.x = this.dicValText3.x-75 + this.mainScene.dicotomyManager.getDic(3) * 150/100;
         this.dial4.x = this.dicValText4.x-75 + this.mainScene.dicotomyManager.getDic(4) * 150/100;
 
-    }
-    
-}
-
-/**
- * Zona donde se encuentra la informacion de la vida del jugador
- * Se compone de una barra, un sprite y texto
- */
-class HealthBar extends Phaser.GameObjects.Container{
-    constructor(scene,x,y){
-        super(scene,x,y)
-
-        let spritesHealthBar = {
-            background: "GreyBG",
-            fill:"GreenBar",
-            frame:"BlackFrame",
-        }
-        let sizeHealthBar = {
-            width: 500,
-            heith: 50
-        }
-
-        this.heartIcon = scene.add.image(0, 0, 'heart').setOrigin(0.5, 0.5).setScale(0.15, 0.15);
-
-        this.bar = new Bar(scene,10,0,400,spritesHealthBar,sizeHealthBar);
-
-        this.healthInfo = scene.add.text(sizeHealthBar.width, 45, 'xxxx', { font: '25px JosefinBold', fill: 'black' }).setOrigin(1, 0.5);
-        
-        this.add([this.bar,this.healthInfo,this.heartIcon])
-
-        scene.add.existing(this)
-    }
-
-    preUpdate(t,dt){
-
-    }
-
-    setValues(value, maxValue){
-        this.bar.setValue(value);
-        this.bar.setMaxValue(maxValue);
-
-        this.healthInfo.setText((value <= 0 ? 0 : Phaser.Math.RoundTo(value, 0)) + ' / ' + Phaser.Math.RoundTo(maxValue, 0));
-    }
-}
-
-class RageEureka extends Phaser.GameObjects.Container{
-    constructor(scene,x,y){
-        super(scene,x,y)
-
-        let spritesRageBar = {
-            background: "GreyBG",
-            fill:"OrangeBar",
-            frame:"BlackFrame",
-        }
-        let spritesEurekaBar = {
-            background: "GreyBG",
-            fill:"BlueBar",
-            frame:"BlackFrame",
-        }
-        let sizeHealthBar = {
-            width: 265,
-            heith: 50
-        }
-
-        this.icono = scene.add.image(0, 0, 'furiaEureka').setOrigin(0.5, 0.5).setScale(1, 1);
-
-        this.rageBar = new Bar(scene,18,0,215,spritesRageBar,sizeHealthBar);
-
-        this.eurekaBar = new Bar(scene,-18,0,215,spritesEurekaBar,sizeHealthBar,false);
-        	
-        this.add([this.rageBar,this.eurekaBar,this.icono]);
-
-        scene.add.existing(this);
-
-    }
-    setRage(value,maxValue){
-        this.rageBar.setValue(value);
-        this.rageBar.setMaxValue(maxValue);
-    }
-    setEureka(value,maxValue){
-        this.eurekaBar.setValue(value);
-        this.eurekaBar.setMaxValue(maxValue);
-    }
+    } 
 }
