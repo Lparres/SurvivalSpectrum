@@ -20,7 +20,7 @@ var config = {
     physics: {
         default: 'arcade', // elegir motor
         arcade: { // propiedades del motor
-            //debug: true// true para ver info
+            debug: true// true para ver info
         }
     }
 }

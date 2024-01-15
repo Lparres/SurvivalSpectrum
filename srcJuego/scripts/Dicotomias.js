@@ -76,8 +76,8 @@ export default class Dicotomías {
                case 2: //dicotomia de mas daño o mas rango
                     this.player.range = this.ExtrovertValue(this.player.baseRange);
                     this.player.damage = this.IntrovertValue(this.player.baseDamage);
-                    console.log(this.player.range);
-                    console.log(this.player.damage);
+                    //console.log(this.player.range);
+                    //console.log(this.player.damage);
                     break;
                case 3: //dicotomia de  mostar mas o menos  cosas  en la  UI
                     

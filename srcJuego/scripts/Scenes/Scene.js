@@ -61,7 +61,7 @@ export default class MainScene extends Phaser.Scene {
         this.statKeyList = ['life', 'lifeRegen', 'damage', 'fireRate', 'meleeArmor', 'rangeArmor', 'speed'];
         this.deck = [];
 
-        this.dicotomyManager = new Dicotomías(this.player, 50, 50, 50, 50, this.scene.get('UIScene'));
+        this.dicotomyManager = new Dicotomías(this.player, 50, 50, 100, 50, this.scene.get('UIScene'));
         this.dicotomyManager.AplieDicotomy(1);
         this.dicotomyManager.AplieDicotomy(2);
 
@@ -96,7 +96,7 @@ export default class MainScene extends Phaser.Scene {
 
         this.testing = true;
 
-        if(this.testing){
+        if(this.physics.config.debug){
 
             //entrar al menu de dicotomías, solo para testeo
             this.cum.on('down', event => {
@@ -351,7 +351,7 @@ export default class MainScene extends Phaser.Scene {
         this.wallLayer = this.map.createLayer('Pared', tileset1);
 
         //para que el player se renderize detras
-        this.behindLayer.setDepth(100);
+        //this.behindLayer.setDepth(100);
 
         //creamos el array de spawn points
         this.spawnPoints = this.map.createFromObjects('Spawns');

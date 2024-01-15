@@ -5,7 +5,7 @@
         "life": 400,"lifeRegen":3,
         "shootCooldown": 500,"reciveDamageSoundCooldown":300,
         "bulletSpeed": 500,
-        "initialDust":100000
+        "initialDust":0
     },
     
     "EnemyConfigs": [

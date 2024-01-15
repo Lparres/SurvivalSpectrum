@@ -24,6 +24,7 @@ export default class Bullet extends Mob
         this._idParent = idParent;
 
         this.range;
+        this.body.isCircle = true;
      
         //settear escala
         this.setScale(0.05);

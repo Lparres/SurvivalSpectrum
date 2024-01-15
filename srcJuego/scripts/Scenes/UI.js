@@ -1,4 +1,5 @@
 import Button from '../UI_Objects/Button.js'
+import Bar from '../UI_Objects/FillableBar.js';
 //Va a ser necesario organizar la ui con containers para la dicotomía que la oculta para
 //que sea mas sencillo de hacer
 
@@ -24,23 +25,8 @@ export default class UI extends Phaser.Scene
         this.loadFont("JosefinBold", "srcJuego/fonts/JosefinSans-Bold.ttf");
         this.loadFont("JosefinMedium", "srcJuego/fonts/JosefinSans-Medium.ttf");
 
-        // Creación de la barra de vida
-        this.GRP_BarraVida = this.add.group();
-
-        this.healthBG = this.add.nineslice(100, 900, 'ui', 'GreyBG', 500, 50, 10, 10, 10, 10);
-        this.healthBar = this.add.nineslice(100, 900, 'ui', 'GreenBar', 500, 40, 10, 20, 20, 20);
-        this.healthFrame = this.add.nineslice(100, 900, 'ui', 'BlackFrame', 500, 50, 10, 10, 10, 10);
-        this.healthBG.setOrigin(0, 0.5);
-        this.healthBar.setOrigin(0, 0.5);
-        this.healthFrame.setOrigin(0, 0.5);
-
-        this.heartIMG = this.add.image(90, 900, 'heart').setOrigin(0.5, 0.5).setScale(0.15, 0.15);
-
-        this.healthInfo = this.add.text(590, 945, 'xxxx', { font: '25px JosefinBold', fill: 'black' });
-        this.healthInfo.setOrigin(1, 0.5)
-
-        this.GRP_BarraVida.addMultiple([this.healthBG, this.healthBar, this.healthFrame, this.heartIMG, this.healthInfo]);
-
+        //zona barra de vida
+        this.GRP_BarraVida = new HealthBar(this,100,900);
 
         // Creación de la barra de furiaEureka
         this.GRP_FuriaEureka = this.add.group();
@@ -154,11 +140,12 @@ export default class UI extends Phaser.Scene
         
         const ourGame = this.scene.get('level');
         //console.log("UI created");
+        //this.prueba.setValue(ourGame.player.health);
 
+        
         if(ourGame.player != undefined){
-            this.healthInfo.setText((ourGame.player.health <= 0 ? 0 : Phaser.Math.RoundTo(ourGame.player.health, 0)) + ' / ' + Phaser.Math.RoundTo(ourGame.player.maxLife, 0));
-
-            this.healthBar.width = ourGame.player.health/ourGame.player.maxLife * 500;
+            
+            this.GRP_BarraVida.setValues(ourGame.player.health,ourGame.player.maxLife);
 
             if(ourGame.player.rageMode){
                 this.rageEffect.setVisible(true)
@@ -308,5 +295,51 @@ export default class UI extends Phaser.Scene
         this.dial4.x = this.dicValText4.x-75 + this.mainScene.dicotomyManager.getDic(4) * 150/100;
 
     }
+    
+}
+
+/**
+ * Zona donde se encuentra la informacion de la vida del jugador
+ * Se compone de una barra, un sprite y texto
+ */
+class HealthBar extends Phaser.GameObjects.Container{
+    constructor(scene,x,y){
+        super(scene,x,y)
+
+        let spritesHealthBar = {
+            background: "GreyBG",
+            fill:"GreenBar",
+            frame:"BlackFrame",
+        }
+        let sizeHealthBar = {
+            width: 500,
+            heith: 50
+        }
+
+        this.heartIcon = scene.add.image(0, 0, 'heart').setOrigin(0.5, 0.5).setScale(0.15, 0.15);
+
+        this.bar = new Bar(scene,10,0,400,spritesHealthBar,sizeHealthBar);
+
+        this.healthInfo = scene.add.text(sizeHealthBar.width, 45, 'xxxx', { font: '25px JosefinBold', fill: 'black' }).setOrigin(1, 0.5);
+        
+        this.add([this.bar,this.healthInfo,this.heartIcon])
+
+        scene.add.existing(this)
+    }
+
+    preUpdate(t,dt){
+
+    }
+
+    setValues(value, maxValue){
+        this.bar.setValue(value);
+        this.bar.setMaxValue(maxValue);
+
+        this.healthInfo.setText((value <= 0 ? 0 : Phaser.Math.RoundTo(value, 0)) + ' / ' + Phaser.Math.RoundTo(maxValue, 0));
+    }
+}
+
+
+class RageEureka extends Phaser.GameObjects.Container{
     
 }
