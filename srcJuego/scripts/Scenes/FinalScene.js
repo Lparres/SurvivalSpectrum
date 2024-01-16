@@ -45,6 +45,7 @@ export default class FinalScene extends Phaser.Scene {
         const left = this.add.container(this.sys.game.canvas.width / 2 - 600, this.sys.game.canvas.height / 2 );
         left.add(this.BGL);
         //diales dicotomias
+        //CLASES OBSOLETAS HAY QUE CAMBIARLAS A LAS NUEVAS
         this.dic1 = left.add(new DicContainer(this,0,-300,1));
         this.dic2 = left.add(new DicContainer(this,0,-100,2));
         this.dic3 = left.add(new DicContainer(this,0,100,3));

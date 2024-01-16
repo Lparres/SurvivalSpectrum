@@ -45,6 +45,10 @@ export default class Player extends Mob
 
         //inicializar los polvos con los que empezamos
         this.dust = playerConfig.initialDust;
+
+        if(scene.physics.config.debug){
+            this.dust += 1000;
+        }
         
         
         //atack cooldown en milisegundos

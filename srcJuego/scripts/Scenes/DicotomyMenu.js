@@ -15,11 +15,11 @@ export default class Menu extends Phaser.Scene {
 
   }
   create() {
-    this.levelScene = this.scene.get('level');
+    this.mainScene = this.scene.get('level');
     ///obtener variables del level
-    this.dicotomyManager = this.levelScene.dicotomyManager;
-    this.player = this.levelScene.player;
-    this.deck = this.levelScene.deck;
+    this.dicotomyManager = this.mainScene.dicotomyManager;
+    this.player = this.mainScene.player;
+    this.deck = this.mainScene.deck;
 
     this.cardsToPick = this.dicotomyManager.getCardsToPick();
 
@@ -76,7 +76,7 @@ export default class Menu extends Phaser.Scene {
 
 
   update(t, dt) {
-    this.dustCost.setText("Adjustment cost: " + this.levelScene.dicPrice);
+    this.dustCost.setText("Adjustment cost: " + this.mainScene.dicPrice);
     this.dust.setText(this.player.dust);
   }
   updateCardsLeft() {
