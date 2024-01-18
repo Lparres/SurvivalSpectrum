@@ -76,11 +76,12 @@ export default class UI extends Phaser.Scene
 
         this.GRP_Dicotomias.add(this.add.image(1100, 929, 'fondoDicotomias').setOrigin(0.5, 0.5));
 
-
         this.dial1 = new Dial(this, 800, 950, 1);
         this.dial2 = new Dial(this, 1000, 950, 2);
         this.dial3 = new Dial(this, 1200, 950, 3);
         this.dial4 = new Dial(this, 1400, 950, 4);
+        
+        this.GRP_Dicotomias.addMultiple([this.dial1,this.dial2,this.dial3,this.dial4]);
         
         //this.GRP_Dicotomias.add(this.add.image(1400, 950, 'marcoDialFrame').setOrigin(0.5, 0.5));
         

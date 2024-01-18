@@ -61,7 +61,7 @@ export default class MainScene extends Phaser.Scene {
         this.statKeyList = ['life', 'lifeRegen', 'damage', 'fireRate', 'meleeArmor', 'rangeArmor', 'speed'];
         this.deck = [];
 
-        this.dicotomyManager = new Dicotomías(this.player, 50, 50, 100, 50, this.scene.get('UIScene'));
+        this.dicotomyManager = new Dicotomías(this.player, 50, 50, 50, 50, this.scene.get('UIScene'));
         this.dicotomyManager.AplieDicotomy(1);
         this.dicotomyManager.AplieDicotomy(2);
 
