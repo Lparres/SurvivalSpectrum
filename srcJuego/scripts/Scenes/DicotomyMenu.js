@@ -65,6 +65,43 @@ export default class Menu extends Phaser.Scene {
     this.container4 = new DicContainer(this, 220, -180, 4);
     centro.add([this.container1, this.container2, this.container3, this.container4]);
 
+    //Cajas de las dicotomías interactivas
+    this.container1.setSize(380, 90);
+    this.container2.setSize(380, 90);
+    this.container3.setSize(380, 90);
+    this.container4.setSize(380, 90);
+    this.container1.setInteractive();
+    this.container2.setInteractive();
+    this.container3.setInteractive();
+    this.container4.setInteractive();
+
+    // OnHover de las dicotomías
+    this.container1.on('pointerover', function () {
+      console.log('over container1');
+    });
+    this.container1.on('pointerout', function () {
+      console.log('out container1');
+    });
+    this.container2.on('pointerover', function () {
+      console.log('over container2');
+    });
+    this.container2.on('pointerout', function () {
+      console.log('out container2');
+    });
+    this.container3.on('pointerover', function () {
+      console.log('over container3');
+    });
+    this.container3.on('pointerout', function () {
+      console.log('out container3');
+    });
+    this.container4.on('pointerover', function () {
+      console.log('over container4');
+    });
+    this.container4.on('pointerout', function () {
+      console.log('out container4');
+    });
+
+
     //añadir la zona de las cartas
     this.cards = new CardsZone(this, 0, 160, this.deck);
     centro.add(this.cards);

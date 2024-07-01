@@ -106,7 +106,6 @@ export default class Enemy extends Mob
             //spawnear un totem
             if(this.totem){
                 this.scene.totemPool.spawn(this.x + this.totemSpawnOffsetX,this.y+ this.totemSpawnOffsetY,' ');
-                console.log("tu vieja");
             }
         }
     }
