@@ -36,8 +36,6 @@ header {
 
   .classJuego{
      margin : 50px; 
-    
-
   }
 
   .classSeccionJuego{
@@ -50,8 +48,6 @@ header {
   }
 
   #seccion-apartado{
-    /*text-align: center;*/
-    /*justify-content: center;*/
     background-color: rgb(22, 22, 22);
     margin : 50px 20% 50px;
     padding: 30px 50px 50px;
@@ -70,19 +66,8 @@ header {
 
   @font-face {
     font-family: "josefin-sans";
-    src: url("https://lparres2000.github.io/JuegoPVLI/srcPaginaWeb/fonts/JosefinSans-Regular.ttf");
+    src: url("./srcPaginaWeb/fonts/JosefinSans-Regular.ttf");
   }
-
-  /* @cursor myCustomCursor {
-    alias: CustomCursor;
-    src: url("https://lparres2000.github.io/JuegoPVLI/srcJuego/img/crosshair.png");
-    hotspot: 16 16;
-  } */
-
-  /* body {
-    cursor: url("https://lparres2000.github.io/JuegoPVLI/srcJuego/img/crosshair.png") 32, auto;
-    
-  } */
 
   #navbarNav{
     margin-bottom: 0px;
