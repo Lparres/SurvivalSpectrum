@@ -54,7 +54,7 @@ export default class Dicotomías {
      dicName(dic) {
           switch (dic) {
                case 1:
-                    return "R/E";
+                    return "T/F";
                case 2:
                     return "I/E";
                case 3:

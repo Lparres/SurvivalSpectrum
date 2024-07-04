@@ -25,7 +25,7 @@ export default class Menu extends Phaser.Scene {
 
     var centro = this.add.container(this.sys.game.canvas.width / 2, this.sys.game.canvas.height / 2);
     const fondo = this.add.nineslice(0, -30, 'ui', 'DicotomyMenuBG', 1000, 900, 13, 13, 13, 13);
-    const titulo = this.add.text(0, -478, 'Build your Personality', { font: '40px JosefinBold', fill: 'white', aling: 'center' }).setOrigin(0.5, 0);
+    const titulo = this.add.text(20, -478, 'Build your Personality', { font: '40px JosefinBold', fill: 'white', aling: 'center' }).setOrigin(0.5, 0);
     const cabecera = this.add.image(0, -450, 'cabeceraDicos').setOrigin(0.5, 0.5);
     //boton para salir del menú
     const unpause = new Button(this, 0, 415, 'confirm', 1, () => {
@@ -43,11 +43,11 @@ export default class Menu extends Phaser.Scene {
     //añadir al contenedor central
     centro.add([fondo, unpause, cabecera, titulo]);
 
-    centro.add(this.add.image(170, -90, 'polvos').setScale(0.08).setOrigin(0, 0.5));
+    centro.add(this.add.image(120, -90, 'polvos').setScale(0.08).setOrigin(0, 0.5));
 
     //texto de coste de polvos
-    this.dustCost = this.add.text(5, -95, 'xxxx',
-      { font: '35px JosefinMedium', fill: 'white', align: 'right', stroke: 'black', strokeThickness: 5 }).setOrigin(0.5, 0.5)
+    this.dustCost = this.add.text(-50, -92, 'xxxx',
+      { font: '35px JosefinMedium', fill: 'white', align: 'right', stroke: 'black', strokeThickness: 3 }).setOrigin(0.5, 0.5)
 
     //añadir texto al contenedor
     centro.add(this.dustCost);
@@ -165,7 +165,7 @@ export default class Menu extends Phaser.Scene {
 
 
   update(t, dt) {
-    this.dustCost.setText("Adjustment cost: " + this.mainScene.dicPrice);
+    this.dustCost.setText("Adjustment cost:  " + this.mainScene.dicPrice);
     this.dust.setText(this.player.dust);
   }
   updateCardsLeft() {

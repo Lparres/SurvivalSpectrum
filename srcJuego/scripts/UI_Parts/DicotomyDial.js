@@ -19,8 +19,8 @@ export default class Dial extends Phaser.GameObjects.Container{
         this.backbround = scene.add.image(0,0,'marcoDialBG').setOrigin(0.5,0.5);
         this.dialRect = scene.add.rectangle(0,0,5,25, 0xff0000).setOrigin(0.5,0.5);
         this.marco = scene.add.image(0,0,'marcoDialFrame').setOrigin(0.5,0.5)
-        const textFormat = { font: '30px JosefinMedium', fill: 'white' }
-        this.text = scene.add.text(0, 40,this.dicName + ' ' + this.dicValue, textFormat).setOrigin(0.5,0.5)
+        const textFormat = { font: '25px JosefinMedium', fill: 'white' }
+        this.text = scene.add.text(0, 36,this.dicName + ' ' + this.dicValue, textFormat).setOrigin(0.5,0.5)
 
 
         //colocacion del dial
