@@ -52,11 +52,11 @@ export default class Menu extends Phaser.Scene {
     //añadir texto al contenedor
     centro.add(this.dustCost);
 
-    this.dustIMG = this.add.image(1860, 1000, 'polvos').setScale(0.1).setOrigin(1, 0.5);
+    this.dustIMG = this.add.image(1860, 990, 'polvos').setScale(0.1).setOrigin(1, 0.5);
 
     this.dust = this.add.text(1730, 1000, 'xxxx',
       { font: '50px JosefinMedium', fill: 'white', align: 'right', stroke: 'black', strokeThickness: 5 }).setOrigin(1, 0.5);
-    this.dustIMG = this.add.image(1860, 1000, 'polvos').setScale(0.1).setOrigin(1, 0.5);
+    this.dustIMG = this.add.image(1860, 990, 'polvos').setScale(0.1).setOrigin(1, 0.5);
 
     //añadir las barras de las dicotomías
     this.container1 = new DicContainer(this, -220, -320, 1);
@@ -75,30 +75,82 @@ export default class Menu extends Phaser.Scene {
     this.container3.setInteractive();
     this.container4.setInteractive();
 
+    // Grupo hint de las dicotomías
+    this.dicoHint = this.add.group();
+    this.panelBg = this.add.image(1690, 500, 'panelHintDicos').setOrigin(0.5, 0.5);
+    this.titleDico1 = this.add.text(this.panelBg.x, this.panelBg.y - 392,' ',{ font: '35px JosefinMedium', fill: 'white', align: 'center', wordWrap:{width: '300'} }).setOrigin(0.5, 0);
+    this.textDico1 = this.add.text(this.panelBg.x, this.panelBg.y - 320,'sdfsdfgsdfgg',{ font: '20px JosefinRegular', fill: 'white', align: 'left', wordWrap:{width: '300'} }).setOrigin(0.5, 0);
+    this.titleDico2 = this.add.text(this.panelBg.x, this.panelBg.y + 12,'Emotional',{ font: '35px JosefinMedium', fill: 'white', align: 'center', wordWrap:{width: '300'} }).setOrigin(0.5, 0);
+    this.textDico2 = this.add.text(this.panelBg.x, this.panelBg.y + 80,'sdfg',{ font: '20px JosefinRegular', fill: 'white', align: 'left', wordWrap:{width: '300'} }).setOrigin(0.5, 0);
+    this.dicoHint.addMultiple([this.panelBg, this.titleDico1, this.textDico1,this.titleDico2, this.textDico2]);
+    this.dicoHint.setVisible(false);
+
+    // Textos
+    this.title1_1 = 'Thinking (T)';
+    this.title1_2 = 'Feeling (F)';
+    this.title2_1 = 'Introversion (I)';
+    this.title2_2 = 'Extraversion (E)';
+    this.title3_1 = 'Sensing (S)';
+    this.title3_2 = 'Intuition (I)';
+    this.title4_1 = 'Judging (J)';
+    this.title4_2 = 'Perceiving (P)';
+    this.text1_1 = 'Reason and logic are your driving force for making decisions in life.\r\rBy taking preference on this parameter, your EUREKA! meter (blue) will fill up faster. What happens when you reach your brightest moment is no longer our responsibility.';
+    this.text1_2 = 'Your sensations and emotions are the way you tend to make decisions.\r\rBy taking preference in this parameter, your RAGE (orange) meter will fill up faster, which will unleash your true inner fury, improving all your characteristics and gaining you life steal.';
+    this.text2_1 = 'If you prefer to think about your inner world, this is your direction.\r\rBy taking preference over this parameter, your range will be increased while your damage will be reduced. So you will have more space for yourself.';
+    this.text2_2 = 'If you prefer to focus on your surroundings and the people around you, this is your direction.\r\rBy taking preference in this parameter, your range will be reduced but your damage will be increased. For those who like the closeness to people.';
+    this.text3_1 = 'If your senses are your best tool to perceive the environment, this is your direction.\r\rBy taking preference in this parameter, the interface will give you more and more information, so that you can analyse it and not feel lost.';
+    this.text3_2 = 'If you enjoy ideas and concepts, and prefer to see the big picture, this is your direction\r\rBy taking preference on this parameter, the amount of information the interface will give you will be reduced. For those empty interface purists.';
+    this.text4_1 = 'If you always need the best possible planning when it comes to doing something, this is the direction for you.\r\rTaking precedence over this parameter means having things more prepared, so you will have a greater number of cards to choose from, albeit with less value each.';
+    this.text4_2 = 'If in a plan you are the one who goes with the flow and adapts to the circumstances, this is your direction.\r\rBy taking preference on this parameter, you will be able to take advantage of your ability to improvise, giving you a smaller number of cards to choose from, but with greater potential each.';
+
     // OnHover de las dicotomías
-    this.container1.on('pointerover', function () {
+    this.container1.on('pointerover', () => {
       console.log('over container1');
+      this.titleDico1.setText(this.title1_1);
+      this.textDico1.setText(this.text1_1);
+      this.titleDico2.setText(this.title1_2);
+      this.textDico2.setText(this.text1_2);
+      this.dicoHint.setVisible(true);
     });
-    this.container1.on('pointerout', function () {
+    this.container1.on('pointerout', () => {
       console.log('out container1');
+      this.dicoHint.setVisible(false)
     });
-    this.container2.on('pointerover', function () {
+    this.container2.on('pointerover', () => {
       console.log('over container2');
+      this.titleDico1.setText(this.title2_1);
+      this.textDico1.setText(this.text2_1);
+      this.titleDico2.setText(this.title2_2);
+      this.textDico2.setText(this.text2_2);
+      this.dicoHint.setVisible(true);
     });
-    this.container2.on('pointerout', function () {
+    this.container2.on('pointerout', () => {
       console.log('out container2');
+      this.dicoHint.setVisible(false)
     });
-    this.container3.on('pointerover', function () {
+    this.container3.on('pointerover', () => {
       console.log('over container3');
+      this.titleDico1.setText(this.title3_1);
+      this.textDico1.setText(this.text3_1);
+      this.titleDico2.setText(this.title3_2);
+      this.textDico2.setText(this.text3_2);
+      this.dicoHint.setVisible(true);
     });
-    this.container3.on('pointerout', function () {
+    this.container3.on('pointerout', () => {
       console.log('out container3');
+      this.dicoHint.setVisible(false)
     });
-    this.container4.on('pointerover', function () {
+    this.container4.on('pointerover', () => {
       console.log('over container4');
+      this.titleDico1.setText(this.title4_1);
+      this.textDico1.setText(this.text4_1);
+      this.titleDico2.setText(this.title4_2);
+      this.textDico2.setText(this.text4_2);
+      this.dicoHint.setVisible(true);
     });
-    this.container4.on('pointerout', function () {
+    this.container4.on('pointerout', () => {
       console.log('out container4');
+      this.dicoHint.setVisible(false)
     });
 
 

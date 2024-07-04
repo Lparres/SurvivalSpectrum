@@ -25,7 +25,7 @@ export default class UI extends Phaser.Scene
 
         this.loadFont("JosefinBold", "srcJuego/fonts/JosefinSans-Bold.ttf");
         this.loadFont("JosefinMedium", "srcJuego/fonts/JosefinSans-Medium.ttf");
-
+        this.loadFont("JosefinRegular", "srcJuego/fonts/JosefinSans-Regular.ttf");
         //parres voy a bombardear la vaguada a ver si asi orientas a objetros cabron
         //zona barra de vida
         this.GRP_BarraVida = new HealthBar(this,100,900);
