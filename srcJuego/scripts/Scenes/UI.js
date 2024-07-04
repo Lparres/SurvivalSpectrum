@@ -23,20 +23,15 @@ export default class UI extends Phaser.Scene
         this.mainScene = this.scene.get('level');
         this.player = this.mainScene.player;
 
-        this.loadFont("JosefinBold", "srcJuego/fonts/JosefinSans-Bold.ttf");
-        this.loadFont("JosefinMedium", "srcJuego/fonts/JosefinSans-Medium.ttf");
-        this.loadFont("JosefinRegular", "srcJuego/fonts/JosefinSans-Regular.ttf");
         //parres voy a bombardear la vaguada a ver si asi orientas a objetros cabron
         //zona barra de vida
         this.GRP_BarraVida = new HealthBar(this,100,900);
 
         // Creación de la barra de furiaEureka
         this.GRP_FuriaEureka = new RageEureka(this,330,1000);
-   
+
         // Creación estadísticas
         this.GRP_Estadisticas = new Stats(this, this.sys.game.canvas.width -35, this.sys.game.canvas.height / 2 + 100).setScale(1);
-
-
         
         //texto de crono
         this.GRP_Reloj = this.add.group();
@@ -123,20 +118,6 @@ export default class UI extends Phaser.Scene
         this.dust.setText(this.player.dust);
     }
 
-    loadFont(name, url) {
-		let self = this;
-	    let newFont = new FontFace(name, `url(${url})`);
-	    newFont.load()
-	    // Función que se llamará cuando las fuentes estén cargadas
-	    // en este caso, load devuelve lo que llamamos una promesa
-	    // más info en: https://developer.mozilla.org/en-US/docs/Web/API/FontFace/load
-	    .then(function (loaded) { 
-	        document.fonts.add(loaded);
-	        self.continueCreate();
-	    }).catch(function (error) {
-	        return error;
-    	});
-	}
     /**
      * actualiza el temporizador de tiempo general de juego
      * @param {number} dt delta time de la escena 

@@ -152,11 +152,31 @@ export default class BootScene extends Phaser.Scene{
         this.load.audio('golpePlayer','srcJuego/audio/playerHit_VSDC.wav');
 
         this.load.audio('music','srcJuego/audio/musica.mp3');
-        this.load.audio('cardClick', 'srcJuego/audio/card_Click.wav')
-        this.load.audio('freeze', 'srcJuego/audio/freezeEfect.wav')
+        this.load.audio('cardClick', 'srcJuego/audio/card_Click.wav');
+        this.load.audio('freeze', 'srcJuego/audio/freezeEfect.wav');
+
+        // Fonts
+        this.loadFont("JosefinBold", "srcJuego/fonts/JosefinSans-Bold.ttf");
+        this.loadFont("JosefinMedium", "srcJuego/fonts/JosefinSans-Medium.ttf");
+        this.loadFont("JosefinRegular", "srcJuego/fonts/JosefinSans-Regular.ttf");
     }
     create(){
 
     }
+
+    loadFont(name, url) {
+		let self = this;
+	    let newFont = new FontFace(name, `url(${url})`);
+	    newFont.load()
+	    // Función que se llamará cuando las fuentes estén cargadas
+	    // en este caso, load devuelve lo que llamamos una promesa
+	    // más info en: https://developer.mozilla.org/en-US/docs/Web/API/FontFace/load
+	    .then(function (loaded) { 
+	        document.fonts.add(loaded);
+	        self.continueCreate();
+	    }).catch(function (error) {
+	        return error;
+    	});
+	}
 
 }
