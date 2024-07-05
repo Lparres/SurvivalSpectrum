@@ -24,90 +24,76 @@ export default class FinalScene extends Phaser.Scene {
 
     create(){
 
+        // Background
+        this.add.image(0, 0, 'gameOverBg').setOrigin(0,0);
 
-        //Game Over text
-        this.end = this.add.text(this.sys.game.canvas.width / 2, 65, 'GAME OVER', { font: '64px Arial', fill: '#FFFFFF' }).setOrigin(0.5,0.5);
+        // Texto de "GAME OVER"
+        this.add.image(960, 200, 'gameOverText');
 
-        //boton de volver al menu principal
-        const restart = new Button(this, this.sys.game.canvas.width / 2, this.sys.game.canvas.height - 100, 'tryAgainButton', 1, () => {
+        // Texto de "YOUR FINAL PERSONALITY"
+        this.add.image(960, 420, 'yourFinalPersonality');
+
+        // Boton de volver al menu principal
+        const restart = new Button(this, 1600, 920, 'tryAgainButton', 1, () => {
             this.scene.wake('StartMenu');
             this.scene.sleep('FinalScene');
 
         })
 
-        this.BGL = this.add.nineslice(0, 0, 'ui', 'CardsMenu', 500, 800 , 20, 20, 20, 20);
-        
-        /**
-         * Zona de la izquierda con los diales de las dicotomias
-         */
-
-        //contenedor con los diales de las dicotomias desbalanceados
-        const left = this.add.container(this.sys.game.canvas.width / 2 - 600, this.sys.game.canvas.height / 2 );
-        left.add(this.BGL);
         //diales dicotomias
         //CLASES OBSOLETAS HAY QUE CAMBIARLAS A LAS NUEVAS
-        this.dic1 = left.add(new DicContainer(this,0,-300,1));
-        this.dic2 = left.add(new DicContainer(this,0,-100,2));
-        this.dic3 = left.add(new DicContainer(this,0,100,3));
-        this.dic4 = left.add(new DicContainer(this,0,300,4));
-        
+        this.dic1 = new DicContainer(this,350,430,1);
+        this.dic2 = new DicContainer(this,350,580,2);
+        this.dic3 = new DicContainer(this,350,730,3);
+        this.dic4 = new DicContainer(this,350,880,4);
 
 
-        /**
-         * Zona central donde se encuentra el nombre de la personalidad y a futuro un icono de la misma
-         */
-        const center = this.add.container(this.sys.game.canvas.width /2, this.sys.game.canvas.height / 2 );
-        this.BGC = this.add.nineslice(0, 0, 'ui', 'CardsMenu', 650, 800 , 20, 20, 20, 20);
-        center.add(this.BGC);    
+        // Texto siglas personalidad
+        this.personality = this.add.text(960, 530, this.getPesonalityName(), 
+        { font: '60px JosefinBold', fill: '#FFFFFF',align:'center' }).setOrigin(0.5,0.5);;
 
-        //texto siglas personalidad
-        this.personality = this.add.text(0, -300, "Your final personality:\n"+this.getPesonalityName(), 
-        { font: '64px Arial', fill: '#FFFFFF',align:'center' }).setOrigin(0.5,0.5);
 
-        center.add(this.personality);
-
-        //texto nombre personalidad
-        this.nameText = this.add.text(0, -200, this.personalityTexts[this.getPesonalityName()].name, 
-        { font: '64px Arial', fill: '#FFFFFF',align:'center' }).setOrigin(0.5,0.5);
+        // Texto nombre personalidad
+        this.nameText = this.add.text(960, 620, this.personalityTexts[this.getPesonalityName()].name, 
+        { font: '60px JosefinBold', fill: '#FFFFFF',align:'center' }).setOrigin(0.5,0.5);;
            
-        center.add(this.nameText);
+
 
         //texto descripcion
-        this.descText = this.add.text(0,0, this.personalityTexts[this.getPesonalityName()].text, 
-        { font: '40px Arial', fill: '#FFFFFF',align:'center' }).setOrigin(0.5,0.5);
-           
-        center.add(this.descText);
-
-        const textFormat = { font: '64px Arial', fill: '#FFFFFF',align:'left' };
+        this.descText = this.add.text(660,720, this.personalityTexts[this.getPesonalityName()].text, 
+        { font: '35px JosefinMedium', fill: '#754c24', align: 'left', wordWrap:{width: '600'} }).setOrigin(0, 0);
 
 
          //texto autor
-         this.authorText = this.add.text(-50, 250,"-"+this.personalityTexts[this.getPesonalityName()].author, 
-         { font: '64px Arial', fill: '#FFFFFF',align:'center' }).setOrigin(0.5,0.5);
-            
-         center.add(this.authorText);
+         this.authorText = this.add.text(1260, 950, "— " + this.personalityTexts[this.getPesonalityName()].author + " —", 
+         { font: '30px JosefinMediumItalic', fill: '#754c24', align: 'right', wordWrap:{width: '600'} }).setOrigin(1, 0.5);
+
+
 
         /**
-         * Zona derecha donde se mostrara informacion del rendimiento de la partida (Pasar a clase container??????)
+         * Estadísticas finales
          */
-        const right= this.add.container(this.sys.game.canvas.width / 2 + 600, this.sys.game.canvas.height / 2 );
+        // Stats background
+        this.add.image(1598, 600, 'finalStats');
 
-        this.BGR = this.add.nineslice(0, 0, 'ui', 'CardsMenu', 500, 800 , 20, 20, 20, 20);    
-        right.add(this.BGR);
+        const textFormat = { font: '25px JosefinBold', fill: 'PaleTurquoise', align:'center' };
 
-        //tiempo final
-        this.waveText = this.add.text(-220, -300,"Wave: "+ this.wave,textFormat)
-        right.add(this.waveText);
+        // Wave
+        this.waveText = this.add.text(1515, 450,"WAVE\rREACHED", textFormat).setOrigin(0.5, 0.5);
+        this.waveInfo = this.add.text(1680, 450, this.wave, textFormat).setOrigin(0.5, 0.5);
 
-        this.endTimeText = this.add.text(-220, -200,"End time: "+ this.finalTime.minutes+":"+this.finalTime.seconds,textFormat)
-        right.add(this.endTimeText);
+        // Tiempo
+        this.waveText = this.add.text(1515, 550,"TIME\rSURVIVED", textFormat).setOrigin(0.5, 0.5);
+        this.waveInfo = this.add.text(1680, 550, this.finalTime.minutes+" : "+this.finalTime.seconds, textFormat).setOrigin(0.5, 0.5);
 
+        // Kills
+        this.waveText = this.add.text(1515, 650,"ENEMIES\rKILLED", textFormat).setOrigin(0.5, 0.5);
+        this.waveInfo = this.add.text(1680, 650, this.killedEnemies, textFormat).setOrigin(0.5, 0.5);
 
-        this.killedEnemiesText = this.add.text(-220, -100,"Total enemies \nkilled: "+ this.killedEnemies,textFormat)
-        right.add(this.killedEnemiesText);
+        // Dust
+        this.waveText = this.add.text(1515, 750,"DUST\rGAINED", textFormat).setOrigin(0.5, 0.5);
+        this.waveInfo = this.add.text(1680, 750, this.totalDust, textFormat).setOrigin(0.5, 0.5);
 
-        this.totalDustText = this.add.text(-220, 70,"Total Dust: "+ this.totalDust,textFormat)
-        right.add(this.totalDustText);
 
         this.esc = this.input.keyboard.addKey('ESC');
 
@@ -118,6 +104,9 @@ export default class FinalScene extends Phaser.Scene {
             document.getElementById("juego").className = "classJuego";
         })
     
+
+        // Foreground
+        this.add.image(0, 0, 'gameOverFg').setOrigin(0,0);
     }
     /**
      * calcula el nombre de la personlidad en funcion de las dicotomias
@@ -125,9 +114,9 @@ export default class FinalScene extends Phaser.Scene {
     getPesonalityName(){
         let name = '';
         name += this.dicotomyManager.perDic2 > 50 ? 'E':'I';
-        name += this.dicotomyManager.perDic3 > 50 ? 'S':'N';
-        name += this.dicotomyManager.perDic1 > 50 ? 'T':'F';
-        name += this.dicotomyManager.perDic4 > 50 ? 'J':'P';
+        name += this.dicotomyManager.perDic3 > 50 ? 'N':'S';
+        name += this.dicotomyManager.perDic1 > 50 ? 'F':'T';
+        name += this.dicotomyManager.perDic4 > 50 ? 'P':'J';
         return name;
     }
 
@@ -147,11 +136,11 @@ class DicContainer extends Phaser.GameObjects.Container {
 
         this.dicPer = scene.dicotomyManager.getDic(dic);
         
-        this.add(scene.add.image(0,0,'marcoDial'));
+        this.add(scene.add.image(0,0,'marcoDial2'));
         //this.add(scene.add.nineslice(0, 0, 'ui', 'SilverFrame', 380, 90, 10, 10, 10, 10));
 
         //texto del valor de la dicotomia
-        this.dicValText = scene.add.text(0, 0, this.dicotomyManager.dicName(this.dicNum) + ' '+this.dicPer, { font: '30px JosefinBold', fill: 'black', aling: 'center' }).setOrigin(0.5, 0);
+        this.dicValText = scene.add.text(0, 6, this.dicotomyManager.dicName(this.dicNum) + ' '+this.dicPer, { font: '26px JosefinMedium', fill: 'white', aling: 'center' }).setOrigin(0.5, 0);
         this.add(this.dicValText);
 
 

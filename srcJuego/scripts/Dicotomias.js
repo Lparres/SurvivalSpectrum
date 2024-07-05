@@ -86,7 +86,7 @@ export default class Dicotomías {
                     this.UI.GRP_Reloj.setVisible(this.perDic3 <= 70);
                     this.UI.GRP_Dust.setVisible(this.perDic3 <= 60);
                     this.UI.GRP_NextWave.setVisible(this.perDic3 <= 50);      
-                    this.UI.GRP_DatosOleada.setVisible(this.perDic3 <= 40);
+                    this.UI.GRP_DatosOleada.setVisible(this.perDic3 <= 60);
                     this.UI.GRP_Estadisticas.setVisible(this.perDic3 <= 30);
                     this.UI.GRP_Dicotomias.setVisible(this.perDic3 <= 20);
                     this.UI.map.setVisible(this.perDic3 <= 10);

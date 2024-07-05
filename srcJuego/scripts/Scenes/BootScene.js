@@ -73,8 +73,14 @@ export default class BootScene extends Phaser.Scene{
         this.load.image('cabeceraDicos', 'srcJuego/ui/CabeceraDicos.png');
         this.load.spritesheet('fullscreenMenu', 'srcJuego/ui/EnableDisableFullScreenButton.png', { frameWidth: 330, frameHeight: 118 });
         this.load.spritesheet('fullscreen', 'srcJuego/ui/fullscreen.png', { frameWidth: 494, frameHeight: 63 });
-        this.load.image('tryAgainButton', 'srcJuego/img/try_again.png')
         this.load.image('panelHintDicos', 'srcJuego/ui/PanelHintDicos.png')
+        this.load.image('marcoDial2', 'srcJuego/ui/ImagenDial_4.png')
+        this.load.image('gameOverText', 'srcJuego/ui/GameOverText.png')
+        this.load.image('yourFinalPersonality', 'srcJuego/ui/YourFinalPersonality.png')
+        this.load.image('tryAgainButton', 'srcJuego/ui/TryAgainButton.png')
+        this.load.image('gameOverBg', 'srcJuego/ui/GameOverBg.png')
+        this.load.image('gameOverFg', 'srcJuego/ui/GameOverFg.png')
+        this.load.image('finalStats', 'srcJuego/ui/FinalStats.png')
 
         let srcJuego = 'srcJuego';
 
@@ -159,6 +165,7 @@ export default class BootScene extends Phaser.Scene{
         this.loadFont("JosefinBold", "srcJuego/fonts/JosefinSans-Bold.ttf");
         this.loadFont("JosefinMedium", "srcJuego/fonts/JosefinSans-Medium.ttf");
         this.loadFont("JosefinRegular", "srcJuego/fonts/JosefinSans-Regular.ttf");
+        this.loadFont("JosefinMediumItalic", "srcJuego/fonts/JosefinSans-MediumItalic.ttf");
     }
     create(){
 
