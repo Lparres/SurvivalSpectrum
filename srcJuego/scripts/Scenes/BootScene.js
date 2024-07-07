@@ -59,7 +59,6 @@ export default class BootScene extends Phaser.Scene{
         this.load.image('fondoDicotomias', 'srcJuego/ui/FondoDicotomias.png');
         this.load.image('increase','srcJuego/ui/FlechaSubida.png');
         this.load.image('decrease','srcJuego/ui/FlechaBajada.png')
-        this.load.image('startButton', 'srcJuego/img/start.png')
         this.load.image('pauseBG','srcJuego/ui/PauseBG.png')
         this.load.image('resume','srcJuego/ui/ResumeButton.png')
         this.load.image('restart','srcJuego/ui/RestartButton.png')
@@ -81,6 +80,8 @@ export default class BootScene extends Phaser.Scene{
         this.load.image('gameOverBg', 'srcJuego/ui/GameOverBg.png')
         this.load.image('gameOverFg', 'srcJuego/ui/GameOverFg.png')
         this.load.image('finalStats', 'srcJuego/ui/FinalStats.png')
+        this.load.image('tutorial_1', 'srcJuego/ui/Tutorial_1.png')
+        this.load.image('tutorial_2', 'srcJuego/ui/Tutorial_2.png')
 
         let srcJuego = 'srcJuego';
 

@@ -105,7 +105,6 @@ export default class Menu extends Phaser.Scene {
 
     // OnHover de las dicotomías
     this.container1.on('pointerover', () => {
-      console.log('over container1');
       this.titleDico1.setText(this.title1_1);
       this.textDico1.setText(this.text1_1);
       this.titleDico2.setText(this.title1_2);
@@ -113,11 +112,9 @@ export default class Menu extends Phaser.Scene {
       this.dicoHint.setVisible(true);
     });
     this.container1.on('pointerout', () => {
-      console.log('out container1');
       this.dicoHint.setVisible(false)
     });
     this.container2.on('pointerover', () => {
-      console.log('over container2');
       this.titleDico1.setText(this.title2_1);
       this.textDico1.setText(this.text2_1);
       this.titleDico2.setText(this.title2_2);
@@ -125,11 +122,9 @@ export default class Menu extends Phaser.Scene {
       this.dicoHint.setVisible(true);
     });
     this.container2.on('pointerout', () => {
-      console.log('out container2');
       this.dicoHint.setVisible(false)
     });
     this.container3.on('pointerover', () => {
-      console.log('over container3');
       this.titleDico1.setText(this.title3_1);
       this.textDico1.setText(this.text3_1);
       this.titleDico2.setText(this.title3_2);
@@ -137,11 +132,9 @@ export default class Menu extends Phaser.Scene {
       this.dicoHint.setVisible(true);
     });
     this.container3.on('pointerout', () => {
-      console.log('out container3');
       this.dicoHint.setVisible(false)
     });
     this.container4.on('pointerover', () => {
-      console.log('over container4');
       this.titleDico1.setText(this.title4_1);
       this.textDico1.setText(this.text4_1);
       this.titleDico2.setText(this.title4_2);
@@ -149,7 +142,6 @@ export default class Menu extends Phaser.Scene {
       this.dicoHint.setVisible(true);
     });
     this.container4.on('pointerout', () => {
-      console.log('out container4');
       this.dicoHint.setVisible(false)
     });
 
@@ -161,6 +153,42 @@ export default class Menu extends Phaser.Scene {
     //contenedor del bloque de estadisticas
     this.latcont = new Stats(this, 400, this.sys.game.canvas.height / 2).setScale(1.2);
     this.cardClick = this.sound.add('cardClick', { volume: 0.1 });
+
+
+
+    // Tutorial
+    this.tutorial1 = this.add.image(960, 540, 'tutorial_1');
+    this.tutorial2 = this.add.image(960, 540, 'tutorial_2');
+    
+    this.tutorial1.setVisible(false);
+    this.tutorial2.setVisible(false);
+
+    // Si linea 1 descomentada -> el tutorial se enseña siempre
+    // Si linea 2 descomentada -> el tutorial solo se muestra una vez
+    //this.tutorialDone = false;
+    this.tutorialDone = sessionStorage.getItem('SurvivalSpectrum_TutorialDone') || false;
+
+    this.time.addEvent({
+      delay: 2000, // milisegundos
+      callback: this.showTutorial,
+      callbackScope: this,
+      loop: false
+    });
+
+    this.tutorial1.setInteractive();
+    this.tutorial2.setInteractive();
+
+    this.tutorial1.on('pointerdown', () => {
+      this.tutorial1.setVisible(false);
+      this.tutorial2.setVisible(true);
+    });
+
+    this.tutorial2.on('pointerdown', () => {
+      this.tutorial1.setVisible(false);
+      this.tutorial2.setVisible(false);
+      sessionStorage.setItem('SurvivalSpectrum_TutorialDone', true);
+    });
+
   }
 
 
@@ -171,5 +199,12 @@ export default class Menu extends Phaser.Scene {
   updateCardsLeft() {
     this.cardsToPick--;
     this.cards.updateCardsLeftText();
+  }
+
+  showTutorial(){
+    if(this.tutorialDone === false){
+      console.log("hola")
+      this.tutorial1.setVisible(true);
+    }
   }
 }
